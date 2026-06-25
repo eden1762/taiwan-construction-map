@@ -3,6 +3,8 @@ const FOOTER_COPY = {
   en: 'For project location, budget, timeline, owner, and contractor data, please verify with the latest official notices from competent authorities, procurement portals, public works systems, building management, EIA records, and local map portals. Please follow the live map attribution for the active base map and official geospatial layers.'
 };
 
+let syncingFooter = false;
+
 function footerLang() {
   return document.documentElement.lang?.toLowerCase().startsWith('en') ? 'en' : 'zh';
 }
@@ -14,8 +16,17 @@ function syncFooterSourceNote() {
   if (footerText.textContent !== nextText) footerText.textContent = nextText;
 }
 
-const footerObserver = new MutationObserver(syncFooterSourceNote);
-footerObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
-footerObserver.observe(document.body, { childList: true, subtree: true });
+function scheduleFooterSourceSync() {
+  if (syncingFooter) return;
+  syncingFooter = true;
+  requestAnimationFrame(() => {
+    syncFooterSourceNote();
+    syncingFooter = false;
+  });
+}
 
-syncFooterSourceNote();
+const footerObserver = new MutationObserver(scheduleFooterSourceSync);
+footerObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+footerObserver.observe(document.body, { childList: true, characterData: true, subtree: true });
+
+scheduleFooterSourceSync();
