@@ -1,33 +1,9 @@
 import { PROJECTS, PROJECT_TYPES, DATA_SOURCES } from './data/projects.js';
 
-const MAP_VIEWBOX = { width: 1000, height: 700 };
-const TAIWAN_BOUNDS = {
-  minLat: 21.75,
-  maxLat: 25.45,
-  minLng: 119.50,
-  maxLng: 122.35
-};
-
-const TAIWAN_SHAPE = 'M620 54 C660 84 684 128 690 176 C696 236 666 286 655 340 C642 401 682 448 646 516 C613 580 562 640 504 670 C448 642 422 594 394 540 C365 484 334 435 350 374 C365 315 410 277 424 219 C439 158 486 92 548 54 C574 38 599 38 620 54 Z';
-const ISLANDS = [
-  { name: '澎湖', x: 285, y: 382, r: 18 },
-  { name: '金門', x: 172, y: 300, r: 13 },
-  { name: '馬祖', x: 260, y: 115, r: 10 },
-  { name: '綠島', x: 734, y: 470, r: 10 },
-  { name: '蘭嶼', x: 742, y: 575, r: 12 }
-];
-const CITY_LABELS = [
-  { name: '台北', lat: 25.05, lng: 121.52 },
-  { name: '新北', lat: 25.01, lng: 121.46 },
-  { name: '桃園', lat: 24.99, lng: 121.30 },
-  { name: '新竹', lat: 24.80, lng: 120.97 },
-  { name: '台中', lat: 24.15, lng: 120.67 },
-  { name: '嘉義', lat: 23.48, lng: 120.45 },
-  { name: '台南', lat: 22.99, lng: 120.20 },
-  { name: '高雄', lat: 22.63, lng: 120.30 },
-  { name: '花蓮', lat: 23.99, lng: 121.60 },
-  { name: '台東', lat: 22.76, lng: 121.14 }
-];
+const TILE_SIZE = 256;
+const MIN_ZOOM = 6;
+const MAX_ZOOM = 15;
+const DEFAULT_VIEW = { lat: 23.78, lng: 120.98, zoom: 7 };
 
 const refs = {
   search: document.querySelector('#searchInput'),
@@ -46,6 +22,9 @@ const refs = {
 
 let activeId = '';
 let visibleProjects = [...PROJECTS];
+let mapView = { ...DEFAULT_VIEW };
+let dragStart = null;
+let resizeTimer = null;
 
 init();
 
@@ -56,26 +35,66 @@ function init() {
   renderProjects(visibleProjects);
   renderMap(visibleProjects);
   bindEvents();
-  showMapHint('點選工程熱點，看甲方、乙方、開工日、預計完工與啟用日。');
+  showMapHint('可拖曳、滾輪縮放，點選工程熱點看甲方、乙方、工期與來源。');
 }
 
 function bindEvents() {
   refs.search.addEventListener('input', applyFilters);
   refs.typeFilter.addEventListener('change', applyFilters);
   refs.statusFilter.addEventListener('change', applyFilters);
-  refs.resetMap.addEventListener('click', () => {
-    activeId = '';
-    visibleProjects = [...PROJECTS];
-    refs.search.value = '';
-    refs.typeFilter.value = 'all';
-    refs.statusFilter.value = 'all';
-    renderProjects(visibleProjects);
-    renderMap(visibleProjects);
-    showMapHint('已回到全台視角，點選任一工程熱點開始探索。');
-  });
+  refs.resetMap.addEventListener('click', resetView);
   refs.toggleSources.addEventListener('click', () => {
     document.querySelector('#sourcePanel').scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
+
+  refs.map.addEventListener('wheel', event => {
+    event.preventDefault();
+    setZoom(mapView.zoom + (event.deltaY < 0 ? 1 : -1));
+  }, { passive: false });
+
+  refs.map.addEventListener('pointerdown', event => {
+    if (event.target.closest('[data-project-id]') || event.target.closest('.map-zoom-control')) return;
+    refs.map.setPointerCapture?.(event.pointerId);
+    const centerWorld = latLngToWorld(mapView.lat, mapView.lng, mapView.zoom);
+    dragStart = { x: event.clientX, y: event.clientY, centerWorld };
+    refs.map.classList.add('dragging');
+  });
+
+  refs.map.addEventListener('pointermove', event => {
+    if (!dragStart) return;
+    const dx = event.clientX - dragStart.x;
+    const dy = event.clientY - dragStart.y;
+    const nextCenter = worldToLatLng(dragStart.centerWorld.x - dx, dragStart.centerWorld.y - dy, mapView.zoom);
+    mapView = { ...mapView, lat: nextCenter.lat, lng: nextCenter.lng };
+    renderMap(visibleProjects, { keepStatus: true });
+  });
+
+  refs.map.addEventListener('pointerup', endDrag);
+  refs.map.addEventListener('pointercancel', endDrag);
+
+  window.addEventListener('resize', () => {
+    window.clearTimeout(resizeTimer);
+    resizeTimer = window.setTimeout(() => renderMap(visibleProjects, { keepStatus: true }), 120);
+  });
+}
+
+function endDrag(event) {
+  if (!dragStart) return;
+  refs.map.releasePointerCapture?.(event.pointerId);
+  dragStart = null;
+  refs.map.classList.remove('dragging');
+}
+
+function resetView() {
+  activeId = '';
+  visibleProjects = [...PROJECTS];
+  refs.search.value = '';
+  refs.typeFilter.value = 'all';
+  refs.statusFilter.value = 'all';
+  mapView = { ...DEFAULT_VIEW };
+  renderProjects(visibleProjects);
+  renderMap(visibleProjects);
+  showMapHint('已回到全台 OpenStreetMap 視角，點選任一工程熱點開始探索。');
 }
 
 function hydrateFilters() {
@@ -148,47 +167,31 @@ function renderProjects(projects) {
   refs.projectList.append(fragment);
 }
 
-function renderMap(projects) {
-  const mapGraphics = projects.map(createProjectGraphic).join('');
-  const labels = CITY_LABELS.map(label => {
-    const [x, y] = projectCoord([label.lat, label.lng]);
-    return `<text class="city-label" x="${x + 10}" y="${y - 6}">${escapeHtml(label.name)}</text>`;
-  }).join('');
-  const islands = ISLANDS.map(island => `
-    <g class="island">
-      <circle cx="${island.x}" cy="${island.y}" r="${island.r}"></circle>
-      <text x="${island.x + island.r + 6}" y="${island.y + 4}">${escapeHtml(island.name)}</text>
-    </g>
-  `).join('');
+function renderMap(projects, options = {}) {
+  const width = Math.max(refs.map.clientWidth || 900, 320);
+  const height = Math.max(refs.map.clientHeight || 620, 420);
+  const tiles = buildTiles(width, height);
+  const overlay = buildOverlay(projects, width, height);
 
   refs.map.innerHTML = `
-    <svg class="taiwan-map" viewBox="0 0 ${MAP_VIEWBOX.width} ${MAP_VIEWBOX.height}" aria-label="台灣工程熱點示意圖" role="img">
-      <defs>
-        <linearGradient id="oceanGlow" x1="0" x2="1" y1="0" y2="1">
-          <stop offset="0%" stop-color="#dff7ff"></stop>
-          <stop offset="54%" stop-color="#b7e8ff"></stop>
-          <stop offset="100%" stop-color="#f7f0df"></stop>
-        </linearGradient>
-        <radialGradient id="landGlow" cx="50%" cy="46%" r="70%">
-          <stop offset="0%" stop-color="#ffffff"></stop>
-          <stop offset="70%" stop-color="#e6f4ee"></stop>
-          <stop offset="100%" stop-color="#cde5da"></stop>
-        </radialGradient>
-        <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
-          <feDropShadow dx="0" dy="16" stdDeviation="16" flood-color="#0b2a44" flood-opacity="0.22"></feDropShadow>
-        </filter>
-      </defs>
-      <rect class="ocean" width="1000" height="700" rx="28"></rect>
-      <g class="map-grid" aria-hidden="true">${buildGrid()}</g>
-      <path class="taiwan-shape" d="${TAIWAN_SHAPE}"></path>
-      ${islands}
-      ${labels}
-      <g class="project-layer">${mapGraphics}</g>
-    </svg>
+    <div class="real-map" style="width:${width}px;height:${height}px" aria-label="OpenStreetMap 台灣工程電子地圖">
+      <div class="tile-layer">${tiles}</div>
+      <svg class="map-overlay" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}" aria-hidden="false">
+        ${overlay}
+      </svg>
+      <div class="map-zoom-control" aria-label="地圖縮放">
+        <button type="button" data-zoom="in" aria-label="放大地圖">＋</button>
+        <button type="button" data-zoom="out" aria-label="縮小地圖">－</button>
+      </div>
+      <div class="map-attribution">© OpenStreetMap contributors</div>
+    </div>
   `;
 
   refs.map.querySelectorAll('[data-project-id]').forEach(element => {
-    element.addEventListener('click', () => selectProject(element.dataset.projectId));
+    element.addEventListener('click', event => {
+      event.stopPropagation();
+      selectProject(element.dataset.projectId);
+    });
     element.addEventListener('keydown', event => {
       if (event.key === 'Enter' || event.key === ' ') {
         event.preventDefault();
@@ -196,36 +199,75 @@ function renderMap(projects) {
       }
     });
   });
+
+  refs.map.querySelector('[data-zoom="in"]')?.addEventListener('click', () => setZoom(mapView.zoom + 1));
+  refs.map.querySelector('[data-zoom="out"]')?.addEventListener('click', () => setZoom(mapView.zoom - 1));
+
+  if (!options.keepStatus) showMapHint('OpenStreetMap 電子地圖已載入，可拖曳縮放並點選工程熱點。');
 }
 
-function createProjectGraphic(project) {
+function buildTiles(width, height) {
+  const center = latLngToWorld(mapView.lat, mapView.lng, mapView.zoom);
+  const startX = Math.floor((center.x - width / 2) / TILE_SIZE);
+  const endX = Math.floor((center.x + width / 2) / TILE_SIZE);
+  const startY = Math.floor((center.y - height / 2) / TILE_SIZE);
+  const endY = Math.floor((center.y + height / 2) / TILE_SIZE);
+  const maxTile = 2 ** mapView.zoom;
+  const parts = [];
+
+  for (let x = startX; x <= endX; x += 1) {
+    for (let y = startY; y <= endY; y += 1) {
+      if (y < 0 || y >= maxTile) continue;
+      const wrappedX = ((x % maxTile) + maxTile) % maxTile;
+      const left = x * TILE_SIZE - center.x + width / 2;
+      const top = y * TILE_SIZE - center.y + height / 2;
+      parts.push(`<img class="map-tile" src="https://tile.openstreetmap.org/${mapView.zoom}/${wrappedX}/${y}.png" alt="" loading="eager" decoding="async" style="left:${left}px;top:${top}px" onerror="this.classList.add('tile-error')" />`);
+    }
+  }
+
+  return parts.join('');
+}
+
+function buildOverlay(projects, width, height) {
+  const items = projects.map(project => createProjectGraphic(project, width, height)).join('');
+  return `<g class="project-layer">${items}</g>`;
+}
+
+function createProjectGraphic(project, width, height) {
   const color = PROJECT_TYPES[project.type]?.color ?? '#2f80ed';
   const geometry = project.geometry;
   const centroid = getCentroid(geometry.coordinates);
-  const [labelX, labelY] = projectCoord(centroid);
+  const labelPoint = mapPixel(centroid, width, height);
   const activeClass = project.id === activeId ? ' active' : '';
   const title = `${project.shortName || project.name}｜${project.status}`;
+  const label = `<text x="${labelPoint.x + 15}" y="${labelPoint.y - 13}">${escapeHtml(project.shortName || project.name)}</text>`;
 
   if (geometry.type === 'line') {
-    const points = geometry.coordinates.map(coord => projectCoord(coord).join(',')).join(' ');
+    const points = geometry.coordinates.map(coord => {
+      const point = mapPixel(coord, width, height);
+      return `${point.x},${point.y}`;
+    }).join(' ');
     return `
       <g class="project-item project-line${activeClass}" tabindex="0" data-project-id="${escapeAttr(project.id)}" style="--project-color:${escapeAttr(color)}">
         <title>${escapeHtml(title)}</title>
         <polyline points="${points}"></polyline>
-        <circle cx="${labelX}" cy="${labelY}" r="12"></circle>
-        <text x="${labelX + 14}" y="${labelY - 12}">${escapeHtml(project.shortName || project.name)}</text>
+        <circle cx="${labelPoint.x}" cy="${labelPoint.y}" r="11"></circle>
+        ${label}
       </g>
     `;
   }
 
   if (geometry.type === 'polygon') {
-    const points = geometry.coordinates.map(coord => projectCoord(coord).join(',')).join(' ');
+    const points = geometry.coordinates.map(coord => {
+      const point = mapPixel(coord, width, height);
+      return `${point.x},${point.y}`;
+    }).join(' ');
     return `
       <g class="project-item project-polygon${activeClass}" tabindex="0" data-project-id="${escapeAttr(project.id)}" style="--project-color:${escapeAttr(color)}">
         <title>${escapeHtml(title)}</title>
         <polygon points="${points}"></polygon>
-        <circle cx="${labelX}" cy="${labelY}" r="11"></circle>
-        <text x="${labelX + 14}" y="${labelY - 10}">${escapeHtml(project.shortName || project.name)}</text>
+        <circle cx="${labelPoint.x}" cy="${labelPoint.y}" r="11"></circle>
+        ${label}
       </g>
     `;
   }
@@ -233,8 +275,8 @@ function createProjectGraphic(project) {
   return `
     <g class="project-item project-point${activeClass}" tabindex="0" data-project-id="${escapeAttr(project.id)}" style="--project-color:${escapeAttr(color)}">
       <title>${escapeHtml(title)}</title>
-      <circle cx="${labelX}" cy="${labelY}" r="16"></circle>
-      <text x="${labelX + 18}" y="${labelY - 12}">${escapeHtml(project.shortName || project.name)}</text>
+      <circle cx="${labelPoint.x}" cy="${labelPoint.y}" r="16"></circle>
+      ${label}
     </g>
   `;
 }
@@ -244,8 +286,12 @@ function selectProject(projectId) {
   if (!project) return;
 
   activeId = projectId;
+  const center = getCentroid(project.geometry.coordinates);
+  if (project.geometry.type !== 'polygon') {
+    mapView = { ...mapView, lat: center[0], lng: center[1], zoom: Math.max(mapView.zoom, 11) };
+  }
   renderProjects(visibleProjects);
-  renderMap(visibleProjects);
+  renderMap(visibleProjects, { keepStatus: true });
   showProjectDetail(project);
 
   const activeCard = refs.projectList.querySelector(`[data-project-id="${cssEscape(projectId)}"]`);
@@ -275,7 +321,7 @@ function showProjectDetail(project) {
       </dl>
       <div class="detail-actions">
         <a href="${safeUrl(project.source)}" target="_blank" rel="noopener noreferrer">打開資料來源 ↗</a>
-        <a href="${safeUrl(openMapUrl(project))}" target="_blank" rel="noopener noreferrer">用開放地圖看位置 ↗</a>
+        <a href="${safeUrl(openMapUrl(project))}" target="_blank" rel="noopener noreferrer">用 OpenStreetMap 看位置 ↗</a>
       </div>
     </article>
   `;
@@ -311,15 +357,43 @@ function detailRow(label, value) {
   return `<div><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value || '待官方資料回填')}</dd></div>`;
 }
 
-function projectCoord([lat, lng]) {
-  const x = ((lng - TAIWAN_BOUNDS.minLng) / (TAIWAN_BOUNDS.maxLng - TAIWAN_BOUNDS.minLng)) * MAP_VIEWBOX.width;
-  const y = ((TAIWAN_BOUNDS.maxLat - lat) / (TAIWAN_BOUNDS.maxLat - TAIWAN_BOUNDS.minLat)) * MAP_VIEWBOX.height;
-  return [clamp(x, 36, MAP_VIEWBOX.width - 36), clamp(y, 36, MAP_VIEWBOX.height - 36)];
+function setZoom(nextZoom) {
+  const zoom = clamp(Math.round(nextZoom), MIN_ZOOM, MAX_ZOOM);
+  if (zoom === mapView.zoom) return;
+  mapView = { ...mapView, zoom };
+  renderMap(visibleProjects, { keepStatus: true });
+  showMapHint(`目前地圖縮放層級：${zoom}。`);
+}
+
+function mapPixel([lat, lng], width, height) {
+  const point = latLngToWorld(lat, lng, mapView.zoom);
+  const center = latLngToWorld(mapView.lat, mapView.lng, mapView.zoom);
+  return {
+    x: point.x - center.x + width / 2,
+    y: point.y - center.y + height / 2
+  };
+}
+
+function latLngToWorld(lat, lng, zoom) {
+  const sin = Math.sin((clamp(lat, -85.05112878, 85.05112878) * Math.PI) / 180);
+  const scale = TILE_SIZE * 2 ** zoom;
+  return {
+    x: ((lng + 180) / 360) * scale,
+    y: (0.5 - Math.log((1 + sin) / (1 - sin)) / (4 * Math.PI)) * scale
+  };
+}
+
+function worldToLatLng(x, y, zoom) {
+  const scale = TILE_SIZE * 2 ** zoom;
+  const lng = (x / scale) * 360 - 180;
+  const n = Math.PI - (2 * Math.PI * y) / scale;
+  const lat = (180 / Math.PI) * Math.atan(0.5 * (Math.exp(n) - Math.exp(-n)));
+  return { lat: clamp(lat, -85.05112878, 85.05112878), lng: wrapLng(lng) };
 }
 
 function getCentroid(coordinates) {
   const points = flattenCoordinates(coordinates);
-  if (!points.length) return [23.6978, 120.9605];
+  if (!points.length) return [DEFAULT_VIEW.lat, DEFAULT_VIEW.lng];
   const totals = points.reduce((sum, point) => [sum[0] + point[0], sum[1] + point[1]], [0, 0]);
   return [totals[0] / points.length, totals[1] / points.length];
 }
@@ -333,14 +407,7 @@ function flattenCoordinates(value) {
 function openMapUrl(project) {
   if (project.openMapUrl) return project.openMapUrl;
   const [lat, lng] = getCentroid(project.geometry.coordinates);
-  return `https://www.openstreetmap.org/?mlat=${lat.toFixed(5)}&mlon=${lng.toFixed(5)}#map=13/${lat.toFixed(5)}/${lng.toFixed(5)}`;
-}
-
-function buildGrid() {
-  const lines = [];
-  for (let x = 100; x < MAP_VIEWBOX.width; x += 100) lines.push(`<line x1="${x}" y1="0" x2="${x}" y2="${MAP_VIEWBOX.height}"></line>`);
-  for (let y = 100; y < MAP_VIEWBOX.height; y += 100) lines.push(`<line x1="0" y1="${y}" x2="${MAP_VIEWBOX.width}" y2="${y}"></line>`);
-  return lines.join('');
+  return `https://www.openstreetmap.org/?mlat=${lat.toFixed(5)}&mlon=${lng.toFixed(5)}#map=14/${lat.toFixed(5)}/${lng.toFixed(5)}`;
 }
 
 function normalize(value) {
@@ -349,6 +416,10 @@ function normalize(value) {
 
 function clamp(value, min, max) {
   return Math.max(min, Math.min(max, value));
+}
+
+function wrapLng(lng) {
+  return ((((lng + 180) % 360) + 360) % 360) - 180;
 }
 
 function shorten(value, max) {
