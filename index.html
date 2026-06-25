@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#061522" />
-  <meta name="description" content="台灣工程地圖：把規劃中、開工、施工中的公共工程、交通建設、道路管線與建築開發，用手機也好看的方式整理成一張互動地圖。" />
+  <meta name="description" content="台灣工程地圖：把公共工程、交通建設、道路管線、建築開發、環評與重大建設入口，整理成手機也好看的工程地圖。" />
   <title>台灣工程地圖｜Taiwan Construction Map</title>
   <link rel="stylesheet" href="./styles.css" />
 </head>
@@ -12,32 +12,32 @@
   <a class="skip-link" href="#mainPanel">跳到工程資訊</a>
 
   <header class="site-header" aria-label="網站導覽">
-    <div class="brand" aria-label="台灣工程地圖">
+    <a class="brand" href="#top" aria-label="台灣工程地圖首頁">
       <div class="brand-mark" aria-hidden="true">工</div>
       <div>
-        <p class="eyebrow">工程位置 × 進度 × 經費</p>
+        <p class="eyebrow">工程位置 × 進度 × 甲乙方</p>
         <h1>台灣工程地圖 <span>Taiwan Construction Map</span></h1>
       </div>
-    </div>
+    </a>
     <nav class="nav-links" aria-label="主要連結">
-      <a href="#mapArea">地圖</a>
+      <a href="#mapArea">工程地圖</a>
       <a href="#sourcePanel">資料入口</a>
       <a href="#maintainPanel">補資料</a>
     </nav>
   </header>
 
-  <main>
+  <main id="top">
     <section class="hero" aria-label="首頁總覽">
       <div class="hero-copy">
-        <p class="pill">工程在哪、誰發包、誰施工、什麼時候完工，一張圖先看懂。</p>
-        <h2>把台灣正在升級的地方，一次開圖。</h2>
+        <p class="pill">不靠外部地圖元件，載入更穩；點工程可回查官方與開放地圖。</p>
+        <h2>台灣正在升級的地方，一張圖先 get。</h2>
         <p>
-          給工程公司、發包甲方、地圖控與年輕使用者看的工程資訊入口。先從位置找到工程，再看經費、工期、甲方、廠商與資料來源；不用在一堆公告裡迷路，城市進度直接 get。
+          給工程公司、發包甲方、地圖控與年輕使用者看的工程雷達。先看位置與施工範圍，再看甲方、乙方、開工日、預計完工與啟用日；資訊不迷路，城市進度直接開圖。
         </p>
       </div>
       <div class="hero-metrics" aria-label="資料統計">
-        <div><strong id="metricProjects">0</strong><span>工程熱點</span></div>
-        <div><strong id="metricCost">—</strong><span>已標示經費</span></div>
+        <div><strong id="metricProjects">0</strong><span>工程/資料圖層</span></div>
+        <div><strong id="metricCost">—</strong><span>工程級距總覽</span></div>
         <div><strong id="metricSources">0</strong><span>可查資料入口</span></div>
       </div>
     </section>
@@ -47,12 +47,12 @@
         <div class="panel-heading">
           <p class="eyebrow">工程雷達</p>
           <h2>先找地點，再看工程脈絡</h2>
-          <p>輸入地名、工程名、廠商或發包單位，快速定位。適合估案、查進度、看城市變化，也適合單純喜歡地圖的人開圖探索。</p>
+          <p>輸入地名、工程名、廠商或發包單位，快速定位。適合估案、查進度、看城市變化，也適合地圖玩家開圖探索。</p>
         </div>
 
         <label class="search-box" for="searchInput">
           <span>搜尋</span>
-          <input id="searchInput" type="search" placeholder="例：淡江大橋、高雄捷運、工信工程" autocomplete="off" />
+          <input id="searchInput" type="search" placeholder="例：淡江大橋、高雄捷運、工信工程、道路挖掘" autocomplete="off" />
         </label>
 
         <div class="filter-grid" aria-label="篩選條件">
@@ -80,6 +80,7 @@
           <span><i class="dot dot-orange"></i>捷運/交通</span>
           <span><i class="dot dot-green"></i>道路/管線</span>
           <span><i class="dot dot-purple"></i>規劃/環評</span>
+          <span><i class="dot dot-cyan"></i>建築/園區</span>
         </div>
 
         <div id="projectList" class="project-list" aria-live="polite"></div>
@@ -88,10 +89,10 @@
       <section class="map-card" aria-label="台灣工程互動地圖">
         <div class="map-toolbar">
           <div>
-            <p class="eyebrow">全台熱點</p>
+            <p class="eyebrow">自製輕量工程圖</p>
             <h2>台灣工程現場一眼看</h2>
           </div>
-          <p class="map-note">點擊路線、範圍或標記，就能看經費、甲方、施工廠商、工期與預計完工日。</p>
+          <p class="map-note">本頁不載入外部地圖底圖或外部地圖元件，避免網路不穩時卡在「地圖載入中」。需要精準地圖時，再點開每筆資料的開放地圖或官方來源。</p>
         </div>
         <div class="map-frame">
           <div id="map" role="application" aria-label="台灣工程熱點地圖">
@@ -105,8 +106,8 @@
     <section id="sourcePanel" class="info-section" aria-label="資料來源說明">
       <div class="section-title">
         <p class="eyebrow">資料入口</p>
-        <h2>工程資料分散在不同單位，要分層查才準。</h2>
-        <p>公共工程、建管、道路挖掘、環評、都市計畫各有自己的入口。本網站先把常用入口整理好，方便工程公司、甲方與地圖玩家交叉查證，不用資訊海裡撈針。</p>
+        <h2>工程資料很分散，要分層查才準。</h2>
+        <p>公共工程、採購決標、重大建設、道路挖掘、環評、建管、能源水利與地方開放資料各有入口。這裡把常用平台集中，方便工程公司、甲方、地圖控交叉查證。</p>
       </div>
       <div id="sourceCards" class="source-grid"></div>
     </section>
@@ -114,24 +115,24 @@
     <section id="maintainPanel" class="maintain-section" aria-label="資料更新方式">
       <div class="section-title">
         <p class="eyebrow">補資料指南</p>
-        <h2>資料要好用，關鍵是位置、來源與查證節奏。</h2>
+        <h2>資料要好用，關鍵是位置、來源與欄位一致。</h2>
       </div>
       <div class="maintain-grid">
         <article>
           <h3>1. 補上工程基本盤</h3>
-          <p>先整理工程名稱、地點、甲方、施工廠商、經費與工期。欄位越完整，查案、比案、看進度就越順。</p>
+          <p>工程名、地點、甲方、乙方、經費、開工日、預計完工日與啟用日要盡量完整，查案才順。</p>
         </article>
         <article>
-          <h3>2. 標清楚位置範圍</h3>
-          <p>橋梁、道路、捷運適合畫路線；基地開發適合畫範圍；單一設施用標記點。地圖準，使用者才不會迷路。</p>
+          <h3>2. 標清楚施工範圍</h3>
+          <p>橋梁、道路、捷運適合畫路線；園區與基地適合畫範圍；單一設施用標記點。地圖準，信任感就上來。</p>
         </article>
         <article>
           <h3>3. 來源要能回查</h3>
-          <p>每筆資料最好能回到官方公告、採購資料、工程頁面或地方圖台。看到來源，信任感直接 up。</p>
+          <p>每筆資料都盡量附官方公告、採購資料、工程頁面或地方圖台。看到來源，資訊力直接 up。</p>
         </article>
         <article>
           <h3>4. 手機先好用</h3>
-          <p>清單、篩選、地圖點擊都要在手機上順手。現場人員、通勤族、地圖控打開就能秒看重點。</p>
+          <p>現場人員、通勤族、地圖控多半用手機看；清單、篩選、地圖點擊都要單手可用、載入快速。</p>
         </article>
       </div>
     </section>
@@ -139,7 +140,7 @@
 
   <footer class="site-footer">
     <p>台灣工程地圖｜Taiwan Construction Map</p>
-    <p>位置與工程資料請以各主管機關、政府電子採購網、公共工程雲端服務網、建管與環評系統為準。</p>
+    <p>工程位置、經費、期程與甲乙方資料，請以各主管機關、政府電子採購網、公共工程雲端服務網、建管、環評與地方圖台最新公告為準。</p>
   </footer>
 
   <script type="module" src="./app.js"></script>
