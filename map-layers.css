@@ -112,6 +112,16 @@
   color: #9a530e;
 }
 
+.map-attribution a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.map-attribution a:hover,
+.map-attribution a:focus-visible {
+  text-decoration: underline;
+}
+
 @media (max-width: 760px) {
   .base-layer-control {
     top: 62px;
