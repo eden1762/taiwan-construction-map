@@ -22,9 +22,10 @@ const BASE_LAYERS = {
     tile: ({ z, x, y }) => `https://wmts.nlsc.gov.tw/wmts/PHOTO2/default/GoogleMapsCompatible/${z}/${y}/${x}`
   },
   nlscCadastre: {
-    label: { zh: '地籍參考', en: 'Cadastre ref.' },
-    attribution: { zh: '國土測繪中心地籍參考圖｜僅供參考', en: 'NLSC cadastral reference｜For reference only' },
-    tile: ({ z, x, y }) => `https://wmts.nlsc.gov.tw/wmts/LANDSECT/default/GoogleMapsCompatible/${z}/${y}/${x}`
+    label: { zh: '地籍參考套疊', en: 'Cadastre overlay' },
+    attribution: { zh: '國土測繪中心灰階電子地圖＋地籍參考圖｜地籍套疊僅供參考', en: 'NLSC gray e-Map + cadastral reference｜Cadastre overlay is for reference only' },
+    tile: ({ z, x, y }) => `https://wmts.nlsc.gov.tw/wmts/EMAP2/default/GoogleMapsCompatible/${z}/${y}/${x}`,
+    overlayTile: ({ z, x, y }) => `https://wmts.nlsc.gov.tw/wmts/LANDSECT/default/GoogleMapsCompatible/${z}/${y}/${x}`
   }
 };
 
@@ -51,6 +52,8 @@ function parseTilePosition(img) {
 
 function rewriteTiles(realMap) {
   const layer = BASE_LAYERS[activeBaseLayer] || BASE_LAYERS.osm;
+  const overlayTiles = [];
+
   realMap.querySelectorAll('.map-tile').forEach(img => {
     const tile = parseTilePosition(img);
     if (!tile) return;
@@ -69,6 +72,38 @@ function rewriteTiles(realMap) {
     };
     const nextSrc = layer.tile(tile);
     if (img.getAttribute('src') !== nextSrc) img.setAttribute('src', nextSrc);
+
+    if (layer.overlayTile) {
+      overlayTiles.push({
+        src: layer.overlayTile(tile),
+        left: img.style.left,
+        top: img.style.top,
+        z: tile.z,
+        x: tile.x,
+        y: tile.y
+      });
+    }
+  });
+
+  syncReferenceOverlay(realMap, overlayTiles);
+}
+
+function syncReferenceOverlay(realMap, overlayTiles) {
+  let overlay = realMap.querySelector('.reference-tile-layer');
+  if (!overlayTiles.length) {
+    overlay?.remove();
+    return;
+  }
+
+  if (!overlay) {
+    overlay = document.createElement('div');
+    overlay.className = 'reference-tile-layer';
+    realMap.querySelector('.tile-layer')?.after(overlay);
+  }
+
+  overlay.innerHTML = overlayTiles.map(tile => `<img class="map-reference-tile" src="${tile.src}" alt="" loading="lazy" decoding="async" data-z="${tile.z}" data-x="${tile.x}" data-y="${tile.y}" style="left:${tile.left};top:${tile.top}" />`).join('');
+  overlay.querySelectorAll('.map-reference-tile').forEach(img => {
+    img.onerror = () => img.remove();
   });
 }
 
