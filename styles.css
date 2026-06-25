@@ -331,9 +331,13 @@ button:hover { transform: translateY(-1px); }
   width: 100%;
   height: 100%;
   min-height: 620px;
-  background: linear-gradient(135deg, #dff7ff, #e9f5fb 48%, #faf1dc);
+  background: #dcecf4;
   z-index: 1;
+  overflow: hidden;
+  touch-action: none;
+  cursor: grab;
 }
+#map.dragging { cursor: grabbing; }
 .map-fallback {
   display: grid;
   min-height: 520px;
@@ -341,69 +345,97 @@ button:hover { transform: translateY(-1px); }
   color: #12324d;
   font-weight: 900;
 }
-.taiwan-map {
-  display: block;
-  width: 100%;
-  height: 100%;
-  min-height: 620px;
+.real-map {
+  position: relative;
+  overflow: hidden;
+  background: #dcecf4;
+  user-select: none;
 }
-.ocean { fill: url(#oceanGlow); }
-.map-grid line { stroke: rgba(15, 42, 68, 0.08); stroke-width: 1; }
-.taiwan-shape {
-  fill: url(#landGlow);
-  stroke: rgba(15, 42, 68, 0.28);
-  stroke-width: 3;
-  filter: url(#softShadow);
+.tile-layer, .map-overlay {
+  position: absolute;
+  inset: 0;
 }
-.island circle {
-  fill: rgba(255,255,255,0.68);
-  stroke: rgba(15, 42, 68, 0.22);
-  stroke-width: 2;
+.map-tile {
+  position: absolute;
+  width: 256px;
+  height: 256px;
+  max-width: none;
+  user-select: none;
+  pointer-events: none;
 }
-.island text, .city-label {
-  fill: rgba(16, 33, 49, 0.58);
-  font-size: 17px;
-  font-weight: 850;
-  paint-order: stroke;
-  stroke: rgba(255,255,255,0.86);
-  stroke-width: 4;
+.map-tile.tile-error { opacity: 0; }
+.map-overlay {
+  z-index: 3;
+  pointer-events: none;
 }
-.project-item { cursor: pointer; outline: none; }
+.project-item {
+  cursor: pointer;
+  outline: none;
+  pointer-events: auto;
+}
 .project-item polyline {
   fill: none;
   stroke: var(--project-color);
-  stroke-width: 9;
+  stroke-width: 7;
   stroke-linecap: round;
   stroke-linejoin: round;
   opacity: 0.92;
-  filter: drop-shadow(0 8px 10px rgba(15,42,68,0.18));
+  filter: drop-shadow(0 4px 7px rgba(15,42,68,0.35));
 }
 .project-item polygon {
-  fill: rgba(47,128,237,0.16);
+  fill: rgba(47,128,237,0.18);
   stroke: var(--project-color);
-  stroke-width: 5;
-  opacity: 0.9;
-  filter: drop-shadow(0 8px 10px rgba(15,42,68,0.16));
+  stroke-width: 4;
+  opacity: 0.92;
+  filter: drop-shadow(0 4px 7px rgba(15,42,68,0.28));
 }
 .project-item circle {
   fill: var(--project-color);
   stroke: #fff;
   stroke-width: 5;
-  filter: drop-shadow(0 8px 12px rgba(15,42,68,0.22));
+  filter: drop-shadow(0 6px 10px rgba(15,42,68,0.35));
 }
 .project-item text {
-  fill: #0f2b44;
-  font-size: 20px;
+  fill: #102131;
+  font-size: 15px;
   font-weight: 950;
   paint-order: stroke;
   stroke: rgba(255,255,255,0.95);
   stroke-width: 5;
   pointer-events: none;
 }
-.project-item:hover polyline, .project-item.active polyline { stroke-width: 13; }
-.project-item:hover polygon, .project-item.active polygon { stroke-width: 8; }
+.project-item:hover polyline, .project-item.active polyline { stroke-width: 11; }
+.project-item:hover polygon, .project-item.active polygon { stroke-width: 7; }
 .project-item:hover circle, .project-item.active circle { r: 19; }
-
+.map-zoom-control {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 6;
+  display: grid;
+  gap: 8px;
+}
+.map-zoom-control button {
+  width: 42px;
+  min-height: 42px;
+  padding: 0;
+  border-radius: 14px;
+  font-size: 24px;
+  line-height: 1;
+  background: rgba(15,43,68,0.92);
+}
+.map-attribution {
+  position: absolute;
+  left: 10px;
+  bottom: 10px;
+  z-index: 4;
+  padding: 4px 7px;
+  border-radius: 999px;
+  background: rgba(255,255,255,0.86);
+  color: #425466;
+  font-size: 11px;
+  font-weight: 800;
+}
 .map-status {
   position: absolute;
   left: 18px;
@@ -417,6 +449,8 @@ button:hover { transform: translateY(-1px); }
   border: 1px solid rgba(15,42,68,0.1);
   color: var(--muted);
   font-weight: 850;
+  max-height: 56%;
+  overflow: auto;
 }
 .map-detail-card { color: var(--ink); }
 .map-detail-card h3 { margin: 9px 0 8px; font-size: 20px; letter-spacing: -0.03em; }
@@ -524,7 +558,7 @@ dd { margin: 3px 0 0; font-weight: 850; line-height: 1.45; }
   .project-list { padding: 0 10px 12px; max-height: 420px; }
   .map-toolbar { display: grid; }
   .map-frame { min-height: 520px; }
-  #map, .taiwan-map { min-height: 560px; }
+  #map { min-height: 560px; }
   .map-status {
     position: static;
     margin: 10px;
@@ -538,6 +572,5 @@ dd { margin: 3px 0 0; font-weight: 850; line-height: 1.45; }
 @media (max-width: 420px) {
   .filter-grid, .quick-actions { grid-template-columns: 1fr; }
   .hero-metrics { grid-template-columns: 1fr; }
-  .project-item text { font-size: 16px; }
-  .city-label, .island text { font-size: 14px; }
+  .project-item text { font-size: 13px; }
 }
