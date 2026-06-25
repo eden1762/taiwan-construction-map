@@ -74,23 +74,25 @@ function rewriteTiles(realMap) {
 
 function renderLayerControl(realMap) {
   const lang = getLang();
-  const existing = realMap.querySelector('.base-layer-control');
+  const stateKey = `${lang}:${activeBaseLayer}`;
+  let control = realMap.querySelector('.base-layer-control');
+  if (control?.dataset.state === stateKey) return;
+
   const labels = {
     title: lang === 'en' ? 'Base map' : '底圖',
     note: lang === 'en' ? 'Mobile loads one base layer at a time.' : '手機一次只載入一種底圖。'
   };
   const html = `<div class="base-layer-title"><span>${labels.title}</span><small>${labels.note}</small></div><div class="base-layer-buttons">${Object.entries(BASE_LAYERS).map(([id, cfg]) => `<button type="button" data-base-layer="${id}" class="${id === activeBaseLayer ? 'active' : ''}" aria-pressed="${id === activeBaseLayer}">${cfg.label[lang]}</button>`).join('')}</div>`;
 
-  if (existing) {
-    existing.innerHTML = html;
-  } else {
-    const control = document.createElement('div');
+  if (!control) {
+    control = document.createElement('div');
     control.className = 'base-layer-control';
-    control.innerHTML = html;
     realMap.append(control);
   }
+  control.dataset.state = stateKey;
+  control.innerHTML = html;
 
-  realMap.querySelectorAll('[data-base-layer]').forEach(button => {
+  control.querySelectorAll('[data-base-layer]').forEach(button => {
     button.addEventListener('pointerdown', event => event.stopPropagation());
     button.addEventListener('click', event => {
       event.stopPropagation();
@@ -107,7 +109,8 @@ function updateAttribution(realMap) {
   const attr = realMap.querySelector('.map-attribution');
   const layer = BASE_LAYERS[activeBaseLayer] || BASE_LAYERS.osm;
   if (!attr) return;
-  attr.textContent = layer.attribution[getLang()];
+  const nextText = layer.attribution[getLang()];
+  if (attr.textContent !== nextText) attr.textContent = nextText;
   attr.classList.toggle('reference-note', activeBaseLayer === 'nlscCadastre');
 }
 
