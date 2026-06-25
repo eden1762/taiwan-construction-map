@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#071626" />
+  <meta name="description" content="台灣工程地圖 Taiwan Construction Map：用 OpenStreetMap 看見規劃中、開工、施工中的公共工程、道路挖掘、建築工程與環評資料來源。" />
+  <title>台灣工程地圖｜Taiwan Construction Map</title>
+  <link rel="preconnect" href="https://unpkg.com" crossorigin>
+  <link rel="preconnect" href="https://tile.openstreetmap.org" crossorigin>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQXZ5PIaYCqOAO9eT5PJy9YZVdX3dpM=" crossorigin="" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#mainPanel">跳到工程資訊</a>
+
+  <header class="site-header" aria-label="網站導覽">
+    <div class="brand" aria-label="台灣工程地圖">
+      <div class="brand-mark" aria-hidden="true">工</div>
+      <div>
+        <p class="eyebrow">OpenStreetMap + Public Construction Data</p>
+        <h1>台灣工程地圖 <span>Taiwan Construction Map</span></h1>
+      </div>
+    </div>
+    <nav class="nav-links" aria-label="主要連結">
+      <a href="#mapArea">地圖</a>
+      <a href="#sourcePanel">資料源</a>
+      <a href="#maintainPanel">維護</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" aria-label="首頁總覽">
+      <div class="hero-copy">
+        <p class="pill">第一性原則：工程地圖 = 位置 × 時間 × 金額 × 負責單位</p>
+        <h2>把台灣正在變大的地方，一次攤開來看。</h2>
+        <p>
+          專為工程公司、發包甲方、地圖控與年輕使用者設計：不用翻一堆公文，就能先看到工程在哪、誰負責、花多少、何時完工。資訊透明，城市進度直接開圖，不迷路不霧煞煞。
+        </p>
+      </div>
+      <div class="hero-metrics" aria-label="資料統計">
+        <div><strong id="metricProjects">0</strong><span>工程圖層</span></div>
+        <div><strong id="metricCost">—</strong><span>已標示經費</span></div>
+        <div><strong id="metricSources">0</strong><span>官方/輔助資料源</span></div>
+      </div>
+    </section>
+
+    <section id="mapArea" class="map-shell" aria-label="台灣工程地圖區塊">
+      <aside id="mainPanel" class="control-panel" aria-label="工程篩選與清單">
+        <div class="panel-heading">
+          <p class="eyebrow">Construction Radar</p>
+          <h2>工程雷達</h2>
+          <p>搜尋地名、工程名、廠商、發包方，快速定位。這版採「官方來源＋可維護資料層」設計，資料可逐筆補強。</p>
+        </div>
+
+        <label class="search-box" for="searchInput">
+          <span>搜尋</span>
+          <input id="searchInput" type="search" placeholder="例：淡江大橋、高雄捷運、工信工程" autocomplete="off" />
+        </label>
+
+        <div class="filter-grid" aria-label="篩選條件">
+          <label>
+            類型
+            <select id="typeFilter">
+              <option value="all">全部類型</option>
+            </select>
+          </label>
+          <label>
+            狀態
+            <select id="statusFilter">
+              <option value="all">全部狀態</option>
+            </select>
+          </label>
+        </div>
+
+        <div class="quick-actions" aria-label="快捷操作">
+          <button id="resetMap" type="button">回到全台</button>
+          <button id="toggleSources" type="button">資料源說明</button>
+        </div>
+
+        <div class="legend" aria-label="地圖圖例">
+          <span><i class="dot dot-blue"></i>公共工程</span>
+          <span><i class="dot dot-orange"></i>捷運/交通</span>
+          <span><i class="dot dot-green"></i>道路/管線</span>
+          <span><i class="dot dot-purple"></i>規劃/環評</span>
+        </div>
+
+        <div id="projectList" class="project-list" aria-live="polite"></div>
+      </aside>
+
+      <section class="map-card" aria-label="OpenStreetMap 地圖">
+        <div class="map-toolbar">
+          <div>
+            <p class="eyebrow">Live Map View</p>
+            <h2>台灣工程熱區</h2>
+          </div>
+          <p class="map-note">點擊線段、範圍或標記，看成本、甲方、施工廠商、工期與預計完工日。</p>
+        </div>
+        <div id="map" role="application" aria-label="OpenStreetMap 台灣工程地圖"></div>
+      </section>
+    </section>
+
+    <section id="sourcePanel" class="info-section" aria-label="資料來源說明">
+      <div class="section-title">
+        <p class="eyebrow">Data Sources</p>
+        <h2>資料源不是只有一個，要分層查才準。</h2>
+        <p>公共工程、建管、道路挖掘、環評、都市計畫各有自己的資料入口。本網站先把入口整理成可維護架構，避免資料亂成一鍋粥。</p>
+      </div>
+      <div id="sourceCards" class="source-grid"></div>
+    </section>
+
+    <section id="maintainPanel" class="maintain-section" aria-label="維護方式">
+      <div class="section-title">
+        <p class="eyebrow">Maintain Like a Pro</p>
+        <h2>維護方式：只改一個資料檔，地圖自動更新。</h2>
+      </div>
+      <div class="maintain-grid">
+        <article>
+          <h3>1. 新增工程</h3>
+          <p>打開 <code>data/projects.js</code>，複製一筆工程資料，改名稱、類型、座標、金額、甲方、廠商、工期即可。No drama，維護超直覺。</p>
+        </article>
+        <article>
+          <h3>2. 畫位置範圍</h3>
+          <p>線型工程用 <code>line</code>，基地型工程用 <code>polygon</code>，單點工程用 <code>point</code>。座標格式是 <code>[緯度, 經度]</code>。</p>
+        </article>
+        <article>
+          <h3>3. 資料品質</h3>
+          <p>每筆工程都有 <code>confidence</code> 欄位：官方確認、部分確認、待補資料。讓使用者知道哪些資料很穩，哪些還要回查官方。</p>
+        </article>
+        <article>
+          <h3>4. Vercel 部署</h3>
+          <p>本網站是靜態網站，不需要 build 到 dist。Vercel 直接部署根目錄，速度快、故障點少、手機載入更輕。</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p>台灣工程地圖｜Taiwan Construction Map</p>
+    <p>OpenStreetMap © contributors｜工程資料請以各主管機關、政府電子採購網、公共工程雲端服務網、建管與環評系統為準。</p>
+  </footer>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
