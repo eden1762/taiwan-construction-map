@@ -223,6 +223,16 @@ function updateAttribution(realMap) {
   attr.classList.toggle('reference-note', activeBaseLayer === 'nlscCadastre');
 }
 
+function guardMapChrome(realMap) {
+  realMap.querySelectorAll('.base-layer-control, .data-layer-control, .map-attribution').forEach(element => {
+    if (element.dataset.mapChromeGuarded === 'true') return;
+    element.dataset.mapChromeGuarded = 'true';
+    ['pointerdown', 'pointermove', 'pointerup', 'touchstart', 'wheel'].forEach(type => {
+      element.addEventListener(type, event => event.stopPropagation(), { passive: true });
+    });
+  });
+}
+
 function applyBaseLayer(options = {}) {
   if (applyingBaseLayer) return;
   applyingBaseLayer = true;
@@ -236,6 +246,7 @@ function applyBaseLayer(options = {}) {
       renderDataLayerControl(realMap, { forceText });
       applyDataLayerState(realMap);
       updateAttribution(realMap);
+      guardMapChrome(realMap);
       lastRenderedLang = currentLang;
     }
     applyingBaseLayer = false;
