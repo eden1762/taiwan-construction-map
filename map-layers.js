@@ -42,7 +42,23 @@ const DATA_LAYER_DEFAULTS = {
   labels: true
 };
 
-let activeBaseLayer = BASE_LAYERS[localStorage.getItem(BASE_LAYER_KEY)] ? localStorage.getItem(BASE_LAYER_KEY) : 'osm';
+function safeGetPreference(key) {
+  try {
+    return window.localStorage?.getItem(key) || '';
+  } catch {
+    return '';
+  }
+}
+
+function safeSetPreference(key, value) {
+  try {
+    window.localStorage?.setItem(key, value);
+  } catch {
+    // Some privacy modes block storage. Keep the map usable with in-memory state.
+  }
+}
+
+let activeBaseLayer = BASE_LAYERS[safeGetPreference(BASE_LAYER_KEY)] ? safeGetPreference(BASE_LAYER_KEY) : 'osm';
 let activeDataLayers = loadDataLayers();
 let applyingBaseLayer = false;
 let lastRenderedLang = '';
@@ -51,14 +67,14 @@ const getLang = () => document.documentElement.lang?.toLowerCase().startsWith('e
 
 function loadDataLayers() {
   try {
-    return { ...DATA_LAYER_DEFAULTS, ...JSON.parse(localStorage.getItem(DATA_LAYER_KEY) || '{}') };
+    return { ...DATA_LAYER_DEFAULTS, ...JSON.parse(safeGetPreference(DATA_LAYER_KEY) || '{}') };
   } catch {
     return { ...DATA_LAYER_DEFAULTS };
   }
 }
 
 function saveDataLayers() {
-  localStorage.setItem(DATA_LAYER_KEY, JSON.stringify(activeDataLayers));
+  safeSetPreference(DATA_LAYER_KEY, JSON.stringify(activeDataLayers));
 }
 
 function parseTilePosition(img) {
@@ -91,7 +107,7 @@ function rewriteTiles(realMap) {
     img.onerror = () => {
       if (activeBaseLayer !== 'osm') {
         activeBaseLayer = 'osm';
-        localStorage.setItem(BASE_LAYER_KEY, activeBaseLayer);
+        safeSetPreference(BASE_LAYER_KEY, activeBaseLayer);
         applyBaseLayer({ forceText: true });
       } else {
         img.classList.add('tile-error');
@@ -161,7 +177,7 @@ function renderLayerControl(realMap, options = {}) {
       const next = button.dataset.baseLayer;
       if (!BASE_LAYERS[next]) return;
       activeBaseLayer = next;
-      localStorage.setItem(BASE_LAYER_KEY, activeBaseLayer);
+      safeSetPreference(BASE_LAYER_KEY, activeBaseLayer);
       applyBaseLayer({ forceText: true });
     });
   });
