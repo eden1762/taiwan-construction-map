@@ -40,6 +40,7 @@ const DATA_LAYER_DEFAULTS = {
 let activeBaseLayer = BASE_LAYERS[localStorage.getItem(BASE_LAYER_KEY)] ? localStorage.getItem(BASE_LAYER_KEY) : 'osm';
 let activeDataLayers = loadDataLayers();
 let applyingBaseLayer = false;
+let lastRenderedLang = '';
 
 const getLang = () => document.documentElement.lang?.toLowerCase().startsWith('en') ? 'en' : 'zh';
 
@@ -86,7 +87,7 @@ function rewriteTiles(realMap) {
       if (activeBaseLayer !== 'osm') {
         activeBaseLayer = 'osm';
         localStorage.setItem(BASE_LAYER_KEY, activeBaseLayer);
-        applyBaseLayer();
+        applyBaseLayer({ forceText: true });
       } else {
         img.classList.add('tile-error');
       }
@@ -128,11 +129,11 @@ function syncReferenceOverlay(realMap, overlayTiles) {
   });
 }
 
-function renderLayerControl(realMap) {
+function renderLayerControl(realMap, options = {}) {
   const lang = getLang();
   const stateKey = `${lang}:${activeBaseLayer}`;
   let control = realMap.querySelector('.base-layer-control');
-  if (control?.dataset.state === stateKey) return;
+  if (!options.forceText && control?.dataset.state === stateKey) return;
 
   const labels = {
     title: lang === 'en' ? 'Base map' : '底圖',
@@ -156,16 +157,16 @@ function renderLayerControl(realMap) {
       if (!BASE_LAYERS[next]) return;
       activeBaseLayer = next;
       localStorage.setItem(BASE_LAYER_KEY, activeBaseLayer);
-      applyBaseLayer();
+      applyBaseLayer({ forceText: true });
     });
   });
 }
 
-function renderDataLayerControl(realMap) {
+function renderDataLayerControl(realMap, options = {}) {
   const lang = getLang();
   const stateKey = `${lang}:${JSON.stringify(activeDataLayers)}`;
   let control = realMap.querySelector('.data-layer-control');
-  if (control?.dataset.state === stateKey) return;
+  if (!options.forceText && control?.dataset.state === stateKey) return;
 
   const labels = lang === 'en'
     ? { title: 'Data layers', note: 'Keep only what you need on.', points: 'Pins', routes: 'Routes', areas: 'Areas', labels: 'Labels' }
@@ -188,7 +189,7 @@ function renderDataLayerControl(realMap) {
       const key = button.dataset.dataLayer;
       activeDataLayers[key] = !activeDataLayers[key];
       saveDataLayers();
-      applyBaseLayer();
+      applyBaseLayer({ forceText: true });
     });
   });
 }
@@ -209,17 +210,20 @@ function updateAttribution(realMap) {
   attr.classList.toggle('reference-note', activeBaseLayer === 'nlscCadastre');
 }
 
-function applyBaseLayer() {
+function applyBaseLayer(options = {}) {
   if (applyingBaseLayer) return;
   applyingBaseLayer = true;
   requestAnimationFrame(() => {
     const realMap = document.querySelector('.real-map');
+    const currentLang = getLang();
+    const forceText = options.forceText || currentLang !== lastRenderedLang;
     if (realMap) {
       rewriteTiles(realMap);
-      renderLayerControl(realMap);
-      renderDataLayerControl(realMap);
+      renderLayerControl(realMap, { forceText });
+      renderDataLayerControl(realMap, { forceText });
       applyDataLayerState(realMap);
       updateAttribution(realMap);
+      lastRenderedLang = currentLang;
     }
     applyingBaseLayer = false;
   });
@@ -227,5 +231,9 @@ function applyBaseLayer() {
 
 const observer = new MutationObserver(() => applyBaseLayer());
 observer.observe(document.body, { childList: true, subtree: true });
-document.addEventListener('DOMContentLoaded', applyBaseLayer);
-applyBaseLayer();
+
+const languageObserver = new MutationObserver(() => applyBaseLayer({ forceText: true }));
+languageObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
+document.getElementById('languageToggle')?.addEventListener('click', () => setTimeout(() => applyBaseLayer({ forceText: true }), 0));
+document.addEventListener('DOMContentLoaded', () => applyBaseLayer({ forceText: true }));
+applyBaseLayer({ forceText: true });
