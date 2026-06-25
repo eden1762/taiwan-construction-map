@@ -258,6 +258,5 @@ observer.observe(document.body, { childList: true, subtree: true });
 
 const languageObserver = new MutationObserver(() => applyBaseLayer({ forceText: true }));
 languageObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['lang'] });
-document.getElementById('languageToggle')?.addEventListener('click', () => setTimeout(() => applyBaseLayer({ forceText: true }), 0));
-document.addEventListener('DOMContentLoaded', () => applyBaseLayer({ forceText: true }));
+
 applyBaseLayer({ forceText: true });
