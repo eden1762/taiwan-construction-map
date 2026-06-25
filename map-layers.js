@@ -1,4 +1,5 @@
 const BASE_LAYER_KEY = 'taiwan-construction-map-base-layer';
+const DATA_LAYER_KEY = 'taiwan-construction-map-data-layers';
 
 const BASE_LAYERS = {
   osm: {
@@ -29,10 +30,30 @@ const BASE_LAYERS = {
   }
 };
 
+const DATA_LAYER_DEFAULTS = {
+  points: true,
+  routes: true,
+  areas: true,
+  labels: true
+};
+
 let activeBaseLayer = BASE_LAYERS[localStorage.getItem(BASE_LAYER_KEY)] ? localStorage.getItem(BASE_LAYER_KEY) : 'osm';
+let activeDataLayers = loadDataLayers();
 let applyingBaseLayer = false;
 
 const getLang = () => document.documentElement.lang?.toLowerCase().startsWith('en') ? 'en' : 'zh';
+
+function loadDataLayers() {
+  try {
+    return { ...DATA_LAYER_DEFAULTS, ...JSON.parse(localStorage.getItem(DATA_LAYER_KEY) || '{}') };
+  } catch {
+    return { ...DATA_LAYER_DEFAULTS };
+  }
+}
+
+function saveDataLayers() {
+  localStorage.setItem(DATA_LAYER_KEY, JSON.stringify(activeDataLayers));
+}
 
 function parseTilePosition(img) {
   if (img.dataset.z && img.dataset.x && img.dataset.y) {
@@ -140,6 +161,45 @@ function renderLayerControl(realMap) {
   });
 }
 
+function renderDataLayerControl(realMap) {
+  const lang = getLang();
+  const stateKey = `${lang}:${JSON.stringify(activeDataLayers)}`;
+  let control = realMap.querySelector('.data-layer-control');
+  if (control?.dataset.state === stateKey) return;
+
+  const labels = lang === 'en'
+    ? { title: 'Data layers', note: 'Keep only what you need on.', points: 'Pins', routes: 'Routes', areas: 'Areas', labels: 'Labels' }
+    : { title: '資料層', note: '只開需要看的圖層。', points: '點位', routes: '路線', areas: '範圍', labels: '標籤' };
+
+  const html = `<div class="base-layer-title"><span>${labels.title}</span><small>${labels.note}</small></div><div class="data-layer-buttons">${Object.keys(DATA_LAYER_DEFAULTS).map(key => `<button type="button" data-data-layer="${key}" class="${activeDataLayers[key] ? 'active' : ''}" aria-pressed="${activeDataLayers[key]}">${labels[key]}</button>`).join('')}</div>`;
+
+  if (!control) {
+    control = document.createElement('div');
+    control.className = 'data-layer-control';
+    realMap.append(control);
+  }
+  control.dataset.state = stateKey;
+  control.innerHTML = html;
+
+  control.querySelectorAll('[data-data-layer]').forEach(button => {
+    button.addEventListener('pointerdown', event => event.stopPropagation());
+    button.addEventListener('click', event => {
+      event.stopPropagation();
+      const key = button.dataset.dataLayer;
+      activeDataLayers[key] = !activeDataLayers[key];
+      saveDataLayers();
+      applyBaseLayer();
+    });
+  });
+}
+
+function applyDataLayerState(realMap) {
+  realMap.classList.toggle('hide-project-points', !activeDataLayers.points);
+  realMap.classList.toggle('hide-project-routes', !activeDataLayers.routes);
+  realMap.classList.toggle('hide-project-areas', !activeDataLayers.areas);
+  realMap.classList.toggle('hide-project-labels', !activeDataLayers.labels);
+}
+
 function updateAttribution(realMap) {
   const attr = realMap.querySelector('.map-attribution');
   const layer = BASE_LAYERS[activeBaseLayer] || BASE_LAYERS.osm;
@@ -157,6 +217,8 @@ function applyBaseLayer() {
     if (realMap) {
       rewriteTiles(realMap);
       renderLayerControl(realMap);
+      renderDataLayerControl(realMap);
+      applyDataLayerState(realMap);
       updateAttribution(realMap);
     }
     applyingBaseLayer = false;
