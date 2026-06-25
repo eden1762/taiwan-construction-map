@@ -312,46 +312,113 @@ button:hover { transform: translateY(-1px); }
   border-bottom: 1px solid var(--line);
 }
 .map-note { margin: 0; max-width: 520px; color: var(--muted); font-weight: 750; line-height: 1.45; }
-.map-frame { position: relative; min-height: 520px; background: #dfe9ef; }
+.map-frame { position: relative; min-height: 520px; background: #dff0f6; }
 #map {
   width: 100%;
   height: 100%;
   min-height: 620px;
-  background: #dfe9ef;
+  background: linear-gradient(135deg, #dff7ff, #e9f5fb 48%, #faf1dc);
   z-index: 1;
 }
+.map-fallback {
+  display: grid;
+  min-height: 520px;
+  place-items: center;
+  color: #12324d;
+  font-weight: 900;
+}
+.taiwan-map {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 620px;
+}
+.ocean { fill: url(#oceanGlow); }
+.map-grid line { stroke: rgba(15, 42, 68, 0.08); stroke-width: 1; }
+.taiwan-shape {
+  fill: rgba(255,255,255,0.72);
+  stroke: rgba(15, 42, 68, 0.28);
+  stroke-width: 3;
+  filter: url(#softShadow);
+}
+.island circle {
+  fill: rgba(255,255,255,0.68);
+  stroke: rgba(15, 42, 68, 0.22);
+  stroke-width: 2;
+}
+.island text, .city-label {
+  fill: rgba(16, 33, 49, 0.58);
+  font-size: 17px;
+  font-weight: 850;
+  paint-order: stroke;
+  stroke: rgba(255,255,255,0.86);
+  stroke-width: 4;
+}
+.project-item {
+  cursor: pointer;
+  outline: none;
+}
+.project-item polyline {
+  fill: none;
+  stroke: var(--project-color);
+  stroke-width: 9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0.92;
+  filter: drop-shadow(0 8px 10px rgba(15,42,68,0.18));
+}
+.project-item polygon {
+  fill: color-mix(in srgb, var(--project-color) 22%, transparent);
+  stroke: var(--project-color);
+  stroke-width: 5;
+  opacity: 0.9;
+  filter: drop-shadow(0 8px 10px rgba(15,42,68,0.16));
+}
+.project-item circle {
+  fill: var(--project-color);
+  stroke: #fff;
+  stroke-width: 5;
+  filter: drop-shadow(0 8px 12px rgba(15,42,68,0.22));
+}
+.project-item text {
+  fill: #0f2b44;
+  font-size: 20px;
+  font-weight: 950;
+  letter-spacing: -0.03em;
+  paint-order: stroke;
+  stroke: rgba(255,255,255,0.9);
+  stroke-width: 6;
+}
+.project-item:hover polyline,
+.project-item.active polyline { stroke-width: 13; }
+.project-item:hover polygon,
+.project-item.active polygon { stroke-width: 8; }
+.project-item:hover circle,
+.project-item.active circle { r: 20; }
+.project-item.active text { font-size: 24px; }
 .map-status {
   position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 500;
-  max-width: min(360px, calc(100% - 32px));
+  left: 18px;
+  right: 18px;
+  bottom: 18px;
+  z-index: 20;
+  max-width: 520px;
   padding: 12px 14px;
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.94);
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.95);
   box-shadow: 0 14px 32px rgba(0,0,0,0.18);
   color: #12324d;
   font-weight: 900;
   line-height: 1.55;
-  text-align: center;
 }
 .map-status[hidden] { display: none; }
-
-.leaflet-container { font: inherit; }
-.leaflet-control-attribution { font-size: 11px; }
-.leaflet-popup-content-wrapper {
-  border-radius: 20px;
-  box-shadow: 0 18px 42px rgba(0,0,0,0.22);
-}
-.leaflet-popup-content { margin: 16px; width: min(310px, calc(100vw - 64px)); }
-.popup-card h3 { margin: 0 0 8px; font-size: 18px; }
-.popup-card p { margin: 0 0 10px; color: #5e7082; line-height: 1.55; }
-.popup-table { display: grid; gap: 7px; margin: 10px 0; }
-.popup-table div { display: grid; grid-template-columns: 92px 1fr; gap: 8px; font-size: 13px; }
-.popup-table dt { color: #66788a; font-weight: 900; }
-.popup-table dd { margin: 0; font-weight: 750; }
-.popup-card a { color: #1769aa; font-weight: 900; }
+.map-detail-card h3 { margin: 8px 0 6px; font-size: 20px; letter-spacing: -0.03em; }
+.map-detail-card p { margin: 0 0 10px; color: #5e7082; line-height: 1.55; font-weight: 700; }
+.map-detail-card dl { display: grid; gap: 7px; margin: 10px 0; }
+.map-detail-card dl div { display: grid; grid-template-columns: 92px 1fr; gap: 8px; font-size: 13px; }
+.map-detail-card dt { color: #66788a; font-weight: 900; }
+.map-detail-card dd { margin: 0; font-weight: 750; }
+.map-detail-card a { color: #1769aa; font-weight: 900; }
 
 .info-section, .maintain-section {
   max-width: 1480px;
@@ -436,10 +503,18 @@ button:hover { transform: translateY(-1px); }
   .project-list { padding: 0 10px 12px; max-height: 310px; }
   .map-toolbar { display: block; padding: 16px; }
   .map-note { margin-top: 8px; font-size: 13px; }
-  .map-frame { min-height: 66vh; }
-  #map { min-height: 66vh; height: 66vh; }
+  .map-frame { min-height: 70vh; }
+  #map, .taiwan-map { min-height: 70vh; height: 70vh; }
+  .project-item text { font-size: 24px; }
+  .city-label, .island text { font-size: 20px; }
+  .map-status { left: 10px; right: 10px; bottom: 10px; max-width: none; max-height: 42vh; overflow: auto; }
+  .map-detail-card dl div { grid-template-columns: 84px 1fr; }
   .source-grid, .maintain-grid { grid-template-columns: 1fr; }
   .site-footer { display: block; padding: 18px 16px 28px; font-size: 13px; }
+}
+
+@supports not (color: color-mix(in srgb, red 50%, transparent)) {
+  .project-item polygon { fill: rgba(47, 128, 237, 0.18); }
 }
 
 @media (prefers-reduced-motion: reduce) {
