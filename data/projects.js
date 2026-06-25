@@ -1,281 +1,58 @@
 // 台灣工程地圖｜Taiwan Construction Map
-// 維護原則：只要新增/修改這個檔案，首頁地圖與工程清單會自動更新。
-// 座標格式採 Leaflet 慣用的 [緯度, 經度]。
-// geometry.type 支援：point、line、polygon。
-// confidence 建議填：官方確認、部分確認、待補資料、示範資料。
+// 首頁採 WGS84 座標與自製輕量示意地圖，不載入外部地圖底圖或外部地圖元件。
+// 工程資料請以各主管機關、採購公告、建管、環評與地方圖台最新資訊為準。
 
 export const PROJECT_TYPES = {
   public: { label: '公共工程', color: '#2f80ed' },
   transit: { label: '捷運/交通', color: '#f28c28' },
   road: { label: '道路/管線', color: '#1ca678' },
   planning: { label: '規劃/環評', color: '#8b5cf6' },
-  building: { label: '建築/民間建案', color: '#0ea5e9' }
+  building: { label: '建築/園區', color: '#0ea5e9' },
+  energy: { label: '水利/能源/港灣', color: '#14b8a6' }
 };
 
 export const DATA_SOURCES = [
-  {
-    name: '公共工程雲端服務網',
-    fitFor: '施工中公共工程、標案管理、進度、查核紀錄',
-    url: 'https://pcic.pcc.gov.tw/',
-    note: '適合追工程進度與公共工程標案資料，是公共工程主戰場。'
-  },
-  {
-    name: '政府電子採購網',
-    fitFor: '招標、決標、得標廠商、決標金額、履約期限',
-    url: 'https://web.pcc.gov.tw/',
-    note: '要查誰發包、誰得標、多少錢，通常從這裡開始。'
-  },
-  {
-    name: '全民督工',
-    fitFor: '施工中公共工程、民眾通報、缺失追蹤',
-    url: 'https://cmdweb.pcc.gov.tw/pccms/owa/cmdmang.userin',
-    note: '工程品質與現場狀態的民眾視角，適合補足地面情報。'
-  },
-  {
-    name: '國發會重大公共建設',
-    fitFor: '規劃中、核定中、總經費十億以上重大建設',
-    url: 'https://www.ndc.gov.tw/Content_List.aspx?n=367921C6BC7A934E',
-    note: '還沒開工但已進入重大建設計畫的案子，從這裡抓輪廓。'
-  },
-  {
-    name: '臺北市道路挖掘管理中心',
-    fitFor: '台北道路施工、管線挖掘、預定施工路段',
-    url: 'https://dig.taipei/',
-    note: '道路與管線工程最在地、最即時，台北施工控必看。'
-  },
-  {
-    name: '新北 iRoad 智慧道路管理中心',
-    fitFor: '新北申挖、孔蓋、緊急搶修、公共工程、道路工程',
-    url: 'https://roadmt.maintenance.ntpc.gov.tw/iROAD/Home/index',
-    note: '可從 GIS 圖台看當日或未來預定施工案件。'
-  },
-  {
-    name: '環境部環評書件查詢系統',
-    fitFor: '大型開發案、環評審查、會議紀錄、審查結論',
-    url: 'https://eiadoc.moenv.gov.tw/',
-    note: '工程還沒動工前，環評常先爆雷，也可能先透露路線與基地。'
-  },
-  {
-    name: '全國土地使用分區資料查詢系統',
-    fitFor: '都市計畫、非都市土地、國家公園使用分區',
-    url: 'https://luz.nlma.gov.tw/web/default.aspx',
-    note: '想確認某地是不是道路、公設、工業或住宅用地，可從這裡交叉比對。'
-  }
+  { category: '中央公共工程／標案／決標', kind: '官方主入口', name: '行政院公共工程委員會', url: 'https://www.pcc.gov.tw/', fitFor: '公共工程、採購制度、工程管理、全民督工、技術資料', note: '工程政策、公共工程與採購資料的入口總站，適合做第一層查證。' },
+  { category: '中央公共工程／標案／決標', kind: '官方主入口', name: '公共工程雲端服務網', url: 'https://pcic.pcc.gov.tw/', fitFor: '施工中公共工程、進度、查核、價格資料、廠商履歷、PCCES', note: '適合追工程進度、工期、查核與價格資料，是公共工程資訊主戰場。' },
+  { category: '中央公共工程／標案／決標', kind: '官方主入口', name: '政府電子採購網', url: 'https://web.pcc.gov.tw/', fitFor: '招標公告、決標公告、得標廠商、決標金額、履約期限', note: '要查甲方、乙方、決標金額與履約期間，通常從這裡開始。' },
+  { category: '規劃中／預算中／大型公共建設', kind: '官方主入口', name: '國發會重大公共建設計畫', url: 'https://www.ndc.gov.tw/Content_List.aspx?n=367921C6BC7A934E', fitFor: '規劃中、核定中、總經費、年度預算、計畫期程', note: '適合看還沒全面施工、但已進入重大建設或預算流程的案件。' },
+  { category: '規劃中／預算中／大型公共建設', kind: '官方主入口', name: '公共政策網路參與平臺 JOIN', url: 'https://join.gov.tw/', fitFor: '規劃中政策、地方建設提案、民眾討論', note: '適合觀察地方建設還在討論或醞釀時的公共意見。' },
+  { category: '交通／道路／鐵路／捷運', kind: '官方主入口', name: '交通部重要公共建設計畫', url: 'https://www.motc.gov.tw/ch/app/folder/58', fitFor: '交通類重大建設、查核金額以上工程進度', note: '交通建設總覽入口，適合從上位計畫一路追到各主管機關。' },
+  { category: '交通／道路／鐵路／捷運', kind: '官方主入口', name: '交通部鐵道局', url: 'https://www.rb.gov.tw/', fitFor: '鐵路地下化、高架化、雙軌化、車站工程、計畫進度', note: '鐵路立體化與車站工程追蹤必看。' },
+  { category: '交通／道路／鐵路／捷運', kind: '官方主入口', name: '交通部公路局', url: 'https://www.thb.gov.tw/', fitFor: '省道、公路、橋梁、隧道、施工路段', note: '公路、橋梁、隧道與施工影響資訊的核心入口。' },
+  { category: '交通／道路／鐵路／捷運', kind: '官方主入口', name: '高速公路局', url: 'https://www.freeway.gov.tw/', fitFor: '國道拓寬、交流道、橋梁、邊坡、交通工程', note: '國道級工程與交流道改善可由此回查。' },
+  { category: '交通／道路／鐵路／捷運', kind: '官方主入口', name: '各縣市捷運工程局', url: 'https://www.dorts.gov.taipei/', fitFor: '臺北、新北、桃園、臺中、高雄、臺南捷運規劃與施工進度', note: '捷運工程多由地方主管機關揭露，查案時建議回到該城市捷運工程局。' },
+  { category: '環評／土地／都市計畫／圖資', kind: '官方主入口', name: '環境部環評書件查詢系統', url: 'https://eiadoc.moenv.gov.tw/', fitFor: '大型開發案、道路、園區、能源、軌道、港灣、環評書件', note: '工程開工前常先進環評，適合看路線、基地與審查爭點。' },
+  { category: '環評／土地／都市計畫／圖資', kind: '官方主入口', name: '全國土地使用分區資料查詢系統', url: 'https://luz.nlma.gov.tw/web/default.aspx', fitFor: '都市計畫、非都市土地、國家公園分區、位置圖台', note: '要看用地性質、都市計畫與土地分區時很有用。' },
+  { category: '環評／土地／都市計畫／圖資', kind: '官方主入口', name: '國土測繪圖資服務雲', url: 'https://maps.nlsc.gov.tw/', fitFor: '地籍、門牌、行政區、地形、航照底圖', note: '適合做工程位置、地籍與圖資交叉比對。' },
+  { category: '道路挖掘／管線／即時施工', kind: '地方圖台', name: '臺北市道路挖掘管理中心', url: 'https://dig.taipei/', fitFor: '道路挖掘、管線工程、預定施工路段、完工管制', note: '臺北道路與管線施工最即時的入口之一。' },
+  { category: '道路挖掘／管線／即時施工', kind: '地方圖台', name: '新北 iRoad 智慧道路管理中心', url: 'https://roadmt.maintenance.ntpc.gov.tw/iROAD/Home/index', fitFor: '申挖、孔蓋、搶修、公共工程、道路工程', note: '新北道路施工、申挖與公共工程查詢入口。' },
+  { category: '地方政府開放資料平台', kind: '開放資料', name: '六都開放資料平台', url: 'https://data.gov.tw/', fitFor: '道路施工、建管、交通、圖資資料集', note: '臺北、新北、桃園、臺中、臺南、高雄等資料平台可用關鍵字搜尋工程資料。' },
+  { category: '建築工程／建照／民間建案', kind: '官方主入口', name: '全國建築管理系統入口網', url: 'https://cloudbm.nlma.gov.tw/', fitFor: '建照、使照、建築地址、起造人、設計人、承造人', note: '民間建案、廠房、商辦與住宅工程可從建管資料切入。' },
+  { category: '建築工程／建照／民間建案', kind: '民間輔助', name: '民間建案與實價資料平台', url: 'https://lvr.land.moi.gov.tw/', fitFor: '實價登錄、預售屋、建案位置、社區與市場資料', note: '591、樂居、實價登錄比價王可輔助找建案，正式引用請回官方資料交叉確認。' },
+  { category: '水利／能源／港灣／產業園區', kind: '官方主入口', name: '經濟部水利署', url: 'https://www.wra.gov.tw/', fitFor: '水庫、治水、防洪、河川、水資源工程', note: '水利、河川治理與防洪工程追蹤入口。' },
+  { category: '水利／能源／港灣／產業園區', kind: '官方主入口', name: '台灣電力公司', url: 'https://www.taipower.com.tw/', fitFor: '電力建設、變電所、電網、發電、再生能源工程', note: '電網強化、變電所與能源工程可從台電與採購資料交叉查。' },
+  { category: '水利／能源／港灣／產業園區', kind: '官方主入口', name: '臺灣港務公司', url: 'https://www.twport.com.tw/', fitFor: '基隆、臺中、高雄、花蓮港建設與碼頭工程', note: '港灣、航道、碼頭與港區工程可從港務公司與航港局追蹤。' },
+  { category: '水利／能源／港灣／產業園區', kind: '官方主入口', name: '產業園區與科學園區資料', url: 'https://www.nstc.gov.tw/', fitFor: '產業園區、科學園區、道路、廠房、公共設施', note: '園區開發與廠房公共設施可回查國科會與產業園區管理局。' }
 ];
 
 export const PROJECTS = [
-  {
-    id: 'danjiang-bridge',
-    name: '淡江大橋及其連絡道路',
-    shortName: '淡江大橋',
-    type: 'public',
-    status: '施工中',
-    region: '新北市淡水區、八里區',
-    summary: '跨越淡水河口的指標性橋梁工程，採單塔不對稱斜張橋設計，是北海岸交通與景觀的超大級更新。',
-    cost: '約新臺幣 212.3 億元（整體計畫，待逐標回填）',
-    area: '路廊約 8.5 公里；主橋段約 1.9 公里（概略）',
-    owner: '交通部公路局 / 相關工程處（待標案逐筆確認）',
-    contractor: '主橋段公開資料常見：工信工程；各標需回查採購網',
-    schedule: '分標施工；主橋段 2019 起動工',
-    expectedFinish: '公開資料曾列 2026 年完工目標；以主管機關最新公告為準',
-    expectedOpen: '待主管機關公告',
-    confidence: '部分確認',
-    source: 'https://pcic.pcc.gov.tw/',
-    geometry: {
-      type: 'line',
-      coordinates: [
-        [25.1707, 121.4075],
-        [25.1696, 121.3998],
-        [25.1678, 121.3918],
-        [25.1658, 121.3836]
-      ]
-    }
-  },
-  {
-    id: 'kaohsiung-yellow-line',
-    name: '高雄捷運黃線｜都會線',
-    shortName: '高捷黃線',
-    type: 'transit',
-    status: '施工中',
-    region: '高雄市',
-    summary: '高雄捷運路網的關鍵補完，串接鳥松、鳳山、三民、苓雅、前鎮等生活圈，屬大型軌道工程。',
-    cost: '約新臺幣 1442.37 億元（綜合規劃核定版本；後續修正請回查官方）',
-    area: 'Y 字型路網，約 26 站（概略）',
-    owner: '高雄市政府捷運工程局',
-    contractor: '多標案分包；土建、機電、軌道需逐標回查政府電子採購網',
-    schedule: '2022 起陸續動工；分段施工',
-    expectedFinish: '局部/全線時程以高雄市政府最新公告為準',
-    expectedOpen: '待官方公告，可能採分段啟用',
-    confidence: '部分確認',
-    source: 'https://mtbu.kcg.gov.tw/',
-    geometry: {
-      type: 'line',
-      coordinates: [
-        [22.7062, 120.3621],
-        [22.6748, 120.3546],
-        [22.6432, 120.3334],
-        [22.6226, 120.3156],
-        [22.5962, 120.3141],
-        [22.6168, 120.3403],
-        [22.6378, 120.3655]
-      ]
-    }
-  },
-  {
-    id: 'taichung-blue-line',
-    name: '臺中捷運藍線第一階段',
-    shortName: '中捷藍線',
-    type: 'transit',
-    status: '規劃/招標準備',
-    region: '臺中市',
-    summary: '沿臺灣大道串接臺中港、市政府、臺中車站等核心節點，是臺中東西向交通的主幹級工程。',
-    cost: '公開討論版本曾見約新臺幣 1615 億元；以核定計畫與最新預算為準',
-    area: '第一階段約 24.78 公里，20 站（概略）',
-    owner: '臺中市政府 / 交通局及捷運工程相關單位',
-    contractor: '待招標/決標後回填',
-    schedule: '規劃推動中；工程標案待官方公告',
-    expectedFinish: '待官方公告',
-    expectedOpen: '待官方公告',
-    confidence: '待補資料',
-    source: 'https://www.traffic.taichung.gov.tw/',
-    geometry: {
-      type: 'line',
-      coordinates: [
-        [24.2607, 120.5268],
-        [24.2342, 120.5798],
-        [24.1832, 120.6176],
-        [24.1612, 120.6460],
-        [24.1376, 120.6868],
-        [24.1360, 120.6973]
-      ]
-    }
-  },
-  {
-    id: 'taoyuan-rail-underground',
-    name: '桃園鐵路地下化工程',
-    shortName: '桃鐵地下化',
-    type: 'transit',
-    status: '施工中',
-    region: '桃園市',
-    summary: '桃園都會區鐵路立體化，目標縫合都市南北、改善平交道與車站周邊生活圈。',
-    cost: '待逐標回填；請以鐵道局、工程會與採購網為準',
-    area: '桃園都會區鐵道路廊（概略線位）',
-    owner: '交通部鐵道局 / 桃園市政府相關單位',
-    contractor: '多標案分包，需逐標回查政府電子採購網',
-    schedule: '分段分標施工',
-    expectedFinish: '待主管機關最新公告',
-    expectedOpen: '待主管機關公告',
-    confidence: '待補資料',
-    source: 'https://www.rb.gov.tw/',
-    geometry: {
-      type: 'line',
-      coordinates: [
-        [24.9707, 121.2578],
-        [24.9897, 121.3133],
-        [25.0010, 121.3562],
-        [25.0138, 121.3832]
-      ]
-    }
-  },
-  {
-    id: 'taipei-road-excavation-layer',
-    name: '臺北市道路挖掘與管線工程資料層',
-    shortName: '台北道路施工',
-    type: 'road',
-    status: '即時資料源',
-    region: '臺北市',
-    summary: '台北道路施工與管線挖掘案件可由道路挖掘管理中心查詢；這裡用行政區範圍提示資料來源，不代表單一工程。',
-    cost: '依各申挖/施工案件公告',
-    area: '臺北市道路與管線施工範圍',
-    owner: '臺北市政府工務局及各管線/工程單位',
-    contractor: '依各案件公告',
-    schedule: '即時/預定施工路段依官方圖台更新',
-    expectedFinish: '依各案件公告',
-    expectedOpen: '不適用；以道路恢復通行為主',
-    confidence: '官方資料源',
-    source: 'https://dig.taipei/',
-    geometry: {
-      type: 'polygon',
-      coordinates: [
-        [25.1220, 121.4570],
-        [25.2100, 121.5600],
-        [25.1240, 121.6650],
-        [24.9700, 121.6300],
-        [24.9600, 121.5000],
-        [25.1220, 121.4570]
-      ]
-    }
-  },
-  {
-    id: 'newtaipei-iroad-layer',
-    name: '新北 iRoad 道路/公共工程資料層',
-    shortName: '新北 iRoad',
-    type: 'road',
-    status: '即時資料源',
-    region: '新北市',
-    summary: '新北市 iRoad 可查申挖、孔蓋、緊急搶修、公共工程、道路工程。這裡標示資料服務範圍，方便從地圖切進官方。',
-    cost: '依各案件公告',
-    area: '新北市道路與公共工程範圍',
-    owner: '新北市政府養護工程處及相關單位',
-    contractor: '依各案件公告',
-    schedule: '當日或未來預定施工案件依 GIS 圖台更新',
-    expectedFinish: '依各案件公告',
-    expectedOpen: '不適用；以道路恢復與工程驗收為主',
-    confidence: '官方資料源',
-    source: 'https://roadmt.maintenance.ntpc.gov.tw/iROAD/Home/index',
-    geometry: {
-      type: 'polygon',
-      coordinates: [
-        [25.305, 121.330],
-        [25.300, 122.005],
-        [24.705, 121.950],
-        [24.720, 121.250],
-        [25.305, 121.330]
-      ]
-    }
-  },
-  {
-    id: 'eia-major-project-layer',
-    name: '大型開發案環評資料層',
-    shortName: '環評資料層',
-    type: 'planning',
-    status: '規劃/審查資料源',
-    region: '全台灣',
-    summary: '大型開發案、園區、能源、交通建設常在開工前進入環評；這層提醒使用者：工程地圖不只看施工，也要看審查前哨站。',
-    cost: '依各開發案書件',
-    area: '依各開發案基地或路廊',
-    owner: '各開發單位 / 目的事業主管機關',
-    contractor: '規劃階段多未定；施工標案後續回填',
-    schedule: '環評審查、補件、通過、備查等階段',
-    expectedFinish: '依各開發計畫',
-    expectedOpen: '依各開發計畫',
-    confidence: '官方資料源',
-    source: 'https://eiadoc.moenv.gov.tw/',
-    geometry: {
-      type: 'point',
-      coordinates: [23.6978, 120.9605]
-    }
-  },
-  {
-    id: 'building-permit-layer',
-    name: '縣市建管與建築執照資料層',
-    shortName: '建管資料層',
-    type: 'building',
-    status: '資料源',
-    region: '各縣市',
-    summary: '民間住宅、商辦、廠房等工程通常要查建照、施工進度、使用執照；此層提供建管資料的入口概念。',
-    cost: '工程造價依建照資料；不等於總銷或總投資',
-    area: '依基地地號/建築地址',
-    owner: '起造人 / 建商 / 業主',
-    contractor: '承造人依建照揭露',
-    schedule: '建照核發、開工申報、施工進度、使照核發',
-    expectedFinish: '依建照與施工進度',
-    expectedOpen: '依使用執照/營運公告',
-    confidence: '官方資料源',
-    source: 'https://tccmoapply.dba.tcg.gov.tw/',
-    geometry: {
-      type: 'point',
-      coordinates: [24.1477, 120.6736]
-    }
-  }
+  { id: 'danjiang-bridge', name: '淡江大橋及其連絡道路', shortName: '淡江大橋', type: 'public', status: '施工中', region: '新北市淡水區、八里區', summary: '跨越淡水河口的指標橋梁工程，適合看大型橋梁、交通改善與景觀工程如何一起推進。', cost: '約 200 億元級；實際金額請依各標案決標資料', area: '淡水端、八里端與連絡道路路廊', owner: '交通部公路局及相關工程單位', contractor: '各標案乙方依政府電子採購網決標資料；主橋段請逐標回查', startDate: '已動工；詳日請以標案與主管機關公告為準', expectedFinish: '以公路局與工程會最新公告為準', expectedOpen: '待主管機關公告', confidence: '部分確認', sourceLabel: '公共工程雲端服務網／政府電子採購網／公路局', source: 'https://pcic.pcc.gov.tw/', tags: ['橋梁', '公路', '淡水', '八里'], geometry: { type: 'line', coordinates: [[25.1707, 121.4075], [25.1696, 121.3998], [25.1678, 121.3918], [25.1658, 121.3836]] } },
+  { id: 'kaohsiung-yellow-line', name: '高雄捷運黃線｜都會線', shortName: '高捷黃線', type: 'transit', status: '施工中', region: '高雄市', summary: '高雄都會區軌道補強工程，串接多個生活圈，是南部交通建設的重量級專案。', cost: '千億元級；以核定計畫與各標案決標資料為準', area: '鳥松、鳳山、三民、苓雅、前鎮等路廊概略標示', owner: '高雄市政府捷運工程局', contractor: '土建、機電、軌道等多標案乙方需逐標回查', startDate: '已陸續動工；以捷運工程局公告為準', expectedFinish: '分標分段推進，請以官方最新進度為準', expectedOpen: '待官方公告，可能分段啟用', confidence: '部分確認', sourceLabel: '高雄市政府捷運工程局／政府電子採購網', source: 'https://mtbu.kcg.gov.tw/', tags: ['捷運', '高雄', '黃線'], geometry: { type: 'line', coordinates: [[22.7062, 120.3621], [22.6748, 120.3546], [22.6432, 120.3334], [22.6226, 120.3156], [22.5962, 120.3141], [22.6168, 120.3403], [22.6378, 120.3655]] } },
+  { id: 'taipei-wanda-line', name: '臺北捷運萬大線第一期', shortName: '萬大線', type: 'transit', status: '施工中', region: '臺北市、新北市', summary: '連接中正、萬華、中和等生活圈的捷運工程，適合看地下車站、潛盾與都市交通更新。', cost: '以臺北捷運工程局與各標案資料為準', area: '中正紀念堂至中和、土城方向概略路廊', owner: '臺北市政府捷運工程局', contractor: '各土建、機電標案乙方依決標資料', startDate: '已施工；詳日請以捷運工程局公告為準', expectedFinish: '以官方最新工程進度為準', expectedOpen: '待官方公告', confidence: '部分確認', sourceLabel: '臺北市政府捷運工程局／政府電子採購網', source: 'https://www.dorts.gov.taipei/', tags: ['捷運', '台北', '新北', '地下工程'], geometry: { type: 'line', coordinates: [[25.034, 121.517], [25.023, 121.505], [25.01, 121.5], [24.993, 121.498], [24.982, 121.5]] } },
+  { id: 'newtaipei-sanying-line', name: '新北捷運三鶯線', shortName: '三鶯線', type: 'transit', status: '施工中', region: '新北市土城、三峽、鶯歌', summary: '串接土城、三峽、鶯歌的軌道工程，帶動三鶯生活圈通勤與都市發展。', cost: '以新北捷運局與各標案資料為準', area: '土城至三峽、鶯歌概略路廊', owner: '新北市政府捷運工程局', contractor: '多標案乙方依決標資料', startDate: '已施工；詳日請以新北捷運局公告為準', expectedFinish: '以官方最新工程進度為準', expectedOpen: '待官方公告', confidence: '部分確認', sourceLabel: '新北市政府捷運工程局／政府電子採購網', source: 'https://www.dorts.ntpc.gov.tw/', tags: ['捷運', '新北', '三峽', '鶯歌'], geometry: { type: 'line', coordinates: [[24.972, 121.438], [24.9525, 121.397], [24.938, 121.366], [24.954, 121.353]] } },
+  { id: 'taoyuan-green-line', name: '桃園捷運綠線', shortName: '桃捷綠線', type: 'transit', status: '施工中', region: '桃園市', summary: '桃園都會核心軌道路網，串接航空城、桃園市區與八德等生活圈。', cost: '以桃園捷運工程局與各標案資料為準', area: '桃園區、蘆竹、八德等概略路廊', owner: '桃園市政府捷運工程局', contractor: '各標案乙方依政府電子採購網決標資料', startDate: '已施工；詳日請以桃園捷運工程局公告為準', expectedFinish: '以官方最新工程進度為準', expectedOpen: '待官方公告', confidence: '部分確認', sourceLabel: '桃園市政府捷運工程局／政府電子採購網', source: 'https://dorts.tycg.gov.tw/', tags: ['捷運', '桃園', '綠線'], geometry: { type: 'line', coordinates: [[25.041, 121.288], [25.017, 121.301], [24.992, 121.309], [24.961, 121.298], [24.929, 121.285]] } },
+  { id: 'taichung-blue-line', name: '臺中捷運藍線第一階段', shortName: '中捷藍線', type: 'transit', status: '規劃/招標準備', region: '臺中市', summary: '沿臺灣大道串接臺中港、市政府、臺中車站等節點，是臺中東西向交通主幹級建設。', cost: '千億元級討論案；以核定計畫與最新預算為準', area: '臺灣大道東西向路廊概略標示', owner: '臺中市政府及交通局／捷運工程相關單位', contractor: '待招標決標後回填', startDate: '待工程標案公告', expectedFinish: '待官方公告', expectedOpen: '待官方公告', confidence: '待補資料', sourceLabel: '臺中市交通局／國發會重大公共建設／政府電子採購網', source: 'https://www.traffic.taichung.gov.tw/', tags: ['捷運', '台中', '藍線', '規劃'], geometry: { type: 'line', coordinates: [[24.2607, 120.5268], [24.2342, 120.5798], [24.1832, 120.6176], [24.1612, 120.646], [24.1376, 120.6868], [24.136, 120.6973]] } },
+  { id: 'taoyuan-rail-underground', name: '桃園鐵路地下化工程', shortName: '桃鐵地下化', type: 'transit', status: '施工中', region: '桃園市', summary: '桃園都會區鐵路立體化，目標改善平交道、縫合都市與更新車站生活圈。', cost: '大型交通建設；以鐵道局與各標案資料為準', area: '桃園都會區鐵道路廊概略標示', owner: '交通部鐵道局／桃園市政府相關單位', contractor: '多標案分包，需逐標回查政府電子採購網', startDate: '分段分標施工中；詳日請以鐵道局公告為準', expectedFinish: '待主管機關最新公告', expectedOpen: '待主管機關公告', confidence: '待補資料', sourceLabel: '交通部鐵道局／政府電子採購網', source: 'https://www.rb.gov.tw/', tags: ['鐵路', '桃園', '地下化'], geometry: { type: 'line', coordinates: [[24.9707, 121.2578], [24.9897, 121.3133], [25.001, 121.3562], [25.0138, 121.3832]] } },
+  { id: 'freeway-project-layer', name: '國道拓寬、交流道與橋梁工程資料層', shortName: '國道工程', type: 'transit', status: '資料源', region: '全台國道系統', summary: '國道拓寬、交流道改善、橋梁與邊坡工程分散在高速公路局與採購資料中，這層作為入口提醒。', cost: '依各國道工程標案公告', area: '全台國道與交流道工程範圍', owner: '交通部高速公路局', contractor: '依各工程標案決標資料', startDate: '依各工程公告', expectedFinish: '依各工程公告', expectedOpen: '依各工程通車或啟用公告', confidence: '官方資料源', sourceLabel: '高速公路局／政府電子採購網', source: 'https://www.freeway.gov.tw/', tags: ['國道', '交流道', '橋梁', '邊坡'], geometry: { type: 'line', coordinates: [[25.06, 121.62], [24.7, 121.02], [24.15, 120.67], [23.48, 120.45], [22.63, 120.3]] } },
+  { id: 'thb-roadworks-layer', name: '公路局施工路段與省道橋隧工程資料層', shortName: '公路施工', type: 'road', status: '資料源', region: '全台省道、公路、橋梁、隧道', summary: '施工路段、位置、日期與交通影響可回查公路局，適合施工影響與路廊工程追蹤。', cost: '依各工程標案公告', area: '省道、公路、橋梁、隧道與道路改善工程', owner: '交通部公路局', contractor: '依各工程標案決標資料', startDate: '依施工路段公告', expectedFinish: '依施工路段公告', expectedOpen: '道路恢復或工程啟用依官方公告', confidence: '官方資料源', sourceLabel: '公路局施工路段查詢／政府電子採購網', source: 'https://www.thb.gov.tw/NewsConstructionRoad.aspx?n=353', tags: ['公路', '施工路段', '橋梁', '隧道'], geometry: { type: 'line', coordinates: [[24.99, 121.3], [24.8, 120.97], [24.15, 120.67], [23.7, 120.53], [23, 120.21]] } },
+  { id: 'taipei-road-excavation-layer', name: '臺北市道路挖掘與管線工程資料層', shortName: '台北道路施工', type: 'road', status: '即時資料源', region: '臺北市', summary: '台北道路施工與管線挖掘案件可由道路挖掘管理中心查詢；這裡標示服務範圍，不代表單一工程。', cost: '依各申挖／施工案件公告', area: '臺北市道路與管線施工範圍', owner: '臺北市政府工務局及各管線／工程單位', contractor: '依各案件公告', startDate: '依各案件公告', expectedFinish: '依各案件公告', expectedOpen: '以道路恢復通行或完工管制解除為主', confidence: '官方資料源', sourceLabel: '臺北市道路挖掘管理中心', source: 'https://dig.taipei/', tags: ['道路挖掘', '管線', '台北'], geometry: { type: 'polygon', coordinates: [[25.122, 121.457], [25.21, 121.56], [25.124, 121.665], [24.97, 121.63], [24.96, 121.5], [25.122, 121.457]] } },
+  { id: 'newtaipei-iroad-layer', name: '新北 iRoad 道路／公共工程資料層', shortName: '新北 iRoad', type: 'road', status: '即時資料源', region: '新北市', summary: '新北 iRoad 可查申挖、孔蓋、緊急搶修、公共工程與道路工程；這裡標示資料服務範圍。', cost: '依各案件公告', area: '新北市道路與公共工程範圍', owner: '新北市政府養護工程處及相關單位', contractor: '依各案件公告', startDate: '依 GIS 圖台與案件公告', expectedFinish: '依各案件公告', expectedOpen: '以道路恢復與工程驗收為主', confidence: '官方資料源', sourceLabel: '新北市 iRoad 智慧道路管理中心', source: 'https://roadmt.maintenance.ntpc.gov.tw/iROAD/Home/index', tags: ['道路挖掘', '新北', '公共工程'], geometry: { type: 'polygon', coordinates: [[25.305, 121.33], [25.3, 122.005], [24.705, 121.95], [24.72, 121.25], [25.305, 121.33]] } },
+  { id: 'eia-major-project-layer', name: '大型開發案環評資料層', shortName: '環評資料層', type: 'planning', status: '規劃/審查資料源', region: '全台灣', summary: '道路、園區、能源、軌道、港灣等大型案常在開工前進入環評；這層提醒先看審查前哨站。', cost: '依各開發案書件', area: '依各開發案基地或路廊', owner: '各開發單位／目的事業主管機關', contractor: '規劃階段多未定；施工標案後續回填', startDate: '環評階段不等於開工；以後續標案為準', expectedFinish: '依各開發計畫', expectedOpen: '依各開發計畫', confidence: '官方資料源', sourceLabel: '環境部環評書件查詢系統', source: 'https://eiadoc.moenv.gov.tw/', tags: ['環評', '大型開發', '審查'], geometry: { type: 'point', coordinates: [23.6978, 120.9605] } },
+  { id: 'ndc-major-project-layer', name: '國發會重大公共建設與年度預算資料層', shortName: '重大建設', type: 'planning', status: '規劃/預算資料源', region: '全台灣', summary: '規劃中、核定中、年度預算與重大公共建設，可先從國發會抓大方向，再回到主管機關與採購資料。', cost: '依重大公共建設計畫與年度預算', area: '依各計畫基地、路廊或服務範圍', owner: '各中央／地方主管機關', contractor: '規劃或預算階段多未定；決標後回填', startDate: '依各計畫核定與標案公告', expectedFinish: '依各計畫期程', expectedOpen: '依各主管機關公告', confidence: '官方資料源', sourceLabel: '國發會重大公共建設計畫／年度預算先期作業', source: 'https://www.ndc.gov.tw/Content_List.aspx?n=367921C6BC7A934E', tags: ['重大建設', '預算', '規劃'], geometry: { type: 'point', coordinates: [23.85, 120.9] } },
+  { id: 'building-permit-layer', name: '縣市建管與建築執照資料層', shortName: '建管資料層', type: 'building', status: '資料源', region: '各縣市', summary: '民間住宅、商辦、廠房等工程要看建照、開工申報、施工進度與使照；這層提供建管資料入口。', cost: '工程造價依建照資料；不等於總銷或總投資', area: '依基地地號／建築地址', owner: '起造人／建商／業主', contractor: '承造人依建照揭露', startDate: '依建照與開工申報', expectedFinish: '依施工進度與使照資料', expectedOpen: '依使用執照、交屋或營運公告', confidence: '官方資料源', sourceLabel: '全國建築管理系統入口網／各縣市建管系統', source: 'https://cloudbm.nlma.gov.tw/', tags: ['建照', '建築', '民間建案'], geometry: { type: 'point', coordinates: [24.1477, 120.6736] } },
+  { id: 'science-park-layer', name: '科學園區道路、廠房與公共設施資料層', shortName: '科學園區', type: 'building', status: '資料源', region: '新竹、中部、南部等科學園區', summary: '科學園區開發、道路、廠房與公共設施工程可由國科會與各園區管理局追蹤。', cost: '依各園區工程與標案公告', area: '各科學園區開發與公共設施範圍', owner: '國科會及各科學園區管理局', contractor: '依各工程標案決標資料', startDate: '依各工程公告', expectedFinish: '依各工程公告', expectedOpen: '依園區或設施啟用公告', confidence: '官方資料源', sourceLabel: '國家科學及技術委員會科學園區／政府電子採購網', source: 'https://www.nstc.gov.tw/', tags: ['科學園區', '廠房', '公共設施'], geometry: { type: 'polygon', coordinates: [[24.83, 120.93], [24.84, 121.06], [24.73, 121.06], [24.72, 120.93], [24.83, 120.93]] } },
+  { id: 'water-resource-layer', name: '水庫、治水、防洪與河川治理資料層', shortName: '水利工程', type: 'energy', status: '資料源', region: '全台河川、排水、水庫與流域', summary: '水利署與各河川分署提供水庫、治水、防洪、疏濬與流域工程資訊。', cost: '依各水利工程標案公告', area: '各流域、河川、排水、水庫工程範圍', owner: '經濟部水利署及各河川分署', contractor: '依各工程標案決標資料', startDate: '依各工程公告', expectedFinish: '依各工程公告', expectedOpen: '依完工驗收或啟用公告', confidence: '官方資料源', sourceLabel: '經濟部水利署／各河川分署', source: 'https://www.wra.gov.tw/', tags: ['水利', '防洪', '河川治理'], geometry: { type: 'line', coordinates: [[24.46, 121], [24, 120.9], [23.65, 120.7], [23.3, 120.47], [22.9, 120.33]] } },
+  { id: 'power-grid-layer', name: '電網、變電所與再生能源工程資料層', shortName: '電力工程', type: 'energy', status: '資料源', region: '全台電網與能源設施', summary: '電力建設、變電所、電網強化、發電與再生能源工程可由台電與採購資料交叉查。', cost: '依各電力工程與標案公告', area: '發電、輸電、配電與變電設施工程範圍', owner: '台灣電力公司及相關主管機關', contractor: '依各工程標案決標資料', startDate: '依各工程公告', expectedFinish: '依各工程公告', expectedOpen: '依送電、併網或設施啟用公告', confidence: '官方資料源', sourceLabel: '台灣電力公司／政府電子採購網', source: 'https://www.taipower.com.tw/', tags: ['電力', '變電所', '電網', '再生能源'], geometry: { type: 'point', coordinates: [23.9, 121] } },
+  { id: 'port-construction-layer', name: '港灣、航道與碼頭工程資料層', shortName: '港灣工程', type: 'energy', status: '資料源', region: '基隆、臺中、高雄、花蓮等港區', summary: '港灣、航道、碼頭與港區公共設施工程，可從航港局與臺灣港務公司追蹤。', cost: '依各港灣工程標案公告', area: '港區、碼頭、航道與港灣設施範圍', owner: '交通部航港局／臺灣港務公司', contractor: '依各工程標案決標資料', startDate: '依各工程公告', expectedFinish: '依各工程公告', expectedOpen: '依碼頭或港區設施啟用公告', confidence: '官方資料源', sourceLabel: '交通部航港局／臺灣港務公司', source: 'https://www.twport.com.tw/', tags: ['港灣', '碼頭', '航道'], geometry: { type: 'line', coordinates: [[25.15, 121.76], [24.28, 120.5], [22.59, 120.29], [23.98, 121.62]] } }
 ];
