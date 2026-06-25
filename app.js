@@ -1,7 +1,30 @@
 import { PROJECTS, PROJECT_TYPES, DATA_SOURCES } from './data/projects.js';
 
-const TAIWAN_CENTER = [23.75, 121.0];
-const TAIWAN_BOUNDS_COORDS = [[21.85, 119.55], [25.40, 122.25]];
+const MAP_VIEWBOX = { width: 1000, height: 700 };
+const TAIWAN_BOUNDS = {
+  minLat: 21.75,
+  maxLat: 25.45,
+  minLng: 119.50,
+  maxLng: 122.35
+};
+
+const TAIWAN_SHAPE = 'M620 54 C660 84 684 128 690 176 C696 236 666 286 655 340 C642 401 682 448 646 516 C613 580 562 640 504 670 C448 642 422 594 394 540 C365 484 334 435 350 374 C365 315 410 277 424 219 C439 158 486 92 548 54 C574 38 599 38 620 54 Z';
+const ISLANDS = [
+  { name: '澎湖', x: 285, y: 382, r: 18 },
+  { name: '金門', x: 172, y: 300, r: 13 },
+  { name: '馬祖', x: 260, y: 115, r: 10 },
+  { name: '綠島', x: 734, y: 470, r: 10 },
+  { name: '蘭嶼', x: 742, y: 575, r: 12 }
+];
+const CITY_LABELS = [
+  { name: '台北', lat: 25.05, lng: 121.52 },
+  { name: '桃園', lat: 24.99, lng: 121.30 },
+  { name: '台中', lat: 24.15, lng: 120.67 },
+  { name: '台南', lat: 22.99, lng: 120.20 },
+  { name: '高雄', lat: 22.63, lng: 120.30 },
+  { name: '花蓮', lat: 23.99, lng: 121.60 },
+  { name: '台東', lat: 22.76, lng: 121.14 }
+];
 
 const refs = {
   search: document.querySelector('#searchInput'),
@@ -18,12 +41,8 @@ const refs = {
   mapStatus: document.querySelector('#mapStatus')
 };
 
-const layersById = new Map();
 let activeId = '';
 let visibleProjects = [...PROJECTS];
-let map = null;
-let mapReady = false;
-let mapResizeObserver = null;
 
 init();
 
@@ -31,61 +50,10 @@ function init() {
   hydrateFilters();
   renderSources();
   renderMetrics();
-  renderProjects(PROJECTS);
+  renderProjects(visibleProjects);
+  renderMap(visibleProjects);
   bindEvents();
-  setupMap();
-}
-
-function setupMap() {
-  if (!refs.map || !window.L) {
-    showMapStatus('地圖服務暫時沒有接上，工程清單仍可先查。請重新整理頁面或稍後再開圖。');
-    return;
-  }
-
-  const L = window.L;
-  map = L.map(refs.map, {
-    center: TAIWAN_CENTER,
-    zoom: 7,
-    minZoom: 6,
-    maxZoom: 18,
-    preferCanvas: true,
-    zoomControl: false,
-    scrollWheelZoom: true,
-    tap: true
-  });
-
-  L.control.zoom({ position: 'bottomright' }).addTo(map);
-
-  const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    detectRetina: true,
-    updateWhenIdle: true,
-    keepBuffer: 2,
-    crossOrigin: true,
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-  });
-
-  tiles.on('load', () => {
-    mapReady = true;
-    hideMapStatus();
-  });
-
-  tiles.on('tileerror', () => {
-    if (!mapReady) {
-      showMapStatus('底圖讀取不穩，請確認網路後重新整理；工程點位與清單已先載入。');
-    }
-  });
-
-  tiles.addTo(map);
-  drawProjects(PROJECTS);
-  fitTaiwan();
-  refreshMapSize();
-
-  window.addEventListener('resize', refreshMapSize, { passive: true });
-  if ('ResizeObserver' in window) {
-    mapResizeObserver = new ResizeObserver(refreshMapSize);
-    mapResizeObserver.observe(refs.map);
-  }
+  showMapHint('點選工程熱點，看經費、甲方、施工廠商與工期。');
 }
 
 function bindEvents() {
@@ -94,8 +62,9 @@ function bindEvents() {
   refs.statusFilter.addEventListener('change', applyFilters);
   refs.resetMap.addEventListener('click', () => {
     activeId = '';
-    highlightListItem();
-    fitTaiwan();
+    renderProjects(visibleProjects);
+    renderMap(visibleProjects);
+    showMapHint('已回到全台視角，點選任一工程熱點開始探索。');
   });
   refs.toggleSources.addEventListener('click', () => {
     document.querySelector('#sourcePanel').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -104,8 +73,7 @@ function bindEvents() {
 
 function hydrateFilters() {
   Object.entries(PROJECT_TYPES).forEach(([key, config]) => {
-    const option = new Option(config.label, key);
-    refs.typeFilter.add(option);
+    refs.typeFilter.add(new Option(config.label, key));
   });
 
   const statuses = [...new Set(PROJECTS.map(project => project.status))].sort((a, b) => a.localeCompare(b, 'zh-Hant'));
@@ -125,59 +93,20 @@ function applyFilters() {
     return matchesType && matchesStatus && matchesKeyword;
   });
 
+  if (!visibleProjects.some(project => project.id === activeId)) {
+    activeId = '';
+  }
+
   renderProjects(visibleProjects);
-  drawProjects(visibleProjects);
-  fitVisibleProjects();
-}
-
-function drawProjects(projects) {
-  if (!map) return;
-
-  layersById.forEach(layer => layer.remove());
-  layersById.clear();
-
-  projects.forEach(project => {
-    const layer = createProjectLayer(project);
-    layer.bindPopup(createPopup(project));
-    layer.on('click', () => selectProject(project.id, { openPopup: false }));
-    layer.addTo(map);
-    layersById.set(project.id, layer);
-  });
-}
-
-function createProjectLayer(project) {
-  const L = window.L;
-  const color = PROJECT_TYPES[project.type]?.color ?? '#2f80ed';
-  const style = {
-    color,
-    weight: project.geometry.type === 'polygon' ? 2 : 5,
-    opacity: 0.88,
-    fillColor: color,
-    fillOpacity: project.geometry.type === 'polygon' ? 0.12 : 0.26,
-    dashArray: project.confidence.includes('待補') || project.confidence.includes('示範') ? '7 8' : undefined
-  };
-
-  if (project.geometry.type === 'line') {
-    return L.polyline(project.geometry.coordinates, style);
-  }
-
-  if (project.geometry.type === 'polygon') {
-    return L.polygon(project.geometry.coordinates, style);
-  }
-
-  return L.circleMarker(project.geometry.coordinates, {
-    ...style,
-    radius: project.type === 'planning' ? 15 : 12,
-    weight: 3,
-    fillOpacity: 0.82
-  });
+  renderMap(visibleProjects);
+  showMapHint(visibleProjects.length ? `目前顯示 ${visibleProjects.length} 個工程熱點。` : '目前沒有符合條件的工程，換個關鍵字再試試。');
 }
 
 function renderProjects(projects) {
   refs.projectList.innerHTML = '';
 
   if (projects.length === 0) {
-    refs.projectList.innerHTML = '<div class="project-card"><h3>沒有符合條件的工程</h3><p>換個關鍵字或清除篩選，讓地圖重新開圖。</p></div>';
+    refs.projectList.innerHTML = '<div class="project-card empty"><h3>沒有符合條件的工程</h3><p>換個地名、工程名或廠商名稱，讓地圖重新開圖。</p></div>';
     return;
   }
 
@@ -190,9 +119,9 @@ function renderProjects(projects) {
     card.dataset.projectId = project.id;
     card.innerHTML = `
       <div class="meta-row">
-        <span class="badge">${PROJECT_TYPES[project.type]?.label ?? '工程'}</span>
-        <span class="badge status">${project.status}</span>
-        <span class="badge confidence">${project.confidence}</span>
+        <span class="badge">${escapeHtml(PROJECT_TYPES[project.type]?.label ?? '工程')}</span>
+        <span class="badge status">${escapeHtml(project.status)}</span>
+        <span class="badge confidence">${escapeHtml(project.confidence)}</span>
       </div>
       <h3>${escapeHtml(project.name)}</h3>
       <p>${escapeHtml(project.region)}｜${escapeHtml(project.summary)}</p>
@@ -210,90 +139,135 @@ function renderProjects(projects) {
   refs.projectList.append(fragment);
 }
 
-function selectProject(projectId, options = { openPopup: true }) {
+function renderMap(projects) {
+  const mapGraphics = projects.map(createProjectGraphic).join('');
+  const labels = CITY_LABELS.map(label => {
+    const [x, y] = projectCoord([label.lat, label.lng]);
+    return `<text class="city-label" x="${x + 10}" y="${y - 6}">${escapeHtml(label.name)}</text>`;
+  }).join('');
+  const islands = ISLANDS.map(island => `
+    <g class="island">
+      <circle cx="${island.x}" cy="${island.y}" r="${island.r}"></circle>
+      <text x="${island.x + island.r + 6}" y="${island.y + 4}">${escapeHtml(island.name)}</text>
+    </g>
+  `).join('');
+
+  refs.map.innerHTML = `
+    <svg class="taiwan-map" viewBox="0 0 ${MAP_VIEWBOX.width} ${MAP_VIEWBOX.height}" aria-label="台灣工程熱點示意圖" role="img">
+      <defs>
+        <linearGradient id="oceanGlow" x1="0" x2="1" y1="0" y2="1">
+          <stop offset="0%" stop-color="#dff7ff"></stop>
+          <stop offset="58%" stop-color="#b7e8ff"></stop>
+          <stop offset="100%" stop-color="#f7f0df"></stop>
+        </linearGradient>
+        <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+          <feDropShadow dx="0" dy="16" stdDeviation="16" flood-color="#0b2a44" flood-opacity="0.22"></feDropShadow>
+        </filter>
+      </defs>
+      <rect class="ocean" width="1000" height="700" rx="28"></rect>
+      <g class="map-grid" aria-hidden="true">
+        ${buildGrid()}
+      </g>
+      <path class="taiwan-shape" d="${TAIWAN_SHAPE}"></path>
+      ${islands}
+      ${labels}
+      <g class="project-layer">
+        ${mapGraphics}
+      </g>
+    </svg>
+  `;
+
+  refs.map.querySelectorAll('[data-project-id]').forEach(element => {
+    element.addEventListener('click', () => selectProject(element.dataset.projectId));
+    element.addEventListener('keydown', event => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        selectProject(element.dataset.projectId);
+      }
+    });
+  });
+}
+
+function createProjectGraphic(project) {
+  const color = PROJECT_TYPES[project.type]?.color ?? '#2f80ed';
+  const geometry = project.geometry;
+  const centroid = getCentroid(geometry.coordinates);
+  const [labelX, labelY] = projectCoord(centroid);
+  const activeClass = project.id === activeId ? ' active' : '';
+  const title = `${project.shortName || project.name}｜${project.status}`;
+
+  if (geometry.type === 'line') {
+    const points = geometry.coordinates.map(coord => projectCoord(coord).join(',')).join(' ');
+    return `
+      <g class="project-item project-line${activeClass}" tabindex="0" data-project-id="${escapeAttr(project.id)}" style="--project-color:${escapeAttr(color)}">
+        <title>${escapeHtml(title)}</title>
+        <polyline points="${points}"></polyline>
+        <circle cx="${labelX}" cy="${labelY}" r="12"></circle>
+        <text x="${labelX + 14}" y="${labelY - 12}">${escapeHtml(project.shortName || project.name)}</text>
+      </g>
+    `;
+  }
+
+  if (geometry.type === 'polygon') {
+    const points = geometry.coordinates.map(coord => projectCoord(coord).join(',')).join(' ');
+    return `
+      <g class="project-item project-polygon${activeClass}" tabindex="0" data-project-id="${escapeAttr(project.id)}" style="--project-color:${escapeAttr(color)}">
+        <title>${escapeHtml(title)}</title>
+        <polygon points="${points}"></polygon>
+        <circle cx="${labelX}" cy="${labelY}" r="11"></circle>
+        <text x="${labelX + 14}" y="${labelY - 10}">${escapeHtml(project.shortName || project.name)}</text>
+      </g>
+    `;
+  }
+
+  return `
+    <g class="project-item project-point${activeClass}" tabindex="0" data-project-id="${escapeAttr(project.id)}" style="--project-color:${escapeAttr(color)}">
+      <title>${escapeHtml(title)}</title>
+      <circle cx="${labelX}" cy="${labelY}" r="16"></circle>
+      <text x="${labelX + 18}" y="${labelY - 12}">${escapeHtml(project.shortName || project.name)}</text>
+    </g>
+  `;
+}
+
+function selectProject(projectId) {
   const project = PROJECTS.find(item => item.id === projectId);
-  const layer = layersById.get(projectId);
-  if (!project || !layer || !map) return;
+  if (!project) return;
 
   activeId = projectId;
-  highlightListItem();
+  renderProjects(visibleProjects);
+  renderMap(visibleProjects);
+  showProjectDetail(project);
 
-  const L = window.L;
-  const bounds = typeof layer.getBounds === 'function'
-    ? layer.getBounds()
-    : L.latLngBounds([layer.getLatLng(), layer.getLatLng()]);
-
-  map.fitBounds(bounds.pad(0.8), { maxZoom: project.geometry.type === 'point' ? 10 : 13, padding: [36, 36] });
-  refreshMapSize();
-
-  if (options.openPopup) {
-    setTimeout(() => layer.openPopup(), 240);
-  }
+  const activeCard = refs.projectList.querySelector(`[data-project-id="${cssEscape(projectId)}"]`);
+  activeCard?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
 }
 
-function fitTaiwan() {
-  if (!map || !window.L) return;
-  map.fitBounds(window.L.latLngBounds(TAIWAN_BOUNDS_COORDS), { padding: [12, 12] });
-  refreshMapSize();
-}
-
-function fitVisibleProjects() {
-  if (!map) return;
-
-  if (visibleProjects.length > 0 && layersById.size > 0) {
-    const group = window.L.featureGroup([...layersById.values()]);
-    map.fitBounds(group.getBounds(), { padding: [28, 28], maxZoom: 11 });
-    refreshMapSize();
-  }
-}
-
-function refreshMapSize() {
-  if (!map) return;
-  requestAnimationFrame(() => {
-    map.invalidateSize({ pan: false });
-    setTimeout(() => map.invalidateSize({ pan: false }), 180);
-  });
-}
-
-function showMapStatus(message) {
-  if (!refs.mapStatus) return;
-  refs.mapStatus.textContent = message;
+function showProjectDetail(project) {
   refs.mapStatus.hidden = false;
-}
-
-function hideMapStatus() {
-  if (!refs.mapStatus) return;
-  refs.mapStatus.hidden = true;
-}
-
-function highlightListItem() {
-  document.querySelectorAll('.project-card').forEach(card => {
-    card.classList.toggle('active', card.dataset.projectId === activeId);
-  });
-}
-
-function createPopup(project) {
-  return `
-    <article class="popup-card">
+  refs.mapStatus.innerHTML = `
+    <article class="map-detail-card">
+      <div class="meta-row">
+        <span class="badge">${escapeHtml(PROJECT_TYPES[project.type]?.label ?? '工程')}</span>
+        <span class="badge status">${escapeHtml(project.status)}</span>
+      </div>
       <h3>${escapeHtml(project.name)}</h3>
       <p>${escapeHtml(project.summary)}</p>
-      <dl class="popup-table">
-        ${popupRow('經費', project.cost)}
-        ${popupRow('位置/範圍', `${project.region}｜${project.area}`)}
-        ${popupRow('發包甲方', project.owner)}
-        ${popupRow('施工廠商', project.contractor)}
-        ${popupRow('工期', project.schedule)}
-        ${popupRow('預計完工', project.expectedFinish)}
-        ${popupRow('預計啟用', project.expectedOpen)}
-        ${popupRow('可信度', project.confidence)}
+      <dl>
+        ${detailRow('經費', project.cost)}
+        ${detailRow('位置/範圍', `${project.region}｜${project.area}`)}
+        ${detailRow('發包甲方', project.owner)}
+        ${detailRow('施工廠商', project.contractor)}
+        ${detailRow('工期', project.schedule)}
+        ${detailRow('預計完工', project.expectedFinish)}
       </dl>
-      <a href="${project.source}" target="_blank" rel="noopener noreferrer">打開官方資料 ↗</a>
+      <a href="${safeUrl(project.source)}" target="_blank" rel="noopener noreferrer">打開資料來源 ↗</a>
     </article>
   `;
 }
 
-function popupRow(label, value) {
-  return `<div><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`;
+function showMapHint(message) {
+  refs.mapStatus.hidden = false;
+  refs.mapStatus.textContent = message;
 }
 
 function renderSources() {
@@ -302,7 +276,7 @@ function renderSources() {
       <h3>${escapeHtml(source.name)}</h3>
       <p><strong>適合查：</strong>${escapeHtml(source.fitFor)}</p>
       <p>${escapeHtml(source.note)}</p>
-      <a href="${source.url}" target="_blank" rel="noopener noreferrer">前往官方入口</a>
+      <a href="${safeUrl(source.url)}" target="_blank" rel="noopener noreferrer">前往官方入口</a>
     </article>
   `).join('');
 }
@@ -313,15 +287,66 @@ function renderMetrics() {
   refs.metricCost.textContent = '2,000億+';
 }
 
+function detailRow(label, value) {
+  return `<div><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`;
+}
+
+function projectCoord([lat, lng]) {
+  const x = ((lng - TAIWAN_BOUNDS.minLng) / (TAIWAN_BOUNDS.maxLng - TAIWAN_BOUNDS.minLng)) * MAP_VIEWBOX.width;
+  const y = ((TAIWAN_BOUNDS.maxLat - lat) / (TAIWAN_BOUNDS.maxLat - TAIWAN_BOUNDS.minLat)) * MAP_VIEWBOX.height;
+  return [clamp(x, 36, MAP_VIEWBOX.width - 36), clamp(y, 36, MAP_VIEWBOX.height - 36)];
+}
+
+function getCentroid(coordinates) {
+  const points = flattenCoordinates(coordinates);
+  const totals = points.reduce((sum, point) => [sum[0] + point[0], sum[1] + point[1]], [0, 0]);
+  return [totals[0] / points.length, totals[1] / points.length];
+}
+
+function flattenCoordinates(value) {
+  if (!Array.isArray(value)) return [];
+  if (typeof value[0] === 'number' && typeof value[1] === 'number') return [value];
+  return value.flatMap(flattenCoordinates);
+}
+
+function buildGrid() {
+  const lines = [];
+  for (let x = 100; x < MAP_VIEWBOX.width; x += 100) {
+    lines.push(`<line x1="${x}" y1="0" x2="${x}" y2="${MAP_VIEWBOX.height}"></line>`);
+  }
+  for (let y = 100; y < MAP_VIEWBOX.height; y += 100) {
+    lines.push(`<line x1="0" y1="${y}" x2="${MAP_VIEWBOX.width}" y2="${y}"></line>`);
+  }
+  return lines.join('');
+}
+
 function normalize(value) {
   return value.trim().toLowerCase();
 }
 
+function clamp(value, min, max) {
+  return Math.max(min, Math.min(max, value));
+}
+
+function safeUrl(value) {
+  const text = String(value || '');
+  if (text.startsWith('https://') || text.startsWith('http://')) return escapeAttr(text);
+  return '#';
+}
+
+function cssEscape(value) {
+  return String(value).replaceAll('\\', '\\\\').replaceAll('"', '\\"');
+}
+
 function escapeHtml(value) {
-  return String(value)
+  return String(value ?? '')
     .replaceAll('&', '&amp;')
     .replaceAll('<', '&lt;')
     .replaceAll('>', '&gt;')
     .replaceAll('"', '&quot;')
     .replaceAll("'", '&#039;');
+}
+
+function escapeAttr(value) {
+  return escapeHtml(value).replaceAll('`', '&#096;');
 }
