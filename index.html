@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#061522" />
-  <meta name="description" content="台灣工程地圖：把公共工程、交通建設、道路管線、建築開發、環評與重大建設入口，整理成手機也好看的工程地圖。" />
+  <meta name="description" content="台灣工程地圖：把公共工程、交通建設、道路管線、建築開發、環評與重大建設入口，整理成手機也好看的 OpenStreetMap 電子地圖。" />
   <title>台灣工程地圖｜Taiwan Construction Map</title>
   <link rel="stylesheet" href="./styles.css" />
 </head>
@@ -29,7 +29,7 @@
   <main id="top">
     <section class="hero" aria-label="首頁總覽">
       <div class="hero-copy">
-        <p class="pill">不靠外部地圖元件，載入更穩；點工程可回查官方與開放地圖。</p>
+        <p class="pill">使用 OpenStreetMap 開放電子地圖；不載入外部地圖套件，速度更穩。</p>
         <h2>台灣正在升級的地方，一張圖先 get。</h2>
         <p>
           給工程公司、發包甲方、地圖控與年輕使用者看的工程雷達。先看位置與施工範圍，再看甲方、乙方、開工日、預計完工與啟用日；資訊不迷路，城市進度直接開圖。
@@ -89,14 +89,14 @@
       <section class="map-card" aria-label="台灣工程互動地圖">
         <div class="map-toolbar">
           <div>
-            <p class="eyebrow">自製輕量工程圖</p>
+            <p class="eyebrow">OpenStreetMap 電子地圖</p>
             <h2>台灣工程現場一眼看</h2>
           </div>
-          <p class="map-note">本頁不載入外部地圖底圖或外部地圖元件，避免網路不穩時卡在「地圖載入中」。需要精準地圖時，再點開每筆資料的開放地圖或官方來源。</p>
+          <p class="map-note">可拖曳、縮放、查看道路地名與城市位置。網站只使用 OpenStreetMap 開放底圖，並用內建互動層標示工程，避免多套地圖資源互相卡住。</p>
         </div>
         <div class="map-frame">
-          <div id="map" role="application" aria-label="台灣工程熱點地圖">
-            <div class="map-fallback">工程熱點地圖準備中，工程清單仍可先查。</div>
+          <div id="map" role="application" aria-label="OpenStreetMap 台灣工程電子地圖">
+            <div class="map-fallback">電子地圖準備中，工程清單仍可先查。</div>
           </div>
           <div id="mapStatus" class="map-status" role="status">點選工程熱點，看工程基本盤。</div>
         </div>
@@ -140,7 +140,7 @@
 
   <footer class="site-footer">
     <p>台灣工程地圖｜Taiwan Construction Map</p>
-    <p>工程位置、經費、期程與甲乙方資料，請以各主管機關、政府電子採購網、公共工程雲端服務網、建管、環評與地方圖台最新公告為準。</p>
+    <p>工程位置、經費、期程與甲乙方資料，請以各主管機關、政府電子採購網、公共工程雲端服務網、建管、環評與地方圖台最新公告為準。地圖底圖 © OpenStreetMap contributors。</p>
   </footer>
 
   <script type="module" src="./app.js"></script>
