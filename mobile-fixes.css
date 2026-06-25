@@ -1,0 +1,133 @@
+@media (min-width: 761px) {
+  body { padding-right: 74px; }
+}
+
+.site-dock {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  z-index: 1400;
+  display: grid;
+  gap: 10px;
+  transform: translateY(-50%);
+  padding: 10px 8px;
+  border-radius: 22px 0 0 22px;
+  background: rgba(6, 21, 34, 0.86);
+  border: 1px solid rgba(255,255,255,0.16);
+  border-right: 0;
+  box-shadow: 0 18px 42px rgba(0,0,0,0.24);
+  backdrop-filter: blur(16px);
+}
+
+.dock-action {
+  display: grid;
+  place-items: center;
+  gap: 3px;
+  width: 54px;
+  min-height: 54px;
+  padding: 6px 4px;
+  border-radius: 17px;
+  border: 1px solid rgba(255,255,255,0.16);
+  background: linear-gradient(135deg, rgba(53,212,255,0.22), rgba(255,255,255,0.08));
+  color: #fff;
+  text-decoration: none;
+  font-weight: 950;
+  box-shadow: none;
+}
+
+.dock-action span { font-size: 15px; line-height: 1; }
+.dock-action strong { font-size: 13px; line-height: 1; }
+.dock-action:hover, .dock-action:focus-visible {
+  outline: none;
+  transform: translateY(-1px);
+  background: linear-gradient(135deg, rgba(53,212,255,0.36), rgba(242,140,40,0.18));
+}
+button.dock-action { font: inherit; cursor: pointer; }
+
+.mobile-map-tip { display: none; }
+
+body[data-lang="en"] .hero-copy h2 { letter-spacing: -0.06em; }
+body[data-lang="en"] .project-card h3,
+body[data-lang="en"] .source-card h3 { line-height: 1.18; }
+
+@media (max-width: 760px) {
+  body { padding: 0 0 calc(86px + env(safe-area-inset-bottom)); }
+  .map-card {
+    min-height: auto;
+    grid-template-rows: auto minmax(320px, 42vh);
+  }
+  .map-toolbar {
+    display: grid;
+    gap: 8px;
+    padding: 14px 16px;
+  }
+  .map-toolbar h2 { font-size: 22px; }
+  .map-note { font-size: 13px; line-height: 1.55; }
+  .map-frame {
+    min-height: 320px;
+    height: min(42vh, 390px);
+    max-height: 390px;
+    overflow: hidden;
+  }
+  #map {
+    min-height: 0 !important;
+    height: 100% !important;
+    touch-action: pan-y !important;
+    cursor: default !important;
+  }
+  #map.dragging { cursor: default !important; }
+  .map-zoom-control { top: 10px; right: 10px; gap: 6px; }
+  .map-zoom-control button { width: 38px; height: 38px; min-height: 38px; border-radius: 13px; }
+  .project-item text { font-size: 12px; stroke-width: 4px; }
+  .mobile-map-tip {
+    display: block;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 58px;
+    z-index: 5;
+    padding: 8px 10px;
+    border-radius: 14px;
+    color: #12324d;
+    background: rgba(255,255,255,0.88);
+    font-size: 11px;
+    line-height: 1.35;
+    font-weight: 900;
+  }
+  .map-status {
+    position: relative !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    margin: 10px;
+    max-height: 245px;
+    overflow: auto;
+    border-radius: 18px;
+    font-size: 13px;
+  }
+  .map-detail-card dl { grid-template-columns: 1fr; }
+  .detail-actions a { width: 100%; }
+  .site-dock {
+    top: auto;
+    right: 12px;
+    left: 12px;
+    bottom: max(10px, env(safe-area-inset-bottom));
+    transform: none;
+    grid-template-columns: 1fr 1fr;
+    border-radius: 24px;
+    border: 1px solid rgba(255,255,255,0.16);
+    padding: 8px;
+  }
+  .dock-action {
+    width: auto;
+    min-height: 54px;
+    grid-template-columns: auto auto;
+    gap: 8px;
+    border-radius: 18px;
+  }
+  .dock-action strong { font-size: 15px; }
+}
+
+@media (max-width: 420px) {
+  .map-frame { height: 340px; }
+}
