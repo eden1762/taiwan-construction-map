@@ -18,8 +18,11 @@ const ISLANDS = [
 ];
 const CITY_LABELS = [
   { name: '台北', lat: 25.05, lng: 121.52 },
+  { name: '新北', lat: 25.01, lng: 121.46 },
   { name: '桃園', lat: 24.99, lng: 121.30 },
+  { name: '新竹', lat: 24.80, lng: 120.97 },
   { name: '台中', lat: 24.15, lng: 120.67 },
+  { name: '嘉義', lat: 23.48, lng: 120.45 },
   { name: '台南', lat: 22.99, lng: 120.20 },
   { name: '高雄', lat: 22.63, lng: 120.30 },
   { name: '花蓮', lat: 23.99, lng: 121.60 },
@@ -53,7 +56,7 @@ function init() {
   renderProjects(visibleProjects);
   renderMap(visibleProjects);
   bindEvents();
-  showMapHint('點選工程熱點，看經費、甲方、施工廠商與工期。');
+  showMapHint('點選工程熱點，看甲方、乙方、開工日、預計完工與啟用日。');
 }
 
 function bindEvents() {
@@ -62,6 +65,10 @@ function bindEvents() {
   refs.statusFilter.addEventListener('change', applyFilters);
   refs.resetMap.addEventListener('click', () => {
     activeId = '';
+    visibleProjects = [...PROJECTS];
+    refs.search.value = '';
+    refs.typeFilter.value = 'all';
+    refs.statusFilter.value = 'all';
     renderProjects(visibleProjects);
     renderMap(visibleProjects);
     showMapHint('已回到全台視角，點選任一工程熱點開始探索。');
@@ -88,25 +95,23 @@ function applyFilters() {
   visibleProjects = PROJECTS.filter(project => {
     const matchesType = type === 'all' || project.type === type;
     const matchesStatus = status === 'all' || project.status === status;
-    const text = normalize(`${project.name} ${project.shortName} ${project.region} ${project.owner} ${project.contractor} ${project.summary}`);
+    const text = normalize(`${project.name} ${project.shortName} ${project.region} ${project.owner} ${project.contractor} ${project.summary} ${project.area} ${project.sourceLabel} ${project.tags?.join(' ') ?? ''}`);
     const matchesKeyword = !keyword || text.includes(keyword);
     return matchesType && matchesStatus && matchesKeyword;
   });
 
-  if (!visibleProjects.some(project => project.id === activeId)) {
-    activeId = '';
-  }
+  if (!visibleProjects.some(project => project.id === activeId)) activeId = '';
 
   renderProjects(visibleProjects);
   renderMap(visibleProjects);
-  showMapHint(visibleProjects.length ? `目前顯示 ${visibleProjects.length} 個工程熱點。` : '目前沒有符合條件的工程，換個關鍵字再試試。');
+  showMapHint(visibleProjects.length ? `目前顯示 ${visibleProjects.length} 個工程熱點與資料圖層。` : '目前沒有符合條件的工程，換個地名、廠商或資料入口再試試。');
 }
 
 function renderProjects(projects) {
   refs.projectList.innerHTML = '';
 
   if (projects.length === 0) {
-    refs.projectList.innerHTML = '<div class="project-card empty"><h3>沒有符合條件的工程</h3><p>換個地名、工程名或廠商名稱，讓地圖重新開圖。</p></div>';
+    refs.projectList.innerHTML = '<div class="project-card empty"><h3>沒有符合條件的工程</h3><p>換個地名、工程名、甲方或乙方，讓地圖重新開圖。</p></div>';
     return;
   }
 
@@ -125,6 +130,10 @@ function renderProjects(projects) {
       </div>
       <h3>${escapeHtml(project.name)}</h3>
       <p>${escapeHtml(project.region)}｜${escapeHtml(project.summary)}</p>
+      <div class="mini-facts">
+        <span>甲方：${escapeHtml(shorten(project.owner, 18))}</span>
+        <span>乙方：${escapeHtml(shorten(project.contractor, 18))}</span>
+      </div>
     `;
     card.addEventListener('click', () => selectProject(project.id));
     card.addEventListener('keydown', event => {
@@ -157,23 +166,24 @@ function renderMap(projects) {
       <defs>
         <linearGradient id="oceanGlow" x1="0" x2="1" y1="0" y2="1">
           <stop offset="0%" stop-color="#dff7ff"></stop>
-          <stop offset="58%" stop-color="#b7e8ff"></stop>
+          <stop offset="54%" stop-color="#b7e8ff"></stop>
           <stop offset="100%" stop-color="#f7f0df"></stop>
         </linearGradient>
+        <radialGradient id="landGlow" cx="50%" cy="46%" r="70%">
+          <stop offset="0%" stop-color="#ffffff"></stop>
+          <stop offset="70%" stop-color="#e6f4ee"></stop>
+          <stop offset="100%" stop-color="#cde5da"></stop>
+        </radialGradient>
         <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
           <feDropShadow dx="0" dy="16" stdDeviation="16" flood-color="#0b2a44" flood-opacity="0.22"></feDropShadow>
         </filter>
       </defs>
       <rect class="ocean" width="1000" height="700" rx="28"></rect>
-      <g class="map-grid" aria-hidden="true">
-        ${buildGrid()}
-      </g>
+      <g class="map-grid" aria-hidden="true">${buildGrid()}</g>
       <path class="taiwan-shape" d="${TAIWAN_SHAPE}"></path>
       ${islands}
       ${labels}
-      <g class="project-layer">
-        ${mapGraphics}
-      </g>
+      <g class="project-layer">${mapGraphics}</g>
     </svg>
   `;
 
@@ -249,18 +259,24 @@ function showProjectDetail(project) {
       <div class="meta-row">
         <span class="badge">${escapeHtml(PROJECT_TYPES[project.type]?.label ?? '工程')}</span>
         <span class="badge status">${escapeHtml(project.status)}</span>
+        <span class="badge confidence">${escapeHtml(project.confidence)}</span>
       </div>
       <h3>${escapeHtml(project.name)}</h3>
       <p>${escapeHtml(project.summary)}</p>
       <dl>
-        ${detailRow('經費', project.cost)}
-        ${detailRow('位置/範圍', `${project.region}｜${project.area}`)}
+        ${detailRow('經費/級距', project.cost)}
+        ${detailRow('施工範圍', `${project.region}｜${project.area}`)}
         ${detailRow('發包甲方', project.owner)}
-        ${detailRow('施工廠商', project.contractor)}
-        ${detailRow('工期', project.schedule)}
-        ${detailRow('預計完工', project.expectedFinish)}
+        ${detailRow('乙方/廠商', project.contractor)}
+        ${detailRow('開工日期', project.startDate)}
+        ${detailRow('預計完工日', project.expectedFinish)}
+        ${detailRow('預計啟用日', project.expectedOpen)}
+        ${detailRow('資料來源', project.sourceLabel)}
       </dl>
-      <a href="${safeUrl(project.source)}" target="_blank" rel="noopener noreferrer">打開資料來源 ↗</a>
+      <div class="detail-actions">
+        <a href="${safeUrl(project.source)}" target="_blank" rel="noopener noreferrer">打開資料來源 ↗</a>
+        <a href="${safeUrl(openMapUrl(project))}" target="_blank" rel="noopener noreferrer">用開放地圖看位置 ↗</a>
+      </div>
     </article>
   `;
 }
@@ -273,10 +289,14 @@ function showMapHint(message) {
 function renderSources() {
   refs.sourceCards.innerHTML = DATA_SOURCES.map(source => `
     <article class="source-card">
+      <div class="source-topline">
+        <span class="badge">${escapeHtml(source.category)}</span>
+        <span>${escapeHtml(source.kind)}</span>
+      </div>
       <h3>${escapeHtml(source.name)}</h3>
       <p><strong>適合查：</strong>${escapeHtml(source.fitFor)}</p>
       <p>${escapeHtml(source.note)}</p>
-      <a href="${safeUrl(source.url)}" target="_blank" rel="noopener noreferrer">前往官方入口</a>
+      <a href="${safeUrl(source.url)}" target="_blank" rel="noopener noreferrer">前往資料入口</a>
     </article>
   `).join('');
 }
@@ -284,11 +304,11 @@ function renderSources() {
 function renderMetrics() {
   refs.metricProjects.textContent = PROJECTS.length.toString();
   refs.metricSources.textContent = DATA_SOURCES.length.toString();
-  refs.metricCost.textContent = '2,000億+';
+  refs.metricCost.textContent = '多層級';
 }
 
 function detailRow(label, value) {
-  return `<div><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`;
+  return `<div><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value || '待官方資料回填')}</dd></div>`;
 }
 
 function projectCoord([lat, lng]) {
@@ -299,6 +319,7 @@ function projectCoord([lat, lng]) {
 
 function getCentroid(coordinates) {
   const points = flattenCoordinates(coordinates);
+  if (!points.length) return [23.6978, 120.9605];
   const totals = points.reduce((sum, point) => [sum[0] + point[0], sum[1] + point[1]], [0, 0]);
   return [totals[0] / points.length, totals[1] / points.length];
 }
@@ -309,23 +330,30 @@ function flattenCoordinates(value) {
   return value.flatMap(flattenCoordinates);
 }
 
+function openMapUrl(project) {
+  if (project.openMapUrl) return project.openMapUrl;
+  const [lat, lng] = getCentroid(project.geometry.coordinates);
+  return `https://www.openstreetmap.org/?mlat=${lat.toFixed(5)}&mlon=${lng.toFixed(5)}#map=13/${lat.toFixed(5)}/${lng.toFixed(5)}`;
+}
+
 function buildGrid() {
   const lines = [];
-  for (let x = 100; x < MAP_VIEWBOX.width; x += 100) {
-    lines.push(`<line x1="${x}" y1="0" x2="${x}" y2="${MAP_VIEWBOX.height}"></line>`);
-  }
-  for (let y = 100; y < MAP_VIEWBOX.height; y += 100) {
-    lines.push(`<line x1="0" y1="${y}" x2="${MAP_VIEWBOX.width}" y2="${y}"></line>`);
-  }
+  for (let x = 100; x < MAP_VIEWBOX.width; x += 100) lines.push(`<line x1="${x}" y1="0" x2="${x}" y2="${MAP_VIEWBOX.height}"></line>`);
+  for (let y = 100; y < MAP_VIEWBOX.height; y += 100) lines.push(`<line x1="0" y1="${y}" x2="${MAP_VIEWBOX.width}" y2="${y}"></line>`);
   return lines.join('');
 }
 
 function normalize(value) {
-  return value.trim().toLowerCase();
+  return String(value || '').trim().toLowerCase();
 }
 
 function clamp(value, min, max) {
   return Math.max(min, Math.min(max, value));
+}
+
+function shorten(value, max) {
+  const text = String(value || '待回填');
+  return text.length > max ? `${text.slice(0, max)}…` : text;
 }
 
 function safeUrl(value) {
