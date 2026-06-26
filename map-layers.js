@@ -1,4 +1,12 @@
 const BASE_LAYER_KEY = 'taiwan-construction-map-base-layer';
+const STORAGE = window.__taiwanConstructionMapSafeStorage || {
+  getItem(key) {
+    try { return window.localStorage.getItem(key); } catch { return null; }
+  },
+  setItem(key, value) {
+    try { window.localStorage.setItem(key, value); } catch {}
+  }
+};
 
 const BASE_LAYERS = {
   osm: {
@@ -6,6 +14,7 @@ const BASE_LAYERS = {
     en: 'OpenStreetMap',
     url: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
     source: 'OpenStreetMap contributors',
+    sourceEn: 'OpenStreetMap contributors',
     sourceUrl: 'https://www.openstreetmap.org/copyright'
   },
   nlscEmap: {
@@ -13,6 +22,7 @@ const BASE_LAYERS = {
     en: 'Official street map',
     url: 'https://wmts.nlsc.gov.tw/wmts/EMAP/default/GoogleMapsCompatible/{z}/{y}/{x}',
     source: '國土測繪圖資服務雲',
+    sourceEn: 'National Land Surveying and Mapping Center geospatial services',
     sourceUrl: 'https://maps.nlsc.gov.tw/'
   },
   nlscGray: {
@@ -20,6 +30,7 @@ const BASE_LAYERS = {
     en: 'Official light map',
     url: 'https://wmts.nlsc.gov.tw/wmts/EMAP2/default/GoogleMapsCompatible/{z}/{y}/{x}',
     source: '國土測繪圖資服務雲',
+    sourceEn: 'National Land Surveying and Mapping Center geospatial services',
     sourceUrl: 'https://maps.nlsc.gov.tw/'
   },
   nlscPhoto: {
@@ -27,6 +38,7 @@ const BASE_LAYERS = {
     en: 'Official aerial imagery',
     url: 'https://wmts.nlsc.gov.tw/wmts/PHOTO2/default/GoogleMapsCompatible/{z}/{y}/{x}',
     source: '國土測繪圖資服務雲',
+    sourceEn: 'National Land Surveying and Mapping Center geospatial services',
     sourceUrl: 'https://maps.nlsc.gov.tw/'
   },
   cadastre: {
@@ -35,6 +47,7 @@ const BASE_LAYERS = {
     url: 'https://wmts.nlsc.gov.tw/wmts/EMAP2/default/GoogleMapsCompatible/{z}/{y}/{x}',
     overlayUrl: 'https://wmts.nlsc.gov.tw/wmts/LANDSECT/default/GoogleMapsCompatible/{z}/{y}/{x}',
     source: '國土測繪圖資服務雲（地籍僅供參考）',
+    sourceEn: 'National Land Surveying and Mapping Center geospatial services (cadastre reference only)',
     sourceUrl: 'https://maps.nlsc.gov.tw/'
   }
 };
@@ -152,7 +165,7 @@ function upsertAttribution(realMap, layer) {
     realMap.append(attr);
   }
   const prefix = lang === 'en' ? 'Source' : '來源';
-  attr.innerHTML = `${prefix}: <a href="${escapeAttr(layer.sourceUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(layer.source)}</a>`;
+  attr.innerHTML = `${prefix}: <a href="${escapeAttr(layer.sourceUrl)}" target="_blank" rel="noopener noreferrer">${escapeHtml(sourceText(layer, lang))}</a>`;
 }
 
 function updateMapEyebrow(layer) {
@@ -180,12 +193,16 @@ function tileUrl(template, tile) {
   return template.replace('{z}', tile.z).replace('{x}', tile.x).replace('{y}', tile.y);
 }
 
+function sourceText(layer, lang) {
+  return lang === 'en' ? (layer.sourceEn || layer.source) : layer.source;
+}
+
 function safeRead(key) {
-  try { return localStorage.getItem(key); } catch { return null; }
+  return STORAGE.getItem(key);
 }
 
 function safeWrite(key, value) {
-  try { localStorage.setItem(key, value); } catch {}
+  STORAGE.setItem(key, value);
 }
 
 function escapeHtml(value) {
