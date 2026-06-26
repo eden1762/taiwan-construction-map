@@ -4,11 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#061522" />
-  <meta name="description" content="台灣工程地圖：把公共工程、交通建設、道路管線、建築開發、環評與重大建設入口，整理成手機也好看的互動工程地圖；工程熱點先顯示，底圖不穩也能先查清單。" />
+  <meta name="description" content="台灣工程地圖：把公共工程、交通建設、道路管線、建築開發、環評與重大建設入口，整理成手機也好看的互動工程地圖；工程熱點先顯示，不再等待外部底圖。" />
   <title>台灣工程地圖｜Taiwan Construction Map</title>
-  <link rel="stylesheet" href="./styles.css?v=stable-mobile-source-page-20260626" />
-  <link rel="stylesheet" href="./map-layers.css?v=stable-mobile-source-page-20260626" />
-  <link rel="stylesheet" href="./mobile-fixes.css?v=stable-mobile-source-page-20260626" />
+  <link rel="stylesheet" href="./styles.css?v=local-map-hotfix-20260626" />
+  <link rel="stylesheet" href="./map-layers.css?v=local-map-hotfix-20260626" />
+  <link rel="stylesheet" href="./mobile-fixes.css?v=local-map-hotfix-20260626" />
 </head>
 <body>
   <a class="skip-link" href="#mainPanel" data-i18n="skipLink">跳到工程資訊</a>
@@ -31,11 +31,9 @@
   <main id="top">
     <section class="hero" aria-label="首頁總覽">
       <div class="hero-copy">
-        <p class="pill" data-i18n="heroPill">工程熱點先顯示；底圖不穩也不會卡住，手機速度更穩。</p>
+        <p class="pill" data-i18n="heroPill">工程熱點先顯示；不用等底圖，手機速度更穩。</p>
         <h2 data-i18n="heroTitle">台灣正在升級的地方，一張圖先 get。</h2>
-        <p data-i18n="heroText">
-          給工程公司、發包甲方、地圖控與年輕使用者看的工程雷達。先看位置與施工範圍，再看甲方、乙方、開工日、預計完工與啟用日；資訊不迷路，城市進度直接開圖。
-        </p>
+        <p data-i18n="heroText">給工程公司、發包甲方、地圖控與年輕使用者看的工程雷達。先看位置與施工範圍，再看甲方、乙方、開工日、預計完工與啟用日；資訊不迷路，城市進度直接開圖。</p>
       </div>
       <div class="hero-metrics" aria-label="資料統計">
         <div><strong id="metricProjects">0</strong><span data-i18n="metricProjects">工程/資料圖層</span></div>
@@ -58,18 +56,8 @@
         </label>
 
         <div class="filter-grid" aria-label="篩選條件">
-          <label>
-            <span data-i18n="typeLabel">類型</span>
-            <select id="typeFilter">
-              <option value="all" data-i18n="typeAll">全部類型</option>
-            </select>
-          </label>
-          <label>
-            <span data-i18n="statusLabel">狀態</span>
-            <select id="statusFilter">
-              <option value="all" data-i18n="statusAll">全部狀態</option>
-            </select>
-          </label>
+          <label><span data-i18n="typeLabel">類型</span><select id="typeFilter"><option value="all" data-i18n="typeAll">全部類型</option></select></label>
+          <label><span data-i18n="statusLabel">狀態</span><select id="statusFilter"><option value="all" data-i18n="statusAll">全部狀態</option></select></label>
         </div>
 
         <div class="quick-actions" aria-label="快捷操作">
@@ -94,12 +82,10 @@
             <p class="eyebrow" data-i18n="mapEyebrow">互動工程地圖</p>
             <h2 data-i18n="mapTitle">台灣工程現場一眼看</h2>
           </div>
-          <p class="map-note" data-i18n="mapNote">可拖曳、縮放、查看道路地名與城市位置。手機瀏覽時先順滑看內容，需要移動地圖時再點一下啟用。</p>
+          <p class="map-note" data-i18n="mapNote">工程熱點、路線與範圍會先出現；手機瀏覽時先順滑看內容，需要移動地圖時再點一下啟用。</p>
         </div>
         <div class="map-frame">
-          <div id="map" role="application" aria-label="台灣工程互動地圖">
-            <div class="map-fallback" data-i18n="mapLoading">工程熱點準備中，清單仍可先查。</div>
-          </div>
+          <div id="map" role="application" aria-label="台灣工程互動地圖"><div class="map-fallback" data-i18n="mapLoading">工程熱點準備中，清單仍可先查。</div></div>
           <div id="mapStatus" class="map-status" role="status">點選工程熱點，看工程基本盤。</div>
         </div>
       </section>
@@ -121,29 +107,17 @@
         <h2 data-i18n="guideTitle">資料要好用，關鍵是位置、來源與欄位一致。</h2>
       </div>
       <div class="maintain-grid">
-        <article>
-          <h3 data-i18n="guide1Title">1. 補上工程基本盤</h3>
-          <p data-i18n="guide1Text">工程名、地點、甲方、乙方、經費、開工日、預計完工日與啟用日要盡量完整，查案才順。</p>
-        </article>
-        <article>
-          <h3 data-i18n="guide2Title">2. 標清楚施工範圍</h3>
-          <p data-i18n="guide2Text">橋梁、道路、捷運適合畫路線；園區與基地適合畫範圍；單一設施用標記點。地圖準，信任感就上來。</p>
-        </article>
-        <article>
-          <h3 data-i18n="guide3Title">3. 來源要能回查</h3>
-          <p data-i18n="guide3Text">每筆資料都盡量附官方公告、採購資料、工程頁面或地方圖台。看到來源，資訊力直接 up。</p>
-        </article>
-        <article>
-          <h3 data-i18n="guide4Title">4. 手機先好用</h3>
-          <p data-i18n="guide4Text">現場人員、通勤族、地圖控多半用手機看；清單、篩選、地圖點擊都要單手可用、載入快速。</p>
-        </article>
+        <article><h3 data-i18n="guide1Title">1. 補上工程基本盤</h3><p data-i18n="guide1Text">工程名、地點、甲方、乙方、經費、開工日、預計完工日與啟用日要盡量完整，查案才順。</p></article>
+        <article><h3 data-i18n="guide2Title">2. 標清楚施工範圍</h3><p data-i18n="guide2Text">橋梁、道路、捷運適合畫路線；園區與基地適合畫範圍；單一設施用標記點。地圖準，信任感就上來。</p></article>
+        <article><h3 data-i18n="guide3Title">3. 來源要能回查</h3><p data-i18n="guide3Text">每筆資料都盡量附官方公告、採購資料、工程頁面或地方圖台。看到來源，資訊力直接 up。</p></article>
+        <article><h3 data-i18n="guide4Title">4. 手機先好用</h3><p data-i18n="guide4Text">現場人員、通勤族、地圖控多半用手機看；清單、篩選、地圖點擊都要單手可用、載入快速。</p></article>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
     <p data-i18n="footerTitle">台灣工程地圖｜Taiwan Construction Map</p>
-    <p data-i18n="footerText">工程位置、經費、期程與甲乙方資料，請以各主管機關、政府電子採購網、公共工程雲端服務網、建管、環評與地方圖台最新公告為準。地圖底圖與官方圖資來源，請以地圖上的即時來源註記為準。</p>
+    <p data-i18n="footerText">工程位置、經費、期程與甲乙方資料，請以各主管機關、政府電子採購網、公共工程雲端服務網、建管、環評與地方圖台最新公告為準。本頁工程熱點為快速定位用，精準範圍請回查來源。</p>
   </footer>
 
   <div class="quick-dock" aria-label="快速操作">
@@ -151,9 +125,9 @@
     <button id="languageToggle" class="dock-button dock-lang" type="button" aria-label="中英切換">EN</button>
   </div>
 
-  <script type="module" src="./app.js?v=stable-mobile-source-page-20260626"></script>
-  <script type="module" src="./map-layers.js?v=stable-mobile-source-page-20260626"></script>
-  <script type="module" src="./site-footer.js?v=stable-mobile-source-page-20260626"></script>
-  <script type="module" src="./copy-guard.js?v=stable-mobile-source-page-20260626"></script>
+  <script type="module" src="./app.js?v=local-map-hotfix-20260626"></script>
+  <script type="module" src="./map-layers.js?v=local-map-hotfix-20260626"></script>
+  <script type="module" src="./site-footer.js?v=local-map-hotfix-20260626"></script>
+  <script type="module" src="./copy-guard.js?v=local-map-hotfix-20260626"></script>
 </body>
 </html>
