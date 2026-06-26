@@ -4,10 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#061522" />
-  <meta name="description" content="台灣工程地圖：把公共工程、交通建設、道路管線、建築開發、環評與重大建設入口，整理成手機也好看的互動工程地圖；預設 OpenStreetMap，並可切換官方圖資參考。" />
+  <meta name="description" content="台灣工程地圖：把公共工程、交通建設、道路管線、建築開發、環評與重大建設入口，整理成手機也好看的互動工程地圖；工程熱點先顯示，底圖不穩也能先查清單。" />
   <title>台灣工程地圖｜Taiwan Construction Map</title>
-  <link rel="stylesheet" href="./styles.css?v=mobile-flow-dock-20260625" />
-  <link rel="stylesheet" href="./map-layers.css?v=official-layers-20260625" />
+  <link rel="stylesheet" href="./styles.css?v=stable-mobile-source-page-20260626" />
+  <link rel="stylesheet" href="./map-layers.css?v=stable-mobile-source-page-20260626" />
+  <link rel="stylesheet" href="./mobile-fixes.css?v=stable-mobile-source-page-20260626" />
 </head>
 <body>
   <a class="skip-link" href="#mainPanel" data-i18n="skipLink">跳到工程資訊</a>
@@ -22,7 +23,7 @@
     </a>
     <nav class="nav-links" aria-label="主要連結">
       <a href="#mapArea" data-i18n="navMap">工程地圖</a>
-      <a href="#sourcePanel" data-i18n="navSources">資料入口</a>
+      <a href="./sources.html" target="_blank" rel="noopener noreferrer" data-i18n="navSources">資料入口</a>
       <a href="#maintainPanel" data-i18n="navGuide">補資料</a>
     </nav>
   </header>
@@ -30,7 +31,7 @@
   <main id="top">
     <section class="hero" aria-label="首頁總覽">
       <div class="hero-copy">
-        <p class="pill" data-i18n="heroPill">OpenStreetMap 開放底圖；只載入需要的地圖畫面，手機速度更穩。</p>
+        <p class="pill" data-i18n="heroPill">工程熱點先顯示；底圖不穩也不會卡住，手機速度更穩。</p>
         <h2 data-i18n="heroTitle">台灣正在升級的地方，一張圖先 get。</h2>
         <p data-i18n="heroText">
           給工程公司、發包甲方、地圖控與年輕使用者看的工程雷達。先看位置與施工範圍，再看甲方、乙方、開工日、預計完工與啟用日；資訊不迷路，城市進度直接開圖。
@@ -73,7 +74,7 @@
 
         <div class="quick-actions" aria-label="快捷操作">
           <button id="resetMap" type="button" data-i18n="resetMap">回到全台</button>
-          <button id="toggleSources" type="button" data-i18n="toggleSources">看資料入口</button>
+          <button id="toggleSources" type="button" data-i18n="toggleSources">開資料入口</button>
         </div>
 
         <div class="legend" aria-label="地圖圖例">
@@ -97,20 +98,21 @@
         </div>
         <div class="map-frame">
           <div id="map" role="application" aria-label="台灣工程互動地圖">
-            <div class="map-fallback" data-i18n="mapLoading">電子地圖準備中，工程清單仍可先查。</div>
+            <div class="map-fallback" data-i18n="mapLoading">工程熱點準備中，清單仍可先查。</div>
           </div>
           <div id="mapStatus" class="map-status" role="status">點選工程熱點，看工程基本盤。</div>
         </div>
       </section>
     </section>
 
-    <section id="sourcePanel" class="info-section" aria-label="資料來源說明">
+    <section id="sourcePanel" class="info-section source-panel-compact" aria-label="資料來源說明">
       <div class="section-title">
         <p class="eyebrow" data-i18n="sourcesEyebrow">資料入口</p>
         <h2 data-i18n="sourcesTitle">工程資料很分散，要分層查才準。</h2>
-        <p data-i18n="sourcesText">公共工程、採購決標、重大建設、道路挖掘、環評、建管、能源水利與地方開放資料各有入口。這裡把常用平台集中，方便工程公司、甲方、地圖控交叉查證。</p>
+        <p data-i18n="sourcesText">公共工程、採購決標、重大建設、道路挖掘、環評、建管、能源水利與地方開放資料各有入口。完整清單已整理到獨立頁面，手機不用一路滑到天荒地老。</p>
       </div>
-      <div id="sourceCards" class="source-grid"></div>
+      <a class="source-page-link" href="./sources.html" target="_blank" rel="noopener noreferrer">開啟資料入口新頁 ↗</a>
+      <div id="sourceCards" class="source-grid home-source-grid" aria-hidden="true"></div>
     </section>
 
     <section id="maintainPanel" class="maintain-section" aria-label="資料更新方式">
@@ -149,9 +151,9 @@
     <button id="languageToggle" class="dock-button dock-lang" type="button" aria-label="中英切換">EN</button>
   </div>
 
-  <script type="module" src="./app.js?v=mobile-flow-dock-20260625"></script>
-  <script type="module" src="./map-layers.js?v=active-basemap-label-20260626"></script>
-  <script type="module" src="./site-footer.js?v=source-note-sync-20260626"></script>
-  <script type="module" src="./copy-guard.js?v=map-copy-guard-20260626a"></script>
+  <script type="module" src="./app.js?v=stable-mobile-source-page-20260626"></script>
+  <script type="module" src="./map-layers.js?v=stable-mobile-source-page-20260626"></script>
+  <script type="module" src="./site-footer.js?v=stable-mobile-source-page-20260626"></script>
+  <script type="module" src="./copy-guard.js?v=stable-mobile-source-page-20260626"></script>
 </body>
 </html>
