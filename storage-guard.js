@@ -15,6 +15,30 @@
     }
   };
 
+  const safeStorage = {
+    getItem(key) {
+      try {
+        return window.localStorage.getItem(key);
+      } catch {
+        return fallbackStorage.getItem(key);
+      }
+    },
+    setItem(key, value) {
+      try {
+        window.localStorage.setItem(key, value);
+      } catch {
+        fallbackStorage.setItem(key, value);
+      }
+    },
+    removeItem(key) {
+      try {
+        window.localStorage.removeItem(key);
+      } catch {
+        fallbackStorage.removeItem(key);
+      }
+    }
+  };
+
   try {
     const testKey = '__taiwan_construction_map_storage_test__';
     window.localStorage.setItem(testKey, '1');
@@ -29,4 +53,6 @@
       window.__taiwanConstructionMapStorageFallback = fallbackStorage;
     }
   }
+
+  window.__taiwanConstructionMapSafeStorage = safeStorage;
 })();
