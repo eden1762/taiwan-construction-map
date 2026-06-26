@@ -44,7 +44,61 @@ const en = {
   footer: 'Please verify project data with the latest official notices from competent authorities and local map portals.'
 };
 
-let currentLang = localStorage.getItem(LANG_KEY) === 'en' ? 'en' : 'zh';
+const SOURCE_NAME_EN = {
+  '行政院公共工程委員會': 'Public Construction Commission',
+  '公共工程雲端服務網': 'Public Construction Cloud Service',
+  '政府電子採購網': 'Government e-Procurement System',
+  '公共工程標案管理系統': 'Public Works Tender Management System',
+  '台灣採購公報網': 'Taiwan Procurement Gazette',
+  '國發會重大公共建設計畫': 'NDC Major Public Construction Plans',
+  '重大公共建設年度預算先期作業': 'Major Public Construction Annual Budget Review',
+  '行政院重要政策／重大建設': 'Executive Yuan Major Policies and Infrastructure',
+  '公共政策網路參與平臺 JOIN': 'JOIN Public Policy Participation Platform',
+  '政府資料開放平臺': 'Taiwan Government Open Data Platform',
+  '交通部重要公共建設計畫': 'MOTC Major Public Construction Plans',
+  '交通部鐵道局': 'Railway Bureau, MOTC',
+  '交通部公路局': 'Highway Bureau, MOTC',
+  '公路局施工路段查詢': 'Highway Bureau Work Zone Lookup',
+  '高速公路局': 'Freeway Bureau, MOTC',
+  '臺北市政府捷運工程局': 'Taipei Department of Rapid Transit Systems',
+  '新北市政府捷運工程局': 'New Taipei Department of Rapid Transit Systems',
+  '桃園市政府捷運工程局': 'Taoyuan Department of Rapid Transit Systems',
+  '臺中市交通局／捷運工程': 'Taichung Transportation Bureau / MRT Projects',
+  '高雄市政府捷運工程局': 'Kaohsiung Mass Rapid Transit Bureau',
+  '臺南市交通局捷運相關頁': 'Tainan Transportation Bureau / MRT Planning',
+  '環境部環評書件查詢系統': 'Ministry of Environment EIA Document Search',
+  '全國土地使用分區資料查詢系統': 'National Land Use Zoning Lookup',
+  '內政部國土管理署': 'National Land Management Agency, MOI',
+  '國土測繪圖資服務雲': 'NLSC Maps and Geospatial Data Cloud',
+  '地籍圖資網路便民服務系統': 'Online Cadastral Map Service',
+  '臺北市道路挖掘管理中心': 'Taipei Road Excavation Management Center',
+  '新北 iRoad 智慧道路管理中心': 'New Taipei iRoad Smart Road Management Center',
+  '桃園市道路挖掘／道管資訊中心': 'Taoyuan Road Excavation and Road Management Center',
+  '臺南市政府工務局': 'Tainan Public Works Bureau',
+  '高雄市政府工務局': 'Kaohsiung Public Works Bureau',
+  '臺北市建管業務 e 辦網': 'Taipei Building Administration Online Service',
+  '新北市建管便民服務資訊網': 'New Taipei Building Management Service',
+  '臺中市建築執照存根查詢系統': 'Taichung Building Permit Record Search',
+  '高雄市建築管理系統': 'Kaohsiung Building Management System',
+  '桃園市建築管理資訊系統': 'Taoyuan Building Management Information System',
+  '全國建築管理系統入口網': 'National Building Management Portal',
+  '內政部不動產交易實價查詢服務網': 'MOI Real Estate Transaction Price Lookup',
+  '經濟部水利署': 'Water Resources Agency, MOEA',
+  '台灣電力公司': 'Taiwan Power Company',
+  '台灣中油': 'CPC Corporation, Taiwan',
+  '交通部航港局': 'Maritime and Port Bureau, MOTC',
+  '臺灣港務公司': 'Taiwan International Ports Corporation',
+  '經濟部產業園區管理局': 'Industrial Parks Administration, MOEA',
+  '國科會科學園區': 'National Science and Technology Council Science Parks',
+  '臺北市資料大平台': 'Taipei Open Data Platform',
+  '新北市政府資料開放平台': 'New Taipei Open Data Platform',
+  '桃園開放資料平台': 'Taoyuan Open Data Platform',
+  '臺中市政府資料開放平台': 'Taichung Open Data Platform',
+  '臺南市政府資料開放平台': 'Tainan Open Data Platform',
+  '高雄市政府資料開放平台': 'Kaohsiung Open Data Platform'
+};
+
+let currentLang = safeGetLang();
 
 function c(key) {
   const pack = currentLang === 'en' ? en : zh;
@@ -52,9 +106,9 @@ function c(key) {
 }
 
 function setLanguage(lang) {
-  currentLang = lang;
-  localStorage.setItem(LANG_KEY, lang);
-  document.documentElement.lang = lang === 'zh' ? 'zh-Hant' : 'en';
+  currentLang = lang === 'en' ? 'en' : 'zh';
+  safeSetLang(currentLang);
+  document.documentElement.lang = currentLang === 'zh' ? 'zh-Hant' : 'en';
   document.title = c('pageTitle');
   eyebrow.textContent = c('eyebrow');
   title.textContent = c('title');
@@ -69,9 +123,9 @@ function setLanguage(lang) {
 }
 
 function render() {
-  const keyword = (searchInput.value || '').trim().toLowerCase();
+  const keyword = normalize(searchInput.value);
   const list = DATA_SOURCES.filter(item => {
-    const text = `${item.category} ${item.kind} ${item.name} ${item.fitFor} ${item.note}`.toLowerCase();
+    const text = normalize(`${item.category} ${item.kind} ${item.name} ${englishSourceName(item.name)} ${item.fitFor} ${item.note}`);
     return keyword === '' || text.includes(keyword);
   });
 
@@ -105,7 +159,7 @@ function createCard(item) {
   top.append(badge, kind);
 
   const h3 = document.createElement('h3');
-  h3.textContent = item.name;
+  h3.textContent = currentLang === 'en' ? englishSourceName(item.name) : item.name;
 
   const fit = document.createElement('p');
   const strong = document.createElement('strong');
@@ -120,6 +174,7 @@ function createCard(item) {
   link.target = '_blank';
   link.rel = 'noopener noreferrer';
   link.textContent = c('open');
+  link.setAttribute('aria-label', currentLang === 'en' ? `Open ${englishSourceName(item.name)}` : `開啟${item.name}`);
 
   article.append(top, h3, fit, note, link);
   return article;
@@ -132,15 +187,19 @@ function englishCategory(text) {
   if (text.includes('道路') || text.includes('管線')) return 'Road excavation / utilities / live works';
   if (text.includes('建築') || text.includes('建照')) return 'Building works / permits';
   if (text.includes('水利') || text.includes('能源') || text.includes('港灣') || text.includes('園區')) return 'Water / energy / ports / parks';
+  if (text.includes('地方政府')) return 'Local open data';
   return 'Planning / budget / major public works';
 }
 
 function englishKind(text) {
   if (text.includes('官方主入口')) return 'Official main portal';
+  if (text.includes('官方系統')) return 'Official system';
   if (text.includes('官方')) return 'Official portal';
   if (text.includes('圖台')) return 'Map portal';
   if (text.includes('施工')) return 'Construction lookup';
   if (text.includes('開放資料')) return 'Open data';
+  if (text.includes('捷運工程')) return 'MRT project office';
+  if (text.includes('市場輔助')) return 'Market reference';
   return 'Data portal';
 }
 
@@ -153,7 +212,35 @@ function englishFit(text) {
   if (text.includes('環評')) result.push('EIA documents');
   if (text.includes('建照') || text.includes('建築')) result.push('building permits');
   if (text.includes('圖資') || text.includes('地籍')) result.push('maps and cadastral checks');
+  if (text.includes('水利') || text.includes('防洪')) result.push('water resources and flood control');
+  if (text.includes('能源') || text.includes('電力')) result.push('energy infrastructure');
+  if (text.includes('港灣') || text.includes('碼頭')) result.push('port and marine works');
   return result.length ? [...new Set(result)].join(', ') : 'official project checks';
+}
+
+function englishSourceName(name) {
+  return SOURCE_NAME_EN[name] || name.replaceAll('臺', 'Tai').replaceAll('台', 'Taiwan ');
+}
+
+function safeGetLang() {
+  try {
+    return localStorage.getItem(LANG_KEY) === 'en' ? 'en' : 'zh';
+  } catch (error) {
+    return 'zh';
+  }
+}
+
+function safeSetLang(lang) {
+  try {
+    localStorage.setItem(LANG_KEY, lang);
+  } catch (error) {
+    return false;
+  }
+  return true;
+}
+
+function normalize(value) {
+  return String(value || '').trim().toLowerCase();
 }
 
 searchInput.addEventListener('input', render);
