@@ -1,4 +1,37 @@
-@import url('./local-map.css?v=mobile-local-map-20260626');
+/* Mobile-only map size guard. The main map behavior is restored in app.js. */
 
-/* External base-map controls are intentionally disabled.
-   The site now uses a lightweight in-page engineering hotspot map so mobile users do not get stuck on map loading. */
+.map-tile.tile-error { opacity: 0; }
+
+@media (max-width: 760px) {
+  .map-frame {
+    min-height: 260px !important;
+    height: min(42svh, 340px) !important;
+    max-height: 340px !important;
+    overflow: hidden !important;
+  }
+
+  #map {
+    min-height: 0 !important;
+    height: 100% !important;
+    touch-action: pan-y !important;
+  }
+
+  #map.map-touch-active {
+    touch-action: none !important;
+  }
+
+  .control-panel {
+    min-height: 0 !important;
+    max-height: min(58svh, 470px) !important;
+  }
+
+  .project-list {
+    max-height: 190px !important;
+    overflow: auto !important;
+  }
+
+  .map-status {
+    max-height: 38% !important;
+    overflow: auto !important;
+  }
+}
