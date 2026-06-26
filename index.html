@@ -6,9 +6,9 @@
   <meta name="theme-color" content="#061522" />
   <meta name="description" content="台灣工程地圖：把公共工程、交通建設、道路管線、建築開發、環評與重大建設入口，整理成手機也好看的互動工程地圖；預設 OpenStreetMap，並提供官方電子地圖、灰階底圖、航照與地籍參考套疊切換。" />
   <title>台灣工程地圖｜Taiwan Construction Map</title>
-  <link rel="stylesheet" href="./styles.css?v=basemap-switcher-20260626a" />
-  <link rel="stylesheet" href="./map-layers.css?v=basemap-switcher-20260626a" />
-  <link rel="stylesheet" href="./mobile-fixes.css?v=basemap-switcher-20260626a" />
+  <link rel="stylesheet" href="./styles.css?v=storage-guard-20260626a" />
+  <link rel="stylesheet" href="./map-layers.css?v=storage-guard-20260626a" />
+  <link rel="stylesheet" href="./mobile-fixes.css?v=storage-guard-20260626a" />
 </head>
 <body>
   <a class="skip-link" href="#mainPanel" data-i18n="skipLink">跳到工程資訊</a>
@@ -125,9 +125,10 @@
     <button id="languageToggle" class="dock-button dock-lang" type="button" aria-label="中英切換">EN</button>
   </div>
 
-  <script type="module" src="./app.js?v=basemap-switcher-20260626a"></script>
-  <script type="module" src="./map-layers.js?v=basemap-switcher-20260626a"></script>
-  <script type="module" src="./site-footer.js?v=basemap-switcher-20260626a"></script>
-  <script type="module" src="./copy-guard.js?v=basemap-switcher-20260626a"></script>
+  <script src="./storage-guard.js?v=storage-guard-20260626a"></script>
+  <script type="module" src="./app.js?v=storage-guard-20260626a"></script>
+  <script type="module" src="./map-layers.js?v=storage-guard-20260626a"></script>
+  <script type="module" src="./site-footer.js?v=storage-guard-20260626a"></script>
+  <script type="module" src="./copy-guard.js?v=storage-guard-20260626a"></script>
 </body>
 </html>
