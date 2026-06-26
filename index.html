@@ -4,11 +4,11 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#061522" />
-  <meta name="description" content="台灣工程地圖：把公共工程、交通建設、道路管線、建築開發、環評與重大建設入口，整理成手機也好看的互動工程地圖；工程熱點先顯示，不再等待外部底圖。" />
+  <meta name="description" content="台灣工程地圖：把公共工程、交通建設、道路管線、建築開發、環評與重大建設入口，整理成手機也好看的互動工程地圖；預設 OpenStreetMap，手機版地圖框不超出瀏覽器可視高度。" />
   <title>台灣工程地圖｜Taiwan Construction Map</title>
-  <link rel="stylesheet" href="./styles.css?v=local-map-hotfix-20260626" />
-  <link rel="stylesheet" href="./map-layers.css?v=local-map-hotfix-20260626" />
-  <link rel="stylesheet" href="./mobile-fixes.css?v=local-map-hotfix-20260626" />
+  <link rel="stylesheet" href="./styles.css?v=map-size-only-20260626b" />
+  <link rel="stylesheet" href="./map-layers.css?v=map-size-only-20260626b" />
+  <link rel="stylesheet" href="./mobile-fixes.css?v=map-size-only-20260626b" />
 </head>
 <body>
   <a class="skip-link" href="#mainPanel" data-i18n="skipLink">跳到工程資訊</a>
@@ -31,7 +31,7 @@
   <main id="top">
     <section class="hero" aria-label="首頁總覽">
       <div class="hero-copy">
-        <p class="pill" data-i18n="heroPill">工程熱點先顯示；不用等底圖，手機速度更穩。</p>
+        <p class="pill" data-i18n="heroPill">OpenStreetMap 開放底圖；只載入需要的地圖畫面，手機速度更穩。</p>
         <h2 data-i18n="heroTitle">台灣正在升級的地方，一張圖先 get。</h2>
         <p data-i18n="heroText">給工程公司、發包甲方、地圖控與年輕使用者看的工程雷達。先看位置與施工範圍，再看甲方、乙方、開工日、預計完工與啟用日；資訊不迷路，城市進度直接開圖。</p>
       </div>
@@ -62,7 +62,7 @@
 
         <div class="quick-actions" aria-label="快捷操作">
           <button id="resetMap" type="button" data-i18n="resetMap">回到全台</button>
-          <button id="toggleSources" type="button" data-i18n="toggleSources">開資料入口</button>
+          <button id="toggleSources" type="button" data-i18n="toggleSources">看資料入口</button>
         </div>
 
         <div class="legend" aria-label="地圖圖例">
@@ -79,13 +79,13 @@
       <section class="map-card" aria-label="台灣工程互動地圖">
         <div class="map-toolbar">
           <div>
-            <p class="eyebrow" data-i18n="mapEyebrow">互動工程地圖</p>
+            <p class="eyebrow" data-i18n="mapEyebrow">OpenStreetMap 電子地圖</p>
             <h2 data-i18n="mapTitle">台灣工程現場一眼看</h2>
           </div>
-          <p class="map-note" data-i18n="mapNote">工程熱點、路線與範圍會先出現；手機瀏覽時先順滑看內容，需要移動地圖時再點一下啟用。</p>
+          <p class="map-note" data-i18n="mapNote">可拖曳、縮放、查看道路地名與城市位置。手機瀏覽時先順滑看內容，需要移動地圖時再點一下啟用。</p>
         </div>
         <div class="map-frame">
-          <div id="map" role="application" aria-label="台灣工程互動地圖"><div class="map-fallback" data-i18n="mapLoading">工程熱點準備中，清單仍可先查。</div></div>
+          <div id="map" role="application" aria-label="台灣工程互動地圖"><div class="map-fallback" data-i18n="mapLoading">電子地圖準備中，工程清單仍可先查。</div></div>
           <div id="mapStatus" class="map-status" role="status">點選工程熱點，看工程基本盤。</div>
         </div>
       </section>
@@ -117,7 +117,7 @@
 
   <footer class="site-footer">
     <p data-i18n="footerTitle">台灣工程地圖｜Taiwan Construction Map</p>
-    <p data-i18n="footerText">工程位置、經費、期程與甲乙方資料，請以各主管機關、政府電子採購網、公共工程雲端服務網、建管、環評與地方圖台最新公告為準。本頁工程熱點為快速定位用，精準範圍請回查來源。</p>
+    <p data-i18n="footerText">工程位置、經費、期程與甲乙方資料，請以各主管機關、政府電子採購網、公共工程雲端服務網、建管、環評與地方圖台最新公告為準。地圖底圖 © OpenStreetMap contributors。</p>
   </footer>
 
   <div class="quick-dock" aria-label="快速操作">
@@ -125,9 +125,9 @@
     <button id="languageToggle" class="dock-button dock-lang" type="button" aria-label="中英切換">EN</button>
   </div>
 
-  <script type="module" src="./app.js?v=local-map-hotfix-20260626"></script>
-  <script type="module" src="./map-layers.js?v=local-map-hotfix-20260626"></script>
-  <script type="module" src="./site-footer.js?v=local-map-hotfix-20260626"></script>
-  <script type="module" src="./copy-guard.js?v=local-map-hotfix-20260626"></script>
+  <script type="module" src="./app.js?v=map-size-only-20260626b"></script>
+  <script type="module" src="./map-layers.js?v=map-size-only-20260626b"></script>
+  <script type="module" src="./site-footer.js?v=map-size-only-20260626b"></script>
+  <script type="module" src="./copy-guard.js?v=map-size-only-20260626b"></script>
 </body>
 </html>
