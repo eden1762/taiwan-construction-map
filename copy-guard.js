@@ -19,11 +19,22 @@ const FALLBACK_COPY = {
   }
 };
 
+let guardQueued = false;
+
 function currentLang() {
   return document.documentElement.lang === 'en' ? 'en' : 'zh';
 }
 
+function setTextIfChanged(element, text) {
+  if (element && element.textContent !== text) element.textContent = text;
+}
+
+function setAttrIfChanged(element, name, value) {
+  if (element && element.getAttribute(name) !== value) element.setAttribute(name, value);
+}
+
 function guardMapAndFooterCopy() {
+  guardQueued = false;
   const lang = currentLang();
   const copy = FALLBACK_COPY[lang];
   const mapEyebrow = document.querySelector('[data-i18n="mapEyebrow"]');
@@ -35,38 +46,44 @@ function guardMapAndFooterCopy() {
   const sourcePageLink = document.querySelector('.source-page-link');
 
   if (mapEyebrow && mapEyebrow.textContent.trim() === copy.mapEyebrowOld) {
-    mapEyebrow.textContent = copy.mapEyebrowNew;
+    setTextIfChanged(mapEyebrow, copy.mapEyebrowNew);
   }
 
   if (footerText && footerText.textContent.trim() === copy.footerOld) {
-    footerText.textContent = copy.footerNew;
+    setTextIfChanged(footerText, copy.footerNew);
   }
 
   if (metaDescription && (metaDescription.content.includes('OpenStreetMap 電子地圖') || metaDescription.content.includes('外部地圖元件'))) {
-    metaDescription.content = '台灣工程地圖：把公共工程、交通建設、道路管線、建築開發、環評與重大建設入口，整理成手機也好看的互動工程地圖；工程熱點先顯示，底圖不穩也能先查清單。';
+    setAttrIfChanged(metaDescription, 'content', '台灣工程地圖：把公共工程、交通建設、道路管線、建築開發、環評與重大建設入口，整理成手機也好看的互動工程地圖；工程熱點先顯示，底圖不穩也能先查清單。');
   }
 
   if (sourceCards) {
-    sourceCards.replaceChildren();
-    sourceCards.setAttribute('aria-hidden', 'true');
+    if (sourceCards.childElementCount) sourceCards.replaceChildren();
+    setAttrIfChanged(sourceCards, 'aria-hidden', 'true');
   }
 
   [sourceNav, sourcePageLink].forEach(link => {
     if (!link) return;
-    link.setAttribute('href', './sources.html');
-    link.setAttribute('target', '_blank');
-    link.setAttribute('rel', 'noopener noreferrer');
+    setAttrIfChanged(link, 'href', './sources.html');
+    setAttrIfChanged(link, 'target', '_blank');
+    setAttrIfChanged(link, 'rel', 'noopener noreferrer');
   });
 
   if (sourcePageLink) {
-    sourcePageLink.textContent = copy.sourcePageLink;
-    sourcePageLink.setAttribute('aria-label', copy.sourcePageAria);
+    setTextIfChanged(sourcePageLink, copy.sourcePageLink);
+    setAttrIfChanged(sourcePageLink, 'aria-label', copy.sourcePageAria);
   }
 
   if (sourceButton) {
-    sourceButton.textContent = copy.sourceButton;
+    setTextIfChanged(sourceButton, copy.sourceButton);
     sourceButton.dataset.sourceGuarded = 'true';
   }
+}
+
+function queueGuard() {
+  if (guardQueued) return;
+  guardQueued = true;
+  requestAnimationFrame(guardMapAndFooterCopy);
 }
 
 function openSourcePage(event) {
@@ -81,13 +98,12 @@ document.addEventListener('click', openSourcePage, true);
 
 guardMapAndFooterCopy();
 
-const observer = new MutationObserver(() => guardMapAndFooterCopy());
+const observer = new MutationObserver(queueGuard);
 observer.observe(document.documentElement, {
   childList: true,
   subtree: true,
-  characterData: true,
   attributes: true,
   attributeFilter: ['lang']
 });
 
-document.addEventListener('taiwan-map:basemap-change', guardMapAndFooterCopy);
+document.addEventListener('taiwan-map:basemap-change', queueGuard);
