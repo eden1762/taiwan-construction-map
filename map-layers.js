@@ -54,7 +54,7 @@ function initBaseLayerSwitcher() {
     if (layerState.applying) return;
     window.requestAnimationFrame(applyLayerEnhancements);
   });
-  observer.observe(map, { childList: true, subtree: true });
+  observer.observe(map, { childList: true });
   document.addEventListener('click', event => {
     const button = event.target.closest('[data-base-layer]');
     if (!button) return;
