@@ -31,7 +31,13 @@ const PROJECT_NAME_EN = {
   'building-permit-layer': ['City and county building-permit data layer', 'Building permits'],
   'taipei-building-permit-layer': ['Taipei building permits and construction-progress data layer', 'Taipei building permits'],
   'newtaipei-building-permit-layer': ['New Taipei building permits, occupancy permits, and presale-progress data layer', 'New Taipei building permits'],
-  'science-park-layer': ['Science park roads, plants, and public-facility data layer', 'Science parks']
+  'science-park-layer': ['Science park roads, plants, and public-facility data layer', 'Science parks'],
+  'social-housing-layer': ['Social housing new-build project data layer', 'Social housing projects'],
+  'water-resource-layer': ['Reservoir, flood-control, and river-improvement data layer', 'Water infrastructure'],
+  'power-grid-layer': ['Power grid, substation, and renewable-energy project data layer', 'Power infrastructure'],
+  'lng-terminal-layer': ['LNG terminal, storage tank, and pipeline project data layer', 'LNG infrastructure'],
+  'port-construction-layer': ['Port, fairway, and wharf project data layer', 'Port infrastructure'],
+  'industrial-park-layer': ['Industrial park roads, drainage, and public-facility data layer', 'Industrial parks']
 };
 
 const PROJECT_FIELD_TRANSLATIONS = [
@@ -64,7 +70,9 @@ const PROJECT_FIELD_TRANSLATIONS = [
   ['規劃/環評資料源', 'Planning / EIA data layer'],
   ['即時資料源', 'Live data layer'],
   ['資料源', 'Data layer'],
+  ['官方資料源', 'Official data source'],
   ['概略標示', 'approximate alignment shown'],
+  ['概略走廊', 'approximate corridor'],
   ['概略路廊', 'approximate corridor'],
   ['概略範圍', 'approximate area'],
   ['路廊', 'corridor'],
@@ -79,7 +87,16 @@ const PROJECT_FIELD_TRANSLATIONS = [
   ['新北市政府捷運工程局', 'New Taipei Department of Rapid Transit Systems'],
   ['桃園市政府捷運工程局', 'Taoyuan Department of Rapid Transit Systems'],
   ['臺中市交通局', 'Taichung Transportation Bureau'],
+  ['臺南市政府交通局', 'Tainan Transportation Bureau'],
   ['交通部鐵道局', 'Railway Bureau, MOTC'],
+  ['交通部高速公路局', 'Freeway Bureau, MOTC'],
+  ['高速公路局', 'Freeway Bureau'],
+  ['交通部航港局', 'Maritime and Port Bureau, MOTC'],
+  ['臺灣港務公司', 'Taiwan International Ports Corporation'],
+  ['經濟部水利署', 'Water Resources Agency, MOEA'],
+  ['台灣電力公司', 'Taiwan Power Company'],
+  ['台灣中油', 'CPC Corporation, Taiwan'],
+  ['經濟部產業園區管理局', 'Industrial Park Administration, MOEA'],
   ['國發會重大公共建設', 'NDC major public construction plans'],
   ['環評', 'EIA'],
   ['捷運', 'MRT'],
@@ -101,6 +118,11 @@ const PROJECT_FIELD_TRANSLATIONS = [
   ['台南市', 'Tainan City'],
   ['高雄市', 'Kaohsiung City'],
   ['嘉義市', 'Chiayi City'],
+  ['花蓮縣', 'Hualien County'],
+  ['臺東縣', 'Taitung County'],
+  ['台灣', 'Taiwan'],
+  ['全台灣', 'Taiwan'],
+  ['全台', 'Taiwan-wide'],
   ['新北', 'New Taipei'],
   ['高雄', 'Kaohsiung'],
   ['臺中', 'Taichung'],
@@ -127,6 +149,11 @@ const PROJECT_FIELD_TRANSLATIONS = [
   ['文山', 'Wenshan'],
   ['八德', 'Bade'],
   ['蘆竹', 'Luzhu'],
+  ['大園', 'Dayuan'],
+  ['歸仁', 'Guiren'],
+  ['基隆', 'Keelung'],
+  ['汐止', 'Xizhi'],
+  ['南港', 'Nangang'],
   ['中正紀念堂', 'Chiang Kai-shek Memorial Hall']
 ];
 
