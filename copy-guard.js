@@ -22,6 +22,7 @@ function guardMapAndFooterCopy() {
   const copy = FALLBACK_COPY[lang];
   const mapEyebrow = document.querySelector('[data-i18n="mapEyebrow"]');
   const footerText = document.querySelector('[data-i18n="footerText"]');
+  const metaDescription = document.querySelector('meta[name="description"]');
 
   if (mapEyebrow && mapEyebrow.textContent.trim() === copy.mapEyebrowOld) {
     mapEyebrow.textContent = copy.mapEyebrowNew;
@@ -29,6 +30,10 @@ function guardMapAndFooterCopy() {
 
   if (footerText && footerText.textContent.trim() === copy.footerOld) {
     footerText.textContent = copy.footerNew;
+  }
+
+  if (metaDescription && metaDescription.content.includes('OpenStreetMap 電子地圖')) {
+    metaDescription.content = '台灣工程地圖：把公共工程、交通建設、道路管線、建築開發、環評與重大建設入口，整理成手機也好看的互動工程地圖，預設 OpenStreetMap，並可切換官方圖資參考。';
   }
 }
 
