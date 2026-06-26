@@ -4,14 +4,18 @@ const FALLBACK_COPY = {
     mapEyebrowNew: '互動工程地圖',
     footerOld: '工程位置、經費、期程與甲乙方資料，請以各主管機關、政府電子採購網、公共工程雲端服務網、建管、環評與地方圖台最新公告為準。地圖底圖 © OpenStreetMap contributors。',
     footerNew: '工程位置、經費、期程與甲乙方資料，請以各主管機關、政府電子採購網、公共工程雲端服務網、建管、環評與地方圖台最新公告為準。地圖底圖與官方圖資來源，請以地圖上的即時來源註記為準。',
-    sourceButton: '開資料入口'
+    sourceButton: '開資料入口',
+    sourcePageLink: '開啟資料入口新頁 ↗',
+    sourcePageAria: '開啟台灣工程資料入口新頁'
   },
   en: {
     mapEyebrowOld: 'OpenStreetMap map',
     mapEyebrowNew: 'Interactive engineering map',
     footerOld: 'For project location, budget, timeline, owner, and contractor data, please verify with the latest official notices from competent authorities, procurement portals, public works systems, building management, EIA records, and local map portals. Map base © OpenStreetMap contributors.',
     footerNew: 'For project location, budget, timeline, owner, and contractor data, verify the latest official notices from competent authorities, procurement portals, public works systems, building management, EIA records, and local map portals. For base maps and official geospatial layers, follow the live attribution shown on the map.',
-    sourceButton: 'Open sources'
+    sourceButton: 'Open sources',
+    sourcePageLink: 'Open source portals ↗',
+    sourcePageAria: 'Open Taiwan construction source portals in a new page'
   }
 };
 
@@ -53,6 +57,11 @@ function guardMapAndFooterCopy() {
     link.setAttribute('target', '_blank');
     link.setAttribute('rel', 'noopener noreferrer');
   });
+
+  if (sourcePageLink) {
+    sourcePageLink.textContent = copy.sourcePageLink;
+    sourcePageLink.setAttribute('aria-label', copy.sourcePageAria);
+  }
 
   if (sourceButton) {
     sourceButton.textContent = copy.sourceButton;
