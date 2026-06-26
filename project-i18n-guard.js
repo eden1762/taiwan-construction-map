@@ -78,6 +78,8 @@ const PROJECT_FIELD_TRANSLATIONS = [
   ['路廊', 'corridor'],
   ['施工範圍', 'work area'],
   ['資料來源', 'source'],
+  ['國土測繪圖資服務雲（地籍僅供參考）', 'National Land Surveying and Mapping Center; cadastre layer for reference only'],
+  ['國土測繪圖資服務雲', 'National Land Surveying and Mapping Center map service'],
   ['公共工程雲端服務網', 'Public Construction Cloud Service'],
   ['政府電子採購網', 'Government e-Procurement System'],
   ['交通部公路局', 'Highway Bureau, MOTC'],
@@ -201,7 +203,7 @@ function applyEnglishProjectNames() {
   if (activeId && detailTitle && PROJECT_NAME_EN[activeId]) {
     detailTitle.textContent = PROJECT_NAME_EN[activeId][0];
   }
-  document.querySelectorAll('.map-detail-card p, .map-detail-card dd, .map-detail-card .badge').forEach(replaceTextContent);
+  document.querySelectorAll('.map-detail-card p, .map-detail-card dd, .map-detail-card .badge, .map-attribution a').forEach(replaceTextContent);
 }
 
 applyEnglishProjectNames();
