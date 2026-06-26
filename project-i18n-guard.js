@@ -159,6 +159,8 @@ const PROJECT_FIELD_TRANSLATIONS = [
   ['中正紀念堂', 'Chiang Kai-shek Memorial Hall']
 ];
 
+let translationPending = false;
+
 function englishMode() {
   return document.documentElement.lang === 'en';
 }
@@ -172,9 +174,14 @@ function translateFieldText(value) {
   return text;
 }
 
+function setTextIfChanged(node, value) {
+  if (!node || typeof value !== 'string' || node.textContent === value) return;
+  node.textContent = value;
+}
+
 function replaceTextContent(node) {
   if (!node) return;
-  node.textContent = translateFieldText(node.textContent);
+  setTextIfChanged(node, translateFieldText(node.textContent));
 }
 
 function applyEnglishProjectNames() {
@@ -182,35 +189,42 @@ function applyEnglishProjectNames() {
 
   document.querySelectorAll('.project-card[data-project-id]').forEach(card => {
     const names = PROJECT_NAME_EN[card.dataset.projectId];
-    if (names) {
-      const title = card.querySelector('h3');
-      if (title) title.textContent = names[0];
-    }
+    if (names) setTextIfChanged(card.querySelector('h3'), names[0]);
     card.querySelectorAll('p, .mini-facts span, .badge').forEach(replaceTextContent);
   });
 
   document.querySelectorAll('#map [data-project-id]').forEach(item => {
     const names = PROJECT_NAME_EN[item.dataset.projectId];
     if (!names) return;
-    const label = item.querySelector('text');
+    const shortName = names[1] || names[0];
+    setTextIfChanged(item.querySelector('text'), shortName);
     const title = item.querySelector('title');
-    if (label) label.textContent = names[1] || names[0];
-    if (title) title.textContent = `${names[1] || names[0]}｜${translateFieldText(title.textContent.split('｜').pop() || 'Project status')}`;
+    if (title) {
+      const statusText = translateFieldText(title.textContent.split('｜').pop() || 'Project status');
+      setTextIfChanged(title, `${shortName}｜${statusText}`);
+    }
   });
 
   const activeId = document.querySelector('.project-card.active[data-project-id]')?.dataset.projectId;
-  const detailTitle = document.querySelector('.map-detail-card h3');
-  if (activeId && detailTitle && PROJECT_NAME_EN[activeId]) {
-    detailTitle.textContent = PROJECT_NAME_EN[activeId][0];
+  if (activeId && PROJECT_NAME_EN[activeId]) {
+    setTextIfChanged(document.querySelector('.map-detail-card h3'), PROJECT_NAME_EN[activeId][0]);
   }
   document.querySelectorAll('.map-detail-card p, .map-detail-card dd, .map-detail-card .badge, .map-attribution a').forEach(replaceTextContent);
 }
 
+function scheduleEnglishProjectNames() {
+  if (translationPending) return;
+  translationPending = true;
+  window.requestAnimationFrame(() => {
+    translationPending = false;
+    applyEnglishProjectNames();
+  });
+}
+
 applyEnglishProjectNames();
-new MutationObserver(() => window.requestAnimationFrame(applyEnglishProjectNames)).observe(document.documentElement, {
+new MutationObserver(scheduleEnglishProjectNames).observe(document.documentElement, {
   subtree: true,
   childList: true,
-  characterData: true,
   attributes: true,
-  attributeFilter: ['lang', 'class']
+  attributeFilter: ['lang']
 });
