@@ -4,30 +4,35 @@ const DATA_LAYER_KEY = 'taiwan-construction-map-data-layers';
 const BASE_LAYERS = {
   osm: {
     label: { zh: 'OpenStreetMap', en: 'OpenStreetMap' },
+    eyebrow: { zh: 'OpenStreetMap 電子地圖', en: 'OpenStreetMap map' },
     attribution: { zh: '© OpenStreetMap contributors', en: '© OpenStreetMap contributors' },
     attributionUrl: 'https://www.openstreetmap.org/copyright',
     tile: ({ z, x, y }) => `https://tile.openstreetmap.org/${z}/${x}/${y}.png`
   },
   nlscEmap: {
     label: { zh: '官方電子圖', en: 'NLSC e-Map' },
+    eyebrow: { zh: '國土測繪官方電子地圖', en: 'NLSC official e-Map' },
     attribution: { zh: '國土測繪中心電子地圖', en: 'NLSC Taiwan e-Map' },
     attributionUrl: 'https://maps.nlsc.gov.tw/',
     tile: ({ z, x, y }) => `https://wmts.nlsc.gov.tw/wmts/EMAP/default/GoogleMapsCompatible/${z}/${y}/${x}`
   },
   nlscGray: {
     label: { zh: '官方灰階', en: 'NLSC Gray' },
+    eyebrow: { zh: '國土測繪官方灰階地圖', en: 'NLSC official gray map' },
     attribution: { zh: '國土測繪中心灰階電子地圖', en: 'NLSC gray e-Map' },
     attributionUrl: 'https://maps.nlsc.gov.tw/',
     tile: ({ z, x, y }) => `https://wmts.nlsc.gov.tw/wmts/EMAP2/default/GoogleMapsCompatible/${z}/${y}/${x}`
   },
   nlscPhoto: {
     label: { zh: '官方航照', en: 'NLSC Orthophoto' },
+    eyebrow: { zh: '國土測繪官方正射影像', en: 'NLSC official orthophoto' },
     attribution: { zh: '國土測繪中心正射影像', en: 'NLSC orthophoto' },
     attributionUrl: 'https://maps.nlsc.gov.tw/',
     tile: ({ z, x, y }) => `https://wmts.nlsc.gov.tw/wmts/PHOTO2/default/GoogleMapsCompatible/${z}/${y}/${x}`
   },
   nlscCadastre: {
     label: { zh: '地籍參考套疊', en: 'Cadastre overlay' },
+    eyebrow: { zh: '官方灰階＋地籍參考套疊', en: 'Official gray map + cadastre overlay' },
     attribution: { zh: '國土測繪中心灰階電子地圖＋地籍參考圖｜地籍套疊僅供參考', en: 'NLSC gray e-Map + cadastral reference｜Cadastre overlay is for reference only' },
     attributionUrl: 'https://maps.nlsc.gov.tw/',
     tile: ({ z, x, y }) => `https://wmts.nlsc.gov.tw/wmts/EMAP2/default/GoogleMapsCompatible/${z}/${y}/${x}`,
@@ -239,6 +244,15 @@ function updateAttribution(realMap) {
   attr.classList.toggle('reference-note', activeBaseLayer === 'nlscCadastre');
 }
 
+function updateMapEyebrow() {
+  const mapEyebrow = document.querySelector('[data-i18n="mapEyebrow"]');
+  if (!mapEyebrow) return;
+  const lang = getLang();
+  const layer = BASE_LAYERS[activeBaseLayer] || BASE_LAYERS.osm;
+  const nextText = layer.eyebrow?.[lang] || layer.label[lang];
+  if (mapEyebrow.textContent !== nextText) mapEyebrow.textContent = nextText;
+}
+
 function guardMapChrome(realMap) {
   realMap.querySelectorAll('.base-layer-control, .data-layer-control, .map-attribution').forEach(element => {
     if (element.dataset.mapChromeGuarded === 'true') return;
@@ -262,6 +276,7 @@ function applyBaseLayer(options = {}) {
       renderDataLayerControl(realMap, { forceText });
       applyDataLayerState(realMap);
       updateAttribution(realMap);
+      updateMapEyebrow();
       guardMapChrome(realMap);
       lastRenderedLang = currentLang;
     }
