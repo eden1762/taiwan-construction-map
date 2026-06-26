@@ -102,10 +102,9 @@ guardMapAndFooterCopy();
 
 const observer = new MutationObserver(queueGuard);
 observer.observe(document.documentElement, {
-  childList: true,
-  subtree: true,
   attributes: true,
   attributeFilter: ['lang']
 });
 
+document.addEventListener('taiwan-map:language-change', queueGuard);
 document.addEventListener('taiwan-map:basemap-change', queueGuard);
