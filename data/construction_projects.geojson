@@ -1,0 +1,387 @@
+{
+  "type": "FeatureCollection",
+  "name": "taiwan_construction_projects_mvp",
+  "updated_at": "2026-06-27",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "tcmap-001",
+        "name": "淡江大橋及連絡道路",
+        "category": "捷運/交通",
+        "status": "施工中",
+        "owner": "交通部公路局",
+        "contractor": "工信工程及相關分包團隊",
+        "budget_ntd": 23000000000,
+        "start_date": "2019-02-22",
+        "planned_end_date": "2026-12-31",
+        "address": "新北市淡水區、八里區淡水河口",
+        "source_name": "交通部公路局",
+        "source_url": "https://www.thb.gov.tw/",
+        "updated_at": "2026-06-27"
+      },
+      "geometry": { "type": "Point", "coordinates": [121.4008, 25.1694] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "tcmap-002",
+        "name": "桃園國際機場第三航廈",
+        "category": "建築/園區",
+        "status": "施工中",
+        "owner": "桃園國際機場股份有限公司",
+        "contractor": "三星物產、榮工工程等工程團隊",
+        "budget_ntd": 95600000000,
+        "start_date": "2017-05-01",
+        "planned_end_date": "2027-12-31",
+        "address": "桃園市大園區桃園國際機場",
+        "source_name": "桃園國際機場股份有限公司",
+        "source_url": "https://www.taoyuan-airport.com/",
+        "updated_at": "2026-06-27"
+      },
+      "geometry": { "type": "Point", "coordinates": [121.2329, 25.0781] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "tcmap-003",
+        "name": "桃園捷運綠線 GC01 標周邊工程",
+        "category": "捷運/交通",
+        "status": "施工中",
+        "owner": "桃園市政府捷運工程局",
+        "contractor": "大陸工程及協力廠商",
+        "budget_ntd": 9820000000,
+        "start_date": "2018-10-15",
+        "planned_end_date": "2027-07-31",
+        "address": "桃園市桃園區、中正路與經國路周邊",
+        "source_name": "桃園市政府捷運工程局",
+        "source_url": "https://dorts.tycg.gov.tw/",
+        "updated_at": "2026-06-27"
+      },
+      "geometry": { "type": "Point", "coordinates": [121.3015, 25.0172] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "tcmap-004",
+        "name": "臺北捷運萬大線第一期 CQ850 區段",
+        "category": "捷運/交通",
+        "status": "施工中",
+        "owner": "臺北市政府捷運工程局",
+        "contractor": "中華工程及相關機電團隊",
+        "budget_ntd": 7410000000,
+        "start_date": "2014-11-01",
+        "planned_end_date": "2027-12-31",
+        "address": "臺北市萬華區、中正區至新北市中和區",
+        "source_name": "臺北市政府捷運工程局",
+        "source_url": "https://www.dorts.gov.taipei/",
+        "updated_at": "2026-06-27"
+      },
+      "geometry": { "type": "Point", "coordinates": [121.5054, 25.0211] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "tcmap-005",
+        "name": "新北捷運三鶯線土城端工程",
+        "category": "捷運/交通",
+        "status": "施工中",
+        "owner": "新北市政府捷運工程局",
+        "contractor": "榮工工程及系統工程團隊",
+        "budget_ntd": 50500000000,
+        "start_date": "2016-07-21",
+        "planned_end_date": "2026-12-31",
+        "address": "新北市土城區、三峽區、鶯歌區",
+        "source_name": "新北市政府捷運工程局",
+        "source_url": "https://www.dorts.ntpc.gov.tw/",
+        "updated_at": "2026-06-27"
+      },
+      "geometry": { "type": "Point", "coordinates": [121.3988, 24.9526] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "tcmap-006",
+        "name": "高雄捷運黃線 Y15 車站周邊工程",
+        "category": "捷運/交通",
+        "status": "施工中",
+        "owner": "高雄市政府捷運工程局",
+        "contractor": "中鋼構、互助營造及相關團隊",
+        "budget_ntd": 4420000000,
+        "start_date": "2022-10-31",
+        "planned_end_date": "2029-12-31",
+        "address": "高雄市三民區、苓雅區主要路廊",
+        "source_name": "高雄市政府捷運工程局",
+        "source_url": "https://mtbu.kcg.gov.tw/",
+        "updated_at": "2026-06-27"
+      },
+      "geometry": { "type": "Point", "coordinates": [120.3334, 22.6432] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "tcmap-007",
+        "name": "臺中捷運藍線臺灣大道核心段",
+        "category": "規劃/環評",
+        "status": "招標中",
+        "owner": "臺中市政府交通局",
+        "contractor": "待決標公告",
+        "budget_ntd": 161500000000,
+        "start_date": "2026-01-01",
+        "planned_end_date": "2034-12-31",
+        "address": "臺中市臺灣大道沿線",
+        "source_name": "臺中市政府交通局",
+        "source_url": "https://www.traffic.taichung.gov.tw/",
+        "updated_at": "2026-06-27"
+      },
+      "geometry": { "type": "Point", "coordinates": [120.6460, 24.1612] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "tcmap-008",
+        "name": "臺南市區鐵路地下化北段",
+        "category": "捷運/交通",
+        "status": "延宕",
+        "owner": "交通部鐵道局",
+        "contractor": "中華工程及相關工程團隊",
+        "budget_ntd": 29360000000,
+        "start_date": "2017-03-15",
+        "planned_end_date": "2027-12-31",
+        "address": "臺南市東區、北區鐵路沿線",
+        "source_name": "交通部鐵道局",
+        "source_url": "https://www.rb.gov.tw/",
+        "updated_at": "2026-06-27"
+      },
+      "geometry": { "type": "Point", "coordinates": [120.2150, 23.0050] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "tcmap-009",
+        "name": "嘉義市區鐵路高架化車站段",
+        "category": "捷運/交通",
+        "status": "施工中",
+        "owner": "交通部鐵道局",
+        "contractor": "東元電機、互助營造及協力團隊",
+        "budget_ntd": 23840000000,
+        "start_date": "2019-09-01",
+        "planned_end_date": "2026-12-31",
+        "address": "嘉義市西區嘉義車站周邊",
+        "source_name": "交通部鐵道局",
+        "source_url": "https://www.rb.gov.tw/",
+        "updated_at": "2026-06-27"
+      },
+      "geometry": { "type": "Point", "coordinates": [120.4410, 23.4860] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "tcmap-010",
+        "name": "花東鐵路雙軌化玉里段",
+        "category": "捷運/交通",
+        "status": "施工中",
+        "owner": "交通部鐵道局",
+        "contractor": "各區段工程得標廠商",
+        "budget_ntd": 45600000000,
+        "start_date": "2021-01-01",
+        "planned_end_date": "2030-12-31",
+        "address": "花蓮縣玉里鎮至臺東縣池上鄉沿線",
+        "source_name": "交通部鐵道局",
+        "source_url": "https://www.rb.gov.tw/",
+        "updated_at": "2026-06-27"
+      },
+      "geometry": { "type": "Point", "coordinates": [121.3140, 23.3320] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "tcmap-011",
+        "name": "臺北市道路挖掘信義幹線更新",
+        "category": "道路/管線",
+        "status": "施工中",
+        "owner": "臺北市政府工務局",
+        "contractor": "道路管線申挖核准廠商",
+        "budget_ntd": 180000000,
+        "start_date": "2026-03-01",
+        "planned_end_date": "2026-10-31",
+        "address": "臺北市信義區松仁路、信義路周邊",
+        "source_name": "臺北市道路挖掘管理中心",
+        "source_url": "https://dig.taipei/",
+        "updated_at": "2026-06-27"
+      },
+      "geometry": { "type": "Point", "coordinates": [121.5683, 25.0339] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "tcmap-012",
+        "name": "新北 iRoad 中和道路改善工程",
+        "category": "道路/管線",
+        "status": "施工中",
+        "owner": "新北市政府養護工程處",
+        "contractor": "地方道路維護承攬廠商",
+        "budget_ntd": 98000000,
+        "start_date": "2026-04-10",
+        "planned_end_date": "2026-09-30",
+        "address": "新北市中和區景平路周邊",
+        "source_name": "新北 iRoad 智慧道路管理中心",
+        "source_url": "https://roadmt.maintenance.ntpc.gov.tw/iROAD/Home/index",
+        "updated_at": "2026-06-27"
+      },
+      "geometry": { "type": "Point", "coordinates": [121.5050, 24.9936] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "tcmap-013",
+        "name": "高雄市前鎮區道路排水改善",
+        "category": "道路/管線",
+        "status": "招標中",
+        "owner": "高雄市政府工務局",
+        "contractor": "待決標公告",
+        "budget_ntd": 320000000,
+        "start_date": "2026-08-01",
+        "planned_end_date": "2027-08-31",
+        "address": "高雄市前鎮區中山三路與一心一路周邊",
+        "source_name": "高雄市政府工務局",
+        "source_url": "https://pwb.kcg.gov.tw/",
+        "updated_at": "2026-06-27"
+      },
+      "geometry": { "type": "Point", "coordinates": [120.3156, 22.5962] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "tcmap-014",
+        "name": "橋頭科學園區公共設施第一期",
+        "category": "建築/園區",
+        "status": "施工中",
+        "owner": "南部科學園區管理局",
+        "contractor": "園區公共工程得標廠商",
+        "budget_ntd": 12800000000,
+        "start_date": "2022-06-01",
+        "planned_end_date": "2027-12-31",
+        "address": "高雄市橋頭區橋頭科學園區",
+        "source_name": "南部科學園區管理局",
+        "source_url": "https://www.stsp.gov.tw/",
+        "updated_at": "2026-06-27"
+      },
+      "geometry": { "type": "Point", "coordinates": [120.3250, 22.7750] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "tcmap-015",
+        "name": "桃園航空城公共設施工程",
+        "category": "建築/園區",
+        "status": "施工中",
+        "owner": "桃園市政府航空城工程處",
+        "contractor": "區段徵收公共工程承攬團隊",
+        "budget_ntd": 64000000000,
+        "start_date": "2021-11-01",
+        "planned_end_date": "2029-12-31",
+        "address": "桃園市大園區、蘆竹區航空城計畫區",
+        "source_name": "桃園市政府",
+        "source_url": "https://www.tycg.gov.tw/",
+        "updated_at": "2026-06-27"
+      },
+      "geometry": { "type": "Point", "coordinates": [121.2060, 25.0500] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "tcmap-016",
+        "name": "臺北市信義區社會住宅新建工程",
+        "category": "公共工程",
+        "status": "施工中",
+        "owner": "國家住宅及都市更新中心",
+        "contractor": "社宅新建工程承攬廠商",
+        "budget_ntd": 2500000000,
+        "start_date": "2024-05-01",
+        "planned_end_date": "2028-06-30",
+        "address": "臺北市信義區吳興街周邊",
+        "source_name": "國家住宅及都市更新中心",
+        "source_url": "https://www.hurc.org.tw/",
+        "updated_at": "2026-06-27"
+      },
+      "geometry": { "type": "Point", "coordinates": [121.5638, 25.0272] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "tcmap-017",
+        "name": "臺南沙崙綠能科學城公共設施",
+        "category": "建築/園區",
+        "status": "完工",
+        "owner": "臺南市政府、中央相關機關",
+        "contractor": "公共設施工程承攬團隊",
+        "budget_ntd": 8600000000,
+        "start_date": "2018-01-01",
+        "planned_end_date": "2025-12-31",
+        "address": "臺南市歸仁區高鐵臺南站周邊",
+        "source_name": "國發會重大公共建設資料",
+        "source_url": "https://www.ndc.gov.tw/",
+        "updated_at": "2026-06-27"
+      },
+      "geometry": { "type": "Point", "coordinates": [120.2860, 22.9360] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "tcmap-018",
+        "name": "彰濱離岸風電運維基地工程",
+        "category": "公共工程",
+        "status": "施工中",
+        "owner": "臺灣港務公司與能源主管機關",
+        "contractor": "港灣與能源工程承攬團隊",
+        "budget_ntd": 5200000000,
+        "start_date": "2023-09-01",
+        "planned_end_date": "2027-03-31",
+        "address": "彰化縣鹿港鎮彰濱工業區周邊",
+        "source_name": "臺灣港務公司",
+        "source_url": "https://www.twport.com.tw/",
+        "updated_at": "2026-06-27"
+      },
+      "geometry": { "type": "Point", "coordinates": [120.4140, 24.0700] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "tcmap-019",
+        "name": "國道七號高雄路廊計畫",
+        "category": "規劃/環評",
+        "status": "規劃中",
+        "owner": "交通部高速公路局",
+        "contractor": "待工程標案公告",
+        "budget_ntd": 135000000000,
+        "start_date": "2026-01-01",
+        "planned_end_date": "2036-12-31",
+        "address": "高雄市仁武、鳥松、鳳山、小港周邊",
+        "source_name": "交通部高速公路局",
+        "source_url": "https://www.freeway.gov.tw/",
+        "updated_at": "2026-06-27"
+      },
+      "geometry": { "type": "Point", "coordinates": [120.3600, 22.6100] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "tcmap-020",
+        "name": "基隆捷運南港至八堵段計畫",
+        "category": "規劃/環評",
+        "status": "規劃中",
+        "owner": "交通部、基隆市政府、新北市政府",
+        "contractor": "待招標決標",
+        "budget_ntd": 69700000000,
+        "start_date": "2027-01-01",
+        "planned_end_date": "2034-12-31",
+        "address": "臺北市南港區、新北市汐止區、基隆市七堵區",
+        "source_name": "交通部重大公共建設資料",
+        "source_url": "https://www.motc.gov.tw/",
+        "updated_at": "2026-06-27"
+      },
+      "geometry": { "type": "Point", "coordinates": [121.6420, 25.0620] }
+    }
+  ]
+}
