@@ -18,69 +18,63 @@ const CATEGORIES = [
 ];
 
 const STATUSES = ['規劃中', '招標中', '施工中', '完工', '延宕'];
-
-const STATUS_EN = {
-  '規劃中': 'Planning',
-  '招標中': 'Tendering',
-  '施工中': 'Under construction',
-  '完工': 'Completed',
-  '延宕': 'Delayed'
-};
+const ACTIVE_STATUSES = new Set(['規劃中', '招標準備', '招標中', '施工中', '延宕']);
+const STATUS_EN = { '規劃中': 'Planning', '招標準備': 'Pre-tender', '招標中': 'Tendering', '施工中': 'Under construction', '完工': 'Completed', '延宕': 'Delayed' };
 
 const COPY = {
   zh: {
     documentTitle: '台灣工程地圖｜Taiwan Construction Map',
     skipLink: '跳到工程資訊', brandEyebrow: '工程位置 × 進度 × 甲乙方', brandTitle: '台灣工程地圖', brandSubtitle: 'Taiwan Construction Map',
     navMap: '工程地圖', navSources: '資料入口', navGuide: '補資料',
-    heroPill: '真正可互動的工程地圖 MVP：點位、圖層、搜尋、篩選與工程卡片一次到位。',
+    heroPill: '可互動的工程地圖：點位、路線、範圍、圖層、搜尋與工程卡片一次到位。',
     heroTitle: '台灣正在升級的地方，一張圖先 get。',
-    heroText: '給工程公司、發包甲方、地理地圖愛好者與年輕使用者看的工程雷達。先看位置，再看甲方、乙方、金額、期程與來源；查工程不用迷路。',
-    metricProjects: '工程點位', metricCost: '總金額估算', metricSources: '資料來源',
+    heroText: '給工程公司、發包甲方、地理地圖愛好者與年輕使用者看的工程雷達。先看位置與施工範圍，再看甲方、乙方、金額、期程與來源；查工程不用迷路。',
+    metricProjects: '現況工程', metricCost: '總金額估算', metricSources: '資料來源',
     panelEyebrow: '工程雷達', panelTitle: '找工程、看位置、追進度', panelText: '搜尋工程名、地點、發包方或施工方；也可以開關圖層與狀態篩選。工程控、地圖控、估案人員都能快速開圖。',
     searchLabel: '搜尋', searchPlaceholder: '例：淡江大橋、高雄捷運、臺南、工信工程、道路挖掘',
     typeLabel: '類型', typeAll: '全部類型', statusLabel: '狀態', statusAll: '全部狀態', resetMap: '回到全台', toggleSources: '資料入口',
-    mapEyebrow: 'Leaflet 互動工程地圖', mapTitle: '台灣工程點位一眼看', mapNote: '點選工程點位可查看甲方、乙方、金額、起訖日與來源。手機版會從下方滑出工程卡片。', mapLoading: '地圖與工程資料載入中。',
+    mapEyebrow: '互動工程地圖', mapTitle: '台灣工程位置與範圍一眼看', mapNote: '點選工程點位、路線或範圍，可查看甲方、乙方、金額、起訖日與來源。手機版會從下方滑出工程卡片。', mapLoading: '地圖與工程資料載入中。',
     sourcesEyebrow: '資料入口', sourcesTitle: '工程資料很分散，要分層查才準。', sourcesText: '公共工程、採購決標、重大建設、道路挖掘、環評、建管、能源水利與地方資料各有入口。',
     guideEyebrow: '補資料指南', guideTitle: '資料要好用，關鍵是位置、來源與欄位一致。',
     guide1Title: '1. 補上工程基本盤', guide1Text: '工程名、地點、甲方、乙方、金額、開工日、預計完工日與狀態要完整。',
-    guide2Title: '2. 標清楚施工位置', guide2Text: '先用點位做 MVP；後續可升級成路線與範圍，讓工程脈絡更清楚。',
+    guide2Title: '2. 標清楚施工位置', guide2Text: '單一設施用點位；道路、捷運與橋梁用路線；園區與基地用範圍。地圖準，信任感就上來。',
     guide3Title: '3. 來源要能回查', guide3Text: '每筆資料都附來源名稱與連結，使用者才能自己交叉確認。',
     guide4Title: '4. 手機先好用', guide4Text: '現場人員與通勤族多半用手機看，底部滑出卡片能更順手。',
-    footerTitle: '台灣工程地圖｜Taiwan Construction Map', footerText: '工程資訊為 MVP 範例資料；正式引用請回各主管機關、採購、工程、建管、環評與地方圖台確認最新公告。',
+    footerTitle: '台灣工程地圖｜Taiwan Construction Map', footerText: '首頁只放計畫中、招標中、施工中，或完工啟用未滿一個月的現況資料；正式引用請回各主管機關、採購、工程、建管、環評與地方圖台確認最新公告。',
     emptyTitle: '沒有符合條件的工程', emptyText: '換個工程名、地點、甲方或乙方試試。',
-    cardIntroTitle: '點一個工程點位', cardIntroText: '右側會顯示工程卡片；手機版會從下方滑出。',
+    cardIntroTitle: '點一個工程', cardIntroText: '右側會顯示工程卡片；手機版會從下方滑出。',
     close: '收合', retry: '重試載入', mapErrorTitle: '地圖載入失敗', dataErrorTitle: '工程資料載入失敗', tileErrorTitle: '底圖載入不穩',
-    tileErrorText: '目前底圖圖磚連線不穩，工程清單仍可使用。可以稍後重試。',
+    tileErrorText: '目前底圖連線不穩，工程清單與工程卡片仍可使用。可以稍後重試。',
     sourcePage: '開啟資料入口新頁 ↗', openSource: '來源連結 ↗',
-    budget: '金額', start: '開工日', end: '預計完工日', owner: '甲方', contractor: '乙方', source: '來源', updated: '更新日', address: '地點', category: '類型', status: '狀態',
-    languageButton: 'EN', ariaLanguage: 'Switch to English', totalPrefix: '約', totalSuffix: '億元', countProjects: '筆工程', showing: '目前顯示'
+    budget: '金額', start: '開工日', end: '預計完工日', owner: '甲方', contractor: '乙方', source: '來源', updated: '更新日', address: '地點', category: '類型', status: '狀態', geometry: '標示方式',
+    languageButton: 'EN', ariaLanguage: 'Switch to English', countProjects: '筆工程', showing: '目前顯示'
   },
   en: {
-    documentTitle: 'Taiwan Construction Map｜MVP',
-    skipLink: 'Skip to project info', brandEyebrow: 'Location × Progress × Owner / Contractor', brandTitle: 'Taiwan Construction Map', brandSubtitle: 'MVP',
+    documentTitle: 'Taiwan Construction Map',
+    skipLink: 'Skip to project info', brandEyebrow: 'Location × Progress × Owner / Contractor', brandTitle: 'Taiwan Construction Map', brandSubtitle: 'Active infrastructure map',
     navMap: 'Map', navSources: 'Sources', navGuide: 'Data guide',
-    heroPill: 'A working construction map MVP with points, layers, search, filters, and project cards.',
+    heroPill: 'A working construction map with points, routes, areas, layers, search, and project cards.',
     heroTitle: 'Taiwan’s upgrades, mapped in one view.',
-    heroText: 'A practical engineering radar for firms, project owners, map lovers, and young readers. Check location, owner, contractor, budget, schedule, and source without getting lost.',
-    metricProjects: 'Project points', metricCost: 'Budget total', metricSources: 'Sources',
+    heroText: 'A practical engineering radar for firms, project owners, map lovers, and young readers. Check location, work area, owner, contractor, budget, schedule, and source without getting lost.',
+    metricProjects: 'Active projects', metricCost: 'Budget total', metricSources: 'Sources',
     panelEyebrow: 'Engineering radar', panelTitle: 'Find projects, places, and progress', panelText: 'Search by project name, place, owner, or contractor. Toggle layers and status filters to focus the map.',
     searchLabel: 'Search', searchPlaceholder: 'Example: Tamkang Bridge, Kaohsiung MRT, Tainan, road works',
     typeLabel: 'Type', typeAll: 'All types', statusLabel: 'Status', statusAll: 'All status', resetMap: 'Taiwan view', toggleSources: 'Sources',
-    mapEyebrow: 'Leaflet interactive construction map', mapTitle: 'Construction points at a glance', mapNote: 'Tap a project point to view owner, contractor, budget, dates, and source. On mobile, the card slides up from the bottom.', mapLoading: 'Loading map and project data.',
+    mapEyebrow: 'Interactive construction map', mapTitle: 'Project locations and work areas at a glance', mapNote: 'Tap a project point, route, or area to view owner, contractor, budget, dates, and source. On mobile, the card slides up from the bottom.', mapLoading: 'Loading map and project data.',
     sourcesEyebrow: 'Source portals', sourcesTitle: 'Engineering data is scattered. Layered checking is the smart move.', sourcesText: 'Public works, tenders, road works, EIA, permits, energy, water, and local data live in different places.',
     guideEyebrow: 'Data guide', guideTitle: 'Good data needs clear location, source, and fields.',
     guide1Title: '1. Add the core project facts', guide1Text: 'Project name, place, owner, contractor, budget, start date, target finish, and status should be complete.',
-    guide2Title: '2. Mark location clearly', guide2Text: 'The MVP starts with points; later versions can add routes and areas.',
+    guide2Title: '2. Mark the work area clearly', guide2Text: 'Use points for facilities, routes for roads and transit, and areas for parks, campuses, and sites.',
     guide3Title: '3. Keep sources traceable', guide3Text: 'Each project includes a source name and URL for cross-checking.',
     guide4Title: '4. Mobile-first', guide4Text: 'Site staff and commuters often use phones, so the bottom project card stays easy to read.',
-    footerTitle: 'Taiwan Construction Map', footerText: 'Project data is sample MVP data. For official use, verify the latest notices from competent authorities and source portals.',
+    footerTitle: 'Taiwan Construction Map', footerText: 'The active map only keeps planned, tendering, under-construction, or completed/opened within one month. For official use, verify the latest notices from competent authorities and source portals.',
     emptyTitle: 'No matching projects', emptyText: 'Try another project name, place, owner, or contractor.',
-    cardIntroTitle: 'Tap a project point', cardIntroText: 'The project card appears on the right. On mobile, it slides up from the bottom.',
+    cardIntroTitle: 'Tap a project', cardIntroText: 'The project card appears on the right. On mobile, it slides up from the bottom.',
     close: 'Close', retry: 'Retry', mapErrorTitle: 'Map failed to load', dataErrorTitle: 'Project data failed to load', tileErrorTitle: 'Base map is unstable',
-    tileErrorText: 'The base map tiles are unstable right now. The project list still works. Try again later.',
+    tileErrorText: 'The base map is unstable right now. The project list and project cards still work. Try again later.',
     sourcePage: 'Open source portals ↗', openSource: 'Source link ↗',
-    budget: 'Budget', start: 'Start', end: 'Planned finish', owner: 'Owner', contractor: 'Contractor', source: 'Source', updated: 'Updated', address: 'Place', category: 'Type', status: 'Status',
-    languageButton: '中', ariaLanguage: 'Switch to Chinese', totalPrefix: 'NT$', totalSuffix: 'B', countProjects: 'projects', showing: 'Showing'
+    budget: 'Budget', start: 'Start', end: 'Planned finish', owner: 'Owner', contractor: 'Contractor', source: 'Source', updated: 'Updated', address: 'Place', category: 'Type', status: 'Status', geometry: 'Map mark',
+    languageButton: '中', ariaLanguage: 'Switch to Chinese', countProjects: 'projects', showing: 'Showing'
   }
 };
 
@@ -93,18 +87,8 @@ const refs = {
 };
 
 const state = {
-  lang: STORAGE.getItem(LANG_KEY) === 'en' ? 'en' : 'zh',
-  geojson: null,
-  features: [],
-  activeCategories: new Set(CATEGORIES.map(item => item.key)),
-  activeFeatureId: '',
-  map: null,
-  layer: null,
-  tileLayer: null,
-  dataLoaded: false,
-  leafletLoaded: false,
-  lastError: null,
-  tileErrorShown: false
+  lang: STORAGE.getItem(LANG_KEY) === 'en' ? 'en' : 'zh', geojson: null, features: [], activeCategories: new Set(CATEGORIES.map(item => item.key)),
+  activeFeatureId: '', map: null, layer: null, tileLayer: null, dataLoaded: false, leafletLoaded: false, lastError: null, tileErrorShown: false
 };
 
 init();
@@ -146,10 +130,7 @@ function bindEvents() {
   refs.typeFilter?.addEventListener('change', () => applyFilters({ fit: true }));
   refs.statusFilter?.addEventListener('change', () => applyFilters({ fit: true }));
   refs.resetMap?.addEventListener('click', resetFiltersAndView);
-  refs.toggleSources?.addEventListener('click', event => {
-    event.preventDefault();
-    window.open('./sources.html', '_blank', 'noopener,noreferrer');
-  });
+  refs.toggleSources?.addEventListener('click', event => { event.preventDefault(); window.open('./sources.html', '_blank', 'noopener,noreferrer'); });
   refs.languageToggle?.addEventListener('click', () => setLanguage(state.lang === 'zh' ? 'en' : 'zh'));
   document.addEventListener('click', event => {
     if (event.target.closest('[data-retry-map]')) loadMvpMap();
@@ -166,38 +147,19 @@ async function fetchGeoJson() {
 }
 
 function loadLeaflet() {
-  if (window.L?.map) {
-    state.leafletLoaded = true;
-    return Promise.resolve();
-  }
+  if (window.L?.map) { state.leafletLoaded = true; return Promise.resolve(); }
   return Promise.all([loadStyle(LEAFLET_CSS), loadScript(LEAFLET_JS)]).then(() => {
     if (!window.L?.map) throw new Error(t('mapErrorTitle'));
     state.leafletLoaded = true;
   });
 }
-
 function loadStyle(href) {
   if ([...document.styleSheets].some(sheet => sheet.href === href)) return Promise.resolve();
-  return new Promise((resolve, reject) => {
-    const link = document.createElement('link');
-    link.rel = 'stylesheet';
-    link.href = href;
-    link.onload = resolve;
-    link.onerror = () => reject(new Error(t('mapErrorTitle')));
-    document.head.append(link);
-  });
+  return new Promise((resolve, reject) => { const link = document.createElement('link'); link.rel = 'stylesheet'; link.href = href; link.onload = resolve; link.onerror = () => reject(new Error(t('mapErrorTitle'))); document.head.append(link); });
 }
-
 function loadScript(src) {
   if ([...document.scripts].some(script => script.src === src)) return Promise.resolve();
-  return new Promise((resolve, reject) => {
-    const script = document.createElement('script');
-    script.src = src;
-    script.async = true;
-    script.onload = resolve;
-    script.onerror = () => reject(new Error(t('mapErrorTitle')));
-    document.head.append(script);
-  });
+  return new Promise((resolve, reject) => { const script = document.createElement('script'); script.src = src; script.async = true; script.onload = resolve; script.onerror = () => reject(new Error(t('mapErrorTitle'))); document.head.append(script); });
 }
 
 function setupLeafletMap() {
@@ -207,26 +169,14 @@ function setupLeafletMap() {
   refs.mapFrame?.classList.add('mvp-leaflet-ready');
   if (state.map) state.map.remove();
   state.map = L.map(refs.map, { zoomControl: true, preferCanvas: true, worldCopyJump: true }).setView(TAIWAN_VIEW.center, TAIWAN_VIEW.zoom);
-  state.tileLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    maxZoom: 19,
-    attribution: '&copy; OpenStreetMap contributors'
-  }).addTo(state.map);
+  state.tileLayer = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '&copy; OpenStreetMap contributors' }).addTo(state.map);
   state.tileLayer.on('tileerror', showTileWarning);
   setTimeout(() => state.map.invalidateSize(), 80);
 }
 
 function applyFilters(options = {}) {
   if (!state.dataLoaded || !state.map) return;
-  const query = normalize(refs.search?.value || '');
-  const selectedType = refs.typeFilter?.value || 'all';
-  const selectedStatus = refs.statusFilter?.value || 'all';
-  const filtered = state.features.filter(feature => {
-    const p = feature.properties || {};
-    const categoryOk = state.activeCategories.has(p.category) && (selectedType === 'all' || p.category === selectedType);
-    const statusOk = selectedStatus === 'all' || p.status === selectedStatus;
-    const text = normalize([p.name, p.address, p.owner, p.contractor, p.category, p.status].join(' '));
-    return categoryOk && statusOk && (!query || text.includes(query));
-  });
+  const filtered = getCurrentFilteredFeatures();
   renderProjectList(filtered);
   renderMarkers(filtered, options);
   renderCurrentSummary(filtered);
@@ -238,14 +188,11 @@ function renderMarkers(features, options = {}) {
   state.layer = L.geoJSON({ type: 'FeatureCollection', features }, {
     pointToLayer(feature, latlng) {
       const props = feature.properties || {};
-      return L.circleMarker(latlng, {
-        radius: state.activeFeatureId === props.id ? 11 : 8,
-        color: '#ffffff',
-        weight: 2,
-        fillColor: categoryColor(props.category),
-        fillOpacity: 0.95,
-        className: 'mvp-project-marker'
-      });
+      return L.circleMarker(latlng, { radius: state.activeFeatureId === props.id ? 11 : 8, color: '#ffffff', weight: 2, fillColor: categoryColor(props.category), fillOpacity: 0.95, className: 'mvp-project-marker' });
+    },
+    style(feature) {
+      const color = categoryColor(feature.properties?.category);
+      return { color, weight: state.activeFeatureId === feature.properties?.id ? 6 : 4, opacity: 0.9, fillColor: color, fillOpacity: feature.geometry?.type?.includes('Polygon') ? 0.2 : 0.08 };
     },
     onEachFeature(feature, layer) {
       const props = feature.properties || {};
@@ -253,7 +200,6 @@ function renderMarkers(features, options = {}) {
       layer.on('click', () => selectFeature(props.id, { pan: true }));
     }
   }).addTo(state.map);
-
   if (features.length && options.fit) {
     const bounds = state.layer.getBounds();
     if (bounds.isValid()) state.map.fitBounds(bounds.pad(0.18), { maxZoom: 12 });
@@ -263,10 +209,7 @@ function renderMarkers(features, options = {}) {
 function renderProjectList(features) {
   if (!refs.projectList) return;
   refs.projectList.innerHTML = '';
-  if (!features.length) {
-    refs.projectList.innerHTML = `<div class="project-card empty"><h3>${escapeHtml(t('emptyTitle'))}</h3><p>${escapeHtml(t('emptyText'))}</p></div>`;
-    return;
-  }
+  if (!features.length) { refs.projectList.innerHTML = `<div class="project-card empty"><h3>${escapeHtml(t('emptyTitle'))}</h3><p>${escapeHtml(t('emptyText'))}</p></div>`; return; }
   const fragment = document.createDocumentFragment();
   features.forEach(feature => {
     const p = feature.properties || {};
@@ -274,18 +217,9 @@ function renderProjectList(features) {
     card.className = `project-card${p.id === state.activeFeatureId ? ' active' : ''}`;
     card.tabIndex = 0;
     card.dataset.projectId = p.id;
-    card.innerHTML = `
-      <div class="meta-row"><span class="badge" style="--badge-color:${escapeAttr(categoryColor(p.category))}">${escapeHtml(labelCategory(p.category))}</span><span class="badge status">${escapeHtml(labelStatus(p.status))}</span></div>
-      <h3>${escapeHtml(p.name)}</h3>
-      <p>${escapeHtml(p.address || '')}</p>
-      <div class="mini-facts"><span>${escapeHtml(t('owner'))}：${escapeHtml(shorten(p.owner, 18))}</span><span>${escapeHtml(t('contractor'))}：${escapeHtml(shorten(p.contractor, 18))}</span></div>`;
+    card.innerHTML = `<div class="meta-row"><span class="badge" style="--badge-color:${escapeAttr(categoryColor(p.category))}">${escapeHtml(labelCategory(p.category))}</span><span class="badge status">${escapeHtml(labelStatus(p.status))}</span></div><h3>${escapeHtml(p.name)}</h3><p>${escapeHtml(p.address || '')}</p><div class="mini-facts"><span>${escapeHtml(t('owner'))}：${escapeHtml(shorten(p.owner, 18))}</span><span>${escapeHtml(t('contractor'))}：${escapeHtml(shorten(p.contractor, 18))}</span></div>`;
     card.addEventListener('click', () => selectFeature(p.id, { pan: true }));
-    card.addEventListener('keydown', event => {
-      if (event.key === 'Enter' || event.key === ' ') {
-        event.preventDefault();
-        selectFeature(p.id, { pan: true });
-      }
-    });
+    card.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); selectFeature(p.id, { pan: true }); } });
     fragment.append(card);
   });
   refs.projectList.append(fragment);
@@ -300,13 +234,7 @@ function renderCategorySwitches() {
     return `<button type="button" class="mvp-layer-toggle${active ? ' active' : ''}" data-category="${escapeAttr(category.key)}" aria-pressed="${active}"><i style="--layer-color:${escapeAttr(category.color)}"></i><span>${escapeHtml(labelCategory(category.key))}</span><b>${count}</b></button>`;
   }).join('');
   refs.legend.querySelectorAll('[data-category]').forEach(button => {
-    button.addEventListener('click', () => {
-      const category = button.dataset.category;
-      if (state.activeCategories.has(category) && state.activeCategories.size > 1) state.activeCategories.delete(category);
-      else state.activeCategories.add(category);
-      renderCategorySwitches();
-      applyFilters({ fit: true });
-    });
+    button.addEventListener('click', () => { const category = button.dataset.category; if (state.activeCategories.has(category) && state.activeCategories.size > 1) state.activeCategories.delete(category); else state.activeCategories.add(category); renderCategorySwitches(); applyFilters({ fit: true }); });
   });
 }
 
@@ -321,12 +249,7 @@ function renderMetrics() {
 function renderCurrentSummary(features) {
   if (state.activeFeatureId) return;
   refs.mapStatus.classList.remove('is-open');
-  refs.mapStatus.innerHTML = `
-    <article class="map-detail-card mvp-intro-card">
-      <h3>${escapeHtml(t('cardIntroTitle'))}</h3>
-      <p>${escapeHtml(t('cardIntroText'))}</p>
-      <dl>${detailRow(t('showing'), `${features.length} ${t('countProjects')}`)}${detailRow(t('category'), activeCategorySummary())}${detailRow(t('status'), refs.statusFilter?.value === 'all' ? t('statusAll') : labelStatus(refs.statusFilter.value))}</dl>
-    </article>`;
+  refs.mapStatus.innerHTML = `<article class="map-detail-card mvp-intro-card"><h3>${escapeHtml(t('cardIntroTitle'))}</h3><p>${escapeHtml(t('cardIntroText'))}</p><dl>${detailRow(t('showing'), `${features.length} ${t('countProjects')}`)}${detailRow(t('category'), activeCategorySummary())}${detailRow(t('status'), refs.statusFilter?.value === 'all' ? t('statusAll') : labelStatus(refs.statusFilter.value))}</dl></article>`;
 }
 
 function selectFeature(id, options = {}) {
@@ -336,36 +259,18 @@ function selectFeature(id, options = {}) {
   renderProjectList(getCurrentFilteredFeatures());
   renderMarkers(getCurrentFilteredFeatures());
   renderFeatureCard(feature);
-  const [lng, lat] = feature.geometry?.coordinates || [];
-  if (options.pan && Number.isFinite(lat) && Number.isFinite(lng)) state.map.setView([lat, lng], Math.max(state.map.getZoom(), 12), { animate: true });
+  const center = featureCenter(feature);
+  if (options.pan && center) state.map.setView([center[1], center[0]], Math.max(state.map.getZoom(), 12), { animate: true });
   refs.projectList?.querySelector(`[data-project-id="${cssEscape(id)}"]`)?.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
 }
 
 function renderFeatureCard(feature) {
   const p = feature.properties || {};
   refs.mapStatus.classList.add('is-open');
-  refs.mapStatus.innerHTML = `
-    <article class="map-detail-card mvp-project-card">
-      <button type="button" class="mvp-card-close" data-close-card aria-label="${escapeAttr(t('close'))}">×</button>
-      <div class="meta-row"><span class="badge" style="--badge-color:${escapeAttr(categoryColor(p.category))}">${escapeHtml(labelCategory(p.category))}</span><span class="badge status">${escapeHtml(labelStatus(p.status))}</span></div>
-      <h3>${escapeHtml(p.name)}</h3>
-      <p>${escapeHtml(p.address || '')}</p>
-      <dl>
-        ${detailRow(t('owner'), p.owner)}
-        ${detailRow(t('contractor'), p.contractor)}
-        ${detailRow(t('budget'), formatBudget(p.budget_ntd))}
-        ${detailRow(t('start'), p.start_date)}
-        ${detailRow(t('end'), p.planned_end_date)}
-        ${detailRow(t('updated'), p.updated_at)}
-      </dl>
-      <div class="detail-actions"><a href="${safeUrl(p.source_url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(p.source_name || t('openSource'))} ↗</a></div>
-    </article>`;
+  refs.mapStatus.innerHTML = `<article class="map-detail-card mvp-project-card"><button type="button" class="mvp-card-close" data-close-card aria-label="${escapeAttr(t('close'))}">×</button><div class="meta-row"><span class="badge" style="--badge-color:${escapeAttr(categoryColor(p.category))}">${escapeHtml(labelCategory(p.category))}</span><span class="badge status">${escapeHtml(labelStatus(p.status))}</span></div><h3>${escapeHtml(p.name)}</h3><p>${escapeHtml(p.address || '')}</p><dl>${detailRow(t('owner'), p.owner)}${detailRow(t('contractor'), p.contractor)}${detailRow(t('budget'), formatBudget(p.budget_ntd))}${detailRow(t('start'), p.start_date)}${detailRow(t('end'), p.planned_end_date)}${detailRow(t('geometry'), geometryLabel(feature.geometry?.type))}${detailRow(t('updated'), p.updated_at)}</dl><div class="detail-actions"><a href="${safeUrl(p.source_url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(p.source_name || t('openSource'))} ↗</a></div></article>`;
 }
 
-function closeProjectCard() {
-  state.activeFeatureId = '';
-  applyFilters();
-}
+function closeProjectCard() { state.activeFeatureId = ''; applyFilters(); }
 
 function getCurrentFilteredFeatures() {
   const query = normalize(refs.search?.value || '');
@@ -373,11 +278,8 @@ function getCurrentFilteredFeatures() {
   const selectedStatus = refs.statusFilter?.value || 'all';
   return state.features.filter(feature => {
     const p = feature.properties || {};
-    const text = normalize([p.name, p.address, p.owner, p.contractor, p.category, p.status].join(' '));
-    return state.activeCategories.has(p.category)
-      && (selectedType === 'all' || p.category === selectedType)
-      && (selectedStatus === 'all' || p.status === selectedStatus)
-      && (!query || text.includes(query));
+    const text = normalize([p.name, p.address, p.owner, p.contractor, p.category, p.status, p.name_en, p.address_en, p.owner_en, p.contractor_en].join(' '));
+    return state.activeCategories.has(p.category) && (selectedType === 'all' || p.category === selectedType) && (selectedStatus === 'all' || p.status === selectedStatus) && (!query || text.includes(query));
   });
 }
 
@@ -397,67 +299,61 @@ function setLanguage(lang, options = {}) {
   STORAGE.setItem(LANG_KEY, state.lang);
   document.documentElement.lang = state.lang === 'zh' ? 'zh-Hant' : 'en';
   document.title = t('documentTitle');
-  document.querySelectorAll('[data-i18n]').forEach(node => {
-    const key = node.dataset.i18n;
-    if (COPY[state.lang][key]) node.textContent = COPY[state.lang][key];
-  });
+  document.querySelectorAll('[data-i18n]').forEach(node => { const key = node.dataset.i18n; if (COPY[state.lang][key]) node.textContent = COPY[state.lang][key]; });
   if (refs.search) refs.search.placeholder = t('searchPlaceholder');
-  if (refs.languageToggle) {
-    refs.languageToggle.textContent = t('languageButton');
-    refs.languageToggle.setAttribute('aria-label', t('ariaLanguage'));
-  }
-  hydrateFilters();
-  prepareSourcePanel();
-  if (!options.skipRender && state.dataLoaded) {
-    renderMetrics();
-    renderCategorySwitches();
-    applyFilters();
-  }
+  if (refs.languageToggle) { refs.languageToggle.textContent = t('languageButton'); refs.languageToggle.setAttribute('aria-label', t('ariaLanguage')); }
+  hydrateFilters(); prepareSourcePanel();
+  if (!options.skipRender && state.dataLoaded) { renderMetrics(); renderCategorySwitches(); applyFilters(); }
 }
 
 function hydrateFilters() {
-  if (refs.typeFilter) {
-    const old = refs.typeFilter.value || 'all';
-    refs.typeFilter.innerHTML = `<option value="all">${escapeHtml(t('typeAll'))}</option>` + CATEGORIES.map(category => `<option value="${escapeAttr(category.key)}">${escapeHtml(labelCategory(category.key))}</option>`).join('');
-    refs.typeFilter.value = old && [...CATEGORIES.map(c => c.key), 'all'].includes(old) ? old : 'all';
-  }
-  if (refs.statusFilter) {
-    const old = refs.statusFilter.value || 'all';
-    refs.statusFilter.innerHTML = `<option value="all">${escapeHtml(t('statusAll'))}</option>` + STATUSES.map(status => `<option value="${escapeAttr(status)}">${escapeHtml(labelStatus(status))}</option>`).join('');
-    refs.statusFilter.value = old && [...STATUSES, 'all'].includes(old) ? old : 'all';
-  }
+  if (refs.typeFilter) { const old = refs.typeFilter.value || 'all'; refs.typeFilter.innerHTML = `<option value="all">${escapeHtml(t('typeAll'))}</option>` + CATEGORIES.map(category => `<option value="${escapeAttr(category.key)}">${escapeHtml(labelCategory(category.key))}</option>`).join(''); refs.typeFilter.value = old && [...CATEGORIES.map(c => c.key), 'all'].includes(old) ? old : 'all'; }
+  if (refs.statusFilter) { const old = refs.statusFilter.value || 'all'; refs.statusFilter.innerHTML = `<option value="all">${escapeHtml(t('statusAll'))}</option>` + STATUSES.map(status => `<option value="${escapeAttr(status)}">${escapeHtml(labelStatus(status))}</option>`).join(''); refs.statusFilter.value = old && [...STATUSES, 'all'].includes(old) ? old : 'all'; }
 }
 
 function prepareSourcePanel() {
-  if (refs.sourceCards) {
-    refs.sourceCards.replaceChildren();
-    refs.sourceCards.setAttribute('aria-hidden', 'true');
-  }
+  if (refs.sourceCards) { refs.sourceCards.replaceChildren(); refs.sourceCards.setAttribute('aria-hidden', 'true'); }
   let link = document.querySelector('.source-page-link');
-  if (!link && document.querySelector('#sourcePanel')) {
-    link = document.createElement('a');
-    link.className = 'source-page-link';
-    document.querySelector('#sourcePanel .section-title')?.after(link);
-  }
-  if (link) {
-    link.href = './sources.html';
-    link.target = '_blank';
-    link.rel = 'noopener noreferrer';
-    link.textContent = t('sourcePage');
-  }
+  if (!link && document.querySelector('#sourcePanel')) { link = document.createElement('a'); link.className = 'source-page-link'; document.querySelector('#sourcePanel .section-title')?.after(link); }
+  if (link) { link.href = './sources.html'; link.target = '_blank'; link.rel = 'noopener noreferrer'; link.textContent = t('sourcePage'); }
 }
 
 function normalizeFeatures(features) {
+  const seen = new Set();
   return features.filter(feature => {
-    const coords = feature.geometry?.coordinates;
-    return feature.type === 'Feature' && feature.geometry?.type === 'Point' && Number.isFinite(coords?.[0]) && Number.isFinite(coords?.[1]);
+    const p = feature.properties || {};
+    if (!feature || feature.type !== 'Feature' || !feature.geometry || !p.id) return false;
+    if (seen.has(p.id)) return false;
+    seen.add(p.id);
+    if (!isActiveProject(p)) return false;
+    return hasUsableGeometry(feature.geometry);
   });
 }
 
-function showLoading() {
-  refs.mapStatus.innerHTML = `<article class="map-detail-card"><h3>${escapeHtml(t('mapLoading'))}</h3><p>${escapeHtml(t('cardIntroText'))}</p></article>`;
+function isActiveProject(p) {
+  if (p.active === false || p.cancelled === true) return false;
+  if (ACTIVE_STATUSES.has(p.status)) return true;
+  if (p.status === '完工') return isWithinOneMonth(p.actual_end_date || p.opened_date || p.planned_end_date);
+  return false;
 }
 
+function isWithinOneMonth(value) {
+  if (!value) return false;
+  const date = new Date(`${value}T00:00:00+08:00`);
+  if (Number.isNaN(date.getTime())) return false;
+  const limit = new Date();
+  limit.setMonth(limit.getMonth() - 1);
+  return date >= limit;
+}
+
+function hasUsableGeometry(geometry) {
+  const type = geometry.type;
+  if (type === 'Point') return Number.isFinite(geometry.coordinates?.[0]) && Number.isFinite(geometry.coordinates?.[1]);
+  if (['LineString', 'MultiLineString', 'Polygon', 'MultiPolygon'].includes(type)) return Boolean(firstCoordinate(geometry.coordinates));
+  return false;
+}
+
+function showLoading() { refs.mapStatus.innerHTML = `<article class="map-detail-card"><h3>${escapeHtml(t('mapLoading'))}</h3><p>${escapeHtml(t('cardIntroText'))}</p></article>`; }
 function showLoadError(error) {
   const message = error?.message || t('mapErrorTitle');
   refs.mapFrame?.classList.remove('mvp-leaflet-ready');
@@ -465,81 +361,36 @@ function showLoadError(error) {
   refs.mapStatus.classList.add('is-open');
   refs.mapStatus.innerHTML = `<article class="map-detail-card"><h3>${escapeHtml(message.includes('資料') ? t('dataErrorTitle') : t('mapErrorTitle'))}</h3><p>${escapeHtml(message)}</p><div class="detail-actions"><button type="button" data-retry-map>${escapeHtml(t('retry'))}</button></div></article>`;
 }
+function showTileWarning() { if (state.tileErrorShown) return; state.tileErrorShown = true; const warning = document.createElement('div'); warning.className = 'mvp-tile-warning'; warning.innerHTML = `<strong>${escapeHtml(t('tileErrorTitle'))}</strong><span>${escapeHtml(t('tileErrorText'))}</span><button type="button" data-retry-map>${escapeHtml(t('retry'))}</button>`; refs.map.append(warning); }
+function clearErrorState() { state.tileErrorShown = false; state.lastError = null; }
+function renderIntroCard() { refs.mapStatus.innerHTML = `<article class="map-detail-card"><h3>${escapeHtml(t('cardIntroTitle'))}</h3><p>${escapeHtml(t('cardIntroText'))}</p></article>`; }
+function categoryColor(category) { return CATEGORIES.find(item => item.key === category)?.color || '#2f80ed'; }
+function labelCategory(category) { const item = CATEGORIES.find(entry => entry.key === category); return state.lang === 'en' ? (item?.en || category) : category; }
+function labelStatus(status) { return state.lang === 'en' ? (STATUS_EN[status] || status) : status; }
+function activeCategorySummary() { if (state.activeCategories.size === CATEGORIES.length) return t('typeAll'); return [...state.activeCategories].map(labelCategory).join('、'); }
+function formatBudget(value) { const n = Number(value || 0); if (!n) return '—'; return state.lang === 'en' ? `NT$ ${(n / 1_000_000_000).toFixed(2)}B` : `約 ${Math.round(n / 100_000_000).toLocaleString('zh-Hant')} 億元`; }
+function detailRow(label, value) { return `<div><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value || '—')}</dd></div>`; }
+function safeUrl(value) { const text = String(value || ''); return text.startsWith('https://') || text.startsWith('http://') ? escapeAttr(text) : '#'; }
+function normalize(value) { return String(value || '').trim().toLowerCase(); }
+function shorten(value, max) { const text = String(value || '—'); return text.length > max ? `${text.slice(0, max)}…` : text; }
+function cssEscape(value) { return String(value).replaceAll('\\', '\\\\').replaceAll('"', '\\"'); }
+function t(key) { return COPY[state.lang]?.[key] ?? COPY.zh[key] ?? key; }
+function escapeHtml(value) { return String(value ?? '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#039;'); }
+function escapeAttr(value) { return escapeHtml(value).replaceAll('`', '&#096;'); }
 
-function showTileWarning() {
-  if (state.tileErrorShown) return;
-  state.tileErrorShown = true;
-  const warning = document.createElement('div');
-  warning.className = 'mvp-tile-warning';
-  warning.innerHTML = `<strong>${escapeHtml(t('tileErrorTitle'))}</strong><span>${escapeHtml(t('tileErrorText'))}</span><button type="button" data-retry-map>${escapeHtml(t('retry'))}</button>`;
-  refs.map.append(warning);
+function featureCenter(feature) {
+  if (feature.geometry?.type === 'Point') return feature.geometry.coordinates;
+  const coords = flattenCoordinates(feature.geometry?.coordinates || []);
+  if (!coords.length) return null;
+  const lng = coords.reduce((sum, item) => sum + item[0], 0) / coords.length;
+  const lat = coords.reduce((sum, item) => sum + item[1], 0) / coords.length;
+  return [lng, lat];
 }
-
-function clearErrorState() {
-  state.tileErrorShown = false;
-  state.lastError = null;
-}
-
-function renderIntroCard() {
-  refs.mapStatus.innerHTML = `<article class="map-detail-card"><h3>${escapeHtml(t('cardIntroTitle'))}</h3><p>${escapeHtml(t('cardIntroText'))}</p></article>`;
-}
-
-function categoryColor(category) {
-  return CATEGORIES.find(item => item.key === category)?.color || '#2f80ed';
-}
-
-function labelCategory(category) {
-  const item = CATEGORIES.find(entry => entry.key === category);
-  return state.lang === 'en' ? (item?.en || category) : category;
-}
-
-function labelStatus(status) {
-  return state.lang === 'en' ? (STATUS_EN[status] || status) : status;
-}
-
-function activeCategorySummary() {
-  if (state.activeCategories.size === CATEGORIES.length) return t('typeAll');
-  return [...state.activeCategories].map(labelCategory).join('、');
-}
-
-function formatBudget(value) {
-  const n = Number(value || 0);
-  if (!n) return '—';
-  return state.lang === 'en' ? `NT$ ${(n / 1_000_000_000).toFixed(2)}B` : `約 ${Math.round(n / 100_000_000).toLocaleString('zh-Hant')} 億元`;
-}
-
-function detailRow(label, value) {
-  return `<div><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value || '—')}</dd></div>`;
-}
-
-function safeUrl(value) {
-  const text = String(value || '');
-  return text.startsWith('https://') || text.startsWith('http://') ? escapeAttr(text) : '#';
-}
-
-function normalize(value) {
-  return String(value || '').trim().toLowerCase();
-}
-
-function shorten(value, max) {
-  const text = String(value || '—');
-  return text.length > max ? `${text.slice(0, max)}…` : text;
-}
-
-function cssEscape(value) {
-  return String(value).replaceAll('\\', '\\\\').replaceAll('"', '\\"');
-}
-
-function t(key) {
-  return COPY[state.lang]?.[key] ?? COPY.zh[key] ?? key;
-}
-
-function escapeHtml(value) {
-  return String(value ?? '').replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#039;');
-}
-
-function escapeAttr(value) {
-  return escapeHtml(value).replaceAll('`', '&#096;');
+function flattenCoordinates(value) { if (!Array.isArray(value)) return []; if (Number.isFinite(value[0]) && Number.isFinite(value[1])) return [value]; return value.flatMap(flattenCoordinates); }
+function firstCoordinate(value) { return flattenCoordinates(value)[0] || null; }
+function geometryLabel(type) {
+  if (state.lang === 'en') return ({ Point: 'Point', LineString: 'Route', MultiLineString: 'Routes', Polygon: 'Area', MultiPolygon: 'Areas' })[type] || 'Map mark';
+  return ({ Point: '點位', LineString: '路線', MultiLineString: '多段路線', Polygon: '範圍', MultiPolygon: '多塊範圍' })[type] || '地圖標示';
 }
 
 function injectMvpStyles() {
