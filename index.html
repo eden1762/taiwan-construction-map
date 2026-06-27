@@ -4,7 +4,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="theme-color" content="#061522" />
-  <meta name="description" content="台灣工程地圖：把公共工程、交通建設、道路管線、建築開發、環評與重大建設入口，整理成手機也好看的互動工程地圖；預設 OpenStreetMap，並提供官方電子地圖、灰階底圖、航照與地籍參考套疊切換。" />
+  <meta name="description" content="台灣工程地圖：把公共工程、交通建設、道路管線、建築開發、環評與重大建設入口，整理成手機也好看的互動工程地圖；支援工程點位、路線、範圍、搜尋、篩選與資料來源回查。" />
   <title>台灣工程地圖｜Taiwan Construction Map</title>
   <link rel="stylesheet" href="./styles.css?v=project-i18n-20260626a" />
   <link rel="stylesheet" href="./map-layers.css?v=project-i18n-20260626a" />
@@ -31,12 +31,12 @@
   <main id="top">
     <section class="hero" aria-label="首頁總覽">
       <div class="hero-copy">
-        <p class="pill" data-i18n="heroPill">預設 OpenStreetMap，並可切換官方電子圖、灰階、航照與地籍參考套疊。</p>
+        <p class="pill" data-i18n="heroPill">可互動的工程地圖：點位、路線、範圍、圖層、搜尋與工程卡片一次到位。</p>
         <h2 data-i18n="heroTitle">台灣正在升級的地方，一張圖先 get。</h2>
         <p data-i18n="heroText">給工程公司、發包甲方、地圖控與年輕使用者看的工程雷達。先看位置與施工範圍，再看甲方、乙方、開工日、預計完工與啟用日；資訊不迷路，城市進度直接開圖。</p>
       </div>
       <div class="hero-metrics" aria-label="資料統計">
-        <div><strong id="metricProjects">0</strong><span data-i18n="metricProjects">工程/資料圖層</span></div>
+        <div><strong id="metricProjects">0</strong><span data-i18n="metricProjects">現況工程</span></div>
         <div><strong id="metricCost">—</strong><span data-i18n="metricCost">工程級距總覽</span></div>
         <div><strong id="metricSources">0</strong><span data-i18n="metricSources">可查資料入口</span></div>
       </div>
@@ -79,13 +79,13 @@
       <section class="map-card" aria-label="台灣工程互動地圖">
         <div class="map-toolbar">
           <div>
-            <p class="eyebrow" data-i18n="mapEyebrow">互動底圖＋工程圖層</p>
+            <p class="eyebrow" data-i18n="mapEyebrow">互動工程地圖</p>
             <h2 data-i18n="mapTitle">台灣工程現場一眼看</h2>
           </div>
-          <p class="map-note" data-i18n="mapNote">可拖曳、縮放、查看道路地名與城市位置。手機瀏覽時先順滑看內容，需要移動地圖時再點一下啟用。</p>
+          <p class="map-note" data-i18n="mapNote">可拖曳、縮放、查看工程位置與施工範圍。手機瀏覽時先順滑看內容，需要移動地圖時再點一下啟用。</p>
         </div>
         <div class="map-frame">
-          <div id="map" role="application" aria-label="台灣工程互動地圖"><div class="map-fallback" data-i18n="mapLoading">電子地圖準備中，工程清單仍可先查。</div></div>
+          <div id="map" role="application" aria-label="台灣工程互動地圖"><div class="map-fallback" data-i18n="mapLoading">地圖與工程資料載入中；若載入失敗，可重試，工程清單仍可先查。</div></div>
           <div id="mapStatus" class="map-status" role="status">點選工程熱點，看工程基本盤。</div>
         </div>
       </section>
@@ -117,7 +117,7 @@
 
   <footer class="site-footer">
     <p data-i18n="footerTitle">台灣工程地圖｜Taiwan Construction Map</p>
-    <p data-i18n="footerText">工程位置、經費、期程與甲乙方資料，請以各主管機關、政府電子採購網、公共工程雲端服務網、建管、環評與地方圖台最新公告為準。地圖底圖與官方圖資來源，請以地圖上的即時來源註記為準。</p>
+    <p data-i18n="footerText">首頁只放計畫中、招標中、施工中，或完工啟用未滿一個月的現況資料；正式引用請回各主管機關、政府電子採購網、公共工程雲端服務網、建管、環評與地方圖台確認最新公告。</p>
   </footer>
 
   <div class="quick-dock" aria-label="快速操作">
@@ -127,7 +127,7 @@
 
   <script src="./storage-guard.js?v=storage-safe-20260626b"></script>
   <script type="module" src="./english-search-index.js?v=search-i18n-20260626a"></script>
-  <script type="module" src="./app.js?v=storage-safe-20260626c"></script>
+  <script type="module" src="./app.js?v=active-map-20260627b"></script>
   <script type="module" src="./map-layers.js?v=map-source-i18n-20260627a"></script>
   <script type="module" src="./site-footer.js?v=project-i18n-20260626a"></script>
   <script type="module" src="./copy-guard.js?v=copy-guard-perf-20260627a"></script>
