@@ -11,7 +11,7 @@ const SOURCE_CHROME_COPY = {
     navGuide: '補資料',
     footerTitle: '台灣工程地圖｜Taiwan Construction Map',
     dockAria: '快速操作',
-    langAria: '中英切換',
+    langAria: 'Switch to English',
     description: '台灣工程地圖資料入口：集中公共工程、採購決標、重大建設、道路挖掘、環評、建管、能源水利與地方開放資料平台。'
   },
   en: {
@@ -26,7 +26,7 @@ const SOURCE_CHROME_COPY = {
     navGuide: 'Data guide',
     footerTitle: 'Taiwan Construction Map',
     dockAria: 'Quick actions',
-    langAria: 'Switch language',
+    langAria: 'Switch to Chinese',
     description: 'Taiwan Construction Map source portals: public works, procurement awards, major infrastructure, road works, EIA, building permits, water, energy, and local open-data platforms in one mobile-friendly guide.'
   }
 };
