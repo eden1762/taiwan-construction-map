@@ -48,4 +48,5 @@ window.fetch=async function taiwanConstructionMapBatchFetch(input,init={}){
 };
 
 await import('./app-active.js');
+await import('./status-filter-pre-tender.js');
 await import('./app-resilience.js');
