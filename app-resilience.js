@@ -2,8 +2,8 @@ const FALLBACK_GEOJSON_URL='./data/active_construction_projects.geojson';
 const FALLBACK_DELAY_MS=1800;
 const isEnglish=()=>document.documentElement.lang?.startsWith('en');
 const text={
-  zh:{loading:'工程資料整理中。',fallbackTitle:'地圖暫時不穩，工程資料先給你看',fallbackText:'底圖或地圖元件連線不穩時，工程清單、搜尋結果與來源連結會先顯示；你仍可先查工程名、地點、甲方與乙方。',open:'來源連結 ↗',budget:'金額',owner:'甲方',contractor:'乙方',place:'地點',status:'狀態',type:'類型',updated:'更新日',empty:'目前沒有可顯示的工程資料',projects:'現況工程',sources:'資料來源',cost:'總金額估算'},
-  en:{loading:'Preparing project data.',fallbackTitle:'Map is unstable, project data is still available',fallbackText:'When the base map or map viewer is unstable, the project list, search results, and source links load first so you can still check project names, places, owners, and contractors.',open:'Source link ↗',budget:'Budget',owner:'Owner',contractor:'Contractor',place:'Place',status:'Status',type:'Type',updated:'Updated',empty:'No project data is available right now',projects:'Active projects',sources:'Sources',cost:'Budget total'}
+  zh:{loading:'工程資料整理中。',fallbackTitle:'地圖暫時不穩，工程資料先給你看',fallbackText:'底圖或地圖元件連線不穩時，工程清單、搜尋結果與來源連結會先顯示；你仍可先查工程名、地點、甲方與乙方。',fallbackSwitched:'地圖背景來源暫時切換中，工程清單與搜尋仍可正常使用。',open:'來源連結 ↗',budget:'金額',owner:'甲方',contractor:'乙方',place:'地點',status:'狀態',type:'類型',updated:'更新日',empty:'目前沒有可顯示的工程資料',projects:'現況工程',sources:'資料來源',cost:'總金額估算'},
+  en:{loading:'Preparing project data.',fallbackTitle:'Map is unstable, project data is still available',fallbackText:'When the map background or viewer is unstable, the project list, search results, and source links load first so you can still check project names, places, owners, and contractors.',fallbackSwitched:'The map background is switching to a backup source. Project list and search are still available.',open:'Source link ↗',budget:'Budget',owner:'Owner',contractor:'Contractor',place:'Place',status:'Status',type:'Type',updated:'Updated',empty:'No project data is available right now',projects:'Active projects',sources:'Sources',cost:'Budget total'}
 };
 const t=k=>text[isEnglish()?'en':'zh'][k]||k;
 const esc=v=>String(v??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'",'&#039;');
@@ -14,6 +14,10 @@ const selectors={list:'#projectList',status:'#mapStatus',mapFrame:'.map-frame'};
 
 setTimeout(initResilience,FALLBACK_DELAY_MS);
 window.addEventListener('languagechange',()=>setTimeout(initResilience,80));
+window.addEventListener('tcm:basemap-fallback',()=>{
+  renderBasemapFallbackNotice();
+  setTimeout(initResilience,80);
+});
 
 async function initResilience(){
   const list=document.querySelector(selectors.list);
@@ -90,6 +94,12 @@ function renderFallbackStatus(count){
   if(!status)return;
   status.classList.add('is-open');
   status.innerHTML=`<article class="map-detail-card"><h3>${esc(t('fallbackTitle'))}</h3><p>${esc(t('fallbackText'))}</p><dl><div><dt>${esc(t('projects'))}</dt><dd>${count}</dd></div></dl></article>`;
+}
+function renderBasemapFallbackNotice(){
+  const status=document.querySelector(selectors.status);
+  if(!status)return;
+  status.classList.add('is-open');
+  status.innerHTML=`<article class="map-detail-card"><h3>${esc(t('fallbackTitle'))}</h3><p>${esc(t('fallbackSwitched'))}</p></article>`;
 }
 function renderFallbackDetail(feature){
   const p=feature.properties||{};
