@@ -21,6 +21,43 @@ const FALLBACK_COPY = {
   }
 };
 
+const ARIA_LABELS = {
+  zh: [
+    ['.site-header', '網站導覽'],
+    ['.brand', '台灣工程地圖首頁'],
+    ['.nav-links', '主要連結'],
+    ['.hero', '首頁總覽'],
+    ['.hero-metrics', '資料統計'],
+    ['#mapArea', '台灣工程地圖區塊'],
+    ['#mainPanel', '工程篩選與清單'],
+    ['.filter-grid', '篩選條件'],
+    ['.quick-actions', '快捷操作'],
+    ['.legend', '地圖圖例'],
+    ['.map-card', '台灣工程互動地圖'],
+    ['#map', '台灣工程互動地圖'],
+    ['#sourcePanel', '資料來源說明'],
+    ['#maintainPanel', '資料更新方式'],
+    ['.quick-dock', '快速操作']
+  ],
+  en: [
+    ['.site-header', 'Site navigation'],
+    ['.brand', 'Taiwan Construction Map home'],
+    ['.nav-links', 'Primary links'],
+    ['.hero', 'Homepage overview'],
+    ['.hero-metrics', 'Data metrics'],
+    ['#mapArea', 'Taiwan construction map section'],
+    ['#mainPanel', 'Project filters and list'],
+    ['.filter-grid', 'Filter options'],
+    ['.quick-actions', 'Quick actions'],
+    ['.legend', 'Map legend'],
+    ['.map-card', 'Interactive Taiwan construction map'],
+    ['#map', 'Interactive Taiwan construction map'],
+    ['#sourcePanel', 'Data source notes'],
+    ['#maintainPanel', 'Data update guide'],
+    ['.quick-dock', 'Quick actions']
+  ]
+};
+
 let guardQueued = false;
 
 function currentLang() {
@@ -33,6 +70,12 @@ function setTextIfChanged(element, text) {
 
 function setAttrIfChanged(element, name, value) {
   if (element && element.getAttribute(name) !== value) element.setAttribute(name, value);
+}
+
+function syncAriaLabels(lang) {
+  ARIA_LABELS[lang].forEach(([selector, label]) => {
+    setAttrIfChanged(document.querySelector(selector), 'aria-label', label);
+  });
 }
 
 function guardMapAndFooterCopy() {
@@ -58,6 +101,8 @@ function guardMapAndFooterCopy() {
   if (metaDescription) {
     setAttrIfChanged(metaDescription, 'content', copy.metaDescription);
   }
+
+  syncAriaLabels(lang);
 
   if (sourceCards) {
     if (sourceCards.childElementCount) sourceCards.replaceChildren();
