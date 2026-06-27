@@ -1,8 +1,8 @@
 {
   "name": "taiwan-construction-map",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
-  "description": "台灣工程地圖 Taiwan Construction Map - static OpenStreetMap construction dashboard for Vercel.",
+  "description": "台灣工程地圖 Taiwan Construction Map - mobile-friendly construction and source portal map.",
   "scripts": {
     "dev": "python3 -m http.server 5173",
     "start": "python3 -m http.server 5173"
@@ -10,8 +10,8 @@
   "keywords": [
     "taiwan",
     "construction",
-    "openstreetmap",
-    "vercel"
+    "map",
+    "public-works"
   ],
   "author": "Taiwan Construction Map",
   "license": "MIT",
