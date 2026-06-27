@@ -47,6 +47,7 @@ window.fetch=async function taiwanConstructionMapBatchFetch(input,init={}){
   return nativeFetch(input,init);
 };
 
+await import('./basemap-fallback-copy.js');
 await import('./app-active.js');
 await import('./status-filter-pre-tender.js');
 await import('./app-resilience.js');
