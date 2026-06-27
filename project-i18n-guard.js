@@ -222,9 +222,14 @@ function scheduleEnglishProjectNames() {
 }
 
 applyEnglishProjectNames();
+
 new MutationObserver(scheduleEnglishProjectNames).observe(document.documentElement, {
-  subtree: true,
-  childList: true,
   attributes: true,
   attributeFilter: ['lang']
+});
+
+const projectContentObserver = new MutationObserver(scheduleEnglishProjectNames);
+['#projectList', '#map', '#mapStatus'].forEach(selector => {
+  const target = document.querySelector(selector);
+  if (target) projectContentObserver.observe(target, { childList: true, subtree: true });
 });
