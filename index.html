@@ -10,6 +10,9 @@
   <link rel="dns-prefetch" href="//tile.openstreetmap.org" />
   <link rel="preload" href="/data/active_construction_projects.geojson" as="fetch" type="application/geo+json" crossorigin />
   <link rel="stylesheet" href="./fast-map.css?v=20260628-national-lanes-2" />
+  <style>
+    .layerbox{margin-top:12px;border:1px solid rgba(12,35,55,.13);border-radius:18px;background:#fff;padding:12px}.layerbox p{margin:0 0 8px!important;color:#526b82!important}.layerbox p b{display:block;color:#102131}.layerbox p span{display:block;font-size:12px;line-height:1.45}.layerbox div{display:flex;flex-wrap:wrap;gap:8px}.layerbox label{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(12,35,55,.13);background:#f8fcff;border-radius:999px;padding:8px 10px;font-size:12px;font-weight:1000;cursor:pointer}.layerbox input{accent-color:#0b88aa}
+  </style>
 </head>
 <body data-page="overview">
   <a class="skip" href="#mapSec">跳到全國工程概況</a>
@@ -55,6 +58,16 @@
           <label><span data-t="cityFilter">縣市</span><select id="cityFilter"></select></label>
           <label><span data-t="status">辦理狀態</span><select id="status"></select></label>
         </div>
+        <section id="layerToggles" class="layerbox" aria-label="圖層開關">
+          <p><b>圖層開關</b><span>先開啟最常查的五類工程；需要更多類型時再手動打開。</span></p>
+          <div>
+            <label><input type="checkbox" checked>公共工程</label>
+            <label><input type="checkbox" checked>道路</label>
+            <label><input type="checkbox" checked>管線</label>
+            <label><input type="checkbox" checked>捷運</label>
+            <label><input type="checkbox" checked>建築</label>
+          </div>
+        </section>
         <button id="reset" class="reset" data-t="reset">回到全台總覽</button>
         <div id="cityCards" class="citycards"></div>
       </aside>
@@ -80,6 +93,6 @@
   </main>
   <footer class="foot"><span data-t="footer">資料以公開入口可回查內容整理；正式引用請回主管機關、發包單位與公告來源確認最新版本。地圖底圖 © OpenStreetMap contributors。</span></footer>
   <div class="dock" aria-label="快速操作"><a href="https://www.instagram.com/taiwan.construction/" target="_blank" rel="noopener noreferrer">IG</a><button id="lang" type="button">EN</button></div>
-  <script type="module" src="./fast-map.js?v=20260628-osm-retry-1"></script>
+  <script type="module" src="./fast-map.js?v=20260629-layer-firstscreen-1"></script>
 </body>
 </html>
