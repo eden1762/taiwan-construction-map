@@ -61,13 +61,20 @@
           <label><span data-t="status">辦理狀態</span><select id="status"></select></label>
         </div>
         <section id="layerToggles" class="layerbox" aria-label="圖層開關">
-          <p><b>圖層開關 / Layer switches</b><span>先開啟最常查的五類工程；需要更多類型時再手動打開。The most useful layers are on first; add more only when needed.</span></p>
+          <p><b>圖層開關 / Layer switches</b><span>資料或地圖背景尚未完成時，先保留完整分類入口；正式載入後可逐層開關。All sector switches stay visible first, then become live filters when the map is ready.</span></p>
           <div>
             <label><input type="checkbox" checked>公共工程 / Public Works</label>
             <label><input type="checkbox" checked>道路 / Roads</label>
             <label><input type="checkbox" checked>管線 / Utilities</label>
             <label><input type="checkbox" checked>捷運 / Metro</label>
+            <label><input type="checkbox">鐵路 / Rail</label>
             <label><input type="checkbox" checked>建築 / Buildings</label>
+            <label><input type="checkbox">園區 / Parks</label>
+            <label><input type="checkbox">規劃 / Planning</label>
+            <label><input type="checkbox">環評 / Environmental Review</label>
+            <label><input type="checkbox">無人載具 / Uncrewed Systems</label>
+            <label><input type="checkbox">AI / AI</label>
+            <label><input type="checkbox">其他 / Other</label>
           </div>
         </section>
         <section class="legendGuide" aria-label="圖例與狀態說明">
@@ -78,10 +85,15 @@
             <span><i style="--c:#ffb84d"></i>道路 / Roads</span>
             <span><i style="--c:#2dd4bf"></i>管線 / Utilities</span>
             <span><i style="--c:#9b7cff"></i>捷運 / Metro</span>
+            <span><i style="--c:#76a7ff"></i>鐵路 / Rail</span>
             <span><i style="--c:#30d68a"></i>建築 / Buildings</span>
+            <span><i style="--c:#42c7a8"></i>園區 / Parks</span>
+            <span><i style="--c:#ffcf66"></i>規劃 / Planning</span>
+            <span><i style="--c:#ff6fae"></i>環評 / Environmental Review</span>
           </div>
           <div class="statusDots" style="margin-top:8px">
             <span><i></i>規劃中 / Planning</span>
+            <span><i></i>招標準備 / Tender Prep</span>
             <span><i></i>招標中 / Tendering</span>
             <span><i></i>施工中 / Under Construction</span>
             <span><i></i>完工 / Completed</span>
@@ -117,11 +129,12 @@
         <article class="proj" style="--c:#35d4ff"><i>公共工程 / Public Works</i><h3>公共工程入口</h3><p>資料讀取中也能先進入分類頁，查看公部門建設、水利、港灣、社宅與市政工程。</p><a href="./category.html?sector=public-works">打開分類地圖</a></article>
         <article class="proj" style="--c:#ffb84d"><i>道路與管線 / Roads & Utilities</i><h3>道路、橋梁、管線入口</h3><p>適合快速查找道路改善、橋梁、公路、排水、污水與地下管線相關工程。</p><a href="./category.html?sector=roads">打開道路工程</a></article>
         <article class="proj" style="--c:#9b7cff"><i>捷運交通 / Metro & Mobility</i><h3>捷運、鐵路、交通入口</h3><p>先看軌道、車站、交通節點與路廊計畫；正式工程資料完成後會自動替換成現況清單。</p><a href="./category.html?sector=metro">打開捷運工程</a></article>
+        <article class="proj" style="--c:#ffcf66"><i>規劃與環評 / Planning & Review</i><h3>規劃、環評入口</h3><p>適合追蹤可行性、路廊、環境審查與前期公告，先看案子會不會往下走。</p><a href="./category.html?sector=planning">打開規劃工程</a></article>
       </div>
     </section>
   </main>
   <footer class="foot"><span data-t="footer">資料以公開入口可回查內容整理；正式引用請回主管機關、發包單位與公告來源確認最新版本。地圖底圖 © OpenStreetMap contributors。</span></footer>
   <div class="dock" aria-label="快速操作"><a href="https://www.instagram.com/taiwan.construction/" target="_blank" rel="noopener noreferrer">IG</a><button id="lang" type="button">EN</button></div>
-  <script type="module" src="./fast-map.js?v=20260629-instant-fallback-1"></script>
+  <script type="module" src="./fast-map.js?v=20260629-fallback-layers-1"></script>
 </body>
 </html>
