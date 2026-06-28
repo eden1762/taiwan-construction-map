@@ -3,26 +3,20 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#061522" />
-  <meta name="description" content="台灣工程地圖資料入口：集中公共工程、採購決標、重大建設、道路挖掘、環評、建管、能源水利與地方開放資料平台。" />
+  <meta name="theme-color" content="#071827" />
+  <meta name="description" content="台灣工程地圖資料入口：集中公共工程、採購決標、重大建設、道路挖掘、環評、建管、能源水利、園區、無人載具、AI 與地方開放資料平台。" />
   <title>資料入口｜台灣工程地圖</title>
-  <link rel="stylesheet" href="./styles.css?v=stable-mobile-source-page-20260626" />
-  <link rel="stylesheet" href="./mobile-fixes.css?v=stable-mobile-source-page-20260626" />
+  <link rel="stylesheet" href="./fast-map.css?v=20260628-national-lanes" />
+  <link rel="stylesheet" href="./styles.css?v=source-page-20260628-national-lanes" />
 </head>
-<body>
-  <header class="site-header" aria-label="網站導覽">
+<body data-page="sources">
+  <a class="skip" href="#sourceCards">跳到資料入口</a>
+  <header class="top" aria-label="網站導覽">
     <a class="brand" href="./index.html" aria-label="回到台灣工程地圖首頁">
-      <div class="brand-mark" aria-hidden="true">工</div>
-      <div>
-        <p class="eyebrow">工程位置 × 資料入口 × 查證路線</p>
-        <h1><span>資料入口</span> <span>Taiwan Construction Map</span></h1>
-      </div>
+      <span class="mark">工</span>
+      <span><b id="sourceBrand">台灣工程地圖</b><small id="sourceLine">全國工程概況 × 分類地圖 × 資料入口</small></span>
     </a>
-    <nav class="nav-links" aria-label="主要連結">
-      <a href="./index.html#mapArea">工程地圖</a>
-      <a href="./sources.html" aria-current="page">資料入口</a>
-      <a href="./index.html#maintainPanel">補資料</a>
-    </nav>
+    <nav id="mainNav" class="nav" aria-label="主要目錄"></nav>
   </header>
 
   <main class="sources-page">
@@ -30,15 +24,15 @@
       <div>
         <p class="eyebrow" id="sourcesEyebrow">資料入口</p>
         <h2 id="sourcesTitle">查工程，先找對入口。</h2>
-        <p id="sourcesIntro">公共工程、標案決標、重大建設、道路挖掘、環評、建管、能源水利與地方資料都放在這裡。工程公司、發包甲方、地圖控要查案，直接從這頁開圖。</p>
+        <p id="sourcesIntro">公共工程、標案決標、重大建設、道路挖掘、環評、建管、能源水利、園區、無人載具、AI 與地方資料都放在這裡。工程公司、發包甲方、地圖控要查案，直接從這頁開圖。</p>
       </div>
-      <a class="sources-back-link" href="./index.html#mapArea" id="backToMap">回工程地圖</a>
+      <a class="sources-back-link" href="./index.html" id="backToMap">回全國工程概況</a>
     </section>
 
     <section class="sources-toolbox" aria-label="資料入口搜尋">
       <label class="search-box" for="sourceSearch">
         <span id="sourceSearchLabel">搜尋資料入口</span>
-        <input id="sourceSearch" type="search" placeholder="例：決標、道路挖掘、環評、建照、捷運" autocomplete="off" />
+        <input id="sourceSearch" type="search" placeholder="例：決標、道路挖掘、環評、建照、捷運、無人機、AI" autocomplete="off" />
       </label>
       <p class="sources-count" id="sourceCount">資料入口整理中</p>
     </section>
@@ -46,17 +40,13 @@
     <section id="sourceCards" class="source-grid" aria-live="polite"></section>
   </main>
 
-  <footer class="site-footer">
-    <p>台灣工程地圖｜Taiwan Construction Map</p>
-    <p id="sourcesFooter">資料請以各主管機關、政府電子採購網、公共工程雲端服務網、建管、環評與地方圖台最新公告為準。</p>
-  </footer>
+  <footer class="foot"><span id="sourcesFooter">資料請以各主管機關、採購、公共工程、建管、環評與地方圖台最新公告為準。</span></footer>
 
-  <div class="quick-dock" aria-label="快速操作">
-    <a class="dock-button dock-ig" href="https://www.instagram.com/taiwan.construction/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">IG</a>
-    <button id="sourceLanguageToggle" class="dock-button dock-lang" type="button" aria-label="中英切換">EN</button>
+  <div class="dock" aria-label="快速操作">
+    <a href="https://www.instagram.com/taiwan.construction/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">IG</a>
+    <button id="sourceLanguageToggle" type="button" aria-label="中英切換">EN</button>
   </div>
 
-  <script type="module" src="./sources.js?v=source-i18n-storage-20260626a"></script>
-  <script type="module" src="./source-page-chrome-i18n.js?v=source-chrome-i18n-20260627a"></script>
+  <script type="module" src="./sources.js?v=source-national-lanes-20260628"></script>
 </body>
 </html>
