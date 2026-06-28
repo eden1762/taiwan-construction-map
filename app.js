@@ -257,7 +257,7 @@ function bindEvents() {
     if (pin) selectFeature(pin.dataset.mapPin);
     const pageButton = event.target.closest('[data-page-action]');
     if (pageButton) changePage(pageButton.dataset.pageAction);
-    if (event.target.closest('[data-refresh-map]')) window.location.reload();
+    if (event.target.closest('[data-refresh-map="true"]')) window.location.reload();
   });
   document.addEventListener('keydown', event => {
     if ((event.key === 'Enter' || event.key === ' ') && event.target.matches('[data-project-id], [data-map-pin]')) {
@@ -532,7 +532,7 @@ function renderFeatureCard(feature) {
   const props = feature.properties || {};
   refs.mapStatus.classList.add('is-open');
   refs.mapStatus.innerHTML = `<article class="map-detail-card tcm-project-detail">
-    <button class="tcm-card-close" type="button" aria-label="${escapeAttr(t('allTaiwan'))}" data-refresh-map="false">×</button>
+    <button class="tcm-card-close" type="button" aria-label="${escapeAttr(t('allTaiwan'))}" data-close-card>×</button>
     <div class="meta-row">
       <span class="badge" style="--badge-color:${escapeAttr(categoryColor(props.category))}">${escapeHtml(labelCategory(props.category))}</span>
       <span class="badge status">${escapeHtml(labelStatus(props.status))}</span>
