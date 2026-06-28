@@ -113,11 +113,15 @@
         <p class="eyebrow" data-t="list">工程清單</p>
         <h2 data-t="listTitle">點位、甲方、乙方、期程與來源。</h2>
       </div>
-      <div id="list" class="cards"></div>
+      <div id="list" class="cards" aria-live="polite">
+        <article class="proj" style="--c:#35d4ff"><i>公共工程 / Public Works</i><h3>公共工程入口</h3><p>資料讀取中也能先進入分類頁，查看公部門建設、水利、港灣、社宅與市政工程。</p><a href="./category.html?sector=public-works">打開分類地圖</a></article>
+        <article class="proj" style="--c:#ffb84d"><i>道路與管線 / Roads & Utilities</i><h3>道路、橋梁、管線入口</h3><p>適合快速查找道路改善、橋梁、公路、排水、污水與地下管線相關工程。</p><a href="./category.html?sector=roads">打開道路工程</a></article>
+        <article class="proj" style="--c:#9b7cff"><i>捷運交通 / Metro & Mobility</i><h3>捷運、鐵路、交通入口</h3><p>先看軌道、車站、交通節點與路廊計畫；正式工程資料完成後會自動替換成現況清單。</p><a href="./category.html?sector=metro">打開捷運工程</a></article>
+      </div>
     </section>
   </main>
   <footer class="foot"><span data-t="footer">資料以公開入口可回查內容整理；正式引用請回主管機關、發包單位與公告來源確認最新版本。地圖底圖 © OpenStreetMap contributors。</span></footer>
   <div class="dock" aria-label="快速操作"><a href="https://www.instagram.com/taiwan.construction/" target="_blank" rel="noopener noreferrer">IG</a><button id="lang" type="button">EN</button></div>
-  <script type="module" src="./fast-map.js?v=20260629-active-rules-1"></script>
+  <script type="module" src="./fast-map.js?v=20260629-instant-fallback-1"></script>
 </body>
 </html>
