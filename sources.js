@@ -1,6 +1,7 @@
 import { DATA_SOURCES } from './data/projects.js';
 
-const LANG_KEY = 'taiwan-construction-map-language';
+const LANG_KEY = 'tcmap.lang';
+const OLD_LANG_KEY = 'taiwan-construction-map-language';
 const searchInput = document.getElementById('sourceSearch');
 const sourceCount = document.getElementById('sourceCount');
 const sourceCards = document.getElementById('sourceCards');
@@ -11,15 +12,41 @@ const intro = document.getElementById('sourcesIntro');
 const label = document.getElementById('sourceSearchLabel');
 const back = document.getElementById('backToMap');
 const footer = document.getElementById('sourcesFooter');
+const brand = document.getElementById('sourceBrand');
+const line = document.getElementById('sourceLine');
+const nav = document.getElementById('mainNav');
+
+const SECTORS = [
+  ['public-works', '公共工程', 'Public Works'],
+  ['roads', '道路', 'Roads'],
+  ['utilities', '管線', 'Utilities'],
+  ['metro', '捷運', 'Metro'],
+  ['rail', '鐵路', 'Rail'],
+  ['buildings', '建築', 'Buildings'],
+  ['parks', '園區', 'Parks'],
+  ['planning', '規劃', 'Planning'],
+  ['eia', '環評', 'Environmental Review'],
+  ['uncrewed', '無人載具', 'Uncrewed Systems'],
+  ['ai', 'AI', 'AI'],
+  ['other', '其他', 'Other']
+];
+
+const MENU = [
+  { type: 'home', zh: '全國工程概況', en: 'National Overview', href: './index.html' },
+  ...SECTORS.map(([key, zh, en]) => ({ type: 'sector', zh, en, href: `./category.html?sector=${encodeURIComponent(key)}` })),
+  { type: 'sources', zh: '資料入口', en: 'Data Sources', href: './sources.html' }
+];
 
 const zh = {
   pageTitle: '資料入口｜台灣工程地圖',
+  brand: '台灣工程地圖',
+  line: '全國工程概況 × 分類地圖 × 資料入口',
   eyebrow: '資料入口',
   title: '查工程，先找對入口。',
-  intro: '公共工程、標案決標、重大建設、道路挖掘、環評、建管、能源水利與地方資料都放在這裡。工程公司、發包甲方、地圖控要查案，直接從這頁開圖。',
+  intro: '公共工程、標案決標、重大建設、道路挖掘、環評、建管、能源水利、園區、無人載具、AI 與地方資料都放在這裡。工程公司、發包甲方、地圖控要查案，直接從這頁開圖。',
   label: '搜尋資料入口',
-  placeholder: '例：決標、道路挖掘、環評、建照、捷運',
-  back: '回工程地圖',
+  placeholder: '例：決標、道路挖掘、環評、建照、捷運、無人機、AI',
+  back: '回全國工程概況',
   fit: '適合查：',
   open: '前往資料入口',
   empty: '沒有符合的資料入口，換個關鍵字再試試。',
@@ -29,13 +56,15 @@ const zh = {
 };
 
 const en = {
-  pageTitle: 'Source Portals｜Taiwan Construction Map',
-  eyebrow: 'Source portals',
+  pageTitle: 'Data Sources｜Taiwan Construction Map',
+  brand: 'Taiwan Construction Map',
+  line: 'National overview × sector maps × source portals',
+  eyebrow: 'Data Sources',
   title: 'Find the right source before checking a project.',
-  intro: 'Public works, tender awards, major infrastructure, road works, EIA, permits, water, energy, and local open data are gathered here for engineering teams, project owners, map lovers, and curious readers.',
+  intro: 'Public works, tenders, awards, major infrastructure, road works, EIA, permits, water, energy, parks, uncrewed systems, AI, and local open data are gathered here for engineering teams, project owners, map lovers, and curious readers.',
   label: 'Search source portals',
-  placeholder: 'Example: tender, road works, EIA, permit, MRT',
-  back: 'Back to map',
+  placeholder: 'Example: tender, road works, EIA, permit, MRT, drones, AI',
+  back: 'Back to national overview',
   fit: 'Best for: ',
   open: 'Open source portal',
   empty: 'No matching source portal. Try another keyword.',
@@ -105,11 +134,21 @@ function c(key) {
   return pack[key] || zh[key] || key;
 }
 
+function renderMenu() {
+  if (!nav) return;
+  nav.innerHTML = MENU.map(item => {
+    const active = item.type === 'sources';
+    return `<a href="${item.href}" ${active ? 'aria-current="page"' : ''}>${currentLang === 'en' ? item.en : item.zh}</a>`;
+  }).join('');
+}
+
 function setLanguage(lang) {
   currentLang = lang === 'en' ? 'en' : 'zh';
   safeSetLang(currentLang);
   document.documentElement.lang = currentLang === 'zh' ? 'zh-Hant' : 'en';
   document.title = c('pageTitle');
+  brand.textContent = c('brand');
+  line.textContent = c('line');
   eyebrow.textContent = c('eyebrow');
   title.textContent = c('title');
   intro.textContent = c('intro');
@@ -119,6 +158,7 @@ function setLanguage(lang) {
   searchInput.placeholder = c('placeholder');
   langButton.textContent = c('button');
   langButton.setAttribute('aria-label', c('aria'));
+  renderMenu();
   render();
 }
 
@@ -151,9 +191,11 @@ function createCard(item) {
 
   const top = document.createElement('div');
   top.className = 'source-topline';
+
   const badge = document.createElement('span');
   badge.className = 'badge';
   badge.textContent = currentLang === 'en' ? englishCategory(item.category) : item.category;
+
   const kind = document.createElement('span');
   kind.textContent = currentLang === 'en' ? englishKind(item.kind) : item.kind;
   top.append(badge, kind);
@@ -167,7 +209,9 @@ function createCard(item) {
   fit.append(strong, document.createTextNode(currentLang === 'en' ? englishFit(item.fitFor) : item.fitFor));
 
   const note = document.createElement('p');
-  note.textContent = currentLang === 'en' ? 'Use this portal to cross-check official records, maps, budgets, tenders, schedules, or project pages.' : item.note;
+  note.textContent = currentLang === 'en'
+    ? 'Use this portal to cross-check official records, maps, budgets, tenders, schedules, or project pages.'
+    : item.note;
 
   const link = document.createElement('a');
   link.href = item.url;
@@ -215,6 +259,8 @@ function englishFit(text) {
   if (text.includes('水利') || text.includes('防洪')) result.push('water resources and flood control');
   if (text.includes('能源') || text.includes('電力')) result.push('energy infrastructure');
   if (text.includes('港灣') || text.includes('碼頭')) result.push('port and marine works');
+  if (text.includes('無人') || text.includes('UAV')) result.push('uncrewed systems');
+  if (text.includes('AI') || text.includes('人工智慧')) result.push('AI infrastructure');
   return result.length ? [...new Set(result)].join(', ') : 'official project checks';
 }
 
@@ -224,8 +270,9 @@ function englishSourceName(name) {
 
 function safeGetLang() {
   try {
-    return localStorage.getItem(LANG_KEY) === 'en' ? 'en' : 'zh';
-  } catch (error) {
+    const v = localStorage.getItem(LANG_KEY) || localStorage.getItem(OLD_LANG_KEY);
+    return v === 'en' ? 'en' : 'zh';
+  } catch {
     return 'zh';
   }
 }
@@ -233,7 +280,8 @@ function safeGetLang() {
 function safeSetLang(lang) {
   try {
     localStorage.setItem(LANG_KEY, lang);
-  } catch (error) {
+    localStorage.setItem(OLD_LANG_KEY, lang);
+  } catch {
     return false;
   }
   return true;
