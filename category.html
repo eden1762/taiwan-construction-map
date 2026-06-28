@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#071827" />
+  <meta name="description" content="台灣工程地圖分類頁：各工程分類的縣市查詢與互動地圖。" />
+  <title>工程分類｜台灣工程地圖 Taiwan Construction Map</title>
+  <link rel="preconnect" href="https://tile.openstreetmap.org" crossorigin />
+  <link rel="dns-prefetch" href="//tile.openstreetmap.org" />
+  <link rel="preload" href="/data/active_construction_projects.geojson" as="fetch" type="application/geo+json" crossorigin />
+  <link rel="stylesheet" href="./fast-map.css?v=20260628-national-lanes" />
+</head>
+<body data-page="category">
+  <a class="skip" href="#mapSec">跳到分類工程地圖</a>
+  <header class="top" aria-label="網站導覽">
+    <a class="brand" href="./index.html" aria-label="台灣工程地圖首頁"><span class="mark">工</span><span><b data-t="brand">台灣工程地圖</b><small data-t="line">全國工程概況 × 分類地圖 × 資料入口</small></span></a>
+    <nav id="mainNav" class="nav" aria-label="主要目錄"></nav>
+  </header>
+  <main>
+    <section class="hero"><div><p class="pill" id="sectorPill">分類工程地圖</p><h1 id="sectorTitle">分類工程地圖</h1><p id="sectorLead">用縣市查詢工程點位、甲方、乙方、金額、期程與來源。手機上也能快速看案場分布。</p><div class="actions"><a class="btn" href="#mapSec" data-t="openSector">打開分類地圖</a><a class="btn alt" href="./index.html" data-t="overview">全國工程概況</a></div></div><div class="metrics" aria-label="分類工程統計"><article><b id="m1">0</b><span data-t="projects">搜集工程</span></article><article><b id="m2">0</b><span data-t="counties">有資料縣市</span></article><article><b id="m3">1</b><span data-t="sectorSingle">目前分類</span></article></div></section>
+    <section id="mapSec" class="layout"><aside class="side"><p class="eyebrow" id="sectorEyebrow">分類查詢</p><h2 id="sectorSideTitle">分縣市看工程點位</h2><p id="sectorSideText">選擇縣市或搜尋工程名稱、甲方、乙方，地圖會同步聚焦。</p><label class="search"><span data-t="search">搜尋</span><input id="q" type="search" placeholder="例：臺北、甲方、工程名"></label><div class="filters one"><label><span data-t="cityFilter">縣市</span><select id="cityFilter"></select></label></div><button id="reset" class="reset" data-t="resetSector">回到分類全覽</button><div id="cityCards" class="citycards"></div></aside><section class="mapcard"><div class="mapbar"><div><p class="eyebrow" data-t="osm">OpenStreetMap 電子地圖</p><h2 id="sectorMapTitle">分類工程地圖</h2></div><p id="health" data-t="boot">工程清單已可用，地圖背景載入中。</p></div><div id="map" class="map" aria-label="分類工程地圖"></div><div id="detail" class="detail"></div></section></section>
+    <section class="block"><div class="title"><p class="eyebrow" data-t="list">工程清單</p><h2 data-t="listTitle">點位、甲方、乙方、期程與來源。</h2></div><div id="list" class="cards"></div></section>
+  </main>
+  <footer class="foot"><span data-t="footer">資料以公開入口可回查內容整理；正式引用請回主管機關、發包單位與公告來源確認最新版本。地圖底圖 © OpenStreetMap contributors。</span></footer>
+  <div class="dock" aria-label="快速操作"><a href="https://www.instagram.com/taiwan.construction/" target="_blank" rel="noopener noreferrer">IG</a><button id="lang" type="button">EN</button></div>
+  <script type="module" src="./fast-map.js?v=20260628-national-lanes"></script>
+</body>
+</html>
