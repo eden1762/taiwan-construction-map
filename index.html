@@ -3,137 +3,24 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#061522" />
-  <meta name="description" content="台灣工程地圖：把公共工程、交通建設、道路管線、建築開發、環評與重大建設入口，整理成手機也好看的互動工程地圖；支援工程點位、路線、範圍、搜尋、篩選與資料來源回查。" />
+  <meta name="theme-color" content="#071827" />
+  <meta name="description" content="台灣工程地圖：把公共工程、道路、管線、捷運、交通、建築、園區、規劃、環評、無人載具、AI 與其他工程整理成手機好讀的工程地圖與縣市統計。" />
   <title>台灣工程地圖｜Taiwan Construction Map</title>
-  <link rel="preconnect" href="https://unpkg.com" crossorigin />
   <link rel="preconnect" href="https://tile.openstreetmap.org" crossorigin />
-  <link rel="preload" href="./data/active_construction_projects.geojson" as="fetch" type="application/geo+json" crossorigin />
-  <link rel="prefetch" href="./data/active_dataset_manifest.json" as="fetch" crossorigin />
-  <link rel="modulepreload" href="./app.js?v=live-map-20260628c" />
-  <link rel="stylesheet" href="./styles.css?v=live-map-20260628c" />
-  <link rel="stylesheet" href="./mobile-fixes.css?v=live-map-20260628c" />
+  <link rel="dns-prefetch" href="https://tile.openstreetmap.org" />
+  <link rel="preload" href="/data/active_construction_projects.geojson" as="fetch" type="application/geo+json" crossorigin />
+  <link rel="stylesheet" href="./fast-map.css?v=20260628h" />
 </head>
-<body>
-  <a class="skip-link" href="#mainPanel" data-i18n="skipLink">跳到工程資訊</a>
-
-  <header class="site-header" aria-label="網站導覽">
-    <a class="brand" href="#top" aria-label="台灣工程地圖首頁">
-      <div class="brand-mark" aria-hidden="true">工</div>
-      <div>
-        <p class="eyebrow" data-i18n="brandEyebrow">工程位置 × 工程進度 × 甲乙方</p>
-        <h1><span data-i18n="brandTitle">台灣工程地圖</span> <span data-i18n="brandSubtitle">Taiwan Construction Map</span></h1>
-      </div>
-    </a>
-    <nav class="nav-links" aria-label="主要連結">
-      <a href="#mapArea" data-i18n="navMap">工程地圖</a>
-      <a href="./sources.html" target="_blank" rel="noopener noreferrer" data-i18n="navSources">資料入口</a>
-      <a href="#maintainPanel" data-i18n="navGuide">補資料</a>
-    </nav>
-  </header>
-
-  <main id="top">
-    <section class="hero" aria-label="首頁總覽">
-      <div class="hero-copy">
-        <p class="pill" data-i18n="heroPill">工程位置、施工範圍、甲方乙方、期程與來源，一張圖先看懂。</p>
-        <h2 data-i18n="heroTitle">台灣正在升級的地方，一張圖先 get。</h2>
-        <p data-i18n="heroText">給工程公司、發包甲方、地理地圖愛好者與年輕使用者看的工程雷達。先看位置與施工範圍，再看甲方、乙方、金額、期程與來源；查工程不用迷路。</p>
-      </div>
-      <div class="hero-metrics" aria-label="資料統計">
-        <div><strong id="metricProjects">20+</strong><span data-i18n="metricProjects">現況工程</span></div>
-        <div><strong id="metricCost">9,000億+</strong><span data-i18n="metricCost">總工程金額估算</span></div>
-        <div><strong id="metricSources">12+</strong><span data-i18n="metricSources">資料來源入口</span></div>
-      </div>
-    </section>
-
-    <section id="mapArea" class="map-shell" aria-label="台灣工程地圖區塊">
-      <aside id="mainPanel" class="control-panel" aria-label="工程篩選與清單">
-        <div class="panel-heading">
-          <p class="eyebrow" data-i18n="panelEyebrow">工程雷達</p>
-          <h2 data-i18n="panelTitle">找工程、看位置、追進度</h2>
-          <p data-i18n="panelText">搜尋工程名、地點、發包方或施工方；也可以用類型、狀態與分頁縮小範圍。工程控、地圖控、估案人員都能快速開圖。</p>
-        </div>
-
-        <label class="search-box" for="searchInput">
-          <span data-i18n="searchLabel">搜尋</span>
-          <input id="searchInput" type="search" placeholder="例：淡江大橋、高雄捷運、臺南、道路挖掘、科學園區" autocomplete="off" />
-        </label>
-
-        <div class="filter-grid" aria-label="篩選條件">
-          <label><span data-i18n="typeLabel">工程類型</span><select id="typeFilter"><option value="all" data-i18n="typeAll">全部類型</option></select></label>
-          <label><span data-i18n="statusLabel">辦理狀態</span><select id="statusFilter"><option value="all" data-i18n="statusAll">全部狀態</option></select></label>
-        </div>
-
-        <div class="quick-actions" aria-label="快捷操作">
-          <button id="resetMap" type="button" data-i18n="resetMap">回到全台</button>
-          <button id="toggleSources" type="button" data-i18n="toggleSources">資料入口</button>
-        </div>
-
-        <div class="legend" aria-label="地圖圖例">
-          <span><i class="dot dot-blue"></i><span data-i18n="legendPublic">公共工程</span></span>
-          <span><i class="dot dot-orange"></i><span data-i18n="legendTransit">捷運/交通</span></span>
-          <span><i class="dot dot-green"></i><span data-i18n="legendRoad">道路/管線</span></span>
-          <span><i class="dot dot-purple"></i><span data-i18n="legendPlanning">規劃/環評</span></span>
-          <span><i class="dot dot-cyan"></i><span data-i18n="legendBuilding">建築/園區</span></span>
-        </div>
-
-        <div id="projectList" class="project-list" aria-live="polite"></div>
-      </aside>
-
-      <section class="map-card" aria-label="台灣工程互動地圖">
-        <div class="map-toolbar">
-          <div>
-            <p class="eyebrow" data-i18n="mapEyebrow">互動工程地圖</p>
-            <h2 data-i18n="mapTitle">電子地圖上的工程點位、路線與範圍</h2>
-          </div>
-          <p class="map-note" data-i18n="mapNote">可拖曳、縮放、點選工程熱點，查看甲方、乙方、金額、期程與來源。清單採分頁顯示，手機載入更快。</p>
-        </div>
-        <div class="map-frame">
-          <div id="map" role="application" aria-label="台灣工程互動地圖"><div class="map-fallback" data-i18n="mapLoading">電子地圖與工程資料載入中，先幫你整理清單與位置。</div></div>
-          <div id="mapStatus" class="map-status" role="status"></div>
-        </div>
-      </section>
-    </section>
-
-    <section id="sourcePanel" class="info-section source-panel-compact" aria-label="資料來源說明">
-      <div class="section-title">
-        <p class="eyebrow" data-i18n="sourcesEyebrow">資料入口</p>
-        <h2 data-i18n="sourcesTitle">工程資料很分散，要分層查才準。</h2>
-        <p data-i18n="sourcesText">公共工程、採購決標、重大建設、道路挖掘、環評、建管、能源水利與地方資料各有入口。完整清單已整理到獨立頁面，手機不用一路滑到天荒地老。</p>
-      </div>
-      <a class="source-page-link" href="./sources.html" target="_blank" rel="noopener noreferrer">開啟資料入口新頁 ↗</a>
-      <div id="sourceCards" class="source-grid home-source-grid" aria-hidden="true"></div>
-    </section>
-
-    <section id="maintainPanel" class="maintain-section" aria-label="資料更新方式">
-      <div class="section-title">
-        <p class="eyebrow" data-i18n="guideEyebrow">補資料指南</p>
-        <h2 data-i18n="guideTitle">資料要好用，關鍵是位置、來源與欄位一致。</h2>
-      </div>
-      <div class="maintain-grid">
-        <article><h3 data-i18n="guide1Title">1. 補上工程基本盤</h3><p data-i18n="guide1Text">工程名、地點、甲方、乙方、金額、開工日、預計完工日與狀態要完整。</p></article>
-        <article><h3 data-i18n="guide2Title">2. 標清楚施工位置</h3><p data-i18n="guide2Text">單一設施用點位；道路、捷運與橋梁用路線；園區與基地用範圍。地圖準，信任感就上來。</p></article>
-        <article><h3 data-i18n="guide3Title">3. 來源要能回查</h3><p data-i18n="guide3Text">每筆資料都附來源名稱與連結，使用者才能交叉確認。</p></article>
-        <article><h3 data-i18n="guide4Title">4. 手機先好用</h3><p data-i18n="guide4Text">現場人員與通勤族多半用手機看，清單、分頁與工程卡片要單手順滑。</p></article>
-      </div>
-    </section>
-  </main>
-
-  <footer class="site-footer">
-    <p data-i18n="footerTitle">台灣工程地圖｜Taiwan Construction Map</p>
-    <p data-i18n="footerText">首頁以計畫中、招標準備、招標中、施工中，或完工啟用未滿一個月的現況資料為主；正式引用請回各主管機關、採購、工程、建管、環評與地方圖台確認最新公告。</p>
-  </footer>
-
-  <div class="quick-dock" aria-label="快速操作">
-    <a class="dock-button dock-ig" href="https://www.instagram.com/taiwan.construction/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">IG</a>
-    <button id="languageToggle" class="dock-button dock-lang" type="button" aria-label="中英切換">EN</button>
-  </div>
-
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('./performance-data-worker.js?v=20260628c').catch(function () {});
-    }
-  </script>
-  <script type="module" src="./app.js?v=live-map-20260628c"></script>
-</body>
-</html>
+<body data-page="home">
+<a class="skip" href="#mapSec">跳到工程地圖</a>
+<header class="top"><a class="brand" href="/"><span class="mark">工</span><span><b data-t="brand">台灣工程地圖</b><small data-t="line">工程位置 × 縣市統計 × 類型分流</small></span></a><nav class="nav"><a href="#mapSec" data-t="map">工程地圖</a><a href="#cats" data-t="cats">工程分類</a><a href="/sources.html" target="_blank" rel="noopener noreferrer" data-t="src">資料入口</a></nav></header>
+<main>
+<section class="hero"><div><p class="pill" data-t="pill">開放街圖底圖，手機一開就能看工程熱點。</p><h1 data-t="h1">台灣工程現場，一張地圖直接開看。</h1><p data-t="lead">給工程公司、發包甲方、地理地圖愛好者與年輕人看的工程雷達。先看縣市總量與工程類型，再進到各分類頁追位置、甲方、乙方、金額、期程與來源。</p><div class="actions"><a class="btn" href="#mapSec" data-t="open">打開工程地圖</a><a class="btn alt" href="#cats" data-t="cats">工程分類</a></div></div><div class="metrics"><article><b id="m1">0</b><span data-t="projects">搜集工程</span></article><article><b id="m2">0</b><span data-t="counties">有資料縣市</span></article><article><b id="m3">0</b><span data-t="lanes">工程類型</span></article></div></section>
+<section id="cats" class="block"><div class="title"><p class="eyebrow" data-t="cats">工程分類</p><h2 data-t="catTitle">十二種工程類型，各走各的專屬地圖。</h2><p data-t="catText">公共工程、道路、管線、捷運、交通、建築、園區、規劃、環評、無人載具、AI 與其他工程都整理到獨立頁面，查案更快。</p></div><div id="catCards" class="catgrid"></div></section>
+<section id="mapSec" class="layout"><aside class="side"><p class="eyebrow" data-t="map">工程地圖</p><h2 data-t="countyTitle">各縣市工程總數與類型盤點</h2><p data-t="countyText">點縣市標記或下方卡片，就能看到工程總數與各工程類型分布。</p><label class="search"><span data-t="search">搜尋</span><input id="q" type="search" placeholder="例：臺北、捷運、道路、科學園區"></label><div class="filters"><label><span data-t="type">工程類型</span><select id="type"></select></label><label><span data-t="status">辦理狀態</span><select id="status"></select></label></div><button id="reset" class="reset" data-t="reset">回到全台總覽</button><div id="cityCards" class="citycards"></div></aside><section class="mapcard"><div class="mapbar"><div><p class="eyebrow" data-t="map">互動工程地圖</p><h2 data-t="countyTitle">各縣市工程總數與類型盤點</h2></div><p id="health" data-t="boot">電子地圖啟動中，工程清單同步整理。</p></div><div id="map" class="map"></div><div id="detail" class="detail"></div></section></section>
+<section class="block"><div class="title"><p class="eyebrow" data-t="list">工程清單</p><h2 data-t="listTitle">點位、甲方、乙方、期程與來源。</h2></div><div id="list" class="cards"></div></section>
+</main>
+<footer class="foot"><span data-t="footer">資料以公開入口可回查內容整理；正式引用請回主管機關、發包單位與公告來源確認最新版本。</span></footer>
+<div class="dock"><a href="https://www.instagram.com/taiwan.construction/" target="_blank" rel="noopener noreferrer">IG</a><button id="lang">EN</button></div>
+<script type="module" src="./fast-map.js?v=20260628h"></script>
+</body></html>
