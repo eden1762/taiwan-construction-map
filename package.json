@@ -1,8 +1,8 @@
 {
   "name": "taiwan-construction-map",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "private": true,
-  "description": "台灣工程地圖 Taiwan Construction Map - mobile-friendly construction and source portal map.",
+  "description": "台灣工程地圖 Taiwan Construction Map - national construction overview, sector maps, and source portal.",
   "scripts": {
     "dev": "python3 -m http.server 5173",
     "start": "python3 -m http.server 5173"
