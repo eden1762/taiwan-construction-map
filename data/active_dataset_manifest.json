@@ -1,1 +1,68 @@
-{"updated_at":"2026-06-27","target_active_project_count":3000,"datasets":[{"url":"./data/active_batches/active_construction_projects_20260627_batch_003.geojson","label":"2026-06-27 batch 003","count":20,"policy":"active-current-only"},{"url":"./data/active_batches/active_construction_projects_20260627_batch_004.geojson","label":"2026-06-27 batch 004","count":10,"policy":"active-current-only"},{"url":"./data/active_batches/active_construction_projects_20260627_batch_005.geojson","label":"2026-06-27 batch 005","count":20,"policy":"active-current-only"},{"url":"./data/active_batches/active_construction_projects_20260627_batch_006.geojson","label":"2026-06-27 batch 006","count":20,"policy":"active-current-only; rail projects; needs further official GIS and contract enrichment"},{"url":"./data/active_batches/active_construction_projects_20260627_batch_007b.geojson","label":"2026-06-27 batch 007","count":20,"policy":"active-current-only; rail contract projects; geometry normalized for mobile map"},{"url":"./data/active_batches/active_construction_projects_20260627_batch_008.geojson","label":"2026-06-27 batch 008","count":20,"policy":"active-current-only; road and bridge projects; official source enrichment required for some contract fields"},{"url":"./data/active_batches/active_construction_projects_20260627_batch_009.geojson","label":"2026-06-27 batch 009","count":20,"policy":"active-current-only; airport, building, park, water-energy and port industrial projects; official source enrichment required for some contract fields"},{"url":"./data/active_batches/active_construction_projects_20260627_batch_010.geojson","label":"2026-06-27 batch 010","count":10,"policy":"active-current-only; contract-level metro, airport MRT, tunnel and waterfront development candidates; official geometry enrichment required"},{"url":"./data/active_batches/active_construction_projects_20260627_batch_011.geojson","label":"2026-06-27 batch 011","count":10,"policy":"active-current-only; urban parking, administrative center, infill station, small hydropower and commuter rail candidates; official geometry enrichment required"}]}
+{
+  "updated_at": "2026-06-28",
+  "target_active_project_count": 3000,
+  "home_loading_policy": {
+    "rule_zh": "首頁只載入首屏必要批次；其餘資料保留在延後批次，避免手機一次載入過量資料。",
+    "rule_en": "The home page loads only the first essential batches; the remaining records stay in deferred batches to keep mobile browsing fast.",
+    "home_first_batch_limit": 40,
+    "mobile_first_screen_goal_seconds": 5
+  },
+  "datasets": [
+    {
+      "url": "./data/active_batches/active_construction_projects_20260627_batch_003.geojson",
+      "label": "2026-06-27 home batch 003",
+      "count": 20,
+      "policy": "active-current-only; home-first"
+    },
+    {
+      "url": "./data/active_batches/active_construction_projects_20260627_batch_004.geojson",
+      "label": "2026-06-27 home batch 004",
+      "count": 10,
+      "policy": "active-current-only; home-first"
+    }
+  ],
+  "deferred_datasets": [
+    {
+      "url": "./data/active_batches/active_construction_projects_20260627_batch_005.geojson",
+      "label": "2026-06-27 deferred batch 005",
+      "count": 20,
+      "policy": "active-current-only; load from category/search pages before adding to home"
+    },
+    {
+      "url": "./data/active_batches/active_construction_projects_20260627_batch_006.geojson",
+      "label": "2026-06-27 deferred batch 006",
+      "count": 20,
+      "policy": "active-current-only; rail projects; load after performance check"
+    },
+    {
+      "url": "./data/active_batches/active_construction_projects_20260627_batch_007b.geojson",
+      "label": "2026-06-27 deferred batch 007",
+      "count": 20,
+      "policy": "active-current-only; rail contract projects; load after performance check"
+    },
+    {
+      "url": "./data/active_batches/active_construction_projects_20260627_batch_008.geojson",
+      "label": "2026-06-27 deferred batch 008",
+      "count": 20,
+      "policy": "active-current-only; road and bridge projects; load after performance check"
+    },
+    {
+      "url": "./data/active_batches/active_construction_projects_20260627_batch_009.geojson",
+      "label": "2026-06-27 deferred batch 009",
+      "count": 20,
+      "policy": "active-current-only; airport, building, park, water-energy and port industrial projects; load after performance check"
+    },
+    {
+      "url": "./data/active_batches/active_construction_projects_20260627_batch_010.geojson",
+      "label": "2026-06-27 deferred batch 010",
+      "count": 10,
+      "policy": "active-current-only; metro, tunnel and waterfront candidates; load after performance check"
+    },
+    {
+      "url": "./data/active_batches/active_construction_projects_20260627_batch_011.geojson",
+      "label": "2026-06-27 deferred batch 011",
+      "count": 10,
+      "policy": "active-current-only; urban parking, administrative center, station, hydropower and commuter rail candidates; load after performance check"
+    }
+  ]
+}
