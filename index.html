@@ -6,9 +6,8 @@
   <meta name="theme-color" content="#061522" />
   <meta name="description" content="台灣工程地圖：把公共工程、交通建設、道路管線、建築開發、環評與重大建設入口，整理成手機也好看的互動工程地圖；支援工程點位、路線、範圍、搜尋、篩選與資料來源回查。" />
   <title>台灣工程地圖｜Taiwan Construction Map</title>
-  <link rel="stylesheet" href="./styles.css?v=project-i18n-20260626a" />
-  <link rel="stylesheet" href="./map-layers.css?v=project-i18n-20260626a" />
-  <link rel="stylesheet" href="./mobile-fixes.css?v=project-i18n-20260626a" />
+  <link rel="stylesheet" href="./styles.css?v=single-source-20260628d" />
+  <link rel="stylesheet" href="./mobile-fixes.css?v=single-source-20260628d" />
 </head>
 <body>
   <a class="skip-link" href="#mainPanel" data-i18n="skipLink">跳到工程資訊</a>
@@ -17,7 +16,7 @@
     <a class="brand" href="#top" aria-label="台灣工程地圖首頁">
       <div class="brand-mark" aria-hidden="true">工</div>
       <div>
-        <p class="eyebrow" data-i18n="brandEyebrow">工程位置 × 進度 × 甲乙方</p>
+        <p class="eyebrow" data-i18n="brandEyebrow">工程位置 × 工程進度 × 甲乙方</p>
         <h1><span data-i18n="brandTitle">台灣工程地圖</span> <span data-i18n="brandSubtitle">Taiwan Construction Map</span></h1>
       </div>
     </a>
@@ -31,14 +30,14 @@
   <main id="top">
     <section class="hero" aria-label="首頁總覽">
       <div class="hero-copy">
-        <p class="pill" data-i18n="heroPill">可互動的工程地圖：點位、路線、範圍、圖層、搜尋與工程卡片一次到位。</p>
+        <p class="pill" data-i18n="heroPill">工程位置、施工範圍、甲方乙方、期程與來源，一張圖先看懂。</p>
         <h2 data-i18n="heroTitle">台灣正在升級的地方，一張圖先 get。</h2>
-        <p data-i18n="heroText">給工程公司、發包甲方、地圖控與年輕使用者看的工程雷達。先看位置與施工範圍，再看甲方、乙方、開工日、預計完工與啟用日；資訊不迷路，城市進度直接開圖。</p>
+        <p data-i18n="heroText">給工程公司、發包甲方、地理地圖愛好者與年輕使用者看的工程雷達。先看位置與施工範圍，再看甲方、乙方、金額、期程與來源；查工程不用迷路。</p>
       </div>
       <div class="hero-metrics" aria-label="資料統計">
-        <div><strong id="metricProjects">0</strong><span data-i18n="metricProjects">現況工程</span></div>
-        <div><strong id="metricCost">—</strong><span data-i18n="metricCost">工程級距總覽</span></div>
-        <div><strong id="metricSources">0</strong><span data-i18n="metricSources">可查資料入口</span></div>
+        <div><strong id="metricProjects">20+</strong><span data-i18n="metricProjects">現況工程</span></div>
+        <div><strong id="metricCost">9,000億+</strong><span data-i18n="metricCost">總工程金額估算</span></div>
+        <div><strong id="metricSources">12+</strong><span data-i18n="metricSources">資料來源入口</span></div>
       </div>
     </section>
 
@@ -46,23 +45,23 @@
       <aside id="mainPanel" class="control-panel" aria-label="工程篩選與清單">
         <div class="panel-heading">
           <p class="eyebrow" data-i18n="panelEyebrow">工程雷達</p>
-          <h2 data-i18n="panelTitle">先找地點，再看工程脈絡</h2>
-          <p data-i18n="panelText">輸入地名、工程名、廠商或發包單位，快速定位。適合估案、查進度、看城市變化，也適合地圖玩家開圖探索。</p>
+          <h2 data-i18n="panelTitle">找工程、看位置、追進度</h2>
+          <p data-i18n="panelText">搜尋工程名、地點、發包方或施工方；也可以用類型、狀態與分頁縮小範圍。工程控、地圖控、估案人員都能快速開圖。</p>
         </div>
 
         <label class="search-box" for="searchInput">
           <span data-i18n="searchLabel">搜尋</span>
-          <input id="searchInput" type="search" placeholder="例：淡江大橋、高雄捷運、工信工程、道路挖掘" autocomplete="off" />
+          <input id="searchInput" type="search" placeholder="例：淡江大橋、高雄捷運、臺南、道路挖掘、科學園區" autocomplete="off" />
         </label>
 
         <div class="filter-grid" aria-label="篩選條件">
-          <label><span data-i18n="typeLabel">類型</span><select id="typeFilter"><option value="all" data-i18n="typeAll">全部類型</option></select></label>
-          <label><span data-i18n="statusLabel">狀態</span><select id="statusFilter"><option value="all" data-i18n="statusAll">全部狀態</option></select></label>
+          <label><span data-i18n="typeLabel">工程類型</span><select id="typeFilter"><option value="all" data-i18n="typeAll">全部類型</option></select></label>
+          <label><span data-i18n="statusLabel">辦理狀態</span><select id="statusFilter"><option value="all" data-i18n="statusAll">全部狀態</option></select></label>
         </div>
 
         <div class="quick-actions" aria-label="快捷操作">
           <button id="resetMap" type="button" data-i18n="resetMap">回到全台</button>
-          <button id="toggleSources" type="button" data-i18n="toggleSources">看資料入口</button>
+          <button id="toggleSources" type="button" data-i18n="toggleSources">資料入口</button>
         </div>
 
         <div class="legend" aria-label="地圖圖例">
@@ -79,14 +78,14 @@
       <section class="map-card" aria-label="台灣工程互動地圖">
         <div class="map-toolbar">
           <div>
-            <p class="eyebrow" data-i18n="mapEyebrow">互動工程地圖</p>
-            <h2 data-i18n="mapTitle">台灣工程現場一眼看</h2>
+            <p class="eyebrow" data-i18n="mapEyebrow">互動工程位置圖</p>
+            <h2 data-i18n="mapTitle">工程點位、路線與範圍一眼看</h2>
           </div>
-          <p class="map-note" data-i18n="mapNote">可拖曳、縮放、查看工程位置與施工範圍。手機瀏覽時先順滑看內容，需要移動地圖時再點一下啟用。</p>
+          <p class="map-note" data-i18n="mapNote">點選工程熱點，可查看甲方、乙方、金額、期程與來源。清單採分頁顯示，手機載入更快。</p>
         </div>
         <div class="map-frame">
-          <div id="map" role="application" aria-label="台灣工程互動地圖"><div class="map-fallback" data-i18n="mapLoading">地圖與工程資料載入中；若載入失敗，可重試，工程清單仍可先查。</div></div>
-          <div id="mapStatus" class="map-status" role="status">點選工程熱點，看工程基本盤。</div>
+          <div id="map" role="application" aria-label="台灣工程互動地圖"><div class="map-fallback" data-i18n="mapLoading">工程資料載入中，先幫你整理清單與位置。</div></div>
+          <div id="mapStatus" class="map-status" role="status"></div>
         </div>
       </section>
     </section>
@@ -95,7 +94,7 @@
       <div class="section-title">
         <p class="eyebrow" data-i18n="sourcesEyebrow">資料入口</p>
         <h2 data-i18n="sourcesTitle">工程資料很分散，要分層查才準。</h2>
-        <p data-i18n="sourcesText">公共工程、採購決標、重大建設、道路挖掘、環評、建管、能源水利與地方開放資料各有入口。完整清單已整理到獨立頁面，手機不用一路滑到天荒地老。</p>
+        <p data-i18n="sourcesText">公共工程、採購決標、重大建設、道路挖掘、環評、建管、能源水利與地方資料各有入口。完整清單已整理到獨立頁面，手機不用一路滑到天荒地老。</p>
       </div>
       <a class="source-page-link" href="./sources.html" target="_blank" rel="noopener noreferrer">開啟資料入口新頁 ↗</a>
       <div id="sourceCards" class="source-grid home-source-grid" aria-hidden="true"></div>
@@ -107,17 +106,17 @@
         <h2 data-i18n="guideTitle">資料要好用，關鍵是位置、來源與欄位一致。</h2>
       </div>
       <div class="maintain-grid">
-        <article><h3 data-i18n="guide1Title">1. 補上工程基本盤</h3><p data-i18n="guide1Text">工程名、地點、甲方、乙方、經費、開工日、預計完工日與啟用日要盡量完整，查案才順。</p></article>
-        <article><h3 data-i18n="guide2Title">2. 標清楚施工範圍</h3><p data-i18n="guide2Text">橋梁、道路、捷運適合畫路線；園區與基地適合畫範圍；單一設施用標記點。地圖準，信任感就上來。</p></article>
-        <article><h3 data-i18n="guide3Title">3. 來源要能回查</h3><p data-i18n="guide3Text">每筆資料都盡量附官方公告、採購資料、工程頁面或地方圖台。看到來源，資訊力直接 up。</p></article>
-        <article><h3 data-i18n="guide4Title">4. 手機先好用</h3><p data-i18n="guide4Text">現場人員、通勤族、地圖控多半用手機看；清單、篩選、地圖點擊都要單手可用、載入快速。</p></article>
+        <article><h3 data-i18n="guide1Title">1. 補上工程基本盤</h3><p data-i18n="guide1Text">工程名、地點、甲方、乙方、金額、開工日、預計完工日與狀態要完整。</p></article>
+        <article><h3 data-i18n="guide2Title">2. 標清楚施工位置</h3><p data-i18n="guide2Text">單一設施用點位；道路、捷運與橋梁用路線；園區與基地用範圍。地圖準，信任感就上來。</p></article>
+        <article><h3 data-i18n="guide3Title">3. 來源要能回查</h3><p data-i18n="guide3Text">每筆資料都附來源名稱與連結，使用者才能交叉確認。</p></article>
+        <article><h3 data-i18n="guide4Title">4. 手機先好用</h3><p data-i18n="guide4Text">現場人員與通勤族多半用手機看，清單、分頁與工程卡片要單手順滑。</p></article>
       </div>
     </section>
   </main>
 
   <footer class="site-footer">
     <p data-i18n="footerTitle">台灣工程地圖｜Taiwan Construction Map</p>
-    <p data-i18n="footerText">首頁只放計畫中、招標中、施工中，或完工啟用未滿一個月的現況資料；正式引用請回各主管機關、政府電子採購網、公共工程雲端服務網、建管、環評與地方圖台確認最新公告。</p>
+    <p data-i18n="footerText">首頁以計畫中、招標準備、招標中、施工中，或完工啟用未滿一個月的現況資料為主；正式引用請回各主管機關、採購、工程、建管、環評與地方圖台確認最新公告。</p>
   </footer>
 
   <div class="quick-dock" aria-label="快速操作">
@@ -125,20 +124,6 @@
     <button id="languageToggle" class="dock-button dock-lang" type="button" aria-label="中英切換">EN</button>
   </div>
 
-  <script src="./storage-guard.js?v=storage-safe-20260626b"></script>
-  <script src="./map-basemap-policy.js?v=basemap-policy-20260627a"></script>
-  <script src="./home-cache-friendly-data.js?v=home-cache-20260628a"></script>
-  <script src="./home-instant-ready.js?v=instant-home-20260628a"></script>
-  <script type="module" src="./english-search-index.js?v=search-i18n-20260626a"></script>
-  <script type="module" src="./app.js?v=home-speed-20260628c"></script>
-  <script type="module" src="./home-fast-fallback.js?v=fast-home-20260628b"></script>
-  <script src="./mobile-map-touch-guard.js?v=mobile-touch-20260628a"></script>
-  <script src="./active-layer-defaults.js?v=layer-defaults-20260628a"></script>
-  <script type="module" src="./data-health-overlay.js?v=data-health-20260628a"></script>
-  <script src="./engineering-detail-sections.js?v=detail-sections-20260628a"></script>
-  <script type="module" src="./map-layers.js?v=map-source-i18n-20260627a"></script>
-  <script type="module" src="./site-footer.js?v=project-i18n-20260626a"></script>
-  <script type="module" src="./copy-guard.js?v=copy-guard-perf-20260627a"></script>
-  <script type="module" src="./project-i18n-guard.js?v=project-i18n-20260627a"></script>
+  <script type="module" src="./app.js?v=single-source-20260628d"></script>
 </body>
 </html>
