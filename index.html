@@ -6,8 +6,8 @@
   <meta name="theme-color" content="#061522" />
   <meta name="description" content="台灣工程地圖：把公共工程、交通建設、道路管線、建築開發、環評與重大建設入口，整理成手機也好看的互動工程地圖；支援工程點位、路線、範圍、搜尋、篩選與資料來源回查。" />
   <title>台灣工程地圖｜Taiwan Construction Map</title>
-  <link rel="stylesheet" href="./styles.css?v=live-map-20260628a" />
-  <link rel="stylesheet" href="./mobile-fixes.css?v=live-map-20260628a" />
+  <link rel="stylesheet" href="./styles.css?v=live-map-20260628b" />
+  <link rel="stylesheet" href="./mobile-fixes.css?v=live-map-20260628b" />
 </head>
 <body>
   <a class="skip-link" href="#mainPanel" data-i18n="skipLink">跳到工程資訊</a>
@@ -124,6 +124,11 @@
     <button id="languageToggle" class="dock-button dock-lang" type="button" aria-label="中英切換">EN</button>
   </div>
 
-  <script type="module" src="./app.js?v=live-map-20260628a"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./performance-data-worker.js?v=20260628b').catch(function () {});
+    }
+  </script>
+  <script type="module" src="./app.js?v=live-map-20260628b"></script>
 </body>
 </html>
