@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="./fast-map.css?v=20260628i" />
   <link rel="stylesheet" href="./detail-sections.css?v=20260628a" />
   <link rel="stylesheet" href="./mobile-detail-drawer.css?v=20260628a" />
+  <link rel="stylesheet" href="./layer-controls.css?v=20260628a" />
 </head>
 <body data-page="home">
 <a class="skip" href="#mapSec">跳到工程地圖</a>
@@ -17,10 +18,10 @@
 <main>
 <section class="hero"><div><p class="pill" data-t="pill">輕量地圖背景，手機一開就能看工程熱點。</p><h1 data-t="h1">台灣工程現場，一張地圖直接開看。</h1><p data-t="lead">給工程公司、發包甲方、地理地圖愛好者與年輕人看的工程雷達。先看縣市總量與工程類型，再進到各分類頁追位置、甲方、乙方、金額、期程與來源。</p><div class="actions"><a class="btn" href="#mapSec" data-t="open">打開工程地圖</a><a class="btn alt" href="#cats" data-t="cats">工程分類</a></div></div><div class="metrics"><article><b id="m1">0</b><span data-t="projects">搜集工程</span></article><article><b id="m2">0</b><span data-t="counties">有資料縣市</span></article><article><b id="m3">0</b><span data-t="lanes">工程類型</span></article></div></section>
 <section id="cats" class="block"><div class="title"><p class="eyebrow" data-t="cats">工程分類</p><h2 data-t="catTitle">十二種工程類型，各走各的專屬地圖。</h2><p data-t="catText">公共工程、道路、管線、捷運、交通、建築、園區、規劃、環評、無人載具、AI 與其他工程都整理到獨立頁面，查案更快。</p></div><div id="catCards" class="catgrid"></div></section>
-<section id="mapSec" class="layout"><aside class="side"><p class="eyebrow" data-t="map">工程地圖</p><h2 data-t="countyTitle">各縣市工程總數與類型盤點</h2><p data-t="countyText">點縣市標記或下方卡片，就能看到工程總數與各工程類型分布。</p><label class="search"><span data-t="search">搜尋</span><input id="q" type="search" placeholder="例：臺北、捷運、道路、科學園區"></label><div class="filters"><label><span data-t="type">工程類型</span><select id="type"></select></label><label><span data-t="status">辦理狀態</span><select id="status"></select></label></div><button id="reset" class="reset" data-t="reset">回到全台總覽</button><div id="cityCards" class="citycards"></div></aside><section class="mapcard"><div class="mapbar"><div><p class="eyebrow" data-t="map">互動工程地圖</p><h2 data-t="countyTitle">各縣市工程總數與類型盤點</h2></div><p id="health" data-t="boot">工程清單已可用，地圖背景同步整理。</p></div><div id="map" class="map"></div><div id="detail" class="detail"></div></section></section>
+<section id="mapSec" class="layout"><aside class="side"><p class="eyebrow" data-t="map">工程地圖</p><h2 data-t="countyTitle">各縣市工程總數與類型盤點</h2><p data-t="countyText">點縣市標記或下方卡片，就能看到工程總數與各工程類型分布。</p><label class="search"><span data-t="search">搜尋</span><input id="q" type="search" placeholder="例：臺北、捷運、道路、科學園區"></label><div class="filters"><label><span data-t="type">工程類型</span><select id="type"></select></label><label><span data-t="status">辦理狀態</span><select id="status"></select></label></div><section class="layerPanel"><div class="layerHead"><b data-t="layers">圖層開關</b><small data-t="layerHint">預設只開最常查的工程層，其他可手動開啟。</small></div><div id="layerToggles" class="layerToggles" aria-label="工程圖層開關"></div></section><button id="reset" class="reset" data-t="reset">回到全台總覽</button><div id="cityCards" class="citycards"></div></aside><section class="mapcard"><div class="mapbar"><div><p class="eyebrow" data-t="map">互動工程地圖</p><h2 data-t="countyTitle">各縣市工程總數與類型盤點</h2></div><p id="health" data-t="boot">工程清單已可用，地圖背景同步整理。</p></div><div id="map" class="map"></div><div id="detail" class="detail"></div></section></section>
 <section class="block"><div class="title"><p class="eyebrow" data-t="list">工程清單</p><h2 data-t="listTitle">點位、甲方、乙方、期程與來源。</h2></div><div id="list" class="cards"></div></section>
 </main>
 <footer class="foot"><span data-t="footer">資料以公開入口可回查內容整理；正式引用請回主管機關、發包單位與公告來源確認最新版本。</span></footer>
 <div class="dock"><a href="https://www.instagram.com/taiwan.construction/" target="_blank" rel="noopener noreferrer">IG</a><button id="lang">EN</button></div>
-<script type="module" src="./fast-map.js?v=20260628k"></script>
+<script type="module" src="./fast-map.js?v=20260628l"></script>
 </body></html>
