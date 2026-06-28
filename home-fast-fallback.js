@@ -14,8 +14,9 @@ function fastSafeUrl(value){const url=String(value||'');return url.startsWith('h
 function hasPrimaryHomeContent(){
   const cards=document.querySelectorAll('#projectList .project-card:not(.empty)').length;
   const ready=document.querySelector('.map-frame.mvp-leaflet-ready');
+  const instantReady=document.documentElement.classList.contains('tcm-instant-ready');
   const metric=Number(document.querySelector('#metricProjects')?.textContent||0);
-  return cards>0&&metric>0&&ready;
+  return cards>0&&metric>0&&(ready||instantReady);
 }
 function normalizeFastFeatures(features){
   const seen=new Set();
@@ -66,8 +67,8 @@ function renderFastSlowNotice(){
   const status=document.querySelector('#mapStatus');
   const html=`<div class="project-card empty fast-slow"><h3>${fastEscape(fastText('slow'))}</h3><div class="detail-actions"><button type="button" data-retry-map>${fastEscape(fastText('retry'))}</button></div></div>`;
   if(list&&!list.querySelector('.project-card:not(.empty)'))list.innerHTML=html;
-  if(map&&!document.querySelector('.map-frame.mvp-leaflet-ready'))map.innerHTML=`<div class="mvp-map-loading fast-home-map"><strong>${fastEscape(fastText('slow'))}</strong><button type="button" data-retry-map>${fastEscape(fastText('retry'))}</button></div>`;
-  if(status&&!status.querySelector('.fast-home-ready'))status.innerHTML=`<article class="map-detail-card fast-home-ready"><h3>${fastEscape(fastText('slow'))}</h3><div class="detail-actions"><button type="button" data-retry-map>${fastEscape(fastText('retry'))}</button></div></article>`;
+  if(map&&!document.querySelector('.map-frame.mvp-leaflet-ready')&&!document.documentElement.classList.contains('tcm-instant-ready'))map.innerHTML=`<div class="mvp-map-loading fast-home-map"><strong>${fastEscape(fastText('slow'))}</strong><button type="button" data-retry-map>${fastEscape(fastText('retry'))}</button></div>`;
+  if(status&&!status.querySelector('.fast-home-ready')&&!document.documentElement.classList.contains('tcm-instant-ready'))status.innerHTML=`<article class="map-detail-card fast-home-ready"><h3>${fastEscape(fastText('slow'))}</h3><div class="detail-actions"><button type="button" data-retry-map>${fastEscape(fastText('retry'))}</button></div></article>`;
 }
 function ensureFastStyles(){
   if(document.querySelector('#fast-home-fallback-style'))return;
