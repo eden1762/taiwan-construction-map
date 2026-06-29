@@ -1,0 +1,37 @@
+{
+  "record_id": "2026-06-30-run-12-source-queue-check",
+  "captured_at": "2026-06-30",
+  "source_name": "Taiwan Construction Map saved source registry and active dedupe baseline",
+  "source_url": "https://taiwan-construction-map.vercel.app/data/source_registry.json",
+  "check_scope": [
+    "source rotation coverage",
+    "dedupe baseline before new imports",
+    "candidate handling before active map inclusion",
+    "homepage speed guardrail before scaling"
+  ],
+  "observed_existing_baseline": {
+    "active_count": 21,
+    "active_goal": 3000,
+    "latest_batch_pointer": "data/import_batches/latest.json",
+    "source_registry": "data/source_registry.json",
+    "dedupe_index": "data/dedupe_index.json",
+    "runtime_quality_gates": "data/quality/mobile_osm_runtime_gates.json"
+  },
+  "action_taken": "Created data/import_plans/2026-06-30-run-12-next-source-queue.json and linked it into the public research catalog and data entrance page.",
+  "dedupe_key_fields_for_future_project_imports": [
+    "name",
+    "owner",
+    "contractor",
+    "address",
+    "source_url",
+    "geometry",
+    "source_group"
+  ],
+  "quality_notes_zh": [
+    "下一批工程資料應優先輪替不同來源群組，尤其公共工程採購、水利能源、港灣機場、園區與環評建管。",
+    "資料只有線索但缺狀態、位置、來源或期程時，先保存為候選，不進首頁 active 統計。",
+    "新增 active 資料前，必須先讀 latest、source registry、dedupe index、active GeoJSON、欄位規格與首頁速度檢查表。"
+  ],
+  "active_map_change": false,
+  "public_website_copy_changed": true
+}
