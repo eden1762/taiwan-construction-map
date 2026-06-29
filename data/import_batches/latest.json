@@ -1,0 +1,12 @@
+{
+  "updated_at": "2026-06-29",
+  "latest_batch_id": "2026-06-29-run-08",
+  "latest_batch_log": "data/import_batches/2026-06-29-run-08-batch-log.json",
+  "latest_raw_source_record": "data/raw_sources/2026-06-29-run-08-source-check.json",
+  "active_count": 21,
+  "active_goal": 3000,
+  "purpose_zh": "提供公開資料入口與後續匯入流程一個穩定的最新批次指標，避免頁面固定指向舊批次。",
+  "purpose_en": "Stable pointer to the latest import batch for the public data entry page and future dedupe workflows.",
+  "next_import_rule_zh": "新增工程資料前，先讀取此檔找到最新批次，再比對 dedupe_index、active GeoJSON、raw source record 與 batch log，避免重複匯入。",
+  "public_readable_zh": "一般研究者可由此找到最新批次紀錄、原始來源紀錄與 active 資料累積進度。"
+}
