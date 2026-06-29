@@ -1,0 +1,40 @@
+{
+  "batch_id": "2026-06-30-run-14",
+  "created_at": "2026-06-30",
+  "scan_type": "candidate_official_verification_scan",
+  "purpose_zh": "保存本輪對第 13 輪候選工程線索進行官方查核前置掃描的結果。",
+  "purpose_en": "Stores the pre-verification scan for Run 13 candidate project leads.",
+  "input_candidate_file": "data/candidates/2026-06-30-run-13-candidate-leads.json",
+  "output_verification_queue": "data/candidates/2026-06-30-run-14-candidate-verification-queue.json",
+  "scan_summary_zh": "本輪將 6 筆候選線索整理為官方查核佇列。部分公開搜尋結果可支持工程存在或興建狀態，但尚不足以同時補齊官方來源、位置、狀態、期程、預算、承攬廠商與去重鍵，因此沒有資料轉入 active 首頁地圖。",
+  "scan_summary_en": "Six candidate leads were converted into an official-verification queue. Public search results may support project existence or broad status, but they were not enough to complete official source, location, status, timeline, budget, contractor, and dedupe checks, so no record was promoted to the active homepage map.",
+  "search_groups": [
+    {
+      "group": "捷運與軌道工程",
+      "queries": ["桃園市政府捷運工程局 捷運綠線 工程進度", "高雄市政府捷運工程局 捷運黃線 工程進度", "交通部鐵道局 臺南市區鐵路地下化計畫"],
+      "result_action": "keep_candidate_and_require_official_project_page"
+    },
+    {
+      "group": "機場與航廈工程",
+      "queries": ["桃園國際機場股份有限公司 第三航站區 建設計畫", "桃園國際機場 第三航廈 工程進度"],
+      "result_action": "keep_candidate_and_require_owner_agency_source"
+    },
+    {
+      "group": "道路橋梁與水利復原",
+      "queries": ["馬太鞍溪橋 復原工程 公路局 水利署", "花蓮 馬太鞍溪 水利 復原工程"],
+      "result_action": "keep_candidate_until_scope_and_owner_are_confirmed"
+    }
+  ],
+  "quality_decision": {
+    "active_records_added": 0,
+    "reason_zh": "候選資料尚未通過來源、狀態、位置、期程、去重與 geometry 檢查。",
+    "reason_en": "Candidates did not yet pass source, status, location, timeline, dedupe, and geometry checks.",
+    "homepage_stats_changed": false
+  },
+  "next_scan_requirements": [
+    "優先打開主管機關、公共工程雲端服務網或政府電子採購網頁面，而不是只看搜尋摘要。",
+    "若取得官方 URL，先寫入候選詳細欄位與 raw source，不直接進 active。",
+    "若同一工程拆成多個標案，必須保存契約或路段差異，避免重複累加。",
+    "若無法確認目前仍在 active 規則內，保留候選或移入歷史資料區。"
+  ]
+}
