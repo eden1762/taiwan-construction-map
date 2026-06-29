@@ -9,9 +9,9 @@
   <link rel="stylesheet" href="./fast-map.css?v=20260628-national-lanes" />
   <link rel="stylesheet" href="./styles.css?v=source-page-20260628-national-lanes" />
   <style>
-    .source-rotation{margin:0 auto 18px;max-width:1120px;border:1px solid rgba(12,35,55,.12);border-radius:22px;background:linear-gradient(135deg,#f4fbff,#fffaf2);padding:16px;box-shadow:0 14px 34px rgba(13,39,62,.08)}
-    .source-rotation h3{margin:0 0 8px;color:#102131;font-size:18px;line-height:1.25}.source-rotation p{margin:0;color:#526b82;font-size:13px;line-height:1.65;font-weight:850}.rotation-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.rotation-pills span{border:1px solid rgba(12,35,55,.12);border-radius:999px;background:#fff;padding:7px 10px;font-size:12px;font-weight:1000;color:#17324a}
-    @media(max-width:760px){.source-rotation{margin:0 12px 14px;padding:13px;border-radius:18px}.source-rotation h3{font-size:16px}.source-rotation p{font-size:12px}.rotation-pills span{font-size:11px;padding:6px 8px}}
+    .source-rotation,.data-flow{margin:0 auto 18px;max-width:1120px;border:1px solid rgba(12,35,55,.12);border-radius:22px;background:linear-gradient(135deg,#f4fbff,#fffaf2);padding:16px;box-shadow:0 14px 34px rgba(13,39,62,.08)}
+    .source-rotation h3,.data-flow h3{margin:0 0 8px;color:#102131;font-size:18px;line-height:1.25}.source-rotation p,.data-flow p{margin:0;color:#526b82;font-size:13px;line-height:1.65;font-weight:850}.rotation-pills,.flow-steps{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.rotation-pills span,.flow-steps span{border:1px solid rgba(12,35,55,.12);border-radius:999px;background:#fff;padding:7px 10px;font-size:12px;font-weight:1000;color:#17324a}.data-flow{background:linear-gradient(135deg,#eefbff,#ffffff)}.data-flow strong{color:#102131}.data-flow small{display:block;margin-top:8px;color:#6a7f91;font-weight:850;line-height:1.55}
+    @media(max-width:760px){.source-rotation,.data-flow{margin:0 12px 14px;padding:13px;border-radius:18px}.source-rotation h3,.data-flow h3{font-size:16px}.source-rotation p,.data-flow p{font-size:12px}.rotation-pills span,.flow-steps span{font-size:11px;padding:6px 8px}}
   </style>
 </head>
 <body data-page="sources">
@@ -54,6 +54,20 @@
         <span>環評建管 / EIA & permits</span>
         <span>道路管線 / Roads & utilities</span>
       </div>
+    </section>
+
+    <section class="data-flow" aria-label="資料保存與去重流程">
+      <h3>資料保存與去重 / Data log & dedupe</h3>
+      <p><strong>每批資料會先留下原始紀錄，再轉成一般人看得懂的工程卡片與地圖。</strong>新增資料前會比對既有工程名、地點、甲方、乙方、來源連結與位置，避免同一工程重複上圖。尚未補齊或狀態不明的資料，先放待確認區，不混入首頁現況統計。</p>
+      <p><strong>Each batch keeps a source log first, then becomes readable cards and map records.</strong> New projects are checked against existing names, places, owners, contractors, source links, and locations before they reach the live map. Unverified records stay outside the active homepage count.</p>
+      <div class="flow-steps" aria-label="資料處理步驟">
+        <span>來源紀錄 / Source log</span>
+        <span>去重比對 / Dedupe check</span>
+        <span>待確認區 / Verify first</span>
+        <span>地圖資料 / Map-ready data</span>
+        <span>大眾可讀 / Public-readable</span>
+      </div>
+      <small>目標是慢慢累積到 3,000 筆以上現況工程，但不為了數量犧牲查證、速度與手機可用性。The goal is 3,000+ active records over time, without trading away verification, speed, or mobile usability.</small>
     </section>
 
     <section id="sourceCards" class="source-grid" aria-live="polite"></section>
