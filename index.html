@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://tile.openstreetmap.org" crossorigin />
   <link rel="dns-prefetch" href="//tile.openstreetmap.org" />
   <link rel="preload" href="/data/active_construction_projects.geojson" as="fetch" type="application/geo+json" crossorigin />
-  <link rel="stylesheet" href="./fast-map.css?v=20260629-mobile-first-1" />
+  <link rel="stylesheet" href="./fast-map.css?v=20260629-mobile-first-2" />
   <style>
     .quickPanel{margin-top:12px;border:1px solid rgba(12,35,55,.13);border-radius:18px;background:linear-gradient(145deg,#fff,#f7fbff);padding:12px}.quickPanel summary{cursor:pointer;font-weight:1000;color:#102131;list-style:none}.quickPanel summary::-webkit-details-marker{display:none}.quickPanel summary::after{content:"＋";float:right}.quickPanel[open] summary::after{content:"－"}.quickPanel p,.quickPanel li{color:#526b82;font-size:12px;line-height:1.55;font-weight:850}.quickPanel ul{margin:10px 0 0;padding-left:18px}.legendDots,.statusDots{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.legendDots span,.statusDots span{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(12,35,55,.12);border-radius:999px;background:#fff;padding:6px 8px;font-size:12px;font-weight:950}.legendDots i{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c)}.statusDots i{display:inline-block;width:9px;height:9px;border-radius:3px;background:#0b88aa}.mapNote{margin:8px 0 0!important;font-size:12px!important;line-height:1.5;color:#526b82!important;font-weight:850!important}.firstUse{border-color:rgba(11,136,170,.22);background:linear-gradient(145deg,#eefbff,#fff)}
     @media(max-width:760px){.quickPanel{margin-top:10px;padding:10px}.side .quickPanel:not(.firstUse){margin-top:8px}.legendDots span,.statusDots span{font-size:11px;padding:5px 7px}.mapNote{font-size:11px!important}.hero{padding-bottom:14px}.block{padding-top:18px}.layout{gap:12px}.side{order:1}.mapcard{order:2}}
@@ -69,6 +69,13 @@
             <label><input type="checkbox" checked>管線 / Utilities</label>
             <label><input type="checkbox" checked>捷運 / Metro</label>
             <label><input type="checkbox" checked>建築 / Buildings</label>
+            <label><input type="checkbox">鐵路 / Rail</label>
+            <label><input type="checkbox">園區 / Parks</label>
+            <label><input type="checkbox">規劃 / Planning</label>
+            <label><input type="checkbox">環評 / Environmental Review</label>
+            <label><input type="checkbox">無人載具 / Uncrewed Systems</label>
+            <label><input type="checkbox">AI</label>
+            <label><input type="checkbox">其他 / Other</label>
           </div>
         </section>
 
@@ -154,6 +161,6 @@
   </main>
   <footer class="foot"><span data-t="footer">資料以公開入口可回查內容整理；正式引用請回主管機關、發包單位與公告來源確認最新版本。地圖底圖 © OpenStreetMap contributors。</span></footer>
   <div class="dock" aria-label="快速操作"><a href="https://www.instagram.com/taiwan.construction/" target="_blank" rel="noopener noreferrer">IG</a><button id="lang" type="button">EN</button></div>
-  <script type="module" src="./fast-map.js?v=20260629-mobile-first-1"></script>
+  <script type="module" src="./fast-map.js?v=20260629-mobile-first-2"></script>
 </body>
 </html>
