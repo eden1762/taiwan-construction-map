@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-06-29",
+  "updated_at": "2026-06-30",
   "title_zh": "台灣工程地圖大眾研究資料索引",
   "title_en": "Taiwan Construction Map Public Research Catalog",
   "purpose_zh": "讓一般研究者與大眾知道哪些資料可直接查閱、哪些資料仍在待確認、以及新增資料如何避免重複。",
@@ -8,6 +8,7 @@
   "current_active_baseline": 21,
   "latest_batch_pointer": "data/import_batches/latest.json",
   "project_record_schema": "data/project_record_schema.json",
+  "runtime_quality_gates": "data/quality/mobile_osm_runtime_gates.json",
   "public_readable_files": [
     {
       "path": "data/active_construction_projects.geojson",
@@ -23,6 +24,14 @@
       "label_en": "Project record schema",
       "who_can_use_zh": "一般研究者、大眾與資料維護者",
       "how_to_read_zh": "說明每筆工程卡片、地圖資料、原始紀錄與批次紀錄應具備哪些欄位，以及缺資料時如何標示待補。",
+      "included_in_homepage_stats": false
+    },
+    {
+      "path": "data/quality/mobile_osm_runtime_gates.json",
+      "label_zh": "首頁手機速度與 OpenStreetMap 備援檢查表",
+      "label_en": "Mobile and OpenStreetMap runtime quality gates",
+      "who_can_use_zh": "一般研究者、大眾、資料維護者與網站檢查者",
+      "how_to_read_zh": "說明首頁 5 秒內可用、OpenStreetMap 來源註記、地圖失敗備援、清單分頁、點位抽樣與大量資料分批載入規則。",
       "included_in_homepage_stats": false
     },
     {
@@ -46,7 +55,7 @@
       "label_zh": "最新批次指標",
       "label_en": "Latest batch pointer",
       "who_can_use_zh": "一般研究者、大眾與資料維護者",
-      "how_to_read_zh": "先從這裡找到最新批次紀錄與最新原始來源紀錄，避免公開頁面固定連到舊批次。",
+      "how_to_read_zh": "先從這裡找到最新批次紀錄、最新原始來源紀錄與最新首頁品質檢查表，避免公開頁面固定連到舊批次。",
       "included_in_homepage_stats": false
     },
     {
@@ -73,5 +82,6 @@
     { "status_zh": "excluded", "meaning_zh": "重複、過期、取消、停辦、來源失效或與工程主題不符。" }
   ],
   "public_data_rule_zh": "公開可讀資料要讓非程式背景的人也能查到工程名稱、位置、狀態、來源與地圖位置；原始資料則保留給後續查核與去重。",
-  "dedupe_rule_zh": "新增資料前必須先比對既有 active 地圖、工程資料欄位規格、去重索引、原始來源紀錄、最新批次指標與批次紀錄；同一工程不得重複累加。"
+  "runtime_rule_zh": "首頁要先讓標題、搜尋、篩選、統計、地圖容器、工程清單與來源提示可用；OpenStreetMap 較慢時保留備援畫面與重試按鈕，不讓整頁卡住。",
+  "dedupe_rule_zh": "新增資料前必須先比對既有 active 地圖、工程資料欄位規格、去重索引、原始來源紀錄、最新批次指標、首頁品質檢查表與批次紀錄；同一工程不得重複累加。"
 }
