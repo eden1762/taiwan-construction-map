@@ -1,0 +1,15 @@
+{
+  "batch_id": "2026-06-30-run-13",
+  "batch_date": "2026-06-30",
+  "candidate_records": 6,
+  "passed_records": 0,
+  "active_records_added": 0,
+  "active_count_after_batch": 21,
+  "active_goal": 3000,
+  "updated_files": [
+    "data/candidates/2026-06-30-run-13-candidate-leads.json",
+    "data/raw_sources/2026-06-30-run-13-web-discovery-scan.json"
+  ],
+  "summary_zh": "本輪保存 6 筆候選線索與原始掃描紀錄。尚未補齊官方來源、位置、狀態與去重查核，因此不加入首頁現況地圖。",
+  "next_rule_zh": "下次新增資料前，先比對最新批次、候選線索、去重索引與 active 地圖資料。"
+}
