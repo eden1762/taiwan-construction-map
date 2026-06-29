@@ -1,0 +1,30 @@
+{
+  "batch_id": "2026-06-30-run-14",
+  "batch_date": "2026-06-30",
+  "batch_type": "candidate_verification_queue",
+  "input_files": [
+    "data/candidates/2026-06-30-run-13-candidate-leads.json",
+    "data/import_batches/latest.json",
+    "data/dedupe_index.json",
+    "data/active_construction_projects.geojson"
+  ],
+  "updated_files": [
+    "data/candidates/2026-06-30-run-14-candidate-verification-queue.json",
+    "data/raw_sources/2026-06-30-run-14-official-verification-scan.json",
+    "data/import_batches/2026-06-30-run-14-log.json",
+    "data/import_batches/latest.json",
+    "data/public_research_catalog.json",
+    "sources.html"
+  ],
+  "candidate_records_reviewed": 6,
+  "passed_records": 0,
+  "excluded_records": 0,
+  "active_records_added": 0,
+  "active_count_after_batch": 21,
+  "active_goal": 3000,
+  "homepage_stats_changed": false,
+  "summary_zh": "本輪把第 13 輪 6 筆候選線索整理成官方查核佇列，補上每筆候選下次必查來源、必補欄位與去重鍵。因尚未補齊官方來源、位置、狀態、期程與 geometry，沒有任何資料轉入 active 首頁地圖。",
+  "summary_en": "This run converted six Run 13 candidate leads into an official-verification queue with required source groups, missing fields, and dedupe keys. No record was promoted to the active homepage map because official sources, location, status, timeline, and geometry are still incomplete.",
+  "next_rule_zh": "下次若取得官方來源，先更新候選詳細欄位與原始來源紀錄；只有通過 active 規則、去重與 geometry 檢查後，才可轉入 active GeoJSON。",
+  "next_rule_en": "If official sources are found next time, enrich candidate details and raw source records first. Promote only after active-status, dedupe, and geometry checks pass."
+}
