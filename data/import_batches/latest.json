@@ -1,9 +1,10 @@
 {
   "updated_at": "2026-06-30",
-  "latest_batch_id": "2026-06-30-run-13",
-  "latest_batch_log": "data/import_batches/2026-06-30-run-13-log.json",
-  "latest_raw_source_record": "data/raw_sources/2026-06-30-run-13-web-discovery-scan.json",
+  "latest_batch_id": "2026-06-30-run-14",
+  "latest_batch_log": "data/import_batches/2026-06-30-run-14-log.json",
+  "latest_raw_source_record": "data/raw_sources/2026-06-30-run-14-official-verification-scan.json",
   "latest_candidate_leads": "data/candidates/2026-06-30-run-13-candidate-leads.json",
+  "latest_candidate_verification_queue": "data/candidates/2026-06-30-run-14-candidate-verification-queue.json",
   "active_count": 21,
   "active_goal": 3000
 }
