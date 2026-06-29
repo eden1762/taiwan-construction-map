@@ -8,6 +8,11 @@
   <title>資料入口｜台灣工程地圖</title>
   <link rel="stylesheet" href="./fast-map.css?v=20260628-national-lanes" />
   <link rel="stylesheet" href="./styles.css?v=source-page-20260628-national-lanes" />
+  <style>
+    .source-rotation{margin:0 auto 18px;max-width:1120px;border:1px solid rgba(12,35,55,.12);border-radius:22px;background:linear-gradient(135deg,#f4fbff,#fffaf2);padding:16px;box-shadow:0 14px 34px rgba(13,39,62,.08)}
+    .source-rotation h3{margin:0 0 8px;color:#102131;font-size:18px;line-height:1.25}.source-rotation p{margin:0;color:#526b82;font-size:13px;line-height:1.65;font-weight:850}.rotation-pills{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.rotation-pills span{border:1px solid rgba(12,35,55,.12);border-radius:999px;background:#fff;padding:7px 10px;font-size:12px;font-weight:1000;color:#17324a}
+    @media(max-width:760px){.source-rotation{margin:0 12px 14px;padding:13px;border-radius:18px}.source-rotation h3{font-size:16px}.source-rotation p{font-size:12px}.rotation-pills span{font-size:11px;padding:6px 8px}}
+  </style>
 </head>
 <body data-page="sources">
   <a class="skip" href="#sourceCards">跳到資料入口</a>
@@ -35,6 +40,20 @@
         <input id="sourceSearch" type="search" placeholder="例：決標、道路挖掘、環評、建照、捷運、無人機、AI" autocomplete="off" />
       </label>
       <p class="sources-count" id="sourceCount">資料入口整理中</p>
+    </section>
+
+    <section class="source-rotation" aria-label="資料輪替補強">
+      <h3>資料輪替補強 / Rotating source coverage</h3>
+      <p>新增工程資料時，優先輪流查公共工程、採購決標、地方工務、捷運鐵道、公路道路、水利防災、港灣機場、園區、環評、建管、道路挖掘與地方開放資料。只放現況有效、可回查、不重複的工程；資料不足時寧可標示待補，也不臆測。</p>
+      <p>New records should rotate across official portals and project sectors. Only active, traceable, non-duplicate projects belong in the live map; missing fields stay marked as to be verified.</p>
+      <div class="rotation-pills" aria-label="輪替資料類型">
+        <span>公共工程 / Public works</span>
+        <span>標案決標 / Tenders</span>
+        <span>地方工務 / Local works</span>
+        <span>交通軌道 / Transit & rail</span>
+        <span>環評建管 / EIA & permits</span>
+        <span>道路管線 / Roads & utilities</span>
+      </div>
     </section>
 
     <section id="sourceCards" class="source-grid" aria-live="polite"></section>
