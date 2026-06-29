@@ -9,13 +9,10 @@
   <link rel="preconnect" href="https://tile.openstreetmap.org" crossorigin />
   <link rel="dns-prefetch" href="//tile.openstreetmap.org" />
   <link rel="preload" href="/data/active_construction_projects.geojson" as="fetch" type="application/geo+json" crossorigin />
-  <link rel="stylesheet" href="./fast-map.css?v=20260628-national-lanes-2" />
+  <link rel="stylesheet" href="./fast-map.css?v=20260629-mobile-first-1" />
   <style>
-    .layerbox{margin-top:12px;border:1px solid rgba(12,35,55,.13);border-radius:18px;background:#fff;padding:12px}.layerbox p{margin:0 0 8px!important;color:#526b82!important}.layerbox p b{display:block;color:#102131}.layerbox p span{display:block;font-size:12px;line-height:1.45}.layerbox div{display:flex;flex-wrap:wrap;gap:8px}.layerbox label{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(12,35,55,.13);background:#f8fcff;border-radius:999px;padding:8px 10px;font-size:12px;font-weight:1000;cursor:pointer}.layerbox input{accent-color:#0b88aa}
-    .legendGuide{margin-top:12px;border:1px solid rgba(12,35,55,.13);border-radius:18px;background:linear-gradient(145deg,#fff,#f4fbff);padding:12px}.legendGuide b{display:block;margin-bottom:8px;color:#102131}.legendGuide p{margin:0 0 8px!important;font-size:12px!important;color:#526b82!important}.legendDots,.statusDots{display:flex;flex-wrap:wrap;gap:7px}.legendDots span,.statusDots span{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(12,35,55,.12);border-radius:999px;background:#fff;padding:6px 8px;font-size:12px;font-weight:950}.legendDots i{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c)}.statusDots i{display:inline-block;width:9px;height:9px;border-radius:3px;background:#0b88aa}.mapNote{margin:8px 0 0!important;font-size:12px!important;line-height:1.5;color:#526b82!important;font-weight:850!important}
-    .dataPolicy{margin-top:12px;border:1px solid rgba(12,35,55,.13);border-radius:18px;background:linear-gradient(145deg,#fffdf7,#f4fbff);padding:12px}.dataPolicy b{display:block;color:#102131;margin-bottom:6px}.dataPolicy p{margin:0!important;color:#526b82!important;font-size:12px!important;line-height:1.55;font-weight:850!important}.dataPolicy strong{color:#0b6d89}
-    .sourceGuide{margin-top:12px;border:1px solid rgba(12,35,55,.13);border-radius:18px;background:linear-gradient(145deg,#fff,#f7fffb);padding:12px}.sourceGuide b{display:block;color:#102131;margin-bottom:8px}.sourceGuide ul{margin:0;padding-left:18px;color:#526b82;font-size:12px;line-height:1.55;font-weight:850}.sourceGuide li+li{margin-top:4px}.sourceGuide strong{color:#0b6d89}
-    .mapHowto{margin-top:12px;border:1px solid rgba(12,35,55,.13);border-radius:18px;background:linear-gradient(145deg,#f7fbff,#fff);padding:12px}.mapHowto b{display:block;color:#102131;margin-bottom:8px}.mapHowto ul{margin:0;padding-left:18px;color:#526b82;font-size:12px;line-height:1.55;font-weight:850}.mapHowto li+li{margin-top:4px}
+    .quickPanel{margin-top:12px;border:1px solid rgba(12,35,55,.13);border-radius:18px;background:linear-gradient(145deg,#fff,#f7fbff);padding:12px}.quickPanel summary{cursor:pointer;font-weight:1000;color:#102131;list-style:none}.quickPanel summary::-webkit-details-marker{display:none}.quickPanel summary::after{content:"＋";float:right}.quickPanel[open] summary::after{content:"－"}.quickPanel p,.quickPanel li{color:#526b82;font-size:12px;line-height:1.55;font-weight:850}.quickPanel ul{margin:10px 0 0;padding-left:18px}.legendDots,.statusDots{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.legendDots span,.statusDots span{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(12,35,55,.12);border-radius:999px;background:#fff;padding:6px 8px;font-size:12px;font-weight:950}.legendDots i{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c)}.statusDots i{display:inline-block;width:9px;height:9px;border-radius:3px;background:#0b88aa}.mapNote{margin:8px 0 0!important;font-size:12px!important;line-height:1.5;color:#526b82!important;font-weight:850!important}.firstUse{border-color:rgba(11,136,170,.22);background:linear-gradient(145deg,#eefbff,#fff)}
+    @media(max-width:760px){.quickPanel{margin-top:10px;padding:10px}.side .quickPanel:not(.firstUse){margin-top:8px}.legendDots span,.statusDots span{font-size:11px;padding:5px 7px}.mapNote{font-size:11px!important}.hero{padding-bottom:14px}.block{padding-top:18px}.layout{gap:12px}.side{order:1}.mapcard{order:2}}
   </style>
 </head>
 <body data-page="overview">
@@ -44,6 +41,7 @@
         <article><b id="m3">12</b><span data-t="lanes">工程類型</span></article>
       </div>
     </section>
+
     <section id="cats" class="block">
       <div class="title">
         <p class="eyebrow" data-t="cats">工程分類</p>
@@ -52,6 +50,7 @@
       </div>
       <div id="catCards" class="catgrid"></div>
     </section>
+
     <section id="mapSec" class="layout">
       <aside class="side">
         <p class="eyebrow" data-t="overview">全國工程概況</p>
@@ -63,25 +62,29 @@
           <label><span data-t="status">辦理狀態</span><select id="status"></select></label>
         </div>
         <section id="layerToggles" class="layerbox" aria-label="圖層開關">
-          <p><b>圖層開關 / Layer switches</b><span>資料或地圖背景尚未完成時，先保留完整分類入口；正式載入後可逐層開關。All sector switches stay visible first, then become live filters when the map is ready.</span></p>
+          <p><b>圖層開關 / Layer switches</b><span>首屏先保留完整分類入口；正式載入後可逐層開關。</span></p>
           <div>
             <label><input type="checkbox" checked>公共工程 / Public Works</label>
             <label><input type="checkbox" checked>道路 / Roads</label>
             <label><input type="checkbox" checked>管線 / Utilities</label>
             <label><input type="checkbox" checked>捷運 / Metro</label>
-            <label><input type="checkbox">鐵路 / Rail</label>
             <label><input type="checkbox" checked>建築 / Buildings</label>
-            <label><input type="checkbox">園區 / Parks</label>
-            <label><input type="checkbox">規劃 / Planning</label>
-            <label><input type="checkbox">環評 / Environmental Review</label>
-            <label><input type="checkbox">無人載具 / Uncrewed Systems</label>
-            <label><input type="checkbox">AI / AI</label>
-            <label><input type="checkbox">其他 / Other</label>
           </div>
         </section>
-        <section class="legendGuide" aria-label="圖例與狀態說明">
-          <b>圖例與狀態 / Legend & status</b>
-          <p>顏色代表工程類型，狀態代表目前辦理階段；放大、搜尋或選縣市後會顯示工程點位。Colors show sectors; status shows the current project stage.</p>
+
+        <details class="quickPanel firstUse" open>
+          <summary>地圖操作提示 / Map tips</summary>
+          <ul>
+            <li>手機可直接拖曳地圖、點縣市標記，或搜尋工程名、地點、甲方與乙方。</li>
+            <li>桌機可用右下角 + / − 調整視角，再點工程點位查看金額、期程與來源。</li>
+            <li>若底圖暫時較慢，工程清單、分類入口、縣市卡片與台灣簡圖會先保持可用。</li>
+            <li>On mobile, drag the map, tap city markers, or search by project, place, owner, or contractor. If the basemap is slow, the list and city cards stay ready first.</li>
+          </ul>
+        </details>
+
+        <details class="quickPanel">
+          <summary>圖例與狀態 / Legend & status</summary>
+          <p>顏色代表工程類型，狀態代表目前辦理階段；放大、搜尋或選縣市後會顯示工程點位。</p>
           <div class="legendDots">
             <span><i style="--c:#35d4ff"></i>公共工程 / Public Works</span>
             <span><i style="--c:#ffb84d"></i>道路 / Roads</span>
@@ -93,7 +96,7 @@
             <span><i style="--c:#ffcf66"></i>規劃 / Planning</span>
             <span><i style="--c:#ff6fae"></i>環評 / Environmental Review</span>
           </div>
-          <div class="statusDots" style="margin-top:8px">
+          <div class="statusDots">
             <span><i></i>規劃中 / Planning</span>
             <span><i></i>招標準備 / Tender Prep</span>
             <span><i></i>招標中 / Tendering</span>
@@ -101,29 +104,24 @@
             <span><i></i>完工 / Completed</span>
             <span><i></i>延宕 / Delayed</span>
           </div>
-        </section>
-        <section class="dataPolicy" aria-label="現況資料守則">
-          <b>現況資料守則 / Active data rules</b>
-          <p><strong>首頁現況統計</strong>只納入計畫中、招標準備、招標中、施工中，或完工／啟用一個月內的工程；過期、取消、停辦或來源失效的資料會移出首頁，避免把歷史案誤看成現況工程。<br><strong>Active overview</strong> keeps planned, pre-tender, tendering, under-construction, or recently completed projects only. Outdated or inactive records are moved out of the homepage view.</p>
-        </section>
-        <section class="sourceGuide" aria-label="資料來源使用方式">
-          <b>資料來源怎麼看 / How to read sources</b>
+        </details>
+
+        <details class="quickPanel">
+          <summary>現況資料守則 / Active data rules</summary>
+          <p><strong>首頁現況統計</strong>只納入計畫中、招標準備、招標中、施工中，或完工／啟用一個月內的工程；過期、取消、停辦或來源失效的資料會移出首頁，避免把歷史案誤看成現況工程。</p>
+          <p><strong>Active overview</strong> keeps planned, pre-tender, tendering, under-construction, or recently completed projects only. Outdated or inactive records are moved out of the homepage view.</p>
+        </details>
+
+        <details class="quickPanel">
+          <summary>資料來源怎麼看 / How to read sources</summary>
           <ul>
             <li><strong>來源連結</strong>優先放可回查的主管機關、發包單位、公告或公開圖資入口。</li>
             <li>工程金額、期程、甲方與乙方可能隨招標、變更設計或公告更新；正式引用前請回來源確認最新版。</li>
             <li>沒有公開佐證的欄位會標示「待補資料 / To be verified」，不把猜測內容混進工程卡片。</li>
             <li>Source links point to traceable public portals. For formal use, always re-check the owner agency, tender notice, or public map layer.</li>
           </ul>
-        </section>
-        <section class="mapHowto" aria-label="地圖操作提示">
-          <b>地圖操作提示 / Map tips</b>
-          <ul>
-            <li>手機可直接拖曳地圖、點縣市標記，或用搜尋找工程名、地點、甲方與乙方。</li>
-            <li>桌機可用右下角 + / − 調整視角，再點工程點位查看摘要與來源。</li>
-            <li>如果底圖暫時較慢，先用工程清單、分類入口與縣市卡片查案，地圖背景可稍後重試。</li>
-            <li>On mobile, drag the map, tap city markers, or search by project, place, owner, or contractor. If the basemap is slow, the list and city cards stay ready first.</li>
-          </ul>
-        </section>
+        </details>
+
         <button id="reset" class="reset" data-t="reset">回到全台總覽</button>
         <div id="cityCards" class="citycards"></div>
       </aside>
@@ -140,6 +138,7 @@
         <div id="detail" class="detail"></div>
       </section>
     </section>
+
     <section class="block">
       <div class="title">
         <p class="eyebrow" data-t="list">工程清單</p>
@@ -148,13 +147,13 @@
       <div id="list" class="cards" aria-live="polite">
         <article class="proj" style="--c:#35d4ff"><i>公共工程 / Public Works</i><h3>公共工程入口</h3><p>資料讀取中也能先進入分類頁，查看公部門建設、水利、港灣、社宅與市政工程。</p><a href="./category.html?sector=public-works">打開分類地圖</a></article>
         <article class="proj" style="--c:#ffb84d"><i>道路與管線 / Roads & Utilities</i><h3>道路、橋梁、管線入口</h3><p>適合快速查找道路改善、橋梁、公路、排水、污水與地下管線相關工程。</p><a href="./category.html?sector=roads">打開道路工程</a></article>
-        <article class="proj" style="--c:#9b7cff"><i>捷運交通 / Metro & Mobility</i><h3>捷運、鐵路、交通入口</h3><p>先看軌道、車站、交通節點與路廊計畫；正式工程資料完成後會自動替換成現況清單。</p><a href="./category.html?sector=metro">打開捷運工程</a></article>
+        <article class="proj" style="--c:#9b7cff"><i>捷運交通 / Metro & Mobility</i><h3>捷運、鐵路、交通入口</h3><p>先看軌道、車站、交通節點與路廊計畫；正式資料載入完成後會自動換成現況清單。</p><a href="./category.html?sector=metro">打開捷運工程</a></article>
         <article class="proj" style="--c:#ffcf66"><i>規劃與環評 / Planning & Review</i><h3>規劃、環評入口</h3><p>適合追蹤可行性、路廊、環境審查與前期公告，先看案子會不會往下走。</p><a href="./category.html?sector=planning">打開規劃工程</a></article>
       </div>
     </section>
   </main>
   <footer class="foot"><span data-t="footer">資料以公開入口可回查內容整理；正式引用請回主管機關、發包單位與公告來源確認最新版本。地圖底圖 © OpenStreetMap contributors。</span></footer>
   <div class="dock" aria-label="快速操作"><a href="https://www.instagram.com/taiwan.construction/" target="_blank" rel="noopener noreferrer">IG</a><button id="lang" type="button">EN</button></div>
-  <script type="module" src="./fast-map.js?v=20260629-source-guide-1"></script>
+  <script type="module" src="./fast-map.js?v=20260629-mobile-first-1"></script>
 </body>
 </html>
