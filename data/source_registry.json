@@ -1,13 +1,16 @@
 {
-  "updated_at": "2026-06-29",
+  "updated_at": "2026-06-30",
   "purpose_zh": "記錄可輪替查詢的公開工程資料來源，作為每批匯入、查核與去重的基準。",
   "purpose_en": "Registry of public source portals used for rotating project discovery, verification, and deduplication.",
   "active_data_rule_zh": "首頁 active 地圖只納入計畫中、招標準備、招標中、施工中，或完工／啟用一個月內的工程。",
+  "rotation_rule_zh": "每輪新增資料應優先選擇不同來源群組與不同工程類型；若欄位不足或狀態不明，先放候選或待確認，不直接進首頁現況統計。",
+  "rotation_rule_en": "Each import round should rotate across different source groups and project sectors. Records with missing fields or unclear status stay as candidates, not active homepage records.",
   "source_rotation_groups": [
     {
       "group_id": "pcc-procurement",
       "label_zh": "公共工程與採購",
       "label_en": "Public works and procurement",
+      "priority_use_zh": "用於大量搜尋招標中、決標後施工中與公共工程進度資料。",
       "sources": [
         { "name": "行政院公共工程委員會", "url": "https://www.pcc.gov.tw/", "use_for": "公共工程政策、工程管理、採購資料入口" },
         { "name": "公共工程雲端服務網", "url": "https://pcic.pcc.gov.tw/", "use_for": "施工中工程、進度、查核、工期與價格資料" },
@@ -18,6 +21,7 @@
       "group_id": "transport-rail-road",
       "label_zh": "交通、捷運、鐵道與公路",
       "label_en": "Transport, metro, rail, and roads",
+      "priority_use_zh": "用於捷運、鐵路、公路、橋梁、交流道、地下化與高架化工程。",
       "sources": [
         { "name": "交通部", "url": "https://www.motc.gov.tw/", "use_for": "交通重大建設與上位計畫" },
         { "name": "交通部鐵道局", "url": "https://www.rb.gov.tw/", "use_for": "鐵路地下化、高架化、雙軌化與車站工程" },
@@ -29,6 +33,7 @@
       "group_id": "local-works-utilities",
       "label_zh": "地方工務、道路挖掘與管線",
       "label_en": "Local works, road works, and utilities",
+      "priority_use_zh": "用於市區道路、管線、排水、污水、共同管道與地方維護工程。",
       "sources": [
         { "name": "臺北市道路挖掘管理中心", "url": "https://dig.taipei/", "use_for": "臺北市道路挖掘與管線施工" },
         { "name": "新北 iRoad 智慧道路管理中心", "url": "https://roadmt.maintenance.ntpc.gov.tw/iROAD/Home/index", "use_for": "新北市道路工程與維護資訊" },
@@ -36,14 +41,58 @@
       ]
     },
     {
+      "group_id": "water-disaster-energy",
+      "label_zh": "水利、防災與能源",
+      "label_en": "Water, resilience, and energy",
+      "priority_use_zh": "用於排水治理、滯洪、防災、港區能源、電力與再生能源相關基礎設施。",
+      "sources": [
+        { "name": "經濟部水利署", "url": "https://www.wra.gov.tw/", "use_for": "河川治理、排水、滯洪池、防洪與水利建設" },
+        { "name": "國家災害防救科技中心", "url": "https://www.ncdr.nat.gov.tw/", "use_for": "防災圖資、災害風險與韌性建設背景查核" },
+        { "name": "經濟部能源署", "url": "https://www.moeaea.gov.tw/", "use_for": "能源設施、再生能源、儲能與電力基礎設施政策背景" },
+        { "name": "台灣電力公司", "url": "https://www.taipower.com.tw/", "use_for": "電力、變電所、輸配電與能源工程公告查核" }
+      ]
+    },
+    {
+      "group_id": "ports-airports-logistics",
+      "label_zh": "港灣、機場與物流節點",
+      "label_en": "Ports, airports, and logistics nodes",
+      "priority_use_zh": "用於港區、航廈、跑道、碼頭、倉儲與物流園區工程。",
+      "sources": [
+        { "name": "臺灣港務公司", "url": "https://www.twport.com.tw/", "use_for": "港灣、碼頭、港區公共設施與運維基地工程" },
+        { "name": "交通部民用航空局", "url": "https://www.caa.gov.tw/", "use_for": "機場、跑道、航廈與航空設施工程" },
+        { "name": "桃園國際機場股份有限公司", "url": "https://www.taoyuan-airport.com/", "use_for": "桃園機場航廈、空側與陸側公共設施工程" }
+      ]
+    },
+    {
+      "group_id": "industrial-science-parks",
+      "label_zh": "產業園區與科學園區",
+      "label_en": "Industrial and science parks",
+      "priority_use_zh": "用於園區道路、公共設施、污水、供電、廠辦與基地開發工程。",
+      "sources": [
+        { "name": "國家科學及技術委員會", "url": "https://www.nstc.gov.tw/", "use_for": "科學園區政策、園區擴建與重大科技建設背景" },
+        { "name": "新竹科學園區管理局", "url": "https://www.sipa.gov.tw/", "use_for": "新竹、中部以北科學園區工程與園區公告" },
+        { "name": "中部科學園區管理局", "url": "https://www.ctsp.gov.tw/", "use_for": "中科園區公共設施、基地與廠辦周邊工程" },
+        { "name": "南部科學園區管理局", "url": "https://www.stsp.gov.tw/", "use_for": "南科、橋頭、嘉義等園區公共工程與公告" },
+        { "name": "經濟部產業園區管理局", "url": "https://www.bip.gov.tw/", "use_for": "產業園區公共設施、開發與維護工程" }
+      ]
+    },
+    {
       "group_id": "eia-planning-permits",
       "label_zh": "環評、都市計畫與建管",
       "label_en": "EIA, planning, and permits",
+      "priority_use_zh": "用於大型開發案前期、都市計畫、建照使照與法規審查狀態。",
       "sources": [
         { "name": "環境部環評書件查詢系統", "url": "https://eiadoc.moenv.gov.tw/", "use_for": "大型開發案、路線、園區、能源與港灣環評" },
         { "name": "內政部國土管理署", "url": "https://www.nlma.gov.tw/", "use_for": "國土、都市計畫與建築管理" },
         { "name": "國土測繪圖資服務雲", "url": "https://maps.nlsc.gov.tw/", "use_for": "地籍、門牌、行政區、地形與航照輔助定位" }
       ]
     }
+  ],
+  "next_round_checklist_zh": [
+    "先讀 data/import_batches/latest.json 找最新批次",
+    "再比對 data/dedupe_index.json 與 data/active_construction_projects.geojson",
+    "新資料必須標示來源群組與來源連結",
+    "日期、狀態或位置不明者先放待確認區",
+    "每輪至少優先嘗試一個上輪未使用的來源群組"
   ]
 }
