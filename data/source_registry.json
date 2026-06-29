@@ -1,0 +1,49 @@
+{
+  "updated_at": "2026-06-29",
+  "purpose_zh": "記錄可輪替查詢的公開工程資料來源，作為每批匯入、查核與去重的基準。",
+  "purpose_en": "Registry of public source portals used for rotating project discovery, verification, and deduplication.",
+  "active_data_rule_zh": "首頁 active 地圖只納入計畫中、招標準備、招標中、施工中，或完工／啟用一個月內的工程。",
+  "source_rotation_groups": [
+    {
+      "group_id": "pcc-procurement",
+      "label_zh": "公共工程與採購",
+      "label_en": "Public works and procurement",
+      "sources": [
+        { "name": "行政院公共工程委員會", "url": "https://www.pcc.gov.tw/", "use_for": "公共工程政策、工程管理、採購資料入口" },
+        { "name": "公共工程雲端服務網", "url": "https://pcic.pcc.gov.tw/", "use_for": "施工中工程、進度、查核、工期與價格資料" },
+        { "name": "政府電子採購網", "url": "https://web.pcc.gov.tw/", "use_for": "招標公告、決標公告、得標廠商、金額與履約期限" }
+      ]
+    },
+    {
+      "group_id": "transport-rail-road",
+      "label_zh": "交通、捷運、鐵道與公路",
+      "label_en": "Transport, metro, rail, and roads",
+      "sources": [
+        { "name": "交通部", "url": "https://www.motc.gov.tw/", "use_for": "交通重大建設與上位計畫" },
+        { "name": "交通部鐵道局", "url": "https://www.rb.gov.tw/", "use_for": "鐵路地下化、高架化、雙軌化與車站工程" },
+        { "name": "交通部公路局", "url": "https://www.thb.gov.tw/", "use_for": "公路、橋梁、隧道與省道改善工程" },
+        { "name": "高速公路局", "url": "https://www.freeway.gov.tw/", "use_for": "國道拓寬、交流道與邊坡工程" }
+      ]
+    },
+    {
+      "group_id": "local-works-utilities",
+      "label_zh": "地方工務、道路挖掘與管線",
+      "label_en": "Local works, road works, and utilities",
+      "sources": [
+        { "name": "臺北市道路挖掘管理中心", "url": "https://dig.taipei/", "use_for": "臺北市道路挖掘與管線施工" },
+        { "name": "新北 iRoad 智慧道路管理中心", "url": "https://roadmt.maintenance.ntpc.gov.tw/iROAD/Home/index", "use_for": "新北市道路工程與維護資訊" },
+        { "name": "地方開放資料平台", "url": "https://data.gov.tw/", "use_for": "地方工務、道路、排水與開放資料交叉查詢" }
+      ]
+    },
+    {
+      "group_id": "eia-planning-permits",
+      "label_zh": "環評、都市計畫與建管",
+      "label_en": "EIA, planning, and permits",
+      "sources": [
+        { "name": "環境部環評書件查詢系統", "url": "https://eiadoc.moenv.gov.tw/", "use_for": "大型開發案、路線、園區、能源與港灣環評" },
+        { "name": "內政部國土管理署", "url": "https://www.nlma.gov.tw/", "use_for": "國土、都市計畫與建築管理" },
+        { "name": "國土測繪圖資服務雲", "url": "https://maps.nlsc.gov.tw/", "use_for": "地籍、門牌、行政區、地形與航照輔助定位" }
+      ]
+    }
+  ]
+}
