@@ -1,0 +1,30 @@
+{
+  "updated_at": "2026-06-29",
+  "purpose_zh": "作為後續新增工程資料前的去重基準；新增資料必須先比對名稱、地點、發包機關、施工方、來源連結與座標。",
+  "purpose_en": "Baseline index for deduplicating future project imports by name, place, owner, contractor, source URL, and coordinates.",
+  "active_goal": 3000,
+  "active_count_baseline": 21,
+  "dedupe_key_fields": ["name", "owner", "contractor", "address", "source_url", "geometry"],
+  "records": [
+    { "id": "tcmap-001", "name": "淡江大橋及連絡道路", "owner": "交通部公路局", "address": "新北市淡水區、八里區淡水河口", "source_url": "https://www.thb.gov.tw/", "dedupe_key": "淡江大橋及連絡道路|交通部公路局|新北市淡水區、八里區淡水河口|https://www.thb.gov.tw/" },
+    { "id": "tcmap-002", "name": "桃園國際機場第三航廈", "owner": "桃園國際機場股份有限公司", "address": "桃園市大園區桃園國際機場", "source_url": "https://www.taoyuan-airport.com/", "dedupe_key": "桃園國際機場第三航廈|桃園國際機場股份有限公司|桃園市大園區桃園國際機場|https://www.taoyuan-airport.com/" },
+    { "id": "tcmap-003", "name": "桃園捷運綠線 GC01 標周邊工程", "owner": "桃園市政府捷運工程局", "address": "桃園市桃園區、中正路與經國路周邊", "source_url": "https://dorts.tycg.gov.tw/", "dedupe_key": "桃園捷運綠線 GC01 標周邊工程|桃園市政府捷運工程局|桃園市桃園區、中正路與經國路周邊|https://dorts.tycg.gov.tw/" },
+    { "id": "tcmap-004", "name": "臺北捷運萬大線第一期 CQ850 區段", "owner": "臺北市政府捷運工程局", "address": "臺北市萬華區、中正區至新北市中和區", "source_url": "https://www.dorts.gov.taipei/", "dedupe_key": "臺北捷運萬大線第一期 CQ850 區段|臺北市政府捷運工程局|臺北市萬華區、中正區至新北市中和區|https://www.dorts.gov.taipei/" },
+    { "id": "tcmap-005", "name": "新北捷運三鶯線土城端工程", "owner": "新北市政府捷運工程局", "address": "新北市土城區、三峽區、鶯歌區", "source_url": "https://www.dorts.ntpc.gov.tw/", "dedupe_key": "新北捷運三鶯線土城端工程|新北市政府捷運工程局|新北市土城區、三峽區、鶯歌區|https://www.dorts.ntpc.gov.tw/" },
+    { "id": "tcmap-006", "name": "高雄捷運黃線 Y15 車站周邊工程", "owner": "高雄市政府捷運工程局", "address": "高雄市三民區、苓雅區主要路廊", "source_url": "https://mtbu.kcg.gov.tw/", "dedupe_key": "高雄捷運黃線 Y15 車站周邊工程|高雄市政府捷運工程局|高雄市三民區、苓雅區主要路廊|https://mtbu.kcg.gov.tw/" },
+    { "id": "tcmap-007", "name": "臺中捷運藍線臺灣大道核心段", "owner": "臺中市政府交通局", "address": "臺中市臺灣大道沿線", "source_url": "https://www.traffic.taichung.gov.tw/", "dedupe_key": "臺中捷運藍線臺灣大道核心段|臺中市政府交通局|臺中市臺灣大道沿線|https://www.traffic.taichung.gov.tw/" },
+    { "id": "tcmap-008", "name": "臺南市區鐵路地下化北段", "owner": "交通部鐵道局", "address": "臺南市東區、北區鐵路沿線", "source_url": "https://www.rb.gov.tw/", "dedupe_key": "臺南市區鐵路地下化北段|交通部鐵道局|臺南市東區、北區鐵路沿線|https://www.rb.gov.tw/" },
+    { "id": "tcmap-009", "name": "嘉義市區鐵路高架化車站段", "owner": "交通部鐵道局", "address": "嘉義市西區嘉義車站周邊", "source_url": "https://www.rb.gov.tw/", "dedupe_key": "嘉義市區鐵路高架化車站段|交通部鐵道局|嘉義市西區嘉義車站周邊|https://www.rb.gov.tw/" },
+    { "id": "tcmap-010", "name": "花東鐵路雙軌化玉里段", "owner": "交通部鐵道局", "address": "花蓮縣玉里鎮至臺東縣池上鄉沿線", "source_url": "https://www.rb.gov.tw/", "dedupe_key": "花東鐵路雙軌化玉里段|交通部鐵道局|花蓮縣玉里鎮至臺東縣池上鄉沿線|https://www.rb.gov.tw/" },
+    { "id": "tcmap-011", "name": "臺北市道路挖掘信義幹線更新", "owner": "臺北市政府工務局", "address": "臺北市信義區松仁路、信義路周邊", "source_url": "https://dig.taipei/", "dedupe_key": "臺北市道路挖掘信義幹線更新|臺北市政府工務局|臺北市信義區松仁路、信義路周邊|https://dig.taipei/" },
+    { "id": "tcmap-012", "name": "新北 iRoad 中和道路改善工程", "owner": "新北市政府養護工程處", "address": "新北市中和區景平路周邊", "source_url": "https://roadmt.maintenance.ntpc.gov.tw/iROAD/Home/index", "dedupe_key": "新北 iRoad 中和道路改善工程|新北市政府養護工程處|新北市中和區景平路周邊|https://roadmt.maintenance.ntpc.gov.tw/iROAD/Home/index" },
+    { "id": "tcmap-013", "name": "高雄市前鎮區道路排水改善", "owner": "高雄市政府工務局", "address": "高雄市前鎮區中山三路與一心一路周邊", "source_url": "https://pwb.kcg.gov.tw/", "dedupe_key": "高雄市前鎮區道路排水改善|高雄市政府工務局|高雄市前鎮區中山三路與一心一路周邊|https://pwb.kcg.gov.tw/" },
+    { "id": "tcmap-014", "name": "橋頭科學園區公共設施第一期", "owner": "南部科學園區管理局", "address": "高雄市橋頭區橋頭科學園區", "source_url": "https://www.stsp.gov.tw/", "dedupe_key": "橋頭科學園區公共設施第一期|南部科學園區管理局|高雄市橋頭區橋頭科學園區|https://www.stsp.gov.tw/" },
+    { "id": "tcmap-015", "name": "桃園航空城公共設施工程", "owner": "桃園市政府航空城工程處", "address": "桃園市大園區、蘆竹區航空城計畫區", "source_url": "https://www.tycg.gov.tw/", "dedupe_key": "桃園航空城公共設施工程|桃園市政府航空城工程處|桃園市大園區、蘆竹區航空城計畫區|https://www.tycg.gov.tw/" },
+    { "id": "tcmap-016", "name": "臺北市信義區社會住宅新建工程", "owner": "國家住宅及都市更新中心", "address": "臺北市信義區吳興街周邊", "source_url": "https://www.hurc.org.tw/", "dedupe_key": "臺北市信義區社會住宅新建工程|國家住宅及都市更新中心|臺北市信義區吳興街周邊|https://www.hurc.org.tw/" },
+    { "id": "tcmap-018", "name": "彰濱離岸風電運維基地工程", "owner": "臺灣港務公司與能源主管機關", "address": "彰化縣鹿港鎮彰濱工業區周邊", "source_url": "https://www.twport.com.tw/", "dedupe_key": "彰濱離岸風電運維基地工程|臺灣港務公司與能源主管機關|彰化縣鹿港鎮彰濱工業區周邊|https://www.twport.com.tw/" },
+    { "id": "tcmap-019", "name": "國道七號高雄路廊計畫", "owner": "交通部高速公路局", "address": "高雄市仁武、鳥松、鳳山、小港周邊", "source_url": "https://www.freeway.gov.tw/", "dedupe_key": "國道七號高雄路廊計畫|交通部高速公路局|高雄市仁武、鳥松、鳳山、小港周邊|https://www.freeway.gov.tw/" },
+    { "id": "tcmap-020", "name": "基隆捷運南港至八堵段計畫", "owner": "交通部、基隆市政府、新北市政府", "address": "臺北市南港區、新北市汐止區、基隆市七堵區", "source_url": "https://www.motc.gov.tw/", "dedupe_key": "基隆捷運南港至八堵段計畫|交通部、基隆市政府、新北市政府|臺北市南港區、新北市汐止區、基隆市七堵區|https://www.motc.gov.tw/" },
+    { "id": "tcmap-021", "name": "淡水河北側沿河平面道路工程", "owner": "新北市政府工務局", "address": "新北市淡水區淡金路、中正東路至臺北市北投區大度路", "source_url": "https://www.publicwork.ntpc.gov.tw/", "dedupe_key": "淡水河北側沿河平面道路工程|新北市政府工務局|新北市淡水區淡金路、中正東路至臺北市北投區大度路|https://www.publicwork.ntpc.gov.tw/" }
+  ]
+}
