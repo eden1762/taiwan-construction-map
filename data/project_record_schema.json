@@ -1,0 +1,64 @@
+{
+  "updated_at": "2026-06-29",
+  "title_zh": "台灣工程地圖工程資料欄位規格",
+  "title_en": "Taiwan Construction Map Project Record Schema",
+  "purpose_zh": "讓後續新增資料時，原始紀錄、待確認資料、active 地圖資料與大眾研究資料使用同一套欄位規格，避免資料越累積越難比對。",
+  "purpose_en": "A shared schema for raw records, pending records, active map data, and public research data so future imports remain comparable and deduplicated.",
+  "public_reading_note_zh": "一般研究者可用本檔理解每筆工程卡片應該有哪些資料；沒有公開資料時，欄位應標示待補資料，不得臆測。",
+  "public_reading_note_en": "Researchers can use this file to understand the fields behind each project card. Missing public data should be marked as To be verified instead of guessed.",
+  "required_project_fields": [
+    { "field": "id", "label_zh": "資料編號", "label_en": "Record ID", "public_note_zh": "每筆工程唯一編號，用於去重與追蹤。" },
+    { "field": "name", "label_zh": "工程名稱", "label_en": "Project name", "public_note_zh": "以官方公告或主管機關常用名稱為準。" },
+    { "field": "category", "label_zh": "工程類型", "label_en": "Project sector", "allowed_values_zh": ["公共工程", "道路/管線", "捷運/交通", "建築/園區", "規劃/環評"], "public_note_zh": "首頁圖層與顏色分類使用此欄位。" },
+    { "field": "status", "label_zh": "辦理狀態", "label_en": "Status", "allowed_values_zh": ["規劃中", "招標準備", "招標中", "施工中", "完工", "延宕", "待確認"], "public_note_zh": "只有符合 active 規則的資料可進首頁現況地圖。" },
+    { "field": "owner", "label_zh": "甲方／發包方", "label_en": "Owner / contracting authority", "public_note_zh": "以主管機關、建設單位或標案資料為準。" },
+    { "field": "contractor", "label_zh": "乙方／施工方", "label_en": "Contractor", "public_note_zh": "尚未決標或未公開時標示待補資料。" },
+    { "field": "budget_ntd", "label_zh": "金額", "label_en": "Budget in NTD", "public_note_zh": "以官方預算、決標金額或公告金額為準；未知時標示待補資料。" },
+    { "field": "start_date", "label_zh": "開始日期", "label_en": "Start date", "format": "YYYY-MM-DD or To be verified", "public_note_zh": "用於判斷工程期程與資料新舊。" },
+    { "field": "planned_end_date", "label_zh": "預定完成日期", "label_en": "Planned completion date", "format": "YYYY-MM-DD or To be verified", "public_note_zh": "已完工或啟用超過一個月者不得留在首頁 active 統計。" },
+    { "field": "address", "label_zh": "位置／範圍", "label_en": "Address / area", "public_note_zh": "可為地址、行政區、道路路廊、站區或工程範圍。" },
+    { "field": "source_name", "label_zh": "資料來源名稱", "label_en": "Source name", "public_note_zh": "顯示給一般使用者判斷資料可信度。" },
+    { "field": "source_url", "label_zh": "資料來源連結", "label_en": "Source URL", "public_note_zh": "必須能回查；無法回查者不得進 active 地圖。" },
+    { "field": "updated_at", "label_zh": "資料更新日", "label_en": "Record updated date", "format": "YYYY-MM-DD", "public_note_zh": "每次查核或匯入都應更新。" },
+    { "field": "geometry", "label_zh": "地圖位置", "label_en": "Map geometry", "allowed_geometry": ["Point", "LineString", "MultiLineString", "Polygon", "MultiPolygon"], "public_note_zh": "能確認路廊或範圍時，優先使用線或面；只有單點時才用 Point。" }
+  ],
+  "public_detail_sections": [
+    "基本資料",
+    "位置範圍",
+    "工程內容",
+    "發包與廠商",
+    "金額成本",
+    "時間期程",
+    "施工進度",
+    "審查法規",
+    "民眾資訊"
+  ],
+  "dedupe_keys": [
+    "normalized_name",
+    "source_url",
+    "owner",
+    "contractor",
+    "address_or_corridor",
+    "geometry_center_or_bounds",
+    "tender_or_project_code"
+  ],
+  "batch_log_required_fields": [
+    "batch_id",
+    "batch_date",
+    "source_type",
+    "source_name",
+    "candidate_count",
+    "passed_review_count",
+    "excluded_count",
+    "excluded_reasons",
+    "added_to_active_count",
+    "saved_as_pending_count",
+    "dedupe_files_checked"
+  ],
+  "active_rules_zh": [
+    "只允許計畫中、招標準備、招標中、施工中，或完工／啟用一個月內的工程進入首頁 active 地圖。",
+    "已完工或啟用超過一個月、取消、停辦、來源失效或無法回查者，不得計入首頁現況統計。",
+    "欄位不足但可能有效者，先保存為候選／待確認資料，不混入 active 統計。"
+  ],
+  "homepage_performance_rule_zh": "即使 active 資料累積到 3,000 筆以上，首頁仍只載入首屏必要摘要、搜尋、篩選、統計、地圖容器與輕量點位；完整資料應透過分類、分頁、索引、搜尋後載入或延後載入處理。"
+}
