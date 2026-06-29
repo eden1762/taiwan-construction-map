@@ -1,0 +1,52 @@
+{
+  "batch_id": "2026-06-29-run-08",
+  "created_at": "2026-06-29",
+  "batch_type": "data-workflow-hardening",
+  "summary_zh": "本批次補強最新批次指標，讓公開資料入口不再固定指向單一舊批次。未新增未查證工程案，避免為了數量犧牲資料品質。",
+  "summary_en": "This batch adds a latest-batch pointer so the public data entry no longer hard-codes one older batch. No unverified projects were added.",
+  "source_types_checked": [
+    "既有 active 工程地圖資料",
+    "資料來源輪替登錄表",
+    "去重索引",
+    "公開研究資料索引",
+    "資料入口公開頁"
+  ],
+  "source_names": [
+    "data/active_construction_projects.geojson",
+    "data/source_registry.json",
+    "data/dedupe_index.json",
+    "data/public_research_catalog.json",
+    "sources.html"
+  ],
+  "candidate_count": 0,
+  "accepted_count": 0,
+  "excluded_count": 0,
+  "excluded_reasons": [],
+  "active_map_added": 0,
+  "candidate_only_added": 0,
+  "public_readable_outputs": [
+    "data/import_batches/latest.json",
+    "data/public_research_catalog.json",
+    "sources.html"
+  ],
+  "raw_outputs": [
+    "data/raw_sources/2026-06-29-run-08-source-check.json",
+    "data/import_batches/2026-06-29-run-08-batch-log.json"
+  ],
+  "dedupe_inputs_for_next_batch": [
+    "data/dedupe_index.json",
+    "data/active_construction_projects.geojson",
+    "data/raw_sources/2026-06-29-run-08-source-check.json",
+    "data/import_batches/2026-06-29-run-08-batch-log.json",
+    "data/import_batches/latest.json"
+  ],
+  "next_batch_checklist_zh": [
+    "先讀取 latest.json 找到最新批次，再沿著 batch log 回查 raw source record。",
+    "先比對 dedupe_index 與 active GeoJSON，避免重複匯入既有 active 工程。",
+    "新工程要先保存原始來源紀錄，再轉成大眾可讀工程卡片與 GeoJSON。",
+    "未補齊狀態、日期、來源或位置者，只能放待確認區，不得進首頁 active 統計。"
+  ],
+  "quality_gate_zh": "只有現況有效、來源可回查、不重複，且至少具備名稱、狀態、甲方、來源、位置或合理定位的資料，才可進入 active 地圖。",
+  "active_goal": 3000,
+  "active_count_after_batch": 21
+}
