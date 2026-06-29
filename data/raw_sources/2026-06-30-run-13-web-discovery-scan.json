@@ -1,0 +1,24 @@
+{
+  "batch_id": "2026-06-30-run-13",
+  "created_at": "2026-06-30",
+  "scan_type": "public-web-discovery-not-active-import",
+  "title_zh": "第 13 輪公開網頁候選線索掃描紀錄",
+  "purpose_zh": "把本輪公開網頁搜尋得到的工程線索先保存為原始查找紀錄；因尚未完成主管機關、採購或公共工程資料交叉查核，本輪不新增 active 首頁資料。",
+  "candidate_output": "data/candidates/2026-06-30-run-13-candidate-leads.json",
+  "source_groups_touched": [
+    "transport-rail-road",
+    "ports-airports-logistics",
+    "water-disaster-energy"
+  ],
+  "search_queries": [
+    "台灣 公共工程 施工中 2026 工程資料 開放資料",
+    "桃園市政府 捷運綠線 施工進度",
+    "高雄市政府捷運工程局 黃線 工程進度 2026",
+    "桃園國際機場 第三航廈 工程進度 2026 官方"
+  ],
+  "quality_result_zh": "找到多個可能仍有效的交通、機場與水利工程線索，但多數搜尋結果不是主管機關原始公告或可直接回查的採購資料，因此全部保留為候選，不納入 active 地圖。",
+  "dedupe_result_zh": "本輪未新增 active 資料，因此不改動 active GeoJSON 與首頁統計；下一輪若要匯入，必須先比對 dedupe_index、active_construction_projects.geojson、source_registry 與最新批次紀錄。",
+  "active_records_added": 0,
+  "candidate_records_saved": 6,
+  "next_step_zh": "下一輪優先用候選名稱回查主管機關、公共工程雲端服務網、政府電子採購網與環評書件，再決定是否轉成 active 或 excluded。"
+}
