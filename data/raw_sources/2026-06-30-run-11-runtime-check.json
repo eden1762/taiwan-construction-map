@@ -1,0 +1,37 @@
+{
+  "record_id": "2026-06-30-run-11-runtime-check",
+  "captured_at": "2026-06-30",
+  "source_name": "Taiwan Construction Map homepage and data rules",
+  "source_url": "https://taiwan-construction-map.vercel.app/",
+  "check_scope": [
+    "homepage first view",
+    "OpenStreetMap attribution",
+    "fallback map behavior",
+    "large dataset rendering",
+    "future dedupe preparation"
+  ],
+  "observed_existing_baseline": {
+    "active_count": 21,
+    "active_goal": 3000,
+    "latest_batch_pointer": "data/import_batches/latest.json",
+    "research_catalog": "data/public_research_catalog.json",
+    "schema": "data/project_record_schema.json",
+    "dedupe_index": "data/dedupe_index.json"
+  },
+  "action_taken": "Created data/quality/mobile_osm_runtime_gates.json and linked it into public data indexes.",
+  "dedupe_key_fields_for_future_project_imports": [
+    "name",
+    "owner",
+    "contractor",
+    "address",
+    "source_url",
+    "geometry"
+  ],
+  "quality_notes_zh": [
+    "首頁必須先讓搜尋、篩選、統計、清單與地圖容器可用，再處理大量資料或底圖載入。",
+    "OpenStreetMap 為預設底圖，失敗時只能用備援畫面，不可讓整頁卡住。",
+    "大量資料累積到 3000 筆以上時，首頁仍需分頁、分類、圖層開關與點位抽樣。"
+  ],
+  "active_map_change": false,
+  "public_website_copy_changed": false
+}
