@@ -1,0 +1,67 @@
+{
+  "batch_id": "2026-06-29-run-07-source-check",
+  "created_at": "2026-06-29",
+  "purpose_zh": "保存本輪工程資料查找與資料結構檢查的原始紀錄，作為下次新增資料前的去重與來源輪替依據。",
+  "purpose_en": "Raw record for this project-source check, used as a future dedupe and source-rotation baseline.",
+  "public_site": "https://taiwan-construction-map.vercel.app/",
+  "repository": "eden1762/taiwan-construction-map",
+  "checked_existing_files": [
+    {
+      "path": "data/source_registry.json",
+      "role_zh": "資料來源輪替登錄表",
+      "dedupe_use": "確認每批資料應輪替不同官方來源，不長期只依賴單一入口。"
+    },
+    {
+      "path": "data/dedupe_index.json",
+      "role_zh": "既有 active 工程去重索引",
+      "dedupe_use": "新增資料前比對工程名、地點、甲方、乙方、來源連結與座標。"
+    },
+    {
+      "path": "data/active_construction_projects.geojson",
+      "role_zh": "首頁 active 工程地圖資料",
+      "dedupe_use": "只讓計畫中、招標準備、招標中、施工中、或完工啟用一個月內資料進入首頁地圖。"
+    },
+    {
+      "path": "sources.html",
+      "role_zh": "大眾可閱讀資料入口頁",
+      "dedupe_use": "向一般研究者與大眾說明來源輪替、保存、去重與待確認規則。"
+    }
+  ],
+  "source_rotation_groups_to_try_next": [
+    "公共工程與採購",
+    "地方工務、道路挖掘與管線",
+    "捷運、鐵道、公路與交通建設",
+    "環評、都市計畫與建管",
+    "水利、防災、港灣、機場、能源與園區"
+  ],
+  "raw_record_policy": {
+    "store_every_batch": true,
+    "required_fields": [
+      "source_name",
+      "source_url",
+      "captured_at",
+      "candidate_count",
+      "accepted_count",
+      "excluded_count",
+      "exclusion_reasons",
+      "dedupe_keys",
+      "active_map_decision"
+    ],
+    "candidate_records_not_active_until_verified": true
+  },
+  "dedupe_key_policy": {
+    "compare_fields": [
+      "name",
+      "case_number",
+      "address",
+      "owner",
+      "contractor",
+      "source_url",
+      "geometry",
+      "project_scope"
+    ],
+    "same_project_rule_zh": "若名稱、地點、甲方、來源連結或工程範圍高度相同，視為同一工程；除非不同路段、不同契約或官方來源明確分段，否則不得重複匯入。"
+  },
+  "active_map_rule_zh": "只納入計畫中、招標準備、招標中、施工中，或完工／啟用一個月內工程。日期不明或狀態未查證者先存候選區，不進首頁統計。",
+  "notes_zh": "本輪優先補強資料保存結構，未新增未查證工程個案；下一輪新增工程時應先讀取本檔、dedupe_index 與 active GeoJSON。"
+}
