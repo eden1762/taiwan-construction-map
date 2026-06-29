@@ -1,0 +1,82 @@
+{
+  "updated_at": "2026-06-30",
+  "title_zh": "首頁手機速度與 OpenStreetMap 備援檢查表",
+  "title_en": "Homepage Mobile Speed and OpenStreetMap Fallback Gates",
+  "purpose_zh": "把首頁 5 秒內可用、OpenStreetMap 來源註記、工程清單備援與大量資料分批載入規則固定保存，供每輪改善與研究者查閱。",
+  "purpose_en": "A public checklist for homepage readiness, OpenStreetMap attribution, fallback behavior, and scalable project loading.",
+  "homepage_ready_within_seconds": 5,
+  "must_be_visible_before_heavy_loading_zh": [
+    "網站標題與基本導覽",
+    "搜尋欄",
+    "縣市與狀態篩選",
+    "工程統計",
+    "地圖容器",
+    "工程清單或降級清單",
+    "資料來源提示",
+    "OpenStreetMap 來源註記或備援說明"
+  ],
+  "must_be_visible_before_heavy_loading_en": [
+    "Site title and basic navigation",
+    "Search box",
+    "City and status filters",
+    "Project statistics",
+    "Map container",
+    "Project list or fallback list",
+    "Source note",
+    "OpenStreetMap attribution or fallback notice"
+  ],
+  "openstreetmap_requirements": {
+    "default_basemap": "OpenStreetMap",
+    "required_attribution_text": "OpenStreetMap contributors",
+    "fallback_allowed": true,
+    "fallback_rule_zh": "底圖或外部地圖資源較慢時，只能降級為本機簡化背景、可搜尋工程清單或重試按鈕；不得讓整頁卡住，也不得把正常預設底圖改成非 OpenStreetMap。",
+    "fallback_rule_en": "When the basemap or external map resources are slow, the site may fall back to a local simplified background, searchable project list, or retry button. The page must not block, and the normal default basemap must remain OpenStreetMap."
+  },
+  "large_dataset_rules": {
+    "active_goal": 3000,
+    "homepage_card_render_limit_per_page": 12,
+    "homepage_pin_render_limit": 120,
+    "default_enabled_layers": [
+      "public-works",
+      "roads",
+      "utilities",
+      "metro",
+      "buildings"
+    ],
+    "required_scaling_methods_zh": [
+      "清單分頁",
+      "分類入口",
+      "圖層開關",
+      "點位抽樣",
+      "搜尋後聚焦",
+      "縣市篩選",
+      "資料索引與批次紀錄"
+    ],
+    "required_scaling_methods_en": [
+      "Paged list",
+      "Sector entry points",
+      "Layer switches",
+      "Balanced pin sampling",
+      "Search-focused loading",
+      "City filtering",
+      "Data index and batch logs"
+    ]
+  },
+  "public_copy_guardrails": {
+    "avoid_public_terms": [
+      "js",
+      "Vercel",
+      "馬斯克",
+      "第一性原則",
+      "mini-taiwan-pulse"
+    ],
+    "allowed_repo_only_note_zh": "GitHub repo 簡介或 README 可寫部分靈感參考 mini-taiwan-pulse；公開網站不可出現該字樣。"
+  },
+  "next_run_checklist_zh": [
+    "進首頁先確認標題、搜尋、篩選、統計、地圖容器與清單可在重資料前出現。",
+    "確認 OpenStreetMap 仍是預設底圖，並保留 OpenStreetMap contributors 來源註記。",
+    "確認底圖較慢時 health 訊息與重試按鈕能讓一般使用者看懂。",
+    "確認首頁不一次渲染 3000 筆卡片或所有點位。",
+    "新增資料前先讀 latest、batch log、raw source、dedupe index、active GeoJSON 與本檢查表。"
+  ]
+}
