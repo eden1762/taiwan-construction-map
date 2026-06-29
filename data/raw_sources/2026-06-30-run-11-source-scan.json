@@ -1,0 +1,74 @@
+{
+  "scan_id": "2026-06-30-run-11-source-scan",
+  "created_at": "2026-06-30",
+  "title_zh": "第 11 輪官方來源掃描紀錄",
+  "title_en": "Run 11 Official Source Scan Record",
+  "purpose_zh": "保存本輪要輪替查核的官方來源群組與資料品質規則。此檔只作為原始來源與查核紀錄，不直接等於 active 地圖資料。",
+  "purpose_en": "A raw source scan record for the official source groups to rotate through. This is a source/check record, not active map data by itself.",
+  "source_groups": [
+    {
+      "group_id": "pcc-procurement",
+      "name_zh": "公共工程與政府採購",
+      "examples_zh": ["公共工程委員會", "政府電子採購", "公共工程雲端服務"],
+      "use_for_zh": "招標準備、招標中、決標後仍施工中的公共工程。",
+      "quality_gate_zh": "需可回查主辦機關、案名、狀態、來源連結；缺位置或期程者先進候選。"
+    },
+    {
+      "group_id": "local-works",
+      "name_zh": "地方工務與建設局處",
+      "examples_zh": ["各縣市工務局", "新工處", "養工處", "建設處"],
+      "use_for_zh": "道路改善、橋梁、排水、公共建築、市政建設。",
+      "quality_gate_zh": "需能區分縣市、路段或基地；新聞性文字不得直接當作工程點位。"
+    },
+    {
+      "group_id": "transit-rail-road",
+      "name_zh": "捷運、鐵道與公路",
+      "examples_zh": ["交通部鐵道局", "公路局", "高速公路局", "各縣市捷運工程局"],
+      "use_for_zh": "路線、車站、橋梁、道路、公路、軌道與交通節點工程。",
+      "quality_gate_zh": "同一路線可分段，但只有不同契約、不同施工範圍或不同官方來源可明確區分時才拆成多筆。"
+    },
+    {
+      "group_id": "water-disaster-energy",
+      "name_zh": "水利、防災與能源",
+      "examples_zh": ["水利署", "河川分署", "地方水利局處", "能源主管機關"],
+      "use_for_zh": "治水、排水、滯洪、防災韌性、能源與輸配電工程。",
+      "quality_gate_zh": "需確認工程仍有效；若只有政策或營運資訊，先保留為來源線索。"
+    },
+    {
+      "group_id": "ports-airports-logistics",
+      "name_zh": "港灣、機場與物流節點",
+      "examples_zh": ["臺灣港務公司", "機場公司", "港區與機場工程公告"],
+      "use_for_zh": "碼頭、航廈、跑道、物流基地、運維基地與港區公共設施。",
+      "quality_gate_zh": "需能確認工程範圍、發包或主管機關；單純營運新聞不進 active。"
+    },
+    {
+      "group_id": "industrial-science-parks",
+      "name_zh": "產業園區與科學園區",
+      "examples_zh": ["科學園區管理局", "產業園區主管機關", "園區公共設施公告"],
+      "use_for_zh": "園區道路、污水、供電、基地開發與公共設施工程。",
+      "quality_gate_zh": "招商、政策或用地消息若無具體工程資料，先列來源線索，不上首頁地圖。"
+    },
+    {
+      "group_id": "eia-planning-permits",
+      "name_zh": "環評、都市計畫與建管",
+      "examples_zh": ["環境部環評書件", "都市計畫公開資料", "建照與使照公開資料"],
+      "use_for_zh": "規劃中、招標準備與大型開發前期工程資料。",
+      "quality_gate_zh": "僅有展延、審查或舊案紀錄者，需確認仍有效；疑似久遠資料不進 active。"
+    }
+  ],
+  "raw_record_policy": {
+    "save_raw_first_zh": "每次找到候選資料，先保存來源名稱、來源連結、擷取日期、初步狀態、去重鍵與查核備註。",
+    "convert_public_readable_zh": "通過查核後，再轉成一般研究者可理解的工程卡片、分類清單與地圖資料。",
+    "do_not_mix_zh": "raw、candidate、active、historical、excluded 必須分開保存，不得把待確認資料混入首頁現況統計。"
+  },
+  "dedupe_before_next_import": [
+    "data/dedupe_index.json",
+    "data/active_construction_projects.geojson",
+    "data/construction_projects.geojson",
+    "data/import_batches/latest.json",
+    "data/import_batches/2026-06-30-run-11-preimport-readiness.json",
+    "data/import_plans/2026-06-30-run-12-next-source-queue.json"
+  ],
+  "active_records_added": 0,
+  "note_zh": "本輪只新增原始來源掃描與匯入前檢核紀錄；沒有把未交叉查核的工程資料放入 active 首頁地圖。"
+}
