@@ -1,0 +1,58 @@
+{
+  "plan_id": "2026-06-30-run-12-next-source-queue",
+  "updated_at": "2026-06-30",
+  "title_zh": "下一輪工程資料來源排程",
+  "title_en": "Next Construction Data Source Queue",
+  "purpose_zh": "把下一批工程資料應優先查哪些來源群組、如何去重、哪些資料先留待確認固定保存，避免長期只查單一來源，也避免重複累加。",
+  "purpose_en": "A saved queue for the next project import round, keeping source rotation, dedupe checks, and candidate handling clear before adding active map records.",
+  "active_goal": 3000,
+  "current_active_baseline": 21,
+  "pre_import_must_read": [
+    "data/import_batches/latest.json",
+    "data/public_research_catalog.json",
+    "data/project_record_schema.json",
+    "data/dedupe_index.json",
+    "data/active_construction_projects.geojson",
+    "data/source_registry.json",
+    "data/quality/mobile_osm_runtime_gates.json"
+  ],
+  "priority_queue": [
+    {
+      "order": 1,
+      "group_id": "pcc-procurement",
+      "focus_zh": "招標中、決標後施工中、工程進度可回查的公共工程。",
+      "candidate_rule_zh": "若只有標案名稱但缺位置或狀態，先進待確認，不進首頁 active 地圖。",
+      "dedupe_focus": ["project name", "agency", "tender or source URL", "place", "contractor"]
+    },
+    {
+      "order": 2,
+      "group_id": "water-disaster-energy",
+      "focus_zh": "水利治理、排水、滯洪、防災韌性、能源與輸配電相關工程。",
+      "candidate_rule_zh": "若能查到主管機關與位置但缺工程期程，先保留候選，補齊後再評估是否 active。",
+      "dedupe_focus": ["project name", "owner", "river or facility name", "source URL", "geometry"]
+    },
+    {
+      "order": 3,
+      "group_id": "ports-airports-logistics",
+      "focus_zh": "港灣、碼頭、航廈、跑道、物流節點與運維基地工程。",
+      "candidate_rule_zh": "若資料屬營運新聞而非工程公告，先排除或留查核備註，不直接上圖。",
+      "dedupe_focus": ["facility name", "owner", "contractor", "source URL", "coordinates"]
+    },
+    {
+      "order": 4,
+      "group_id": "industrial-science-parks",
+      "focus_zh": "產業園區與科學園區公共設施、道路、污水、供電、基地開發工程。",
+      "candidate_rule_zh": "若為園區政策或招商資訊但無具體工程範圍，先列為來源線索，不納入 active。",
+      "dedupe_focus": ["park name", "public facility name", "owner", "source URL", "address"]
+    },
+    {
+      "order": 5,
+      "group_id": "eia-planning-permits",
+      "focus_zh": "環評、都市計畫、建照與大型開發前期資料，用於規劃中與招標準備階段。",
+      "candidate_rule_zh": "若僅有審查或展延紀錄，須確認工程仍有效；疑似久遠資料先不放 active。",
+      "dedupe_focus": ["case name", "developer or agency", "review document URL", "site", "status date"]
+    }
+  ],
+  "homepage_speed_guardrail_zh": "即使 active 資料逐步累加，首頁仍只先顯示必要摘要、搜尋、篩選、統計、地圖容器與可用清單；大量資料用分頁、分類與分批載入。",
+  "public_readable_output_zh": "通過查核的資料需轉成一般人能讀懂的工程卡片與地圖資料；候選、歷史與排除資料要分開保存，不混入首頁統計。"
+}
