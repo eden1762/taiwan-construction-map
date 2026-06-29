@@ -1,0 +1,85 @@
+{
+  "batch_id": "2026-06-30-run-14",
+  "created_at": "2026-06-30",
+  "title_zh": "第 14 輪候選工程查核佇列",
+  "title_en": "Run 14 Candidate Verification Queue",
+  "purpose_zh": "把第 13 輪候選線索轉成下一步可執行的官方查核清單。此檔只做查核排程，不把資料推入首頁 active 地圖，也不計入首頁現況統計。",
+  "purpose_en": "Turns Run 13 candidate leads into an actionable official-verification queue. This file is a review queue only and does not promote records into the active homepage map.",
+  "source_candidate_file": "data/candidates/2026-06-30-run-13-candidate-leads.json",
+  "active_records_added": 0,
+  "candidate_records_reviewed": 6,
+  "candidate_records_promoted_to_active": 0,
+  "why_no_active_promotion_zh": "本輪尚未取得足以同時確認主管機關來源、工程範圍、狀態、期程、位置與去重鍵的完整資料，因此全部維持候選狀態。",
+  "why_no_active_promotion_en": "No candidate had enough complete evidence for owner-agency source, project scope, status, dates, location, and dedupe keys in this run, so all remain candidates.",
+  "verification_rules": [
+    "先讀 data/import_batches/latest.json、data/dedupe_index.json、data/active_construction_projects.geojson 與第 13 輪候選檔。",
+    "每筆候選至少需要一個主管機關、發包單位、公共工程或政府採購可回查來源。",
+    "若來源只能證明存在但無法證明目前狀態、位置或期程，保留為 candidate，不得進 active。",
+    "同一路線或同一計畫若拆成多個標案，必須能用路段、契約、站點或官方案名區分，否則不得重複累加。",
+    "補齊 geometry 前不得進入首頁地圖；只有大範圍線索時，先標為 To be verified。"
+  ],
+  "queue": [
+    {
+      "lead_id": "run13-lead-001",
+      "name_zh": "桃園捷運綠線主線與延伸相關工程",
+      "priority": "high",
+      "official_sources_to_check": ["桃園市政府捷運工程局", "公共工程雲端服務網", "政府電子採購網"],
+      "must_confirm_fields": ["主線與延伸線是否分筆", "施工標或路線區間", "最新狀態", "預定通車或完工期程", "可回查來源連結", "點位或路廊 geometry"],
+      "dedupe_keys_to_compare": ["桃園捷運綠線", "G01-G19", "G15a", "G15b", "中壢延伸線", "大溪延伸線", "桃園市政府捷運工程局"],
+      "current_decision": "keep_candidate",
+      "active_map_allowed": false
+    },
+    {
+      "lead_id": "run13-lead-002",
+      "name_zh": "高雄捷運黃線土建及設施機電工程",
+      "priority": "high",
+      "official_sources_to_check": ["高雄市政府捷運工程局", "公共工程雲端服務網", "政府電子採購網"],
+      "must_confirm_fields": ["土建標與機電標是否分筆", "YC 標案範圍", "Y1-Y18 或支線範圍", "最新狀態", "預定完工或通車期程", "可回查來源連結"],
+      "dedupe_keys_to_compare": ["高雄捷運黃線", "YC01", "Y1-Y18", "鳥松機廠", "高雄市政府捷運工程局"],
+      "current_decision": "keep_candidate",
+      "active_map_allowed": false
+    },
+    {
+      "lead_id": "run13-lead-003",
+      "name_zh": "臺灣桃園國際機場第三航站區建設計畫",
+      "priority": "high",
+      "official_sources_to_check": ["桃園國際機場股份有限公司", "公共工程雲端服務網", "政府電子採購網"],
+      "must_confirm_fields": ["第三航廈主體、登機廊廳、多功能大樓是否分筆", "施工狀態", "分階段啟用日期", "承攬廠商", "預算或決標金額", "航廈位置 geometry"],
+      "dedupe_keys_to_compare": ["第三航廈", "第三航站區", "桃園國際機場公司", "主體航廈", "登機廊廳"],
+      "current_decision": "keep_candidate",
+      "active_map_allowed": false
+    },
+    {
+      "lead_id": "run13-lead-004",
+      "name_zh": "宜蘭鐵路高架化計畫",
+      "priority": "medium",
+      "official_sources_to_check": ["交通部鐵道局", "宜蘭縣政府", "環評書件查詢系統"],
+      "must_confirm_fields": ["目前屬規劃、綜合規劃、環評或招標階段", "宜蘭至羅東路廊範圍", "預定期程", "主管機關來源", "是否已有標案"],
+      "dedupe_keys_to_compare": ["宜蘭鐵路高架化", "宜蘭站", "羅東站", "交通部鐵道局", "環評"],
+      "current_decision": "keep_candidate",
+      "active_map_allowed": false
+    },
+    {
+      "lead_id": "run13-lead-005",
+      "name_zh": "臺南市區鐵路地下化計畫",
+      "priority": "high",
+      "official_sources_to_check": ["交通部鐵道局", "臺南市政府", "公共工程雲端服務網"],
+      "must_confirm_fields": ["地下化主體工程範圍", "臺南車站、林森站、南臺南站是否分筆", "施工狀態", "預定啟用或完工期程", "可回查來源", "路廊 geometry"],
+      "dedupe_keys_to_compare": ["臺南鐵路地下化", "臺南車站", "林森站", "南臺南站", "交通部鐵道局"],
+      "current_decision": "keep_candidate",
+      "active_map_allowed": false
+    },
+    {
+      "lead_id": "run13-lead-006",
+      "name_zh": "馬太鞍溪橋與水利復原相關工程",
+      "priority": "medium",
+      "official_sources_to_check": ["交通部公路局", "經濟部水利署", "花蓮縣政府", "公共工程雲端服務網"],
+      "must_confirm_fields": ["橋梁、公路或水利復原是否為不同工程", "災後復原工程狀態", "位置範圍", "預算或標案", "發包機關", "是否仍在 active 時效內"],
+      "dedupe_keys_to_compare": ["馬太鞍溪橋", "光復", "萬榮", "水利署", "公路局", "復原工程"],
+      "current_decision": "keep_candidate",
+      "active_map_allowed": false
+    }
+  ],
+  "next_action_zh": "下一輪若能取得官方來源與可查回資料，先補到 candidate 詳細欄位；只有通過 active 規則、去重與 geometry 檢查後才轉入 data/active_construction_projects.geojson。",
+  "next_action_en": "If official sources are found in the next run, enrich candidate fields first. Promote only after active-status, dedupe, and geometry checks pass."
+}
