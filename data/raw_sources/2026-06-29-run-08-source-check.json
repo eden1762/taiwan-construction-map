@@ -1,0 +1,48 @@
+{
+  "batch_id": "2026-06-29-run-08",
+  "captured_at": "2026-06-29",
+  "record_type": "raw-source-check",
+  "purpose_zh": "保存本輪資料工作流查核紀錄，作為下次新增工程資料前的來源、去重與批次追溯依據。",
+  "source_rotation_checked": [
+    {
+      "group_id": "pcc-procurement",
+      "name_zh": "公共工程與採購",
+      "status": "registered-for-rotation",
+      "notes_zh": "後續可用於查詢施工中公共工程、招標公告、決標公告、工程金額與履約期限。"
+    },
+    {
+      "group_id": "transport-rail-road",
+      "name_zh": "交通、捷運、鐵道與公路",
+      "status": "registered-for-rotation",
+      "notes_zh": "後續可用於查詢捷運、鐵道、公路、橋梁、隧道與重大交通建設。"
+    },
+    {
+      "group_id": "local-works-utilities",
+      "name_zh": "地方工務、道路挖掘與管線",
+      "status": "registered-for-rotation",
+      "notes_zh": "後續可用於查詢道路挖掘、管線、地方道路改善、排水與維護資訊。"
+    },
+    {
+      "group_id": "eia-planning-permits",
+      "name_zh": "環評、都市計畫與建管",
+      "status": "registered-for-rotation",
+      "notes_zh": "後續可用於查詢環評、都市計畫、建管與定位輔助資料。"
+    }
+  ],
+  "dedupe_keys_to_check_next": [
+    "name",
+    "owner",
+    "contractor",
+    "address",
+    "source_url",
+    "geometry"
+  ],
+  "candidate_records_found": 0,
+  "candidate_records_accepted": 0,
+  "candidate_records_pending": 0,
+  "candidate_records_excluded": 0,
+  "raw_data_saved": true,
+  "public_readable_update": "data/import_batches/latest.json and sources.html latest-batch link",
+  "active_map_rule_zh": "本輪沒有把未查證資料放入 active 首頁地圖。下次新增時必須先比對 active GeoJSON、dedupe index、raw source record 與 batch log。",
+  "notes_zh": "本輪主要改善資料追溯結構：新增 latest batch 指標，避免資料入口頁長期固定指向舊批次紀錄。"
+}
