@@ -9,6 +9,7 @@
   "latest_batch_pointer": "data/import_batches/latest.json",
   "project_record_schema": "data/project_record_schema.json",
   "runtime_quality_gates": "data/quality/mobile_osm_runtime_gates.json",
+  "next_source_queue": "data/import_plans/2026-06-30-run-12-next-source-queue.json",
   "public_readable_files": [
     {
       "path": "data/active_construction_projects.geojson",
@@ -32,6 +33,14 @@
       "label_en": "Mobile and OpenStreetMap runtime quality gates",
       "who_can_use_zh": "一般研究者、大眾、資料維護者與網站檢查者",
       "how_to_read_zh": "說明首頁 5 秒內可用、OpenStreetMap 來源註記、地圖失敗備援、清單分頁、點位抽樣與大量資料分批載入規則。",
+      "included_in_homepage_stats": false
+    },
+    {
+      "path": "data/import_plans/2026-06-30-run-12-next-source-queue.json",
+      "label_zh": "下一輪資料來源排程",
+      "label_en": "Next source queue",
+      "who_can_use_zh": "資料研究者、網站維護者與想追蹤資料累積方式的大眾",
+      "how_to_read_zh": "說明下一批工程資料優先查哪些來源群組、每類資料如何判斷候選、哪些欄位要先比對避免重複。",
       "included_in_homepage_stats": false
     },
     {
@@ -83,5 +92,5 @@
   ],
   "public_data_rule_zh": "公開可讀資料要讓非程式背景的人也能查到工程名稱、位置、狀態、來源與地圖位置；原始資料則保留給後續查核與去重。",
   "runtime_rule_zh": "首頁要先讓標題、搜尋、篩選、統計、地圖容器、工程清單與來源提示可用；OpenStreetMap 較慢時保留備援畫面與重試按鈕，不讓整頁卡住。",
-  "dedupe_rule_zh": "新增資料前必須先比對既有 active 地圖、工程資料欄位規格、去重索引、原始來源紀錄、最新批次指標、首頁品質檢查表與批次紀錄；同一工程不得重複累加。"
+  "dedupe_rule_zh": "新增資料前必須先比對既有 active 地圖、工程資料欄位規格、去重索引、原始來源紀錄、最新批次指標、首頁品質檢查表、來源排程與批次紀錄；同一工程不得重複累加。"
 }
