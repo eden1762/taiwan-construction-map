@@ -1,13 +1,14 @@
 {
   "updated_at": "2026-06-30",
-  "latest_batch_id": "2026-06-30-run-11",
-  "latest_batch_log": "data/import_batches/2026-06-30-run-11-batch-log.json",
-  "latest_raw_source_record": "data/raw_sources/2026-06-30-run-11-runtime-check.json",
+  "latest_batch_id": "2026-06-30-run-12",
+  "latest_batch_log": "data/import_batches/2026-06-30-run-12-batch-log.json",
+  "latest_raw_source_record": "data/raw_sources/2026-06-30-run-12-source-queue-check.json",
+  "latest_import_plan": "data/import_plans/2026-06-30-run-12-next-source-queue.json",
   "latest_quality_gate": "data/quality/mobile_osm_runtime_gates.json",
   "active_count": 21,
   "active_goal": 3000,
   "purpose_zh": "提供公開資料入口與後續匯入流程一個穩定的最新批次指標，避免頁面固定指向舊批次。",
   "purpose_en": "Stable pointer to the latest import batch for the public data entry page and future dedupe workflows.",
-  "next_import_rule_zh": "新增工程資料前，先讀取此檔找到最新批次，再比對 dedupe_index、active GeoJSON、raw source record、batch log 與 mobile_osm_runtime_gates，避免重複匯入並確認首頁 5 秒內可用。",
-  "public_readable_zh": "一般研究者可由此找到最新批次紀錄、原始來源紀錄、首頁品質檢查表與 active 資料累積進度。"
+  "next_import_rule_zh": "新增工程資料前，先讀取此檔找到最新批次，再比對 next-source queue、dedupe_index、active GeoJSON、raw source record、batch log 與 mobile_osm_runtime_gates，避免重複匯入並確認首頁 5 秒內可用。",
+  "public_readable_zh": "一般研究者可由此找到最新批次紀錄、原始來源紀錄、來源排程、首頁品質檢查表與 active 資料累積進度。"
 }
