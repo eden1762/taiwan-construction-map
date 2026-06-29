@@ -1,0 +1,93 @@
+{
+  "batch_id": "2026-06-30-run-13",
+  "created_at": "2026-06-30",
+  "title_zh": "第 13 輪候選工程線索",
+  "title_en": "Run 13 Candidate Construction Leads",
+  "purpose_zh": "保存本輪公開網頁掃描找到、但尚未完成官方交叉查核的工程線索。這些資料不進首頁 active 地圖，也不計入現況統計。",
+  "purpose_en": "Public web discovery leads found in this run. They require official cross-checking before becoming active map records.",
+  "active_records_added": 0,
+  "candidate_records": 6,
+  "candidate_policy_zh": "以下線索只作為下一輪官方來源查核清單；若無法補齊主管機關來源、位置、狀態、期程與去重鍵，不得轉入 active 地圖。",
+  "candidate_policy_en": "These leads are only a follow-up checklist for official verification. They must not enter the active map without owner-agency sources, location, status, dates, and dedupe keys.",
+  "pre_active_required_checks": [
+    "比對 data/dedupe_index.json 與 data/active_construction_projects.geojson",
+    "補上主管機關或發包單位可回查來源",
+    "確認工程狀態符合 active 規則",
+    "補齊位置或 geometry",
+    "確認不是單純新聞、百科條目或歷史資料"
+  ],
+  "leads": [
+    {
+      "lead_id": "run13-lead-001",
+      "name_zh": "桃園捷運綠線主線與延伸相關工程",
+      "category": "捷運/交通",
+      "status_hint_zh": "興建中／部分延伸規劃中",
+      "location_hint_zh": "桃園市",
+      "discovery_source_name": "公開網頁搜尋結果",
+      "official_source_needed_zh": "桃園市政府捷運工程局、公共工程雲端服務網、政府電子採購網",
+      "dedupe_focus": ["桃園捷運綠線", "桃園市政府捷運工程局", "施工標", "路線區間", "來源連結"],
+      "candidate_status": "candidate_official_verification_required",
+      "active_map_allowed": false
+    },
+    {
+      "lead_id": "run13-lead-002",
+      "name_zh": "高雄捷運黃線土建及設施機電工程",
+      "category": "捷運/交通",
+      "status_hint_zh": "興建中",
+      "location_hint_zh": "高雄市",
+      "discovery_source_name": "公開網頁搜尋結果",
+      "official_source_needed_zh": "高雄市政府捷運工程局、公共工程雲端服務網、政府電子採購網",
+      "dedupe_focus": ["高雄捷運黃線", "YC01", "Y1-Y18", "高雄市政府捷運工程局", "來源連結"],
+      "candidate_status": "candidate_official_verification_required",
+      "active_map_allowed": false
+    },
+    {
+      "lead_id": "run13-lead-003",
+      "name_zh": "臺灣桃園國際機場第三航站區建設計畫",
+      "category": "建築/園區",
+      "status_hint_zh": "興建中／分階段完工",
+      "location_hint_zh": "桃園市大園區",
+      "discovery_source_name": "公開網頁搜尋結果",
+      "official_source_needed_zh": "桃園國際機場股份有限公司、公共工程雲端服務網、政府電子採購網",
+      "dedupe_focus": ["第三航廈", "第三航站區", "桃園國際機場公司", "主體航廈", "來源連結"],
+      "candidate_status": "candidate_official_verification_required",
+      "active_map_allowed": false
+    },
+    {
+      "lead_id": "run13-lead-004",
+      "name_zh": "宜蘭鐵路高架化計畫",
+      "category": "捷運/交通",
+      "status_hint_zh": "規劃中／預定施工期程待官方確認",
+      "location_hint_zh": "宜蘭縣宜蘭至羅東廊帶",
+      "discovery_source_name": "公開網頁搜尋結果",
+      "official_source_needed_zh": "交通部鐵道局、宜蘭縣政府、環評書件查詢系統",
+      "dedupe_focus": ["宜蘭鐵路高架化", "宜蘭站", "羅東站", "交通部鐵道局", "環評文件"],
+      "candidate_status": "candidate_official_verification_required",
+      "active_map_allowed": false
+    },
+    {
+      "lead_id": "run13-lead-005",
+      "name_zh": "臺南市區鐵路地下化計畫",
+      "category": "捷運/交通",
+      "status_hint_zh": "興建中",
+      "location_hint_zh": "臺南市區鐵路廊帶",
+      "discovery_source_name": "公開網頁搜尋結果",
+      "official_source_needed_zh": "交通部鐵道局、臺南市政府、公共工程雲端服務網",
+      "dedupe_focus": ["臺南鐵路地下化", "臺南車站", "林森站", "南臺南站", "來源連結"],
+      "candidate_status": "candidate_official_verification_required",
+      "active_map_allowed": false
+    },
+    {
+      "lead_id": "run13-lead-006",
+      "name_zh": "馬太鞍溪橋與水利復原相關工程",
+      "category": "道路/管線",
+      "status_hint_zh": "復原工程線索",
+      "location_hint_zh": "花蓮縣光復鄉、萬榮鄉周邊",
+      "discovery_source_name": "公開網頁搜尋結果",
+      "official_source_needed_zh": "交通部公路局、經濟部水利署、花蓮縣政府、公共工程雲端服務網",
+      "dedupe_focus": ["馬太鞍溪橋", "光復堤防", "水利署", "公路局", "復原工程"],
+      "candidate_status": "candidate_official_verification_required",
+      "active_map_allowed": false
+    }
+  ]
+}
