@@ -1,0 +1,29 @@
+{
+  "batch_id": "2026-06-30-run-11",
+  "batch_date": "2026-06-30",
+  "batch_type": "quality-gate-update",
+  "candidate_records": 0,
+  "passed_records": 0,
+  "excluded_records": 0,
+  "active_records_added": 0,
+  "active_count_after_batch": 21,
+  "active_goal": 3000,
+  "updated_files": [
+    "data/quality/mobile_osm_runtime_gates.json",
+    "data/import_batches/2026-06-30-run-11-batch-log.json",
+    "data/raw_sources/2026-06-30-run-11-runtime-check.json",
+    "data/public_research_catalog.json",
+    "data/import_batches/latest.json"
+  ],
+  "change_summary_zh": "本輪未新增工程筆數；先補齊公開可追蹤的首頁手機速度、OpenStreetMap 備援與大量資料渲染檢查表，讓後續每批工程資料匯入前能固定檢查首頁可用性。",
+  "change_summary_en": "No project records were added in this batch. This run adds a public runtime quality gate for mobile readiness, OpenStreetMap fallback behavior, and large-dataset rendering checks before future imports.",
+  "dedupe_basis_checked": [
+    "data/import_batches/latest.json",
+    "data/public_research_catalog.json",
+    "data/project_record_schema.json",
+    "data/dedupe_index.json",
+    "data/active_construction_projects.geojson"
+  ],
+  "reason_no_active_records_added_zh": "本輪重點是補強可追蹤品質規格，不將未查核工程資料混入 active 地圖。",
+  "next_import_rule_zh": "下次新增工程資料前，先讀取 latest 指標、去重索引、active GeoJSON、原始來源紀錄、批次紀錄與 data/quality/mobile_osm_runtime_gates.json，確認資料不重複且首頁仍能在 5 秒內可用。"
+}
