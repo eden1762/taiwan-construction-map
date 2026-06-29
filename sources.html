@@ -9,9 +9,9 @@
   <link rel="stylesheet" href="./fast-map.css?v=20260628-national-lanes" />
   <link rel="stylesheet" href="./styles.css?v=source-page-20260628-national-lanes" />
   <style>
-    .source-rotation,.data-flow{margin:0 auto 18px;max-width:1120px;border:1px solid rgba(12,35,55,.12);border-radius:22px;background:linear-gradient(135deg,#f4fbff,#fffaf2);padding:16px;box-shadow:0 14px 34px rgba(13,39,62,.08)}
-    .source-rotation h3,.data-flow h3{margin:0 0 8px;color:#102131;font-size:18px;line-height:1.25}.source-rotation p,.data-flow p{margin:0;color:#526b82;font-size:13px;line-height:1.65;font-weight:850}.rotation-pills,.flow-steps{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.rotation-pills span,.flow-steps span{border:1px solid rgba(12,35,55,.12);border-radius:999px;background:#fff;padding:7px 10px;font-size:12px;font-weight:1000;color:#17324a}.data-flow{background:linear-gradient(135deg,#eefbff,#ffffff)}.data-flow strong{color:#102131}.data-flow small{display:block;margin-top:8px;color:#6a7f91;font-weight:850;line-height:1.55}
-    @media(max-width:760px){.source-rotation,.data-flow{margin:0 12px 14px;padding:13px;border-radius:18px}.source-rotation h3,.data-flow h3{font-size:16px}.source-rotation p,.data-flow p{font-size:12px}.rotation-pills span,.flow-steps span{font-size:11px;padding:6px 8px}}
+    .source-rotation,.data-flow,.research-catalog{margin:0 auto 18px;max-width:1120px;border:1px solid rgba(12,35,55,.12);border-radius:22px;background:linear-gradient(135deg,#f4fbff,#fffaf2);padding:16px;box-shadow:0 14px 34px rgba(13,39,62,.08)}
+    .source-rotation h3,.data-flow h3,.research-catalog h3{margin:0 0 8px;color:#102131;font-size:18px;line-height:1.25}.source-rotation p,.data-flow p,.research-catalog p{margin:0;color:#526b82;font-size:13px;line-height:1.65;font-weight:850}.rotation-pills,.flow-steps,.catalog-links{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}.rotation-pills span,.flow-steps span,.catalog-links a{border:1px solid rgba(12,35,55,.12);border-radius:999px;background:#fff;padding:7px 10px;font-size:12px;font-weight:1000;color:#17324a}.data-flow{background:linear-gradient(135deg,#eefbff,#ffffff)}.data-flow strong,.research-catalog strong{color:#102131}.data-flow small,.research-catalog small{display:block;margin-top:8px;color:#6a7f91;font-weight:850;line-height:1.55}.research-catalog{background:linear-gradient(135deg,#fff7e8,#f5fbff)}.catalog-links a{text-decoration:none}.catalog-links a:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(13,39,62,.08)}
+    @media(max-width:760px){.source-rotation,.data-flow,.research-catalog{margin:0 12px 14px;padding:13px;border-radius:18px}.source-rotation h3,.data-flow h3,.research-catalog h3{font-size:16px}.source-rotation p,.data-flow p,.research-catalog p{font-size:12px}.rotation-pills span,.flow-steps span,.catalog-links a{font-size:11px;padding:6px 8px}}
   </style>
 </head>
 <body data-page="sources">
@@ -68,6 +68,19 @@
         <span>大眾可讀 / Public-readable</span>
       </div>
       <small>目標是慢慢累積到 3,000 筆以上現況工程，但不為了數量犧牲查證、速度與手機可用性。The goal is 3,000+ active records over time, without trading away verification, speed, or mobile usability.</small>
+    </section>
+
+    <section class="research-catalog" aria-label="大眾研究資料索引">
+      <h3>大眾研究資料索引 / Public research catalog</h3>
+      <p><strong>資料不只上地圖，也會留下可追溯的研究索引。</strong>現況工程、去重索引、來源輪替表、批次紀錄與原始來源紀錄分開保存，讓研究者可以知道哪些資料已上圖、哪些仍待確認、哪些只是查核紀錄。</p>
+      <p><strong>Map records, source logs, and review notes stay separated.</strong> Researchers can tell live projects from pending records and trace how each batch avoids duplicates.</p>
+      <div class="catalog-links" aria-label="資料索引連結">
+        <a href="./data/public_research_catalog.json">研究資料索引 / Research catalog</a>
+        <a href="./data/source_registry.json">來源輪替表 / Source registry</a>
+        <a href="./data/dedupe_index.json">去重索引 / Dedupe index</a>
+        <a href="./data/import_batches/2026-06-29-run-07-batch-log.json">最新批次紀錄 / Latest batch log</a>
+      </div>
+      <small>公開頁面用一般文字說明；進階研究者可開啟資料檔查核來源、狀態、排除原因與去重邏輯。</small>
     </section>
 
     <section id="sourceCards" class="source-grid" aria-live="polite"></section>
