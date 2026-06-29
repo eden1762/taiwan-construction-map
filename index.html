@@ -14,6 +14,7 @@
     .layerbox{margin-top:12px;border:1px solid rgba(12,35,55,.13);border-radius:18px;background:#fff;padding:12px}.layerbox p{margin:0 0 8px!important;color:#526b82!important}.layerbox p b{display:block;color:#102131}.layerbox p span{display:block;font-size:12px;line-height:1.45}.layerbox div{display:flex;flex-wrap:wrap;gap:8px}.layerbox label{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(12,35,55,.13);background:#f8fcff;border-radius:999px;padding:8px 10px;font-size:12px;font-weight:1000;cursor:pointer}.layerbox input{accent-color:#0b88aa}
     .legendGuide{margin-top:12px;border:1px solid rgba(12,35,55,.13);border-radius:18px;background:linear-gradient(145deg,#fff,#f4fbff);padding:12px}.legendGuide b{display:block;margin-bottom:8px;color:#102131}.legendGuide p{margin:0 0 8px!important;font-size:12px!important;color:#526b82!important}.legendDots,.statusDots{display:flex;flex-wrap:wrap;gap:7px}.legendDots span,.statusDots span{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(12,35,55,.12);border-radius:999px;background:#fff;padding:6px 8px;font-size:12px;font-weight:950}.legendDots i{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c)}.statusDots i{display:inline-block;width:9px;height:9px;border-radius:3px;background:#0b88aa}.mapNote{margin:8px 0 0!important;font-size:12px!important;line-height:1.5;color:#526b82!important;font-weight:850!important}
     .dataPolicy{margin-top:12px;border:1px solid rgba(12,35,55,.13);border-radius:18px;background:linear-gradient(145deg,#fffdf7,#f4fbff);padding:12px}.dataPolicy b{display:block;color:#102131;margin-bottom:6px}.dataPolicy p{margin:0!important;color:#526b82!important;font-size:12px!important;line-height:1.55;font-weight:850!important}.dataPolicy strong{color:#0b6d89}
+    .sourceGuide{margin-top:12px;border:1px solid rgba(12,35,55,.13);border-radius:18px;background:linear-gradient(145deg,#fff,#f7fffb);padding:12px}.sourceGuide b{display:block;color:#102131;margin-bottom:8px}.sourceGuide ul{margin:0;padding-left:18px;color:#526b82;font-size:12px;line-height:1.55;font-weight:850}.sourceGuide li+li{margin-top:4px}.sourceGuide strong{color:#0b6d89}
     .mapHowto{margin-top:12px;border:1px solid rgba(12,35,55,.13);border-radius:18px;background:linear-gradient(145deg,#f7fbff,#fff);padding:12px}.mapHowto b{display:block;color:#102131;margin-bottom:8px}.mapHowto ul{margin:0;padding-left:18px;color:#526b82;font-size:12px;line-height:1.55;font-weight:850}.mapHowto li+li{margin-top:4px}
   </style>
 </head>
@@ -105,6 +106,15 @@
           <b>現況資料守則 / Active data rules</b>
           <p><strong>首頁現況統計</strong>只納入計畫中、招標準備、招標中、施工中，或完工／啟用一個月內的工程；過期、取消、停辦或來源失效的資料會移出首頁，避免把歷史案誤看成現況工程。<br><strong>Active overview</strong> keeps planned, pre-tender, tendering, under-construction, or recently completed projects only. Outdated or inactive records are moved out of the homepage view.</p>
         </section>
+        <section class="sourceGuide" aria-label="資料來源使用方式">
+          <b>資料來源怎麼看 / How to read sources</b>
+          <ul>
+            <li><strong>來源連結</strong>優先放可回查的主管機關、發包單位、公告或公開圖資入口。</li>
+            <li>工程金額、期程、甲方與乙方可能隨招標、變更設計或公告更新；正式引用前請回來源確認最新版。</li>
+            <li>沒有公開佐證的欄位會標示「待補資料 / To be verified」，不把猜測內容混進工程卡片。</li>
+            <li>Source links point to traceable public portals. For formal use, always re-check the owner agency, tender notice, or public map layer.</li>
+          </ul>
+        </section>
         <section class="mapHowto" aria-label="地圖操作提示">
           <b>地圖操作提示 / Map tips</b>
           <ul>
@@ -145,6 +155,6 @@
   </main>
   <footer class="foot"><span data-t="footer">資料以公開入口可回查內容整理；正式引用請回主管機關、發包單位與公告來源確認最新版本。地圖底圖 © OpenStreetMap contributors。</span></footer>
   <div class="dock" aria-label="快速操作"><a href="https://www.instagram.com/taiwan.construction/" target="_blank" rel="noopener noreferrer">IG</a><button id="lang" type="button">EN</button></div>
-  <script type="module" src="./fast-map.js?v=20260629-active-filter-1"></script>
+  <script type="module" src="./fast-map.js?v=20260629-source-guide-1"></script>
 </body>
 </html>
