@@ -1,0 +1,32 @@
+{
+  "batch_id": "2026-06-30-run-12",
+  "batch_date": "2026-06-30",
+  "batch_type": "source-queue-and-public-index-update",
+  "candidate_records": 0,
+  "passed_records": 0,
+  "excluded_records": 0,
+  "active_records_added": 0,
+  "active_count_after_batch": 21,
+  "active_goal": 3000,
+  "updated_files": [
+    "data/import_plans/2026-06-30-run-12-next-source-queue.json",
+    "data/raw_sources/2026-06-30-run-12-source-queue-check.json",
+    "data/import_batches/2026-06-30-run-12-batch-log.json",
+    "data/public_research_catalog.json",
+    "sources.html",
+    "data/import_batches/latest.json"
+  ],
+  "change_summary_zh": "本輪未新增 active 工程筆數；先新增下一輪資料來源排程，讓後續找工程資料時有明確來源輪替、候選處理、去重比對與首頁速度檢查順序。",
+  "change_summary_en": "No active project records were added in this batch. This run adds a saved next-source queue for future imports, including source rotation, candidate handling, dedupe checks, and homepage speed guardrails.",
+  "dedupe_basis_checked": [
+    "data/import_batches/latest.json",
+    "data/public_research_catalog.json",
+    "data/project_record_schema.json",
+    "data/dedupe_index.json",
+    "data/active_construction_projects.geojson",
+    "data/source_registry.json",
+    "data/quality/mobile_osm_runtime_gates.json"
+  ],
+  "reason_no_active_records_added_zh": "本輪重點是補強下一批資料匯入的來源排程與公開索引，不將未查核工程資料混入 active 地圖。",
+  "next_import_rule_zh": "下次新增工程資料前，先讀 latest 指標與 next-source queue，再依序查公共工程採購、水利能源、港灣機場、園區、環評建管等來源；資料未補齊者先進候選或待確認，不進首頁統計。"
+}
