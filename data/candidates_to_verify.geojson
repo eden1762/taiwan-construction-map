@@ -1,0 +1,9 @@
+{
+  "type": "FeatureCollection",
+  "name": "taiwan_construction_projects_candidates_to_verify",
+  "updated_at": "2026-06-29",
+  "purpose_zh": "保存可能有效但尚未補齊欄位、狀態或來源查核的工程候選資料。此檔資料不得直接計入首頁 active 統計。",
+  "purpose_en": "Holding area for potentially valid project candidates that still need fields, status, or source verification. These records do not count toward active homepage statistics.",
+  "candidate_rule_zh": "資料若日期不明、來源不足、完工時間待確認或 geometry 尚未確定，先放本區，待查核後再決定是否納入 active 地圖。",
+  "features": []
+}
