@@ -1,0 +1,73 @@
+{
+  "batch_id": "2026-06-30-run-11-preimport-readiness",
+  "created_at": "2026-06-30",
+  "title_zh": "第 11 輪匯入前檢核紀錄",
+  "title_en": "Run 11 Pre-import Readiness Record",
+  "purpose_zh": "在真正新增 active 工程資料前，先固定本輪必讀資料、去重基準、候選資料處理規則與首頁速度門檻，避免重複累加或把未查核資料放進首頁地圖。",
+  "purpose_en": "A saved pre-import check before adding active project records, covering required files, dedupe baselines, candidate handling, and homepage speed gates.",
+  "active_goal": 3000,
+  "current_active_baseline": 21,
+  "pre_import_must_read": [
+    "data/import_batches/latest.json",
+    "data/import_plans/2026-06-30-run-12-next-source-queue.json",
+    "data/public_research_catalog.json",
+    "data/project_record_schema.json",
+    "data/dedupe_index.json",
+    "data/active_construction_projects.geojson",
+    "data/construction_projects.geojson",
+    "data/source_registry.json",
+    "data/quality/mobile_osm_runtime_gates.json"
+  ],
+  "dedupe_keys_required": [
+    "project name",
+    "owner agency",
+    "contractor",
+    "address or corridor",
+    "source URL",
+    "geometry or coordinates",
+    "tender/case identifier when available"
+  ],
+  "candidate_rules": {
+    "can_enter_active_map_zh": "只允許計畫中、招標準備、招標中、施工中，或完工／啟用一個月內且來源可回查的工程。",
+    "candidate_only_zh": "只有標案名稱、新聞稿、政策線索、缺位置、缺狀態、日期不明或疑似久遠的資料，只能放候選或查核紀錄，不得納入 active 首頁統計。",
+    "excluded_zh": "重複、取消、停辦、完工超過一個月、啟用超過一個月、來源失效、無法查證或與工程主題不符者排除。"
+  },
+  "homepage_speed_gates": {
+    "first_view_usable_within_seconds": 5,
+    "project_cards_per_page": 12,
+    "max_default_map_points": 120,
+    "default_light_layers": [
+      "public-works",
+      "roads",
+      "utilities",
+      "metro",
+      "buildings"
+    ],
+    "must_remain_available_when_osm_is_slow": [
+      "title",
+      "search",
+      "filters",
+      "statistics",
+      "map container",
+      "project list or fallback list",
+      "source hint",
+      "basic navigation"
+    ]
+  },
+  "public_copy_guardrails": {
+    "public_pages_must_not_contain": [
+      "js",
+      "Vercel",
+      "馬斯克",
+      "第一性原則",
+      "mini-taiwan-pulse"
+    ],
+    "public_copy_audience_zh": "工程公司、發包甲方、地理地圖愛好者、年輕人與一般研究者。",
+    "tone_zh": "使用一般人看得懂的工程、採購、基礎建設與地圖語彙，避免程式開發者口吻。"
+  },
+  "result": {
+    "candidate_records_added_to_active": 0,
+    "reason_zh": "本輪先補齊匯入前檢核紀錄；未把未查核資料混入 active 地圖。",
+    "next_action_zh": "下一輪新增資料前，先依本紀錄讀取去重索引、最新批次、來源排程與 active GeoJSON，再把通過查核的資料轉成大眾可讀卡片與地圖資料。"
+  }
+}
