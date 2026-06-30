@@ -1,0 +1,28 @@
+{
+  "batch_id": "2026-06-30-run-24",
+  "batch_date": "2026-06-30",
+  "source_type": "runtime_quality_gate",
+  "source_name": "active homepage map runtime review",
+  "candidate_count": 0,
+  "passed_count": 0,
+  "excluded_count": 0,
+  "active_records_added_this_batch": 0,
+  "active_records_removed_this_batch": 0,
+  "active_count_after_batch": 15,
+  "active_goal": 300,
+  "missing_to_active_goal": 285,
+  "included_in_active_map": false,
+  "candidate_only": false,
+  "allowed_statuses": ["計畫中", "計劃中", "評估中", "設計中", "施工中", "完工/啟用一個月內"],
+  "changes": [
+    "Homepage runtime target now follows the phase-one 300 active-project gate.",
+    "Live status filter now follows the active map rule and excludes generic planning, tendering, delayed, and pending records.",
+    "Duplicate and inactive filtering remains in the browser runtime so homepage statistics stay aligned with active GeoJSON rules.",
+    "Active GeoJSON request cache key was refreshed for the current active dataset policy."
+  ],
+  "quality_notes": [
+    "No project records were added to active data in this batch.",
+    "Active dataset remains 15 records; 285 more verified current records are needed for the first 300-record gate.",
+    "The map continues to use OpenStreetMap tiles with local Taiwan fallback."
+  ]
+}
