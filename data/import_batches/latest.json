@@ -1,13 +1,14 @@
 {
   "updated_at": "2026-06-30",
-  "latest_batch_id": "2026-06-30-run-18",
-  "latest_batch_log": "data/import_batches/run-18-homepage-language-audit.json",
+  "latest_batch_id": "2026-06-30-run-20",
+  "latest_batch_log": "index.html",
   "latest_candidate_leads": "data/candidates/2026-06-30-run-13-candidate-leads.json",
   "latest_candidate_verification_queue": "data/candidates/2026-06-30-run-14-candidate-verification-queue.json",
   "latest_candidate_evidence_notes": "data/candidates/2026-06-30-run-15-candidate-evidence-notes.json",
   "latest_candidate_reconciliation": "data/candidates/2026-06-30-run-16-candidate-active-reconciliation.json",
-  "latest_homepage_language_audit": "data/import_batches/run-18-homepage-language-audit.json",
+  "latest_homepage_language_audit": "index.html",
   "active_count": 21,
   "active_goal": 3000,
-  "active_records_added_this_batch": 0
+  "active_records_added_this_batch": 0,
+  "public_homepage_fix": "English static helper copy and fallback cards now switch by page language without changing active map data."
 }
