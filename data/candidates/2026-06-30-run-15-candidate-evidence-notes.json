@@ -1,0 +1,67 @@
+{
+  "batch_id": "2026-06-30-run-15",
+  "created_at": "2026-06-30",
+  "title_zh": "第 15 輪候選工程證據備註",
+  "title_en": "Run 15 Candidate Evidence Notes",
+  "purpose_zh": "把本輪公開查核結果轉成下一輪可繼續補欄位的候選備註。此檔仍屬待確認資料，不進首頁 active 統計。",
+  "purpose_en": "Turns this run's public verification findings into candidate notes for future field completion. This file remains pending and is excluded from active homepage statistics.",
+  "active_records_added": 0,
+  "candidate_records_enriched": 3,
+  "candidate_records_kept_pending": 6,
+  "source_scan": "data/raw_sources/2026-06-30-run-15-web-verification-scan.json",
+  "evidence_notes": [
+    {
+      "lead_id": "run13-lead-001",
+      "name_zh": "桃園捷運綠線主線與延伸相關工程",
+      "candidate_status": "candidate_needs_official_confirmation",
+      "usable_clue_zh": "公開整理資料顯示主線與延伸線狀態可能不同，後續不得把主線、延伸線、車站或不同施工標混成同一筆或重複多筆。",
+      "must_not_promote_reason_zh": "尚未取得本輪可回查主管機關頁面與工程標案細節，geometry 也尚未補齊。",
+      "next_fields_to_fill": ["owner", "contract_segment", "status", "planned_end_date", "source_url", "geometry"]
+    },
+    {
+      "lead_id": "run13-lead-002",
+      "name_zh": "高雄捷運黃線土建及設施機電工程",
+      "candidate_status": "candidate_needs_official_confirmation",
+      "usable_clue_zh": "公開整理資料顯示此案可拆成路線、車站、機廠、土建與機電等不同範圍；後續需以官方標案或主管機關案名決定是否分筆。",
+      "must_not_promote_reason_zh": "本輪尚未確認 YC 標案範圍、最新施工狀態、正式期程與官方來源連結。",
+      "next_fields_to_fill": ["owner", "contractor", "contract_segment", "status", "planned_end_date", "source_url", "geometry"]
+    },
+    {
+      "lead_id": "run13-lead-003",
+      "name_zh": "臺灣桃園國際機場第三航站區建設計畫",
+      "candidate_status": "candidate_needs_official_confirmation",
+      "usable_clue_zh": "公開整理資料顯示第三航站區包含航廈主體、登機廊廳、機電、行李系統、機坪、道路與周邊設施等多個子項。後續若拆分，必須以官方工程名稱、契約或分項來源為準。",
+      "must_not_promote_reason_zh": "本輪尚未取得可直接引用的桃園國際機場公司最新工程頁或公共工程分項資料，不能把整理資料直接當 active 來源。",
+      "next_fields_to_fill": ["owner", "contractor", "budget_ntd", "status", "planned_end_date", "source_url", "geometry"]
+    },
+    {
+      "lead_id": "run13-lead-004",
+      "name_zh": "宜蘭鐵路高架化計畫",
+      "candidate_status": "candidate_needs_source",
+      "usable_clue_zh": "本輪未取得足以保存為工程卡片的可回查來源。",
+      "must_not_promote_reason_zh": "缺主管機關來源、階段、期程與 geometry。",
+      "next_fields_to_fill": ["official_source", "status", "planning_stage", "source_url", "geometry"]
+    },
+    {
+      "lead_id": "run13-lead-005",
+      "name_zh": "臺南市區鐵路地下化計畫",
+      "candidate_status": "candidate_needs_source",
+      "usable_clue_zh": "本輪未取得足以保存為工程卡片的可回查來源。",
+      "must_not_promote_reason_zh": "缺主管機關來源、施工範圍、期程與路廊 geometry。",
+      "next_fields_to_fill": ["official_source", "contract_segment", "status", "planned_end_date", "source_url", "geometry"]
+    },
+    {
+      "lead_id": "run13-lead-006",
+      "name_zh": "馬太鞍溪橋與水利復原相關工程",
+      "candidate_status": "candidate_needs_source",
+      "usable_clue_zh": "本輪未取得足以保存為工程卡片的可回查來源；後續需先判斷橋梁、公路、水利是否為不同工程。",
+      "must_not_promote_reason_zh": "缺官方來源、工程範圍、active 時效與 geometry。",
+      "next_fields_to_fill": ["official_source", "project_scope", "status", "budget_ntd", "source_url", "geometry"]
+    }
+  ],
+  "homepage_impact": {
+    "active_count_changed": false,
+    "active_count_after_run": 21,
+    "reason_zh": "未通過官方來源與 geometry 查核，候選資料不得混入首頁統計。"
+  }
+}
