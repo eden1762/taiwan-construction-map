@@ -1,0 +1,139 @@
+{
+  "batch_id": "run-20-active-300-gate",
+  "batch_date": "2026-06-30",
+  "site": "台灣工程地圖｜Taiwan Construction Map",
+  "purpose": "鎖定 active 首頁工程資料的 300 件硬性門檻，並把狀態、去重、來源可回查與首頁效能規則保存成下一輪匯入前檢核基準。",
+  "active_geojson_checked": "data/construction_projects.geojson",
+  "observed_active_features": 20,
+  "first_active_id": "tcmap-001",
+  "last_active_id": "tcmap-020",
+  "active_target_minimum": 300,
+  "gap_to_300_by_current_feature_count": 280,
+  "strict_status_review": {
+    "allowed_active_statuses": [
+      "計劃中",
+      "計畫中",
+      "評估中",
+      "設計中",
+      "施工中",
+      "已完工一個月內",
+      "已啟用一個月內"
+    ],
+    "current_statuses_observed": {
+      "施工中": 14,
+      "招標中": 2,
+      "延宕": 1,
+      "完工": 1,
+      "規劃中": 2
+    },
+    "records_requiring_status_mapping_or_recheck": [
+      {
+        "id": "tcmap-007",
+        "name": "臺中捷運藍線臺灣大道核心段",
+        "current_status": "招標中",
+        "required_action": "需以官方來源確認是否可歸入計畫中、評估中或設計中；否則不得作為 active 統計。"
+      },
+      {
+        "id": "tcmap-008",
+        "name": "臺南市區鐵路地下化北段",
+        "current_status": "延宕",
+        "required_action": "需確認仍為施工中或設計中且官方來源有效；若僅是歷史延宕紀錄，應移出 active。"
+      },
+      {
+        "id": "tcmap-013",
+        "name": "高雄市前鎮區道路排水改善",
+        "current_status": "招標中",
+        "required_action": "需以官方招標或工程頁確認仍屬計畫中、評估中或設計中；否則先移到待確認。"
+      },
+      {
+        "id": "tcmap-017",
+        "name": "臺南沙崙綠能科學城公共設施",
+        "current_status": "完工",
+        "required_action": "需確認完工或啟用日期距本批次日期是否不超過一個月；若超過一個月，應移到歷史資料區。"
+      },
+      {
+        "id": "tcmap-019",
+        "name": "國道七號高雄路廊計畫",
+        "current_status": "規劃中",
+        "required_action": "規劃中需對應到計畫中或評估中，並保留官方來源證據。"
+      },
+      {
+        "id": "tcmap-020",
+        "name": "基隆捷運南港至八堵段計畫",
+        "current_status": "規劃中",
+        "required_action": "規劃中需對應到計畫中或評估中，並保留官方來源證據。"
+      }
+    ]
+  },
+  "dedupe_required_before_next_import": [
+    "data/construction_projects.geojson",
+    "active GeoJSON or active map dataset",
+    "data/projects.js if present",
+    "data/raw_sources/",
+    "data/import_batches/",
+    "data/source_registry.json if present",
+    "data/dedupe_index.json if present",
+    "candidate, pending, historical and excluded data folders if present"
+  ],
+  "dedupe_keys": [
+    "id",
+    "name_normalized",
+    "case_or_tender_no",
+    "owner",
+    "contractor",
+    "address_or_corridor",
+    "source_url",
+    "geometry_centroid_or_corridor",
+    "project_scope"
+  ],
+  "next_import_priority": [
+    {
+      "source_type": "政府電子採購與公共工程",
+      "target": "以招標中、決標後未開工、施工中工程為主，優先找有案號、金額、機關與履約期限者。",
+      "candidate_goal": 80
+    },
+    {
+      "source_type": "縣市道路挖掘與管線施工圖資",
+      "target": "優先找施工中且有路段、日期、主管機關或管線單位者；短期小案需避免完工超過一個月。",
+      "candidate_goal": 80
+    },
+    {
+      "source_type": "捷運、鐵道、公路、水利、港灣與機場主管機關",
+      "target": "優先找計畫中、設計中、施工中大型工程，保留官方工程頁或進度頁。",
+      "candidate_goal": 80
+    },
+    {
+      "source_type": "園區、環評、都市計畫與建管公開資料",
+      "target": "僅保存可證明仍在計畫、評估、設計或施工階段者；未能判定現況先列待確認。",
+      "candidate_goal": 80
+    }
+  ],
+  "active_import_policy": {
+    "can_add_to_active": "只有不重複、來源可回查、現況有效、狀態符合門檻、至少具備必要欄位與 GeoJSON geometry 的資料可以進 active。",
+    "must_not_add_to_active": "重複、過期、取消、停辦、無法查證、完工超過一個月、只有新聞摘要但缺官方來源、或無法判定位置範圍者不得進 active。",
+    "candidate_allowed": "資料有效但欄位不足者可保存為候選或待確認，不計入 active 統計。"
+  },
+  "homepage_performance_guard": {
+    "five_second_rule": true,
+    "initial_render_should_include": [
+      "title",
+      "search",
+      "filters",
+      "statistics",
+      "map container",
+      "project list or fallback list",
+      "source note",
+      "basic navigation"
+    ],
+    "large_dataset_rule": "即使 active 補到 300 件或 3000 件，首頁也不得一次渲染所有完整卡片或所有圖層；必須使用摘要、分頁、分類、索引、分批或延後載入。"
+  },
+  "this_batch_result": {
+    "candidate_count": 0,
+    "passed_count": 0,
+    "excluded_count": 0,
+    "added_to_active": 0,
+    "active_after_batch": 20,
+    "gap_to_300_after_batch": 280,
+    "reason_no_active_import": "本批次先保存新的 300 件門檻與狀態查核規則；未把未交叉查核資料混入 active。"
+  }
+}
