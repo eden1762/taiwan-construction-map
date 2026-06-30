@@ -9,6 +9,7 @@
   "latest_batch_pointer": "data/import_batches/latest.json",
   "latest_candidate_leads": "data/candidates/2026-06-30-run-13-candidate-leads.json",
   "latest_candidate_verification_queue": "data/candidates/2026-06-30-run-14-candidate-verification-queue.json",
+  "latest_candidate_evidence_notes": "data/candidates/2026-06-30-run-15-candidate-evidence-notes.json",
   "project_record_schema": "data/project_record_schema.json",
   "runtime_quality_gates": "data/quality/mobile_osm_runtime_gates.json",
   "next_source_queue": "data/import_plans/2026-06-30-run-12-next-source-queue.json",
@@ -35,6 +36,14 @@
       "label_en": "Candidate verification queue",
       "who_can_use_zh": "一般研究者、大眾、工程公司、發包甲方與資料維護者",
       "how_to_read_zh": "把候選線索拆成每筆下次必查來源、必補欄位與去重鍵；尚未通過者不進首頁現況統計。",
+      "included_in_homepage_stats": false
+    },
+    {
+      "path": "data/candidates/2026-06-30-run-15-candidate-evidence-notes.json",
+      "label_zh": "候選工程證據備註",
+      "label_en": "Candidate evidence notes",
+      "who_can_use_zh": "一般研究者、大眾、工程公司、發包甲方與資料維護者",
+      "how_to_read_zh": "保存本輪公開查核後的候選備註；可看到哪些工程有線索、哪些欄位仍待官方來源補齊，以及為何暫不進首頁。",
       "included_in_homepage_stats": false
     },
     {
@@ -82,7 +91,7 @@
       "label_zh": "最新批次指標",
       "label_en": "Latest batch pointer",
       "who_can_use_zh": "一般研究者、大眾與資料維護者",
-      "how_to_read_zh": "先從這裡找到最新批次紀錄、最新候選線索、最新候選查核佇列、最新原始來源紀錄與首頁品質檢查表。",
+      "how_to_read_zh": "先從這裡找到最新批次紀錄、最新候選線索、最新候選查核佇列、最新候選證據備註、最新原始來源紀錄與首頁品質檢查表。",
       "included_in_homepage_stats": false
     },
     {
@@ -110,5 +119,5 @@
   ],
   "public_data_rule_zh": "公開可讀資料要讓非程式背景的人也能查到工程名稱、位置、狀態、來源與地圖位置；原始資料則保留給後續查核與去重。",
   "runtime_rule_zh": "首頁要先讓標題、搜尋、篩選、統計、地圖容器、工程清單與來源提示可用；OpenStreetMap 較慢時保留備援畫面與重試按鈕，不讓整頁卡住。",
-  "dedupe_rule_zh": "新增資料前必須先比對既有 active 地圖、候選線索、候選查核佇列、工程資料欄位規格、去重索引、原始來源紀錄、最新批次指標、首頁品質檢查表、來源排程與批次紀錄；同一工程不得重複累加。"
+  "dedupe_rule_zh": "新增資料前必須先比對既有 active 地圖、候選線索、候選查核佇列、候選證據備註、工程資料欄位規格、去重索引、原始來源紀錄、最新批次指標、首頁品質檢查表、來源排程與批次紀錄；同一工程不得重複累加。"
 }
