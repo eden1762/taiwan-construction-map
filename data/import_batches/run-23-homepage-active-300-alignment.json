@@ -1,0 +1,60 @@
+{
+  "batch_id": "run-23-homepage-active-300-alignment",
+  "batch_date": "2026-06-30",
+  "source_type": "homepage_quality_gate",
+  "source_name": "Taiwan Construction Map homepage and active GeoJSON policy check",
+  "candidate_count": 0,
+  "passed_count": 0,
+  "excluded_count": 0,
+  "active_added_count": 0,
+  "active_total_before": 21,
+  "active_target_phase_one": 300,
+  "active_gap_after": 279,
+  "included_in_active_map": false,
+  "saved_as_candidate_only": false,
+  "changes": [
+    "Aligned homepage progress metric from 3,000 long-term reach to 300 phase-one active projects.",
+    "Updated homepage active-data public copy to match allowed states: planned, under evaluation, in design, under construction, or completed/opened within one month.",
+    "Updated the homepage progress filter so tender-prep, tendering, delayed, and generic planning states no longer count toward the 300 active target unless later normalized into allowed states by source evidence.",
+    "Kept OpenStreetMap attribution and first-screen fallback behavior unchanged."
+  ],
+  "allowed_active_status": [
+    "計劃中",
+    "計畫中",
+    "評估中",
+    "設計中",
+    "施工中",
+    "完工/啟用一個月內"
+  ],
+  "excluded_status_from_homepage_counter": [
+    "規劃中",
+    "招標準備",
+    "招標中",
+    "延宕"
+  ],
+  "exclusion_reason": "These states are not part of the latest active-data hard gate unless official source evidence maps them to planning, evaluation, or design status.",
+  "dedupe_basis": [
+    "name",
+    "owner",
+    "address",
+    "source_url"
+  ],
+  "performance_check": {
+    "first_screen_required_under_seconds": 5,
+    "homepage_full_card_render_limit": "Do not render 300+ full project cards at once.",
+    "changed_heavy_assets": false,
+    "changed_map_tiles": false,
+    "fallback_behavior_preserved": true
+  },
+  "next_priority_sources": [
+    "公共工程委員會與政府電子採購資料",
+    "各縣市政府工程與建設局處",
+    "捷運與鐵道主管機關",
+    "公路與道路工程機關",
+    "水利與防災機關",
+    "產業園區與科學園區",
+    "環評書件與主管機關公告",
+    "data.gov.tw"
+  ],
+  "notes": "No unverified candidate projects were mixed into active data in this run."
+}
