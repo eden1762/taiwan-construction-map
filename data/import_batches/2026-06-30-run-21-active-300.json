@@ -1,0 +1,13 @@
+{
+  "batch_id": "2026-06-30-run-21",
+  "updated_at": "2026-06-30",
+  "active_count_before_this_batch": 21,
+  "active_goal": 300,
+  "long_term_active_goal": 3000,
+  "missing_to_active_goal": 279,
+  "records_added_to_active_this_batch": 0,
+  "allowed_status": ["planned", "under_evaluation", "under_design", "under_construction", "completed_or_opened_within_one_month"],
+  "dedupe_required_before_import": true,
+  "homepage_performance_rule": "Do not render 300 or more full project cards at once on the homepage.",
+  "decision": "No active records were imported in this batch before verification."
+}
