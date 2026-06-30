@@ -1,0 +1,37 @@
+{
+  "batch_id": "2026-06-30-run-16",
+  "created_at": "2026-06-30",
+  "title_zh": "第 16 輪匯入紀錄：候選與 active 去重對照",
+  "source_type_zh": "既有資料去重檢查",
+  "source_names": [
+    "data/active_construction_projects.geojson",
+    "data/candidates/2026-06-30-run-13-candidate-leads.json",
+    "data/candidates/2026-06-30-run-15-candidate-evidence-notes.json"
+  ],
+  "candidate_records_reviewed": 6,
+  "passed_verification_records": 0,
+  "active_records_added": 0,
+  "excluded_or_deferred_records": 6,
+  "already_represented_or_partly_represented": 4,
+  "still_pending_records": 2,
+  "exclusion_reasons_zh": [
+    "4 筆候選已由 active 地圖資料代表或部分代表，需避免重複累加。",
+    "2 筆候選仍缺官方來源、現況狀態、期程、位置或 geometry。"
+  ],
+  "outputs": [
+    "data/candidates/2026-06-30-run-16-candidate-active-reconciliation.json",
+    "data/import_batches/2026-06-30-run-16-log.json"
+  ],
+  "homepage_impact": {
+    "active_count_before": 21,
+    "active_count_after": 21,
+    "active_count_changed": false,
+    "reason_zh": "本輪只修正候選去重路徑，沒有把未完成交叉查核的候選資料放入首頁。"
+  },
+  "next_import_checks_zh": [
+    "新增任何候選工程前，先比對 run-16 reconciliation。",
+    "已標記 already_represented 的候選不得再以泛稱新增 active 卡片。",
+    "若要拆成多筆，必須有官方契約、不同施工範圍、不同來源連結與 geometry。",
+    "宜蘭鐵路高架化與馬太鞍溪橋相關工程仍需官方來源與 geometry。"
+  ]
+}
