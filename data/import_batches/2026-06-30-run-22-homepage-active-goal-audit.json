@@ -1,0 +1,54 @@
+{
+  "batch_id": "2026-06-30-run-22",
+  "batch_date": "2026-06-30",
+  "source_type": "homepage active data rule audit",
+  "source_name": "Taiwan Construction Map active dataset and homepage copy",
+  "candidate_records_checked": 21,
+  "verified_active_records": 21,
+  "excluded_records": 0,
+  "active_records_added": 0,
+  "active_count_after_batch": 21,
+  "active_goal": 300,
+  "missing_to_active_goal": 279,
+  "allowed_active_statuses": [
+    "計劃中",
+    "計畫中",
+    "評估中",
+    "設計中",
+    "施工中",
+    "完工/啟用一個月內"
+  ],
+  "homepage_findings": [
+    {
+      "item": "首頁第一階段資料門檻",
+      "status": "needs_follow_up_code_alignment",
+      "note": "資料入口與批次指標已保存 300 件門檻；首頁顯示與前端檢核仍需持續對齊第一階段 300 件與評估中/設計中狀態。"
+    },
+    {
+      "item": "手機 5 秒可用性",
+      "status": "pass_by_design_review",
+      "note": "首頁已先提供標題、搜尋、篩選、統計、地圖容器、工程清單、來源提示與基本導覽；底圖較慢時清單與台灣簡圖仍可用。"
+    },
+    {
+      "item": "資料品質",
+      "status": "guarded",
+      "note": "本輪未將未查核候選資料混入 active；仍需優先查核不同來源補足 300 件。"
+    }
+  ],
+  "next_priority_sources": [
+    "公共工程雲端服務網施工中案件",
+    "政府電子採購網近期決標且仍在履約工程",
+    "各縣市道路挖掘與管線施工圖資",
+    "捷運與鐵道主管機關施工進度頁",
+    "水利署與地方水利防災工程公告",
+    "產業園區與科學園區公共設施工程"
+  ],
+  "public_site_copy_blocklist_checked": [
+    "js",
+    "Vercel",
+    "馬斯克",
+    "第一性原則",
+    "mini-taiwan-pulse"
+  ],
+  "notes": "本批次保留為可追蹤查核紀錄；不把待確認或狀態不足資料混入 active 首頁地圖。"
+}
