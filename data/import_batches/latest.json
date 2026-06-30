@@ -6,5 +6,6 @@
   "active_goal": 300,
   "long_term_active_goal": 3000,
   "missing_to_active_goal": 279,
-  "active_records_added_this_batch": 0
+  "active_records_added_this_batch": 0,
+  "latest_reconciliation": "data/candidates/2026-06-30-run-16-candidate-active-reconciliation.json"
 }
