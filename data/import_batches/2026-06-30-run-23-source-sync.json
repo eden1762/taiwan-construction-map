@@ -1,0 +1,55 @@
+{
+  "batch_id": "2026-06-30-run-23",
+  "updated_at": "2026-06-30",
+  "source_type": "active baseline consistency audit",
+  "source_name": "data/construction_projects.geojson, data/active_construction_projects.geojson, data/import_batches/latest.json",
+  "candidate_records_checked": 20,
+  "records_added_to_active_this_batch": 0,
+  "records_removed_or_excluded_from_active_baseline": 5,
+  "active_count_after_batch": 15,
+  "active_goal": 300,
+  "missing_to_active_goal": 285,
+  "allowed_status": [
+    "計畫中",
+    "計劃中",
+    "評估中",
+    "設計中",
+    "施工中",
+    "完工/啟用一個月內"
+  ],
+  "excluded_records": [
+    {
+      "id": "tcmap-007",
+      "name": "臺中捷運藍線臺灣大道核心段",
+      "previous_status": "招標中",
+      "reason": "招標中尚未由本批官方查核證明可歸入計畫中、評估中或設計中，暫不列入 active。"
+    },
+    {
+      "id": "tcmap-008",
+      "name": "臺南市區鐵路地下化北段",
+      "previous_status": "延宕",
+      "reason": "延宕不屬於本輪 active 允許狀態，需待官方進度複查後再判斷是否可改列施工中。"
+    },
+    {
+      "id": "tcmap-013",
+      "name": "高雄市前鎮區道路排水改善",
+      "previous_status": "招標中",
+      "reason": "招標中尚未由本批官方查核證明可歸入計畫中、評估中或設計中，暫不列入 active。"
+    },
+    {
+      "id": "tcmap-019",
+      "name": "國道七號高雄路廊計畫",
+      "previous_status": "規劃中",
+      "reason": "一般規劃中不在新版 active 狀態字典；需複查是否可明確改列計畫中、評估中或設計中。"
+    },
+    {
+      "id": "tcmap-020",
+      "name": "基隆捷運南港至八堵段計畫",
+      "previous_status": "規劃中",
+      "reason": "一般規劃中不在新版 active 狀態字典；需複查是否可明確改列計畫中、評估中或設計中。"
+    }
+  ],
+  "dedupe_note": "下一批新增前需以 id, name, owner, contractor, source_url, address, geometry 與既有 active / raw / candidate / excluded records 交叉比對。",
+  "homepage_performance_note": "active 目標 300 件不得一次渲染 300 張完整卡片；首頁仍應先呈現標題、搜尋、篩選、統計、地圖容器、清單入口、來源提示與 fallback。",
+  "decision": "本批不新增 active 資料；先修正 latest metrics 與排除紀錄，避免後續資料匯入以過時 active_count=21 去重或計數。"
+}
