@@ -39,7 +39,7 @@
         <article><b id="m1">0</b><span data-t="projects">搜集工程</span></article>
         <article><b id="m2">0</b><span data-t="counties">有資料縣市</span></article>
         <article><b id="m3">12</b><span data-t="lanes">工程類型</span></article>
-        <article><b id="m4">0 / 3,000</b><span><span class="zh-only">資料版圖</span><span class="en-only inline-en">Data reach</span></span></article>
+        <article><b id="m4">0 / 300</b><span><span class="zh-only">第一階段現況工程</span><span class="en-only inline-en">Active phase one</span></span></article>
       </div>
     </section>
 
@@ -107,19 +107,18 @@
             <span><i style="--c:#ff6fae"></i><span class="zh-only">環評</span><span class="en-only inline-en">Environmental Review</span></span>
           </div>
           <div class="statusDots">
-            <span><i></i><span class="zh-only">規劃中</span><span class="en-only inline-en">Planning</span></span>
-            <span><i></i><span class="zh-only">招標準備</span><span class="en-only inline-en">Tender Prep</span></span>
-            <span><i></i><span class="zh-only">招標中</span><span class="en-only inline-en">Tendering</span></span>
+            <span><i></i><span class="zh-only">計畫中</span><span class="en-only inline-en">Planned</span></span>
+            <span><i></i><span class="zh-only">評估中</span><span class="en-only inline-en">Under Evaluation</span></span>
+            <span><i></i><span class="zh-only">設計中</span><span class="en-only inline-en">In Design</span></span>
             <span><i></i><span class="zh-only">施工中</span><span class="en-only inline-en">Under Construction</span></span>
-            <span><i></i><span class="zh-only">完工</span><span class="en-only inline-en">Completed</span></span>
-            <span><i></i><span class="zh-only">延宕</span><span class="en-only inline-en">Delayed</span></span>
+            <span><i></i><span class="zh-only">一個月內完工</span><span class="en-only inline-en">Completed within 1 month</span></span>
           </div>
         </details>
 
         <details class="quickPanel">
           <summary><span class="zh-only">現況資料守則</span><span class="en-only inline-en">Active data rules</span></summary>
-          <p class="zh-only"><strong>首頁現況統計</strong>只納入計畫中、招標準備、招標中、施工中，或完工／啟用一個月內的工程；過期、取消、停辦或來源失效的資料會移出首頁，避免把歷史案誤看成現況工程。</p>
-          <p class="en-only"><strong>Active overview</strong> keeps planned, pre-tender, tendering, under-construction, or recently completed projects only. Outdated or inactive records are moved out of the homepage view.</p>
+          <p class="zh-only"><strong>首頁現況統計</strong>只納入計畫中、評估中、設計中、施工中，或完工／啟用一個月內的工程；過期、取消、停辦或來源失效的資料會移出首頁，避免把歷史案誤看成現況工程。</p>
+          <p class="en-only"><strong>Active overview</strong> keeps planned, under-evaluation, in-design, under-construction, or completed/opened-within-one-month projects only. Outdated or inactive records are moved out of the homepage view.</p>
         </details>
 
         <details class="quickPanel">
@@ -186,7 +185,7 @@
   <div class="dock" aria-label="快速操作"><a href="https://www.instagram.com/taiwan.construction/" target="_blank" rel="noopener noreferrer">IG</a><button id="lang" type="button">EN</button></div>
   <script type="module" src="./fast-map.js?v=20260629-active-cache-2"></script>
   <script>
-    (()=>{const goal=3000,ok=p=>["計畫中","規劃中","招標準備","招標中","施工中","延宕"].includes(p.status)||p.status==="完工"&&(()=>{const d=new Date(`${String(p.completed_at||p.opened_at||p.planned_end_date||p.end_date||"").slice(0,10)}T00:00:00+08:00`);return !Number.isNaN(d.getTime())&&Date.now()-d.getTime()<=31*864e5})(),seen=new Set();fetch("/data/active_construction_projects.geojson?v=20260629-active-cache-2",{cache:"no-cache"}).then(r=>r.ok?r.json():Promise.reject()).then(j=>{let n=(j.features||[]).filter(f=>{const p=f.properties||{},k=[p.name,p.owner,p.address,p.source_url].join("|").toLowerCase();if(seen.has(k))return false;seen.add(k);return ok(p)}).length;const m=document.getElementById("m4");if(m)m.textContent=`${n.toLocaleString()} / ${goal.toLocaleString()}`}).catch(()=>{});})();
+    (()=>{const goal=300,ok=p=>["計畫中","計劃中","評估中","設計中","施工中"].includes(p.status)||p.status==="完工"&&(()=>{const d=new Date(`${String(p.completed_at||p.opened_at||p.planned_end_date||p.end_date||"").slice(0,10)}T00:00:00+08:00`);return !Number.isNaN(d.getTime())&&Date.now()-d.getTime()<=31*864e5})(),seen=new Set();fetch("/data/active_construction_projects.geojson?v=20260629-active-cache-2",{cache:"no-cache"}).then(r=>r.ok?r.json():Promise.reject()).then(j=>{let n=(j.features||[]).filter(f=>{const p=f.properties||{},k=[p.name,p.owner,p.address,p.source_url].join("|").toLowerCase();if(seen.has(k))return false;seen.add(k);return ok(p)}).length;const m=document.getElementById("m4");if(m)m.textContent=`${n.toLocaleString()} / ${goal.toLocaleString()}`}).catch(()=>{});})();
   </script>
 </body>
 </html>
