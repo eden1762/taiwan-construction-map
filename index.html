@@ -11,12 +11,12 @@
   <link rel="preload" href="/data/active_construction_projects.geojson?v=20260629-active-cache-2" as="fetch" type="application/geo+json" crossorigin />
   <link rel="stylesheet" href="./fast-map.css?v=20260629-mobile-first-4" />
   <style>
-    .quickPanel{margin-top:12px;border:1px solid rgba(12,35,55,.13);border-radius:18px;background:linear-gradient(145deg,#fff,#f7fbff);padding:12px}.quickPanel summary{cursor:pointer;font-weight:1000;color:#102131;list-style:none}.quickPanel summary::-webkit-details-marker{display:none}.quickPanel summary::after{content:"＋";float:right}.quickPanel[open] summary::after{content:"－"}.quickPanel p,.quickPanel li{color:#526b82;font-size:12px;line-height:1.55;font-weight:850}.quickPanel ul{margin:10px 0 0;padding-left:18px}.legendDots,.statusDots,.speedPills{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.legendDots span,.statusDots span,.speedPills span{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(12,35,55,.12);border-radius:999px;background:#fff;padding:6px 8px;font-size:12px;font-weight:950}.legendDots i{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c)}.statusDots i{display:inline-block;width:9px;height:9px;border-radius:3px;background:#0b88aa}.speedPills i{display:inline-block;width:8px;height:8px;border-radius:50%;background:#0b88aa}.mapNote{margin:8px 0 0!important;font-size:12px!important;line-height:1.5;color:#526b82!important;font-weight:850!important}.firstUse{border-color:rgba(11,136,170,.22);background:linear-gradient(145deg,#eefbff,#fff)}
+    .quickPanel{margin-top:12px;border:1px solid rgba(12,35,55,.13);border-radius:18px;background:linear-gradient(145deg,#fff,#f7fbff);padding:12px}.quickPanel summary{cursor:pointer;font-weight:1000;color:#102131;list-style:none}.quickPanel summary::-webkit-details-marker{display:none}.quickPanel summary::after{content:"＋";float:right}.quickPanel[open] summary::after{content:"－"}.quickPanel p,.quickPanel li{color:#526b82;font-size:12px;line-height:1.55;font-weight:850}.quickPanel ul{margin:10px 0 0;padding-left:18px}.legendDots,.statusDots,.speedPills{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.legendDots span,.statusDots span,.speedPills span{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(12,35,55,.12);border-radius:999px;background:#fff;padding:6px 8px;font-size:12px;font-weight:950}.legendDots i{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c)}.statusDots i{display:inline-block;width:9px;height:9px;border-radius:3px;background:#0b88aa}.speedPills i{display:inline-block;width:8px;height:8px;border-radius:50%;background:#0b88aa}.mapNote{margin:8px 0 0!important;font-size:12px!important;line-height:1.5;color:#526b82!important;font-weight:850!important}.firstUse{border-color:rgba(11,136,170,.22);background:linear-gradient(145deg,#eefbff,#fff)}.en-only{display:none!important}html[lang=en] .zh-only{display:none!important}html[lang=en] .en-only{display:initial!important}html[lang=en] li.en-only,html[lang=en] p.en-only,html[lang=en] article.en-only{display:block!important}html[lang=en] .inline-en{display:inline!important}
     @media(max-width:760px){.quickPanel{margin-top:10px;padding:10px}.side .quickPanel:not(.firstUse){margin-top:8px}.legendDots span,.statusDots span,.speedPills span{font-size:11px;padding:5px 7px}.mapNote{font-size:11px!important}.hero{padding-bottom:14px}.block{padding-top:18px}.layout{gap:12px}.side{order:1}.mapcard{order:2}.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
   </style>
 </head>
 <body data-page="overview">
-  <a class="skip" href="#mapSec">跳到全國工程概況</a>
+  <a class="skip" href="#mapSec"><span class="zh-only">跳到全國工程概況</span><span class="en-only inline-en">Skip to national overview</span></a>
   <header class="top" aria-label="網站導覽">
     <a class="brand" href="./index.html" aria-label="台灣工程地圖首頁">
       <span class="mark">工</span>
@@ -39,7 +39,7 @@
         <article><b id="m1">0</b><span data-t="projects">搜集工程</span></article>
         <article><b id="m2">0</b><span data-t="counties">有資料縣市</span></article>
         <article><b id="m3">12</b><span data-t="lanes">工程類型</span></article>
-        <article><b id="m4">0 / 3,000</b><span>資料版圖 / Data reach</span></article>
+        <article><b id="m4">0 / 3,000</b><span><span class="zh-only">資料版圖</span><span class="en-only inline-en">Data reach</span></span></article>
       </div>
     </section>
 
@@ -63,83 +63,88 @@
           <label><span data-t="status">辦理狀態</span><select id="status"></select></label>
         </div>
         <section id="layerToggles" class="layerbox" aria-label="圖層開關">
-          <p><b>圖層開關 / Layer switches</b><span>首屏先保留完整分類入口；正式載入後可逐層開關。</span></p>
+          <p><b><span class="zh-only">圖層開關</span><span class="en-only inline-en">Layer switches</span></b><span><span class="zh-only">首屏先保留完整分類入口；正式載入後可逐層開關。</span><span class="en-only inline-en">The first view keeps all sector entry points ready; after loading, layers can be switched one by one.</span></span></p>
           <div>
-            <label><input type="checkbox" checked>公共工程 / Public Works</label>
-            <label><input type="checkbox" checked>道路 / Roads</label>
-            <label><input type="checkbox" checked>管線 / Utilities</label>
-            <label><input type="checkbox" checked>捷運 / Metro</label>
-            <label><input type="checkbox" checked>建築 / Buildings</label>
-            <label><input type="checkbox">鐵路 / Rail</label>
-            <label><input type="checkbox">園區 / Parks</label>
-            <label><input type="checkbox">規劃 / Planning</label>
-            <label><input type="checkbox">環評 / Environmental Review</label>
-            <label><input type="checkbox">無人載具 / Uncrewed Systems</label>
+            <label><input type="checkbox" checked><span class="zh-only">公共工程</span><span class="en-only inline-en">Public Works</span></label>
+            <label><input type="checkbox" checked><span class="zh-only">道路</span><span class="en-only inline-en">Roads</span></label>
+            <label><input type="checkbox" checked><span class="zh-only">管線</span><span class="en-only inline-en">Utilities</span></label>
+            <label><input type="checkbox" checked><span class="zh-only">捷運</span><span class="en-only inline-en">Metro</span></label>
+            <label><input type="checkbox" checked><span class="zh-only">建築</span><span class="en-only inline-en">Buildings</span></label>
+            <label><input type="checkbox"><span class="zh-only">鐵路</span><span class="en-only inline-en">Rail</span></label>
+            <label><input type="checkbox"><span class="zh-only">園區</span><span class="en-only inline-en">Parks</span></label>
+            <label><input type="checkbox"><span class="zh-only">規劃</span><span class="en-only inline-en">Planning</span></label>
+            <label><input type="checkbox"><span class="zh-only">環評</span><span class="en-only inline-en">Environmental Review</span></label>
+            <label><input type="checkbox"><span class="zh-only">無人載具</span><span class="en-only inline-en">Uncrewed Systems</span></label>
             <label><input type="checkbox">AI</label>
-            <label><input type="checkbox">其他 / Other</label>
+            <label><input type="checkbox"><span class="zh-only">其他</span><span class="en-only inline-en">Other</span></label>
           </div>
         </section>
 
         <details class="quickPanel firstUse" open>
-          <summary>地圖操作提示 / Map tips</summary>
+          <summary><span class="zh-only">地圖操作提示</span><span class="en-only inline-en">Map tips</span></summary>
           <ul>
-            <li>手機可直接拖曳地圖、點縣市標記，或搜尋工程名、地點、甲方與乙方。</li>
-            <li>桌機可用右下角 + / − 調整視角，再點工程點位查看金額、期程與來源。</li>
-            <li>若底圖暫時較慢，工程清單、分類入口、縣市卡片與台灣簡圖會先保持可用。</li>
-            <li>On mobile, drag the map, tap city markers, or search by project, place, owner, or contractor. If the basemap is slow, the list and city cards stay ready first.</li>
+            <li class="zh-only">手機可直接拖曳地圖、點縣市標記，或搜尋工程名、地點、甲方與乙方。</li>
+            <li class="zh-only">桌機可用右下角 + / − 調整視角，再點工程點位查看金額、期程與來源。</li>
+            <li class="zh-only">若底圖暫時較慢，工程清單、分類入口、縣市卡片與台灣簡圖會先保持可用。</li>
+            <li class="en-only">On mobile, drag the map, tap city markers, or search by project, place, owner, or contractor.</li>
+            <li class="en-only">On desktop, use + / − to adjust the view, then tap a project pin to check budget, schedule, and source.</li>
+            <li class="en-only">If the basemap is slow, the project list, sector entry points, city cards, and Taiwan fallback map stay ready first.</li>
           </ul>
         </details>
 
         <details class="quickPanel">
-          <summary>圖例與狀態 / Legend & status</summary>
-          <p>顏色代表工程類型，狀態代表目前辦理階段；放大、搜尋或選縣市後會顯示工程點位。</p>
+          <summary><span class="zh-only">圖例與狀態</span><span class="en-only inline-en">Legend & status</span></summary>
+          <p><span class="zh-only">顏色代表工程類型，狀態代表目前辦理階段；放大、搜尋或選縣市後會顯示工程點位。</span><span class="en-only inline-en">Colors show project sectors, while status shows the current delivery stage. Zoom, search, or choose a city to reveal project pins.</span></p>
           <div class="legendDots">
-            <span><i style="--c:#35d4ff"></i>公共工程 / Public Works</span>
-            <span><i style="--c:#ffb84d"></i>道路 / Roads</span>
-            <span><i style="--c:#2dd4bf"></i>管線 / Utilities</span>
-            <span><i style="--c:#9b7cff"></i>捷運 / Metro</span>
-            <span><i style="--c:#76a7ff"></i>鐵路 / Rail</span>
-            <span><i style="--c:#30d68a"></i>建築 / Buildings</span>
-            <span><i style="--c:#42c7a8"></i>園區 / Parks</span>
-            <span><i style="--c:#ffcf66"></i>規劃 / Planning</span>
-            <span><i style="--c:#ff6fae"></i>環評 / Environmental Review</span>
+            <span><i style="--c:#35d4ff"></i><span class="zh-only">公共工程</span><span class="en-only inline-en">Public Works</span></span>
+            <span><i style="--c:#ffb84d"></i><span class="zh-only">道路</span><span class="en-only inline-en">Roads</span></span>
+            <span><i style="--c:#2dd4bf"></i><span class="zh-only">管線</span><span class="en-only inline-en">Utilities</span></span>
+            <span><i style="--c:#9b7cff"></i><span class="zh-only">捷運</span><span class="en-only inline-en">Metro</span></span>
+            <span><i style="--c:#76a7ff"></i><span class="zh-only">鐵路</span><span class="en-only inline-en">Rail</span></span>
+            <span><i style="--c:#30d68a"></i><span class="zh-only">建築</span><span class="en-only inline-en">Buildings</span></span>
+            <span><i style="--c:#42c7a8"></i><span class="zh-only">園區</span><span class="en-only inline-en">Parks</span></span>
+            <span><i style="--c:#ffcf66"></i><span class="zh-only">規劃</span><span class="en-only inline-en">Planning</span></span>
+            <span><i style="--c:#ff6fae"></i><span class="zh-only">環評</span><span class="en-only inline-en">Environmental Review</span></span>
           </div>
           <div class="statusDots">
-            <span><i></i>規劃中 / Planning</span>
-            <span><i></i>招標準備 / Tender Prep</span>
-            <span><i></i>招標中 / Tendering</span>
-            <span><i></i>施工中 / Under Construction</span>
-            <span><i></i>完工 / Completed</span>
-            <span><i></i>延宕 / Delayed</span>
+            <span><i></i><span class="zh-only">規劃中</span><span class="en-only inline-en">Planning</span></span>
+            <span><i></i><span class="zh-only">招標準備</span><span class="en-only inline-en">Tender Prep</span></span>
+            <span><i></i><span class="zh-only">招標中</span><span class="en-only inline-en">Tendering</span></span>
+            <span><i></i><span class="zh-only">施工中</span><span class="en-only inline-en">Under Construction</span></span>
+            <span><i></i><span class="zh-only">完工</span><span class="en-only inline-en">Completed</span></span>
+            <span><i></i><span class="zh-only">延宕</span><span class="en-only inline-en">Delayed</span></span>
           </div>
         </details>
 
         <details class="quickPanel">
-          <summary>現況資料守則 / Active data rules</summary>
-          <p><strong>首頁現況統計</strong>只納入計畫中、招標準備、招標中、施工中，或完工／啟用一個月內的工程；過期、取消、停辦或來源失效的資料會移出首頁，避免把歷史案誤看成現況工程。</p>
-          <p><strong>Active overview</strong> keeps planned, pre-tender, tendering, under-construction, or recently completed projects only. Outdated or inactive records are moved out of the homepage view.</p>
+          <summary><span class="zh-only">現況資料守則</span><span class="en-only inline-en">Active data rules</span></summary>
+          <p class="zh-only"><strong>首頁現況統計</strong>只納入計畫中、招標準備、招標中、施工中，或完工／啟用一個月內的工程；過期、取消、停辦或來源失效的資料會移出首頁，避免把歷史案誤看成現況工程。</p>
+          <p class="en-only"><strong>Active overview</strong> keeps planned, pre-tender, tendering, under-construction, or recently completed projects only. Outdated or inactive records are moved out of the homepage view.</p>
         </details>
 
         <details class="quickPanel">
-          <summary>資料量與速度 / Data speed</summary>
-          <p>首頁先給搜尋、篩選、統計、分類入口與地圖容器；工程資料增加時，畫面會優先顯示目前視野與已篩選的重點，不一次把大量卡片塞到手機畫面。</p>
-          <p>The homepage stays field-ready first: search, filters, stats, sector entry points, and the map frame load before heavy project detail views.</p>
+          <summary><span class="zh-only">資料量與速度</span><span class="en-only inline-en">Data speed</span></summary>
+          <p class="zh-only">首頁先給搜尋、篩選、統計、分類入口與地圖容器；工程資料增加時，畫面會優先顯示目前視野與已篩選的重點，不一次把大量卡片塞到手機畫面。</p>
+          <p class="en-only">The homepage stays field-ready first: search, filters, stats, sector entry points, and the map frame load before heavy project detail views.</p>
           <div class="speedPills">
-            <span><i></i>首屏先可用 / First view first</span>
-            <span><i></i>分類分流 / Sector lanes</span>
-            <span><i></i>清單分頁 / Paged list</span>
-            <span><i></i>點位抽樣 / Balanced pins</span>
+            <span><i></i><span class="zh-only">首屏先可用</span><span class="en-only inline-en">First view first</span></span>
+            <span><i></i><span class="zh-only">分類分流</span><span class="en-only inline-en">Sector lanes</span></span>
+            <span><i></i><span class="zh-only">清單分頁</span><span class="en-only inline-en">Paged list</span></span>
+            <span><i></i><span class="zh-only">點位抽樣</span><span class="en-only inline-en">Balanced pins</span></span>
           </div>
         </details>
 
         <details class="quickPanel">
-          <summary>資料來源怎麼看 / How to read sources</summary>
+          <summary><span class="zh-only">資料來源怎麼看</span><span class="en-only inline-en">How to read sources</span></summary>
           <ul>
-            <li><strong>來源連結</strong>優先放可回查的主管機關、發包單位、公告或公開圖資入口。</li>
-            <li>工程金額、期程、甲方與乙方可能隨招標、變更設計或公告更新；正式引用前請回來源確認最新版。</li>
-            <li>資料會逐步輪流補進不同主管機關、不同縣市與不同工程類型，避免只看單一來源。</li>
-            <li>沒有公開佐證的欄位會標示「待補資料 / To be verified」，不把猜測內容混進工程卡片。</li>
-            <li>Source links point to traceable public portals. For formal use, always re-check the owner agency, tender notice, or public map layer.</li>
+            <li class="zh-only"><strong>來源連結</strong>優先放可回查的主管機關、發包單位、公告或公開圖資入口。</li>
+            <li class="zh-only">工程金額、期程、甲方與乙方可能隨招標、變更設計或公告更新；正式引用前請回來源確認最新版。</li>
+            <li class="zh-only">資料會逐步輪流補進不同主管機關、不同縣市與不同工程類型，避免只看單一來源。</li>
+            <li class="zh-only">沒有公開佐證的欄位會標示「待補資料 / To be verified」，不把猜測內容混進工程卡片。</li>
+            <li class="en-only"><strong>Source links</strong> point first to traceable owner agencies, project owners, public notices, or public map portals.</li>
+            <li class="en-only">Budgets, schedules, owners, and contractors may change with tendering or design updates; re-check the source before formal use.</li>
+            <li class="en-only">New records are rotated across agencies, cities, and project sectors so the map does not lean on only one source.</li>
+            <li class="en-only">Fields without public evidence are marked “To be verified,” and guesses are kept out of project cards.</li>
           </ul>
         </details>
 
@@ -151,7 +156,7 @@
           <div>
             <p class="eyebrow" data-t="osm">OpenStreetMap 電子地圖</p>
             <h2 data-t="countyTitle">各縣市工程總數與分類盤點</h2>
-            <p class="mapNote">預設使用 OpenStreetMap 底圖；若底圖暫時較慢，搜尋、篩選、工程清單與台灣簡圖會先保持可用。Default basemap: OpenStreetMap. Search, filters, list, and fallback map stay usable even when map tiles are slow.</p>
+            <p class="mapNote"><span class="zh-only">預設使用 OpenStreetMap 底圖；若底圖暫時較慢，搜尋、篩選、工程清單與台灣簡圖會先保持可用。</span><span class="en-only inline-en">Default basemap: OpenStreetMap. Search, filters, list, and fallback map stay usable even when map tiles are slow.</span></p>
           </div>
           <p id="health" data-t="boot">工程清單已可用，地圖背景載入中。</p>
         </div>
@@ -166,10 +171,14 @@
         <h2 data-t="listTitle">點位、甲方、乙方、期程與來源。</h2>
       </div>
       <div id="list" class="cards" aria-live="polite">
-        <article class="proj" style="--c:#35d4ff"><i>公共工程 / Public Works</i><h3>公共工程入口</h3><p>資料讀取中也能先進入分類頁，查看公部門建設、水利、港灣、社宅與市政工程。</p><a href="./category.html?sector=public-works">打開分類地圖</a></article>
-        <article class="proj" style="--c:#ffb84d"><i>道路與管線 / Roads & Utilities</i><h3>道路、橋梁、管線入口</h3><p>適合快速查找道路改善、橋梁、公路、排水、污水與地下管線相關工程。</p><a href="./category.html?sector=roads">打開道路工程</a></article>
-        <article class="proj" style="--c:#9b7cff"><i>捷運交通 / Metro & Mobility</i><h3>捷運、鐵路、交通入口</h3><p>先看軌道、車站、交通節點與路廊計畫；正式資料載入完成後會自動換成現況清單。</p><a href="./category.html?sector=metro">打開捷運工程</a></article>
-        <article class="proj" style="--c:#ffcf66"><i>規劃與環評 / Planning & Review</i><h3>規劃、環評入口</h3><p>適合追蹤可行性、路廊、環境審查與前期公告，先看案子會不會往下走。</p><a href="./category.html?sector=planning">打開規劃工程</a></article>
+        <article class="proj zh-only" style="--c:#35d4ff"><i>公共工程</i><h3>公共工程入口</h3><p>資料讀取中也能先進入分類頁，查看公部門建設、水利、港灣、社宅與市政工程。</p><a href="./category.html?sector=public-works">打開分類地圖</a></article>
+        <article class="proj zh-only" style="--c:#ffb84d"><i>道路與管線</i><h3>道路、橋梁、管線入口</h3><p>適合快速查找道路改善、橋梁、公路、排水、污水與地下管線相關工程。</p><a href="./category.html?sector=roads">打開道路工程</a></article>
+        <article class="proj zh-only" style="--c:#9b7cff"><i>捷運交通</i><h3>捷運、鐵路、交通入口</h3><p>先看軌道、車站、交通節點與路廊計畫；正式資料載入完成後會自動換成現況清單。</p><a href="./category.html?sector=metro">打開捷運工程</a></article>
+        <article class="proj zh-only" style="--c:#ffcf66"><i>規劃與環評</i><h3>規劃、環評入口</h3><p>適合追蹤可行性、路廊、環境審查與前期公告，先看案子會不會往下走。</p><a href="./category.html?sector=planning">打開規劃工程</a></article>
+        <article class="proj en-only" style="--c:#35d4ff"><i>Public Works</i><h3>Public works gateway</h3><p>Even while data loads, jump into civic works, water, ports, public housing, and municipal infrastructure.</p><a href="./category.html?sector=public-works">Open sector map</a></article>
+        <article class="proj en-only" style="--c:#ffb84d"><i>Roads & Utilities</i><h3>Roads, bridges, and utility works</h3><p>Quickly check road upgrades, bridges, highways, drainage, sewage, and underground utility projects.</p><a href="./category.html?sector=roads">Open road projects</a></article>
+        <article class="proj en-only" style="--c:#9b7cff"><i>Metro & Mobility</i><h3>Metro, rail, and transport gateway</h3><p>Start with rail corridors, stations, mobility nodes, and corridor plans; the active list replaces this view after loading.</p><a href="./category.html?sector=metro">Open metro projects</a></article>
+        <article class="proj en-only" style="--c:#ffcf66"><i>Planning & Review</i><h3>Planning and review gateway</h3><p>Track feasibility, corridors, environmental review, and early-stage notices before projects move forward.</p><a href="./category.html?sector=planning">Open planning projects</a></article>
       </div>
     </section>
   </main>
