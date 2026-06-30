@@ -1,14 +1,10 @@
 {
   "updated_at": "2026-06-30",
-  "latest_batch_id": "2026-06-30-run-20",
-  "latest_batch_log": "index.html",
-  "latest_candidate_leads": "data/candidates/2026-06-30-run-13-candidate-leads.json",
-  "latest_candidate_verification_queue": "data/candidates/2026-06-30-run-14-candidate-verification-queue.json",
-  "latest_candidate_evidence_notes": "data/candidates/2026-06-30-run-15-candidate-evidence-notes.json",
-  "latest_candidate_reconciliation": "data/candidates/2026-06-30-run-16-candidate-active-reconciliation.json",
-  "latest_homepage_language_audit": "index.html",
+  "latest_batch_id": "2026-06-30-run-21",
+  "latest_batch_log": "data/import_batches/latest.json",
   "active_count": 21,
-  "active_goal": 3000,
-  "active_records_added_this_batch": 0,
-  "public_homepage_fix": "English static helper copy and fallback cards now switch by page language without changing active map data."
+  "active_goal": 300,
+  "long_term_active_goal": 3000,
+  "missing_to_active_goal": 279,
+  "active_records_added_this_batch": 0
 }
