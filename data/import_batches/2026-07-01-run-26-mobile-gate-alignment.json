@@ -1,0 +1,17 @@
+{
+  "batch_id": "2026-07-01-run-26",
+  "updated_at": "2026-07-01",
+  "type": "quality_check",
+  "active_count": 15,
+  "active_goal": 300,
+  "missing_to_active_goal": 285,
+  "candidate_count": 0,
+  "accepted_count": 0,
+  "excluded_count": 0,
+  "active_records_added_this_batch": 0,
+  "active_records_removed_this_batch": 0,
+  "finding_zh": "手機速度檢查表仍含舊版長期 3000 件目標與舊圖層鍵值，容易誤導後續檢核；本輪記錄為需修正項，不混入未查核資料。",
+  "finding_en": "The mobile runtime gate file still contains an older long-term 3000-record target and older layer keys, which can mislead future checks. This run records the issue without mixing unverified records into active data.",
+  "next_action_zh": "下一輪優先將 mobile_osm_runtime_gates.json 對齊第一階段 300 件目標、五大圖層鍵值與目前 active 15 件現況。",
+  "next_action_en": "Next run should align mobile_osm_runtime_gates.json with the phase-one 300-record target, the five layer keys, and the current 15 active records."
+}
