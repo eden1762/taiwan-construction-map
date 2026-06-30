@@ -1,0 +1,56 @@
+{
+  "batch_id": "2026-06-30-run-25",
+  "batch_date": "2026-06-30",
+  "source_type": "active_status_policy_audit",
+  "source_name": "homepage active data gate and public research catalog review",
+  "candidate_count": 0,
+  "passed_count": 0,
+  "excluded_count": 0,
+  "active_records_added_this_batch": 0,
+  "active_records_removed_this_batch": 0,
+  "active_count_after_batch": 15,
+  "active_goal": 300,
+  "missing_to_active_goal": 285,
+  "included_in_active_map": false,
+  "candidate_only": false,
+  "policy_file_added": "data/quality/active_status_policy.json",
+  "allowed_statuses": [
+    "計畫中",
+    "計劃中",
+    "評估中",
+    "設計中",
+    "施工中",
+    "完工/啟用一個月內"
+  ],
+  "excluded_statuses": [
+    "招標中",
+    "招標準備",
+    "規劃中",
+    "延宕",
+    "待確認",
+    "已完工超過一個月",
+    "取消",
+    "停辦",
+    "停止推動",
+    "來源失效"
+  ],
+  "changes": [
+    "Added a public-readable active status policy file for the phase-one 300-record gate.",
+    "Kept active_count at 15 because no new candidate passed source, status, field, geometry, and dedupe checks in this run.",
+    "Preserved the rule that unverified candidates must stay outside active GeoJSON and active homepage statistics.",
+    "Prepared the policy file for linking from the public research catalog so researchers can inspect the active gate directly."
+  ],
+  "quality_notes": [
+    "No unverified data was added to active data in this batch.",
+    "The project still needs 285 verified current active records to reach the first 300-record gate.",
+    "Next high-yield sources should prioritize official public works portals, local works bureaus, metro and rail agencies, road excavation/public works maps, environmental review records, and park/airport/port project pages."
+  ],
+  "next_priority_sources": [
+    "公共工程雲端服務網與公共工程委員會公開資料",
+    "各縣市政府工務局、建設局、養工處與道路挖掘平台",
+    "臺北、新北、桃園、高雄捷運工程主管機關",
+    "交通部鐵道局、公路局與港務公司工程頁",
+    "環境部環評書件、都市計畫與建管公開資料",
+    "科學園區、產業園區、航空城、港灣與機場公開工程資訊"
+  ]
+}
