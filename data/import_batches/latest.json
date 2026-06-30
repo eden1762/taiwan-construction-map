@@ -1,11 +1,10 @@
 {
   "updated_at": "2026-06-30",
   "latest_batch_id": "2026-06-30-run-21",
-  "latest_batch_log": "data/import_batches/latest.json",
+  "latest_batch_log": "data/import_batches/2026-06-30-run-21-active-300.json",
   "active_count": 21,
   "active_goal": 300,
   "long_term_active_goal": 3000,
   "missing_to_active_goal": 279,
-  "active_records_added_this_batch": 0,
-  "latest_reconciliation": "data/candidates/2026-06-30-run-16-candidate-active-reconciliation.json"
+  "active_records_added_this_batch": 0
 }
