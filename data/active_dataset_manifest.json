@@ -1,11 +1,34 @@
 {
-  "updated_at": "2026-06-28",
-  "target_active_project_count": 3000,
+  "updated_at": "2026-06-30",
+  "target_active_project_count": 300,
+  "long_term_target_active_project_count": 3000,
+  "current_active_project_count": 21,
+  "missing_to_target_active_project_count": 279,
+  "active_status_policy": {
+    "allowed_status_zh": [
+      "計劃中",
+      "計畫中",
+      "評估中",
+      "設計中",
+      "施工中",
+      "完工/啟用一個月內"
+    ],
+    "allowed_status_en": [
+      "Planned",
+      "Under evaluation",
+      "In design",
+      "Under construction",
+      "Completed/opened within one month"
+    ],
+    "rule_zh": "active 首頁工程資料必須不重複、現況有效、來源可回查；已完工或啟用超過一個月、取消、停辦、停止推動、來源失效或無法查證者不得計入首頁現況統計。",
+    "rule_en": "Active homepage records must be non-duplicate, current, and traceable. Projects completed or opened for more than one month, cancelled, paused, no longer valid, or unverified must stay outside the active count."
+  },
   "home_loading_policy": {
-    "rule_zh": "首頁只載入首屏必要批次；其餘資料保留在延後批次，避免手機一次載入過量資料。",
-    "rule_en": "The home page loads only the first essential batches; the remaining records stay in deferred batches to keep mobile browsing fast.",
+    "rule_zh": "首頁只載入首屏必要批次；其餘資料保留在延後批次，避免手機一次載入過量資料。即使 active 逐步補到 300 件，也不得一次渲染 300 張完整卡片。",
+    "rule_en": "The home page loads only the first essential batches; the remaining records stay in deferred batches to keep mobile browsing fast. Even when active records grow to 300, the page must not render 300 full cards at once.",
     "home_first_batch_limit": 40,
-    "mobile_first_screen_goal_seconds": 5
+    "mobile_first_screen_goal_seconds": 5,
+    "max_full_cards_per_render": 8
   },
   "datasets": [
     {
