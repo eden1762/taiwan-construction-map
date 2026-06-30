@@ -1,0 +1,15 @@
+{
+  "batch_id": "run-19-homepage-static-language-check",
+  "date": "2026-06-30",
+  "scope": "homepage bilingual static guidance audit",
+  "finding": "Homepage English mode still has several hard-coded Chinese or mixed-language helper panels before project data replaces the fallback list.",
+  "impact": "English readers can use the core search, filters, map and list, but supporting guidance is not fully localized.",
+  "recommended_fix": [
+    "Add data-static translation hooks to the homepage helper panels, map note, fallback list and data reach label.",
+    "Add a small static copy patch that follows the existing language toggle and does not delay the first view.",
+    "Keep OpenStreetMap attribution visible and avoid changing the basemap or data loading path."
+  ],
+  "active_geojson_changed": false,
+  "active_project_count": 21,
+  "notes": "No unverified candidate project was promoted into the active homepage dataset."
+}
