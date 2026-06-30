@@ -1,0 +1,25 @@
+{
+  "batch_id": "2026-07-01-run-27",
+  "batch_date": "2026-07-01",
+  "source_type": "site_quality_check",
+  "source_name": "sources-page-five-layer-navigation-audit",
+  "candidate_records_checked": 0,
+  "active_records_added": 0,
+  "active_records_removed": 0,
+  "active_count_after_batch": 15,
+  "active_goal": 300,
+  "missing_to_active_goal": 285,
+  "included_in_active_map": false,
+  "kept_as_candidate_or_quality_record": true,
+  "quality_findings": [
+    {
+      "area": "sources_navigation",
+      "finding": "sources.js still builds the sources-page menu from legacy sector keys such as roads, utilities, metro, rail, buildings, parks, planning, eia, uncrewed, ai, and other, while the homepage and category flow now use five active layer keys.",
+      "risk": "Users can open stale category URLs from the data-sources page, creating a split navigation experience and confusing the single-source five-layer structure.",
+      "recommended_fix": "Change the sources-page sector menu to public-works, roads-utilities, transit, buildings-parks, and planning-eia; update source-page copy and placeholders to match those five layers."
+    }
+  ],
+  "active_status_policy": ["計畫中", "計劃中", "評估中", "設計中", "施工中", "完工/啟用一個月內"],
+  "excluded_from_active": ["未查核資料", "重複資料", "過期資料", "取消/停辦資料", "來源失效資料", "完工/啟用超過一個月資料"],
+  "next_priority_sources": ["公共工程雲端服務網", "政府電子採購網", "地方工務局處", "捷運與鐵道主管機關", "道路挖掘與管線公開圖資"]
+}
