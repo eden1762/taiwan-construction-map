@@ -1,0 +1,27 @@
+{
+  "batch_id": "run-18-homepage-language-audit",
+  "batch_date": "2026-06-30",
+  "audit_type": "homepage_language_and_map_fallback",
+  "status": "follow_up_saved",
+  "findings": [
+    {
+      "id": "run18-home-language-001",
+      "severity": "medium",
+      "area": "homepage static guidance",
+      "finding_zh": "首頁動態文案可切換中英文，但部分操作提示、圖例、速度與資料來源說明屬於靜態首屏內容，英文模式仍可能保留中文或中英混合。",
+      "finding_en": "Most dynamic copy can switch language, but some first-view guidance blocks may remain Chinese or bilingual in English mode.",
+      "recommended_fix": [
+        "Move static guidance blocks into the same language state as the existing language toggle.",
+        "Keep the map attribution visible in both languages.",
+        "Keep fallback list cards understandable before data loads."
+      ],
+      "active_map_change": false,
+      "candidate_promoted_to_active": false
+    }
+  ],
+  "next_run_must_check": [
+    "Check the active project dataset and dedupe index before adding records.",
+    "Check that the first view still shows search, filters, stats, map frame, list, source hint and basic navigation quickly.",
+    "Check that the default basemap remains OpenStreetMap."
+  ]
+}
