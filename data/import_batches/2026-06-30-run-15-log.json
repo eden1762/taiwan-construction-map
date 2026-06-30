@@ -1,0 +1,44 @@
+{
+  "batch_id": "2026-06-30-run-15",
+  "created_at": "2026-06-30",
+  "title_zh": "第 15 輪工程資料查核批次紀錄",
+  "title_en": "Run 15 Project Data Verification Batch Log",
+  "source_type": "public_web_verification_scan",
+  "source_groups_checked": [
+    "捷運與鐵道主管機關候選",
+    "港灣與機場主管機關候選",
+    "公共工程與採購候選"
+  ],
+  "input_files": [
+    "data/import_batches/latest.json",
+    "data/dedupe_index.json",
+    "data/active_construction_projects.geojson",
+    "data/candidates/2026-06-30-run-13-candidate-leads.json",
+    "data/candidates/2026-06-30-run-14-candidate-verification-queue.json"
+  ],
+  "output_files": [
+    "data/raw_sources/2026-06-30-run-15-web-verification-scan.json",
+    "data/candidates/2026-06-30-run-15-candidate-evidence-notes.json",
+    "data/import_batches/2026-06-30-run-15-log.json"
+  ],
+  "candidate_records_checked": 6,
+  "candidate_records_enriched": 3,
+  "candidate_records_promoted_to_active": 0,
+  "active_records_added": 0,
+  "active_records_removed": 0,
+  "excluded_records": 0,
+  "why_no_active_promotion_zh": "本輪查到的公開資料仍不足以同時確認主管機關來源、工程範圍、狀態、期程、位置與 geometry；依規則全部留在候選或證據備註，不進首頁現況統計。",
+  "why_no_active_promotion_en": "The public findings did not fully confirm owner-agency source, scope, status, dates, location, and geometry. All records remain candidates or evidence notes and are excluded from homepage active statistics.",
+  "dedupe_actions": [
+    "未新增 active，因此未改動 data/active_construction_projects.geojson。",
+    "候選備註仍保留 lead_id 與既有 dedupe keys，下一輪查核需先比對候選線索、候選查核佇列、原始來源紀錄與去重索引。",
+    "若同一工程被拆成多個施工標，必須以官方案名、契約、路段、站點或工程範圍明確區分後才能分筆。"
+  ],
+  "public_readable_update_zh": "新增候選證據備註與原始掃描紀錄，讓一般研究者能知道本輪哪些資料只作為線索、哪些欄位仍待補。",
+  "next_required_checks": [
+    "優先查主管機關站內頁，而不是只使用公開整理頁。",
+    "取得官方來源後，先補候選詳細欄位，不直接上首頁。",
+    "補齊 geometry、狀態、期程與去重鍵後，再判斷是否符合 active 規則。",
+    "首頁 active 資料仍維持 21 筆，直到有通過查核的新資料。"
+  ]
+}
