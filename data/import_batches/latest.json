@@ -1,12 +1,13 @@
 {
   "updated_at": "2026-06-30",
-  "latest_batch_id": "2026-06-30-run-24",
-  "latest_batch_log": "data/import_batches/2026-06-30-run-24-runtime-gate-sync.json",
+  "latest_batch_id": "2026-06-30-run-25",
+  "latest_batch_log": "data/import_batches/2026-06-30-run-25-active-status-policy.json",
   "active_count": 15,
   "active_goal": 300,
   "long_term_active_goal": 3000,
   "missing_to_active_goal": 285,
   "active_records_added_this_batch": 0,
   "active_records_removed_from_source_baseline_this_batch": 0,
-  "note": "Runtime gate now matches the phase-one 300 active-project target and allowed active statuses. Active baseline remains 15 traceable records; 285 more verified current records are still needed."
+  "policy_file_added": "data/quality/active_status_policy.json",
+  "note": "Run 25 added a public-readable active status policy for the 300-record gate. Active baseline remains 15 traceable records; 285 more verified current records are still needed."
 }
