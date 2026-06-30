@@ -1,0 +1,80 @@
+{
+  "batch_id": "2026-06-30-run-16",
+  "created_at": "2026-06-30",
+  "title_zh": "第 16 輪候選與首頁現況資料對照",
+  "title_en": "Run 16 Candidate to Active Map Reconciliation",
+  "purpose_zh": "把候選線索與首頁 active 地圖資料做去重對照，避免下一輪把已上圖的工程重複匯入。此檔不新增 active 筆數，只修正後續查核路徑。",
+  "active_records_added": 0,
+  "active_count_after_run": 21,
+  "candidate_records_checked": 6,
+  "candidate_records_marked_as_already_represented": 4,
+  "candidate_records_kept_pending": 2,
+  "must_read_before_next_import": [
+    "data/active_construction_projects.geojson",
+    "data/dedupe_index.json",
+    "data/candidates/2026-06-30-run-13-candidate-leads.json",
+    "data/candidates/2026-06-30-run-14-candidate-verification-queue.json",
+    "data/candidates/2026-06-30-run-15-candidate-evidence-notes.json",
+    "data/candidates/2026-06-30-run-16-candidate-active-reconciliation.json"
+  ],
+  "reconciliation": [
+    {
+      "lead_id": "run13-lead-001",
+      "candidate_name_zh": "桃園捷運綠線主線與延伸相關工程",
+      "reconciliation_status": "already_partly_represented_in_active",
+      "active_record_id": "tcmap-003",
+      "active_record_name_zh": "桃園捷運綠線 GC01 標周邊工程",
+      "dedupe_note_zh": "候選線索與 active 資料同屬桃園捷運綠線。後續若新增主線其他標段或延伸線，必須以不同官方契約、不同路段、不同來源連結與不同 geometry 明確區分。",
+      "next_action_zh": "保留為細分標段查核，不得直接轉 active。"
+    },
+    {
+      "lead_id": "run13-lead-002",
+      "candidate_name_zh": "高雄捷運黃線土建及設施機電工程",
+      "reconciliation_status": "already_partly_represented_in_active",
+      "active_record_id": "tcmap-006",
+      "active_record_name_zh": "高雄捷運黃線 Y15 車站周邊工程",
+      "dedupe_note_zh": "候選線索與 active 資料同屬高雄捷運黃線。後續若拆成不同標段、車站、機廠或機電工程，必須先補官方標案名稱、契約範圍、施工範圍與 geometry。",
+      "next_action_zh": "保留為標段拆分查核，不得直接轉 active。"
+    },
+    {
+      "lead_id": "run13-lead-003",
+      "candidate_name_zh": "臺灣桃園國際機場第三航站區建設計畫",
+      "reconciliation_status": "already_represented_in_active",
+      "active_record_id": "tcmap-002",
+      "active_record_name_zh": "桃園國際機場第三航廈",
+      "dedupe_note_zh": "候選線索已由 active 資料代表。除非能以官方來源區分航廈主體、登機廊廳、機坪、道路、行李系統或機電分項，否則不得新增重複工程卡。",
+      "next_action_zh": "標記為已代表；只接受分項官方來源補強。"
+    },
+    {
+      "lead_id": "run13-lead-004",
+      "candidate_name_zh": "宜蘭鐵路高架化計畫",
+      "reconciliation_status": "still_pending_not_in_active",
+      "active_record_id": null,
+      "active_record_name_zh": null,
+      "dedupe_note_zh": "目前 active 地圖未見同名或高度相似工程；但仍缺官方來源、現況階段、期程與 geometry。",
+      "next_action_zh": "繼續待確認；不得進首頁統計。"
+    },
+    {
+      "lead_id": "run13-lead-005",
+      "candidate_name_zh": "臺南市區鐵路地下化計畫",
+      "reconciliation_status": "already_partly_represented_in_active",
+      "active_record_id": "tcmap-008",
+      "active_record_name_zh": "臺南市區鐵路地下化北段",
+      "dedupe_note_zh": "候選線索與 active 資料同屬臺南市區鐵路地下化。後續若新增南段、車站或不同契約，必須以官方契約、路廊範圍與 geometry 區分。",
+      "next_action_zh": "保留為路段細分查核，不得直接轉 active。"
+    },
+    {
+      "lead_id": "run13-lead-006",
+      "candidate_name_zh": "馬太鞍溪橋與水利復原相關工程",
+      "reconciliation_status": "still_pending_not_in_active",
+      "active_record_id": null,
+      "active_record_name_zh": null,
+      "dedupe_note_zh": "目前 active 地圖未見同名或高度相似工程；後續需先區分橋梁、公路、水利與復原工程是否為不同工程。",
+      "next_action_zh": "繼續待確認；需補官方來源、工程範圍、active 時效與 geometry。"
+    }
+  ],
+  "homepage_impact": {
+    "active_count_changed": false,
+    "reason_zh": "本輪只做候選與 active 去重對照，沒有新增或移除首頁現況工程。"
+  }
+}
