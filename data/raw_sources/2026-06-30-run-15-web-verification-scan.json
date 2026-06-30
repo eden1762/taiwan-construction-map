@@ -1,0 +1,90 @@
+{
+  "batch_id": "2026-06-30-run-15",
+  "created_at": "2026-06-30",
+  "title_zh": "第 15 輪公開來源查核掃描",
+  "title_en": "Run 15 Public Source Verification Scan",
+  "purpose_zh": "針對第 14 輪候選查核佇列進行公開來源搜尋，保存本輪查到的線索與限制；本檔不直接推入首頁 active 地圖。",
+  "purpose_en": "Stores public-source search findings and limitations for the Run 14 candidate verification queue. This file does not promote records into the active homepage map.",
+  "source_candidate_queue": "data/candidates/2026-06-30-run-14-candidate-verification-queue.json",
+  "checked_against": [
+    "data/import_batches/latest.json",
+    "data/dedupe_index.json",
+    "data/active_construction_projects.geojson",
+    "data/candidates/2026-06-30-run-13-candidate-leads.json",
+    "data/candidates/2026-06-30-run-14-candidate-verification-queue.json"
+  ],
+  "search_method_zh": "以候選工程名稱搭配主管機關、工程進度、施工狀態、2026 等關鍵字搜尋；優先尋找主管機關、發包單位、公共工程或政府採購可回查來源。",
+  "search_method_en": "Searched candidate project names with owner agency, progress, active status, and 2026 keywords. Priority was given to traceable owner-agency, public works, or public procurement sources.",
+  "candidate_checks": [
+    {
+      "lead_id": "run13-lead-001",
+      "name_zh": "桃園捷運綠線主線與延伸相關工程",
+      "public_search_hits": [
+        {
+          "source_name": "公開整理頁：桃園捷運綠線",
+          "source_url": "https://zh.wikipedia.org/wiki/%E6%A1%83%E5%9C%92%E6%8D%B7%E9%81%8B%E7%B6%A0%E7%B7%9A",
+          "notes_zh": "可作為線索，提到主線興建中、延伸線規劃中與分期通車資訊；仍需主管機關或公共工程來源確認最新狀態、標案、位置與期程。"
+        }
+      ],
+      "official_source_confirmed": false,
+      "active_promotion_decision": "keep_candidate",
+      "missing_fields": ["主管機關最新頁面", "工程標案或契約區分", "可回查來源連結", "路廊 geometry", "最新期程"]
+    },
+    {
+      "lead_id": "run13-lead-002",
+      "name_zh": "高雄捷運黃線土建及設施機電工程",
+      "public_search_hits": [
+        {
+          "source_name": "公開整理頁：Yellow line (Kaohsiung Metro)",
+          "source_url": "https://en.wikipedia.org/wiki/Yellow_line_%28Kaohsiung_Metro%29",
+          "notes_zh": "可作為線索，提到路線施工中與預期時程；仍需高雄市政府捷運工程局、公共工程或政府採購來源確認標案範圍與最新進度。"
+        }
+      ],
+      "official_source_confirmed": false,
+      "active_promotion_decision": "keep_candidate",
+      "missing_fields": ["主管機關最新頁面", "YC 標案範圍", "土建與機電分筆規則", "官方期程", "路廊 geometry"]
+    },
+    {
+      "lead_id": "run13-lead-003",
+      "name_zh": "臺灣桃園國際機場第三航站區建設計畫",
+      "public_search_hits": [
+        {
+          "source_name": "公開整理頁：臺灣桃園國際機場第三航廈",
+          "source_url": "https://zh.wikipedia.org/wiki/%E8%87%BA%E7%81%A3%E6%A1%83%E5%9C%92%E5%9C%8B%E9%9A%9B%E6%A9%9F%E5%A0%B4%E7%AC%AC%E4%B8%89%E8%88%AA%E5%BB%88",
+          "notes_zh": "可作為線索，提到第三航站區仍有多項工程進行與分項進度；仍需桃園國際機場公司或公共工程來源確認可引用欄位。"
+        }
+      ],
+      "official_source_confirmed": false,
+      "active_promotion_decision": "keep_candidate",
+      "missing_fields": ["桃園國際機場公司最新工程頁", "分項標案與承攬廠商確認", "預算或決標金額來源", "航站區 geometry", "分階段啟用狀態"]
+    },
+    {
+      "lead_id": "run13-lead-004",
+      "name_zh": "宜蘭鐵路高架化計畫",
+      "public_search_hits": [],
+      "official_source_confirmed": false,
+      "active_promotion_decision": "keep_candidate",
+      "missing_fields": ["交通部鐵道局或宜蘭縣政府最新頁面", "環評或綜合規劃階段", "路廊範圍", "期程", "geometry"]
+    },
+    {
+      "lead_id": "run13-lead-005",
+      "name_zh": "臺南市區鐵路地下化計畫",
+      "public_search_hits": [],
+      "official_source_confirmed": false,
+      "active_promotion_decision": "keep_candidate",
+      "missing_fields": ["交通部鐵道局或臺南市政府最新頁面", "主體工程與車站工程分筆規則", "施工狀態", "期程", "路廊 geometry"]
+    },
+    {
+      "lead_id": "run13-lead-006",
+      "name_zh": "馬太鞍溪橋與水利復原相關工程",
+      "public_search_hits": [],
+      "official_source_confirmed": false,
+      "active_promotion_decision": "keep_candidate",
+      "missing_fields": ["公路局或水利署最新頁面", "橋梁與水利工程是否分筆", "位置範圍", "標案或預算", "active 時效"]
+    }
+  ],
+  "batch_decision_zh": "本輪查到的公開資料仍不足以同時滿足官方來源、工程範圍、狀態、期程、位置、geometry 與去重需求，因此 0 筆轉入 active。",
+  "batch_decision_en": "The public findings were not sufficient for official source, scope, status, dates, location, geometry, and dedupe requirements. No records were promoted into active data.",
+  "next_action_zh": "下一輪優先改查主管機關站內頁、公共工程雲端服務網與政府電子採購網；若取得官方來源，再先補候選詳細欄位，不直接上首頁。",
+  "next_action_en": "Next run should prioritize owner-agency pages, public works portals, and public procurement records. If official sources are found, enrich candidates first rather than pushing directly to the homepage."
+}
