@@ -1,0 +1,32 @@
+{
+  "batch_id": "2026-06-30-run-17",
+  "created_at": "2026-06-30",
+  "title_zh": "第 17 輪匯入紀錄：公開研究入口指標同步",
+  "source_type_zh": "公開資料入口維護",
+  "source_names": [
+    "data/import_batches/latest.json",
+    "data/public_research_catalog.json",
+    "sources.html",
+    "data/candidates/2026-06-30-run-16-candidate-active-reconciliation.json"
+  ],
+  "candidate_records_reviewed": 0,
+  "passed_verification_records": 0,
+  "active_records_added": 0,
+  "excluded_or_deferred_records": 0,
+  "maintenance_actions_zh": [
+    "把最新批次指標更新到 run-17，並保留 run-16 候選與 active 去重對照作為新增資料前必讀檔。",
+    "把大眾研究資料索引補上候選與 active 去重對照入口，避免研究者只看到較舊的候選查核佇列。",
+    "把資料入口頁的候選查核連結改為更精準的去重對照說明，維持待確認資料不進首頁統計。"
+  ],
+  "homepage_impact": {
+    "active_count_before": 21,
+    "active_count_after": 21,
+    "active_count_changed": false,
+    "reason_zh": "本輪只同步公開研究入口與最新批次指標，沒有新增或移除首頁現況工程。"
+  },
+  "next_import_checks_zh": [
+    "新增資料前先讀 latest.json、public_research_catalog.json 與 run-16 reconciliation。",
+    "已被 active 代表或部分代表的候選不得用泛稱重複新增。",
+    "宜蘭鐵路高架化與馬太鞍溪橋相關工程仍需補官方來源、期程、位置與 geometry 後才可進一步判斷。"
+  ]
+}
