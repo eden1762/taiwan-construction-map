@@ -1,0 +1,104 @@
+{
+  "updated_at": "2026-06-30",
+  "policy_id": "active-status-policy-2026-06-30",
+  "active_goal": 300,
+  "long_term_active_goal": 3000,
+  "purpose_zh": "定義首頁 active 工程資料可納入與必須排除的狀態，避免為了補足 300 件而混入過期、重複或無法查證資料。",
+  "purpose_en": "Define which project statuses can enter the active homepage map and which must stay outside, so the 300-record gate does not accept outdated, duplicate, or unverified records.",
+  "allowed_statuses": [
+    {
+      "status_zh": "計畫中",
+      "status_en": "Planned",
+      "active_rule": "Allowed when an official or traceable source shows the project is still being advanced."
+    },
+    {
+      "status_zh": "計劃中",
+      "status_en": "Planned",
+      "active_rule": "Alias of 計畫中; allowed only when the source shows the project is still current."
+    },
+    {
+      "status_zh": "評估中",
+      "status_en": "Under Evaluation",
+      "active_rule": "Allowed for feasibility, evaluation, review, or route/solution assessment with a current traceable source."
+    },
+    {
+      "status_zh": "設計中",
+      "status_en": "In Design",
+      "active_rule": "Allowed for design, detailed design, engineering design, or design-and-build preparation with a current traceable source."
+    },
+    {
+      "status_zh": "施工中",
+      "status_en": "Under Construction",
+      "active_rule": "Allowed when construction, installation, civil works, system works, or site works are still active."
+    },
+    {
+      "status_zh": "完工/啟用一個月內",
+      "status_en": "Completed or opened within one month",
+      "active_rule": "Allowed only when completed_at or opened_at is traceable and within 31 days of the current review date."
+    }
+  ],
+  "excluded_statuses": [
+    {
+      "status_zh": "招標中",
+      "status_en": "Tendering",
+      "reason": "Keep out of active unless another official source proves the project belongs to planned, under-evaluation, or in-design status."
+    },
+    {
+      "status_zh": "招標準備",
+      "status_en": "Tender preparation",
+      "reason": "Keep out of active unless it can be mapped to planned, under-evaluation, or in-design with a traceable source."
+    },
+    {
+      "status_zh": "規劃中",
+      "status_en": "Generic planning",
+      "reason": "Too broad for the active gate unless normalized to 計畫中, 評估中, or 設計中 with evidence."
+    },
+    {
+      "status_zh": "延宕",
+      "status_en": "Delayed",
+      "reason": "Not accepted as an active-status label by itself; move to candidate review until a current delivery phase is confirmed."
+    },
+    {
+      "status_zh": "待確認",
+      "status_en": "To be verified",
+      "reason": "Candidate-only. It cannot count toward active totals until status, source, and dedupe checks pass."
+    },
+    {
+      "status_zh": "已完工超過一個月",
+      "status_en": "Completed more than one month ago",
+      "reason": "Historical or archive data only; do not count in active homepage statistics."
+    },
+    {
+      "status_zh": "取消／停辦／停止推動／來源失效",
+      "status_en": "Canceled, suspended, stopped, or inactive source",
+      "reason": "Excluded from active and preserved only in historical, exclusion, or audit records when useful."
+    }
+  ],
+  "dedupe_key_fields": ["name", "owner", "address", "source_url"],
+  "required_active_fields": [
+    "id",
+    "name",
+    "category",
+    "status",
+    "owner",
+    "contractor",
+    "budget_ntd",
+    "start_date",
+    "planned_end_date",
+    "address",
+    "source_name",
+    "source_url",
+    "updated_at",
+    "geometry"
+  ],
+  "homepage_performance_rule": {
+    "first_view_seconds": 5,
+    "full_cards_render_limit": 300,
+    "rule_zh": "首頁需先顯示搜尋、篩選、統計、地圖容器、工程清單或降級清單與來源提示；資料量超過首屏需求時需分頁、分批、分類或延後載入。",
+    "rule_en": "The homepage must show search, filters, stats, map frame, project list or fallback list, and source notes first; large datasets need paging, batching, sector lanes, or deferred loading."
+  },
+  "notes": [
+    "This file is a public-readable rule reference, not a candidate import list.",
+    "Candidate records that do not pass this policy must not be mixed into data/active_construction_projects.geojson."
+  ]
+}
