@@ -1,11 +1,11 @@
 {
   "updated_at": "2026-07-01",
-  "latest_batch_id": "2026-07-01-run-37-railway-candidates",
-  "latest_batch_log": "data/import_batches/2026-07-01-run-37-railway-candidates.json",
+  "latest_batch_id": "2026-07-01-run-38-water-public-works-candidates",
+  "latest_batch_log": "data/import_batches/2026-07-01-run-38-water-public-works-candidates.json",
   "active_count": 14,
   "active_records_added_this_batch": 0,
   "active_records_removed_from_source_baseline_this_batch": 0,
-  "candidate_records_added_this_batch": 4,
-  "quality_finding": "Added railway candidate records for source completion without changing active public counts.",
-  "note": "Run 37 kept active data unchanged, preserved railway candidates for official-source completion, and did not expose internal targets."
+  "candidate_records_added_this_batch": 3,
+  "quality_finding": "Added water and public-utility candidate records for official-source completion without changing active public counts.",
+  "note": "Run 38 kept active data unchanged and preserved water/public-works candidates for source completion."
 }
