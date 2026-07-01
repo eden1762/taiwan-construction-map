@@ -1,11 +1,11 @@
 {
   "updated_at": "2026-07-01",
-  "latest_batch_id": "2026-07-01-run-38-water-public-works-candidates",
-  "latest_batch_log": "data/import_batches/2026-07-01-run-38-water-public-works-candidates.json",
+  "latest_batch_id": "2026-07-01-run-39-metro-transport-candidates",
+  "latest_batch_log": "data/import_batches/2026-07-01-run-39-metro-transport-candidates.json",
   "active_count": 14,
   "active_records_added_this_batch": 0,
   "active_records_removed_from_source_baseline_this_batch": 0,
   "candidate_records_added_this_batch": 3,
-  "quality_finding": "Added water and public-utility candidate records for official-source completion without changing active public counts.",
-  "note": "Run 38 kept active data unchanged and preserved water/public-works candidates for source completion."
+  "quality_finding": "Added metro/transport candidate records for official-source completion without changing active public counts.",
+  "note": "Run 39 kept active data unchanged and preserved metro/transport candidates for source, contractor, schedule, and geometry completion."
 }
