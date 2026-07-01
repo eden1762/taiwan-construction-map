@@ -1,10 +1,11 @@
 {
   "updated_at": "2026-07-01",
-  "latest_batch_id": "2026-07-01-run-29-active-data-cleanup",
-  "latest_batch_log": "data/import_batches/2026-07-01-run-29-active-data-cleanup.json",
+  "latest_batch_id": "2026-07-01-run-30-candidate-import",
+  "latest_batch_log": "data/import_batches/2026-07-01-run-30-candidate-import.json",
   "active_count": 14,
   "active_records_added_this_batch": 0,
-  "active_records_removed_from_source_baseline_this_batch": 1,
-  "quality_finding": "Active map data now excludes one under-verified record and publishes only current verified counts, source notes, and data rules.",
-  "note": "Run 29 cleaned the active map dataset and kept only records that meet the current active-data requirements."
+  "active_records_removed_from_source_baseline_this_batch": 0,
+  "candidate_records_added_this_batch": 4,
+  "quality_finding": "Four construction candidates were saved for field completion. Active map data remains limited to fully checked records only.",
+  "note": "Run 30 saved candidate records for further official source checking before any active map promotion."
 }
