@@ -1,0 +1,101 @@
+{
+  "batch_id": "2026-07-01-run-37-railway-candidates",
+  "batch_date": "2026-07-01",
+  "source_type": "official-railway-progress-candidate-review",
+  "source_names": [
+    "交通部鐵道局",
+    "交通部鐵道局各計畫進度及計畫辦理情形"
+  ],
+  "candidate_records": 4,
+  "passed_records": 0,
+  "excluded_records": 0,
+  "active_records_added": 0,
+  "active_records_removed": 0,
+  "active_total_public": 14,
+  "candidate_handling_policy": "These records are retained as candidates only. They must not be merged into active GeoJSON until source detail pages, owner/contractor fields, schedule fields, deduplication keys, and GeoJSON geometry are checked against official public sources.",
+  "public_safety_check": {
+    "no_internal_targets_in_public_fields": true,
+    "no_placeholder_abc_found": true,
+    "no_public_forbidden_terms_found": true,
+    "active_data_unchanged": true
+  },
+  "candidates": [
+    {
+      "candidate_id": "tcmap-cand-rail-20260701-001",
+      "name": "桃園鐵路地下化計畫",
+      "category": "捷運/交通",
+      "initial_status": "施工中",
+      "owner": "交通部鐵道局、桃園市政府相關機關",
+      "contractor": "待官方細頁補齊",
+      "budget_ntd": null,
+      "start_date": null,
+      "planned_end_date": "2033-12-31",
+      "address": "新北市、桃園市臺鐵縱貫線沿線",
+      "source_name": "交通部鐵道局",
+      "source_url": "https://www.rb.gov.tw/",
+      "captured_at": "2026-07-01",
+      "dedupe_key": "桃園鐵路地下化計畫|交通部鐵道局|新北桃園縱貫線",
+      "geometry_status": "needs_official_corridor_geometry",
+      "candidate_reason": "Public progress information indicates an active railway construction plan, but contractor, source detail URL, verified budget, and route geometry still require official-source completion."
+    },
+    {
+      "candidate_id": "tcmap-cand-rail-20260701-002",
+      "name": "臺鐵平鎮臨時站計畫",
+      "category": "捷運/交通",
+      "initial_status": "施工中",
+      "owner": "交通部鐵道局、臺灣鐵路公司、桃園市政府相關機關",
+      "contractor": "待官方細頁補齊",
+      "budget_ntd": null,
+      "start_date": null,
+      "planned_end_date": "2026-05-31",
+      "address": "桃園市平鎮區環南路與新富一街周邊",
+      "source_name": "交通部鐵道局",
+      "source_url": "https://www.rb.gov.tw/",
+      "captured_at": "2026-07-01",
+      "dedupe_key": "臺鐵平鎮臨時站計畫|交通部鐵道局|平鎮區",
+      "geometry_status": "needs_station_point_or_site_polygon",
+      "candidate_reason": "Candidate only because completion/opening timing must be rechecked before any active inclusion; if already opened more than one month, it should go to history rather than active."
+    },
+    {
+      "candidate_id": "tcmap-cand-rail-20260701-003",
+      "name": "北宜鐵路提速工程計畫",
+      "category": "規劃/環評",
+      "initial_status": "評估中",
+      "owner": "交通部鐵道局",
+      "contractor": "尚未進入可列 active 的施工承攬資料",
+      "budget_ntd": null,
+      "start_date": null,
+      "planned_end_date": null,
+      "address": "大臺北至宜蘭鐵路走廊",
+      "source_name": "交通部鐵道局",
+      "source_url": "https://www.rb.gov.tw/",
+      "captured_at": "2026-07-01",
+      "dedupe_key": "北宜鐵路提速工程計畫|交通部鐵道局|大臺北宜蘭",
+      "geometry_status": "needs_planning_corridor_geometry",
+      "candidate_reason": "Planning/evaluation-stage railway candidate. Keep outside active until official planning status, route scope, and public source detail page are normalized."
+    },
+    {
+      "candidate_id": "tcmap-cand-rail-20260701-004",
+      "name": "臺鐵海線雙軌化計畫",
+      "category": "規劃/環評",
+      "initial_status": "評估中",
+      "owner": "交通部鐵道局、地方政府相關機關",
+      "contractor": "尚未進入可列 active 的施工承攬資料",
+      "budget_ntd": null,
+      "start_date": null,
+      "planned_end_date": null,
+      "address": "苗栗縣、臺中市臺鐵海線沿線",
+      "source_name": "交通部鐵道局",
+      "source_url": "https://www.rb.gov.tw/",
+      "captured_at": "2026-07-01",
+      "dedupe_key": "臺鐵海線雙軌化計畫|交通部鐵道局|苗栗臺中海線",
+      "geometry_status": "needs_planning_corridor_geometry",
+      "candidate_reason": "Feasibility/planning-stage railway candidate. Keep outside active until official scope, schedule, and geometry can be checked."
+    }
+  ],
+  "next_actions": [
+    "Fetch official project detail pages or datasets for each railway candidate.",
+    "Complete contractor, budget, schedule, and route geometry before any active import.",
+    "Move completed or no-longer-active items to history instead of active."
+  ]
+}
