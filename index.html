@@ -36,10 +36,10 @@
         </div>
       </div>
       <div class="metrics" aria-label="全國工程統計">
-        <article><b id="m1">0</b><span data-t="projects">搜集工程</span></article>
+        <article><b id="m1">0</b><span data-t="projects">現況工程</span></article>
         <article><b id="m2">0</b><span data-t="counties">有資料縣市</span></article>
         <article><b id="m3">5</b><span data-t="lanes">主要圖層</span></article>
-        <article><b id="m4">0 / 300</b><span><span class="zh-only">第一階段現況工程</span><span class="en-only inline-en">Active phase one</span></span></article>
+        <article><b id="m4">0</b><span data-t="sourcePortals">公開來源</span></article>
       </div>
     </section>
 
@@ -174,9 +174,6 @@
   </main>
   <footer class="foot"><span data-t="footer">資料以公開入口可回查內容整理；正式引用請回主管機關、發包單位與公告來源確認最新版本。地圖底圖 © OpenStreetMap contributors。</span></footer>
   <div class="dock" aria-label="快速操作"><a href="https://www.instagram.com/taiwan.construction/" target="_blank" rel="noopener noreferrer">IG</a><button id="lang" type="button">EN</button></div>
-  <script type="module" src="./fast-map.js?v=20260630-main-layers-5"></script>
-  <script>
-    (()=>{const goal=300,ok=p=>["計畫中","計劃中","評估中","設計中","施工中"].includes(p.status)||p.status==="完工"&&(()=>{const d=new Date(`${String(p.completed_at||p.opened_at||p.planned_end_date||p.end_date||"").slice(0,10)}T00:00:00+08:00`);return !Number.isNaN(d.getTime())&&Date.now()-d.getTime()<=31*864e5})(),seen=new Set();fetch("/data/active_construction_projects.geojson?v=20260630-main-layers-5",{cache:"no-cache"}).then(r=>r.ok?r.json():Promise.reject()).then(j=>{let n=(j.features||[]).filter(f=>{const p=f.properties||{},k=[p.name,p.owner,p.address,p.source_url].join("|").toLowerCase();if(seen.has(k))return false;seen.add(k);return ok(p)}).length;const m=document.getElementById("m4");if(m)m.textContent=`${n.toLocaleString()} / ${goal.toLocaleString()}`}).catch(()=>{});})();
-  </script>
+  <script type="module" src="./fast-map.js?v=20260701-private-goals"></script>
 </body>
 </html>
