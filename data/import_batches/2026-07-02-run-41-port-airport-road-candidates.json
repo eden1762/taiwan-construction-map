@@ -1,0 +1,77 @@
+{
+  "batch_id": "2026-07-02-run-41-port-airport-road-candidates",
+  "updated_at": "2026-07-02",
+  "source_rotation": [
+    "臺北市政府工務局新建工程處",
+    "桃園國際機場股份有限公司",
+    "台灣電力股份有限公司"
+  ],
+  "active_count_before": 14,
+  "active_records_added": 0,
+  "candidate_records_added": 3,
+  "excluded_records_added": 0,
+  "public_safety_check": {
+    "public_target_numbers_exposed": false,
+    "forbidden_public_terms_found": false,
+    "placeholder_found": false,
+    "active_geojson_modified": false,
+    "note": "This batch preserves candidate records only. Records are not promoted to active until source detail, contractor, schedule, and geometry checks are complete."
+  },
+  "candidate_records": [
+    {
+      "candidate_id": "cand-20260702-041-001",
+      "name": "南港隧道興中路道路工程",
+      "category": "道路/管線",
+      "initial_status": "施工中",
+      "owner": "臺北市政府工務局新建工程處",
+      "contractor": "待補資料 / To be verified",
+      "budget_ntd": 1329000000,
+      "start_date": "待補資料 / To be verified",
+      "planned_end_date": "2026-06-30",
+      "address": "臺北市南港區忠孝東路七段興中路口至研究院路一段周邊",
+      "source_name": "臺北市政府工務局新建工程處",
+      "source_url": "https://nco.gov.taipei/",
+      "retrieved_at": "2026-07-02",
+      "dedupe_key": "南港隧道|興中路|臺北市政府工務局新建工程處",
+      "geometry_status": "需補路廊 LineString；暫不使用單點進 active。",
+      "verification_note": "已先列為道路工程候選；需回查官方工程細頁、契約標案、實際通車或完工日期與承攬廠商後，才能判斷是否仍符合 active 規則。"
+    },
+    {
+      "candidate_id": "cand-20260702-041-002",
+      "name": "桃園國際機場第三跑道及基礎設施計畫第一階段工程",
+      "category": "捷運/交通",
+      "initial_status": "施工中",
+      "owner": "桃園國際機場股份有限公司",
+      "contractor": "待補資料 / To be verified",
+      "budget_ntd": 37456000000,
+      "start_date": "2023-09-16",
+      "planned_end_date": "2032-06-30",
+      "address": "桃園市大園區桃園國際機場北側跑滑道系統周邊",
+      "source_name": "桃園國際機場股份有限公司",
+      "source_url": "https://www.taoyuan-airport.com/",
+      "retrieved_at": "2026-07-02",
+      "dedupe_key": "桃園國際機場第三跑道|基礎設施|桃園國際機場股份有限公司",
+      "geometry_status": "需補跑道工程範圍 Polygon 或 LineString。",
+      "verification_note": "列為候選；因期程延後與用地搬遷狀態需回官方專區與工程進度表確認，暫不混入 active。"
+    },
+    {
+      "candidate_id": "cand-20260702-041-003",
+      "name": "臺中港液化天然氣接收站工程",
+      "category": "公共工程",
+      "initial_status": "施工中",
+      "owner": "台灣電力股份有限公司",
+      "contractor": "待補資料 / To be verified",
+      "budget_ntd": null,
+      "start_date": "2021-09-01",
+      "planned_end_date": "2026-08-31",
+      "address": "臺中市龍井區臺中港外港區",
+      "source_name": "台灣電力股份有限公司",
+      "source_url": "https://www.taipower.com.tw/",
+      "retrieved_at": "2026-07-02",
+      "dedupe_key": "臺中港液化天然氣接收站|台灣電力股份有限公司|臺中港",
+      "geometry_status": "需補港區工程範圍 Polygon。",
+      "verification_note": "列為能源與港區公共工程候選；需補官方工程細頁、契約標案、承攬廠商與現況有效性後才可轉 active。"
+    }
+  ],
+  "quality_note": "This run improves the import pipeline by adding traceable candidate records from road, airport, and energy/port source groups while keeping strict active-data separation."
+}
