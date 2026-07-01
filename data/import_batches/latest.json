@@ -1,11 +1,11 @@
 {
   "updated_at": "2026-07-01",
-  "latest_batch_id": "2026-07-01-run-30-candidate-import",
-  "latest_batch_log": "data/import_batches/2026-07-01-run-30-candidate-import.json",
+  "latest_batch_id": "2026-07-01-run-31-status-filter-fix",
+  "latest_batch_log": "data/import_batches/2026-07-01-run-31-status-filter-fix.json",
   "active_count": 14,
   "active_records_added_this_batch": 0,
   "active_records_removed_from_source_baseline_this_batch": 0,
-  "candidate_records_added_this_batch": 4,
-  "quality_finding": "Four construction candidates were saved for field completion. Active map data remains limited to fully checked records only.",
-  "note": "Run 30 saved candidate records for further official source checking before any active map promotion."
+  "candidate_records_added_this_batch": 0,
+  "quality_finding": "The public status selector now includes the delayed status required by the site taxonomy, with bilingual labeling.",
+  "note": "Run 31 corrected the status filter UI and refreshed the active data cache key without changing active records."
 }
