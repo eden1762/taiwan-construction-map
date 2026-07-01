@@ -1,0 +1,34 @@
+{
+  "batch_id": "2026-07-01-run-28-public-goal-cleanup",
+  "batch_date": "2026-07-01",
+  "source_type": "site-quality-and-public-copy-check",
+  "source_names": [
+    "index.html",
+    "fast-map.js",
+    "sources.html",
+    "data/import_batches/latest.json"
+  ],
+  "candidate_records": 0,
+  "passed_records": 0,
+  "excluded_records": 0,
+  "active_records_added": 0,
+  "active_records_removed": 0,
+  "active_total_public": 15,
+  "public_site_changes": [
+    "Homepage metrics no longer display internal accumulation ratios.",
+    "Data source page was restored from invalid placeholder content.",
+    "Public data entry language explains active rules without exposing internal targets.",
+    "Script cache key was refreshed so the homepage reads the updated public metric logic."
+  ],
+  "internal_goal_policy": "Accumulation targets are private operating goals for task planning and batch QA only. Public website copy, homepage metrics, navigation, cards, and source pages should show actual verified data and source context, not private target numbers.",
+  "why_active_count_is_low": [
+    "The public counter is not a census of all Taiwan construction projects.",
+    "It counts only records that have already been converted into the active GeoJSON dataset and pass current-status, traceable-source, deduplication, and geometry rules.",
+    "Many real projects remain outside active because they have not yet been imported, geocoded, normalized, and cross-checked."
+  ],
+  "next_private_data_work": [
+    "Build importer batches from public procurement, road excavation, metro, rail, water, park, EIA, and local government datasets.",
+    "Keep candidates separate until official source, status, location, owner, schedule, and geometry are adequate.",
+    "Never expose private accumulation targets in public-facing website copy."
+  ]
+}
