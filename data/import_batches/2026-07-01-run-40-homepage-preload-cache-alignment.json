@@ -1,0 +1,18 @@
+{
+  "batch_id": "2026-07-01-run-40-homepage-preload-cache-alignment",
+  "updated_at": "2026-07-01",
+  "type": "quality_fix",
+  "public_safe": true,
+  "active_count": 14,
+  "active_records_added_this_batch": 0,
+  "active_records_removed_from_source_baseline_this_batch": 0,
+  "candidate_records_added_this_batch": 0,
+  "checks": {
+    "index_html": "homepage preload cache key aligned with the active GeoJSON request used by the map script",
+    "category_html": "category page already uses the current active GeoJSON cache key",
+    "active_geojson": "kept unchanged; active_count remains actual verified active records only",
+    "public_copy": "no internal accumulation target or public banned wording added"
+  },
+  "quality_finding": "The homepage preload referenced an older active GeoJSON cache key while the map script requested the current status-filter data key. Aligning both reduces stale-cache risk and avoids duplicate early fetches.",
+  "note": "No unverified records were added to active data. Candidate import remains separate until source, contractor, schedule, and geometry fields are complete."
+}
