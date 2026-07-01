@@ -1,0 +1,90 @@
+{
+  "batch_id": "2026-07-01-run-39-metro-transport-candidates",
+  "batch_date": "2026-07-01",
+  "source_type": "official-metro-transport-candidate-review",
+  "source_names": [
+    "桃園市政府捷運工程局",
+    "臺北市政府捷運工程局",
+    "高雄市政府捷運工程局",
+    "公共工程與捷運主管機關公開資料入口"
+  ],
+  "candidate_records": 3,
+  "passed_records": 0,
+  "excluded_records": 0,
+  "active_records_added": 0,
+  "active_records_removed": 0,
+  "active_total_public": 14,
+  "candidate_handling_policy": "These records are retained as candidates only. They must not be merged into active GeoJSON until official detail pages, procurement/contractor records, budget, schedule, deduplication keys, and GeoJSON line or station geometry are checked against public sources.",
+  "public_safety_check": {
+    "no_internal_targets_in_public_fields": true,
+    "no_placeholder_abc_found": true,
+    "no_public_forbidden_terms_found": true,
+    "active_data_unchanged": true
+  },
+  "quality_findings": [
+    "Homepage, category page, source page, active GeoJSON, and latest batch index remain free of public internal accumulation targets.",
+    "Candidate additions focus on currently relevant metro/transport projects but are kept out of active because public-source completion is still required.",
+    "Homepage preload cache key is still older than the active data fetch key; this remains a safe future edit target because the runtime fetch already uses the newer key."
+  ],
+  "candidates": [
+    {
+      "candidate_id": "tcmap-cand-transit-20260701-001",
+      "name": "桃園捷運綠線主線工程",
+      "category": "捷運/交通",
+      "initial_status": "施工中",
+      "owner": "桃園市政府捷運工程局",
+      "contractor": "待逐標補齊可列 active 的施工承攬資料",
+      "budget_ntd": null,
+      "start_date": null,
+      "planned_end_date": null,
+      "address": "桃園市桃園、八德、蘆竹、大園及航空城相關路廊",
+      "source_name": "桃園市政府捷運工程局",
+      "source_url": "https://dorts.tycg.gov.tw/",
+      "captured_at": "2026-07-01",
+      "dedupe_key": "桃園捷運綠線主線工程|桃園市政府捷運工程局|桃園捷運綠線",
+      "geometry_status": "needs_official_route_or_station_geometry",
+      "candidate_reason": "Metro construction candidate. Keep outside active until current official progress page, tender packages, contractor fields, schedule fields, and route/station GeoJSON geometry are normalized."
+    },
+    {
+      "candidate_id": "tcmap-cand-transit-20260701-002",
+      "name": "臺北捷運萬大中和樹林線第一期工程",
+      "category": "捷運/交通",
+      "initial_status": "施工中",
+      "owner": "臺北市政府捷運工程局及新北市政府捷運主管機關",
+      "contractor": "待逐標補齊可列 active 的施工承攬資料",
+      "budget_ntd": null,
+      "start_date": null,
+      "planned_end_date": null,
+      "address": "臺北市中正、萬華及新北市中和、土城、樹林相關路廊",
+      "source_name": "臺北市政府捷運工程局",
+      "source_url": "https://www.dorts.gov.taipei/",
+      "captured_at": "2026-07-01",
+      "dedupe_key": "萬大中和樹林線第一期工程|臺北市政府捷運工程局|萬大線",
+      "geometry_status": "needs_official_route_or_station_geometry",
+      "candidate_reason": "Metro construction candidate. Keep outside active until current official progress, tender/contractor fields, planned completion, and station/corridor GeoJSON are checked."
+    },
+    {
+      "candidate_id": "tcmap-cand-transit-20260701-003",
+      "name": "高雄捷運黃線工程",
+      "category": "捷運/交通",
+      "initial_status": "施工中",
+      "owner": "高雄市政府捷運工程局",
+      "contractor": "待逐標補齊可列 active 的施工承攬資料",
+      "budget_ntd": null,
+      "start_date": null,
+      "planned_end_date": null,
+      "address": "高雄市鳥松、三民、新興、苓雅、前鎮等黃線路廊相關區域",
+      "source_name": "高雄市政府捷運工程局",
+      "source_url": "https://mtbu.kcg.gov.tw/",
+      "captured_at": "2026-07-01",
+      "dedupe_key": "高雄捷運黃線工程|高雄市政府捷運工程局|高雄捷運黃線",
+      "geometry_status": "needs_official_route_or_station_geometry",
+      "candidate_reason": "Metro construction candidate. Keep outside active until current official progress, tender packages, contractors, schedule, and route/station geometry are normalized."
+    }
+  ],
+  "next_actions": [
+    "Find current official project detail pages and public progress pages for each metro/transport candidate.",
+    "Complete contractor, budget, start date, planned end date, and route or station geometry before any active import.",
+    "Do not merge candidates into active unless all required active fields and source checks pass."
+  ]
+}
