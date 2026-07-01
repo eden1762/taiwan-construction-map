@@ -1,0 +1,26 @@
+{
+  "batch_id": "2026-07-01-run-36-category-status-filter",
+  "batch_date": "2026-07-01",
+  "source_type": "site-quality-and-public-function-check",
+  "source_names": [
+    "category.html",
+    "fast-map.js",
+    "data/active_construction_projects.geojson",
+    "data/import_batches/latest.json"
+  ],
+  "candidate_records": 0,
+  "passed_records": 0,
+  "excluded_records": 0,
+  "active_records_added": 0,
+  "active_records_removed": 0,
+  "active_total_public": 14,
+  "public_site_changes": [
+    "Category pages now expose the same status filter control as the national overview.",
+    "The category page preload key now matches the current active GeoJSON cache key.",
+    "The category page script cache key was refreshed for deployment propagation.",
+    "The category page skip link now has both Chinese and English labels."
+  ],
+  "quality_finding": "Layer pages previously allowed city filtering but did not expose the status filter, even though the shared map script already supported it. The page now includes the status select without changing active data.",
+  "public_goal_policy_check": "No public target ratio or private accumulation goal was added. Public pages continue to show actual verified records and source context only.",
+  "active_data_check": "Active data remains at 14 records. No unverified candidate was mixed into the active GeoJSON."
+}
