@@ -1,0 +1,34 @@
+{
+  "batch_id": "2026-07-01-run-29-active-data-cleanup",
+  "batch_date": "2026-07-01",
+  "source_type": "active-data-quality-check",
+  "source_names": [
+    "data/active_construction_projects.geojson",
+    "data/import_batches/latest.json"
+  ],
+  "candidate_records": 1,
+  "passed_records": 0,
+  "excluded_records": 1,
+  "active_records_added": 0,
+  "active_records_removed": 1,
+  "active_total_public": 14,
+  "public_site_changes": [
+    "Removed non-public progress metadata from the active GeoJSON dataset.",
+    "Moved one under-verified project out of active map data because contractor and budget fields were not sufficiently complete for active publication."
+  ],
+  "excluded_or_moved_records": [
+    {
+      "id": "tcmap-021",
+      "name": "淡水河北側沿河平面道路工程",
+      "source_name": "新北市政府工務局、公共工程雲端服務網",
+      "source_url": "https://www.publicwork.ntpc.gov.tw/",
+      "initial_status": "施工中",
+      "dedupe_key": "淡水河北側沿河平面道路工程|新北市政府工務局|新北市淡水區淡金路、中正東路至臺北市北投區大度路",
+      "review_note": "Moved out of active because contractor and budget fields were still marked as not fully verified. Keep as a candidate until official contract and cost fields are confirmed."
+    }
+  ],
+  "next_data_work": [
+    "Import verified public procurement and public works records with complete owner, contractor, budget, schedule, source, and geometry fields.",
+    "Keep incomplete records in candidate or review data until they meet active-publication requirements."
+  ]
+}
