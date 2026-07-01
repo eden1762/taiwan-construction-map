@@ -1,8 +1,8 @@
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
-const DATA = "/data/active_construction_projects.geojson?v=20260630-main-layers-5";
-const CK = "tcmap.active.layers.v10";
+const DATA = "/data/active_construction_projects.geojson?v=20260701-status-filter";
+const CK = "tcmap.active.layers.v11";
 const LK = "tcmap.lang";
 const TS = 256;
 const HOME = [120.96, 23.72];
@@ -19,8 +19,8 @@ const CAT = [
   ["planning-eia", "規劃/環評", "Planning & Environmental Review", "#ffcf66", "計畫中、評估中、設計中、環評與前期公開資料。", "Planned, under-evaluation, in-design, environmental-review, and early public records."]
 ];
 const CB = Object.fromEntries(CAT.map(x => [x[0], x]));
-const ST = ["計畫中", "計劃中", "評估中", "設計中", "施工中", "完工"];
-const STE = { 計畫中: "Planned", 計劃中: "Planned", 評估中: "Under Evaluation", 設計中: "In Design", 施工中: "Under Construction", 完工: "Completed within 1 month" };
+const ST = ["計畫中", "計劃中", "評估中", "設計中", "施工中", "完工", "延宕"];
+const STE = { 計畫中: "Planned", 計劃中: "Planned", 評估中: "Under Evaluation", 設計中: "In Design", 施工中: "Under Construction", 完工: "Completed within 1 month", 延宕: "Delayed" };
 const MENU = [["home", "全國工程概況", "National Overview", "./index.html"], ...CAT.map(c => ["sector", c[1], c[2], `./category.html?sector=${encodeURIComponent(c[0])}`]), ["sources", "資料入口", "Data Sources", "./sources.html"]];
 
 const T = {
