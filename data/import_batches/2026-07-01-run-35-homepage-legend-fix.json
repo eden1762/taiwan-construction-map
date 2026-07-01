@@ -1,0 +1,28 @@
+{
+  "batch_id": "2026-07-01-run-35-homepage-legend-fix",
+  "batch_date": "2026-07-01",
+  "source_type": "site-quality-and-public-copy-check",
+  "source_names": [
+    "index.html",
+    "fast-map.js",
+    "data/import_batches/latest.json"
+  ],
+  "candidate_records": 0,
+  "passed_records": 0,
+  "excluded_records": 0,
+  "active_records_added": 0,
+  "active_records_removed": 0,
+  "active_total_public": 14,
+  "public_site_changes": [
+    "Added the missing delayed / Delayed status pill to the homepage static legend.",
+    "Kept active data unchanged because no new official record met active GeoJSON requirements in this run.",
+    "Refreshed the homepage script cache key after the copy-level fix."
+  ],
+  "quality_checks": [
+    "Homepage statistics still show actual verified counts only.",
+    "No private accumulation targets were added to public HTML or public JSON.",
+    "No placeholder abc content was introduced.",
+    "The status filter and static legend are now aligned for planned, under-evaluation, in-design, under-construction, recently completed, and delayed statuses."
+  ],
+  "note": "This run fixed a visible homepage consistency issue that was previously logged but not safely applied."
+}
