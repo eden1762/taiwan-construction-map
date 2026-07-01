@@ -1,11 +1,11 @@
 {
   "updated_at": "2026-07-01",
-  "latest_batch_id": "2026-07-01-run-34-status-legend-followup",
-  "latest_batch_log": "data/import_batches/2026-07-01-run-34-status-legend-followup.json",
+  "latest_batch_id": "2026-07-01-run-35-homepage-legend-fix",
+  "latest_batch_log": "data/import_batches/2026-07-01-run-35-homepage-legend-fix.json",
   "active_count": 14,
   "active_records_added_this_batch": 0,
   "active_records_removed_from_source_baseline_this_batch": 0,
   "candidate_records_added_this_batch": 0,
-  "quality_finding": "Logged a homepage status legend consistency issue without changing active data or exposing internal targets.",
-  "note": "Run 34 found that the status filter already supports delayed status, while the static homepage legend still needs a delayed / Delayed pill. Direct homepage replacement was blocked by repository write safety checks, so the risky overwrite was not performed."
+  "quality_finding": "Homepage static legend now includes the delayed / Delayed status pill and matches the status filter.",
+  "note": "Run 35 fixed a visible homepage legend consistency issue without changing active data or exposing internal targets."
 }
