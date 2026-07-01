@@ -1,0 +1,21 @@
+{
+  "batch_id": "2026-07-01-run-34-status-legend-followup",
+  "batch_date": "2026-07-01",
+  "source_type": "site-quality-and-ui-consistency-check",
+  "source_names": [
+    "index.html",
+    "fast-map.js",
+    "data/active_construction_projects.geojson",
+    "data/import_batches/latest.json"
+  ],
+  "candidate_records": 0,
+  "passed_records": 0,
+  "excluded_records": 0,
+  "active_records_added": 0,
+  "active_records_removed": 0,
+  "active_total_public": 14,
+  "finding": "The status filter supports delayed status through the shared status list, but the static homepage legend still lists planned, under evaluation, in design, under construction, and completed within one month only. The legend should add delayed / Delayed for UI consistency, while keeping delayed records outside active homepage data unless separately shown as non-active context.",
+  "public_copy_check": "No public internal target wording, placeholder abc text, or banned public copy was found in the checked snippets.",
+  "write_status": "A direct homepage update was attempted but blocked by repository write safety checks, so no risky overwrite was performed in this run.",
+  "safe_next_step": "Update index.html statusDots to include a delayed / Delayed pill and refresh the script cache key after verifying the full file can be replaced safely."
+}
