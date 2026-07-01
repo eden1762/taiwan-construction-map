@@ -1,11 +1,11 @@
 {
   "updated_at": "2026-07-01",
-  "latest_batch_id": "2026-07-01-run-31-status-filter-fix",
-  "latest_batch_log": "data/import_batches/2026-07-01-run-31-status-filter-fix.json",
+  "latest_batch_id": "2026-07-01-run-32-candidate-source-rotation",
+  "latest_batch_log": "data/import_batches/2026-07-01-run-32-candidate-source-rotation.json",
   "active_count": 14,
   "active_records_added_this_batch": 0,
   "active_records_removed_from_source_baseline_this_batch": 0,
-  "candidate_records_added_this_batch": 0,
-  "quality_finding": "The public status selector now includes the delayed status required by the site taxonomy, with bilingual labeling.",
-  "note": "Run 31 corrected the status filter UI and refreshed the active data cache key without changing active records."
+  "candidate_records_added_this_batch": 3,
+  "quality_finding": "Added three rotated transport-infrastructure candidate records without mixing incomplete data into the active public map.",
+  "note": "Run 32 continued data import work by preserving source URLs, dedupe keys, verification notes, and missing-field reasons for candidate records."
 }
