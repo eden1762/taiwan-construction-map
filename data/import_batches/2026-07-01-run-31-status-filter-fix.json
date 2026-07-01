@@ -1,0 +1,23 @@
+{
+  "batch_id": "2026-07-01-run-31-status-filter-fix",
+  "batch_date": "2026-07-01",
+  "source_type": "site-quality-and-ui-rule-check",
+  "source_names": [
+    "fast-map.js",
+    "data/import_batches/latest.json"
+  ],
+  "candidate_records": 0,
+  "passed_records": 0,
+  "excluded_records": 0,
+  "active_records_added": 0,
+  "active_records_removed": 0,
+  "active_total_public": 14,
+  "candidate_records_added": 0,
+  "public_site_changes": [
+    "Added 延宕 to the status filter option list so the UI matches the requested status taxonomy.",
+    "Added the English label Delayed for the bilingual status selector and project labels.",
+    "Refreshed the active data cache key so browsers reload the current active GeoJSON after this UI change."
+  ],
+  "active_data_policy_note": "Delayed records remain outside the active homepage dataset unless they also satisfy the current active data rules. The filter is present for taxonomy completeness and future inactive or candidate views.",
+  "public_goal_safety_check": "No private accumulation target numbers were added to public website copy or public data fields."
+}
