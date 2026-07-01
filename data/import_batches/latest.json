@@ -1,11 +1,11 @@
 {
   "updated_at": "2026-07-01",
-  "latest_batch_id": "2026-07-01-run-33-road-candidate-rotation",
-  "latest_batch_log": "data/import_batches/2026-07-01-run-33-road-candidate-rotation.json",
+  "latest_batch_id": "2026-07-01-run-34-status-legend-followup",
+  "latest_batch_log": "data/import_batches/2026-07-01-run-34-status-legend-followup.json",
   "active_count": 14,
   "active_records_added_this_batch": 0,
   "active_records_removed_from_source_baseline_this_batch": 0,
-  "candidate_records_added_this_batch": 3,
-  "quality_finding": "Added three road-infrastructure candidate records while keeping incomplete records out of the active public map.",
-  "note": "Run 33 continued source rotation with road and highway candidates. Active data remains unchanged until official detail URLs, contractor identity, schedules, and route geometry are fully verified."
+  "candidate_records_added_this_batch": 0,
+  "quality_finding": "Logged a homepage status legend consistency issue without changing active data or exposing internal targets.",
+  "note": "Run 34 found that the status filter already supports delayed status, while the static homepage legend still needs a delayed / Delayed pill. Direct homepage replacement was blocked by repository write safety checks, so the risky overwrite was not performed."
 }
