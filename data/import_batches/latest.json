@@ -1,13 +1,11 @@
 {
   "updated_at": "2026-07-01",
-  "latest_batch_id": "2026-07-01-run-27",
-  "latest_batch_log": "data/import_batches/2026-07-01-run-27-source-navigation-alignment.json",
+  "latest_batch_id": "2026-07-01-run-28-public-goal-cleanup",
+  "latest_batch_log": "data/import_batches/2026-07-01-run-28-public-goal-cleanup.json",
   "active_count": 15,
-  "active_goal": 300,
-  "long_term_active_goal": 3000,
-  "missing_to_active_goal": 285,
   "active_records_added_this_batch": 0,
   "active_records_removed_from_source_baseline_this_batch": 0,
-  "quality_finding": "The sources-page navigation still uses legacy 12-category sector keys instead of the current five active layer keys.",
-  "note": "Run 27 logged a source-page navigation alignment issue without adding unverified records to active data. Active baseline remains 15 traceable records; 285 more verified current records are still needed."
+  "public_note": "Public pages show current verified records, source groups, city coverage, and map layers only. Internal accumulation targets are not shown on the website.",
+  "quality_finding": "Homepage and source navigation no longer expose internal active-count targets.",
+  "note": "Run 28 restored the sources page and removed public target ratios from homepage metrics without adding unverified records to active data."
 }
