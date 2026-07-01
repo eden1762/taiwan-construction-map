@@ -1,0 +1,88 @@
+{
+  "batch_id": "2026-07-01-run-38-water-public-works-candidates",
+  "batch_date": "2026-07-01",
+  "source_type": "official-water-public-works-candidate-review",
+  "source_names": [
+    "經濟部水利署",
+    "經濟部水利署各區水資源分署",
+    "公共工程與水資源公開資料入口"
+  ],
+  "candidate_records": 3,
+  "passed_records": 0,
+  "excluded_records": 0,
+  "active_records_added": 0,
+  "active_records_removed": 0,
+  "active_total_public": 14,
+  "candidate_handling_policy": "These records are retained as candidates only. They must not be merged into active GeoJSON until official detail pages, procurement/contractor records, budget, schedule, deduplication keys, and GeoJSON geometry are checked against public sources.",
+  "public_safety_check": {
+    "no_internal_targets_in_public_fields": true,
+    "no_placeholder_abc_found": true,
+    "no_public_forbidden_terms_found": true,
+    "active_data_unchanged": true
+  },
+  "quality_findings": [
+    "Homepage, category page, source page, active GeoJSON, and latest batch index remain free of public internal accumulation targets.",
+    "Homepage preload cache key should be aligned with the active GeoJSON fetch key in a future safe edit; no destructive overwrite was attempted in this batch."
+  ],
+  "candidates": [
+    {
+      "candidate_id": "tcmap-cand-water-20260701-001",
+      "name": "大安大甲溪水源聯合運用輸水工程計畫",
+      "category": "公共工程",
+      "initial_status": "評估中",
+      "owner": "經濟部水利署相關水資源分署",
+      "contractor": "尚未補齊可列 active 的施工承攬資料",
+      "budget_ntd": null,
+      "start_date": null,
+      "planned_end_date": null,
+      "address": "臺中市、苗栗縣大安溪與大甲溪水源調度相關區域",
+      "source_name": "經濟部水利署",
+      "source_url": "https://www.wra.gov.tw/",
+      "captured_at": "2026-07-01",
+      "dedupe_key": "大安大甲溪水源聯合運用輸水工程計畫|經濟部水利署|大安溪大甲溪",
+      "geometry_status": "needs_official_water_corridor_geometry",
+      "candidate_reason": "Water-resource public works candidate. Keep outside active until the official project detail page, current approval/progress status, budget, schedule, and route geometry are normalized."
+    },
+    {
+      "candidate_id": "tcmap-cand-water-20260701-002",
+      "name": "桃園至新竹備援幹管工程相關計畫",
+      "category": "道路/管線",
+      "initial_status": "評估中",
+      "owner": "經濟部水利署、台灣自來水公司及地方供水相關機關",
+      "contractor": "待官方細頁補齊",
+      "budget_ntd": null,
+      "start_date": null,
+      "planned_end_date": null,
+      "address": "桃園市、新竹縣市供水備援幹管沿線",
+      "source_name": "經濟部水利署",
+      "source_url": "https://www.wra.gov.tw/",
+      "captured_at": "2026-07-01",
+      "dedupe_key": "桃園新竹備援幹管工程|經濟部水利署|桃園新竹供水",
+      "geometry_status": "needs_pipeline_corridor_geometry",
+      "candidate_reason": "Pipeline/public-utility candidate. Keep outside active because contractor, tender package, verified schedule, and official line geometry still require source completion."
+    },
+    {
+      "candidate_id": "tcmap-cand-water-20260701-003",
+      "name": "曾文南化聯通管工程相關計畫",
+      "category": "道路/管線",
+      "initial_status": "評估中",
+      "owner": "經濟部水利署南區水資源分署及供水相關機關",
+      "contractor": "待官方細頁補齊",
+      "budget_ntd": null,
+      "start_date": null,
+      "planned_end_date": null,
+      "address": "臺南市曾文水庫、南化水庫與區域供水系統相關區域",
+      "source_name": "經濟部水利署",
+      "source_url": "https://www.wra.gov.tw/",
+      "captured_at": "2026-07-01",
+      "dedupe_key": "曾文南化聯通管工程|經濟部水利署|臺南區域供水",
+      "geometry_status": "needs_pipeline_corridor_geometry",
+      "candidate_reason": "Water-supply resilience candidate. Keep outside active until current official status, procurement package, budget, schedule, and public geometry evidence are completed."
+    }
+  ],
+  "next_actions": [
+    "Find official detail pages or datasets for each water/public-works candidate.",
+    "Complete contractor, budget, schedule, and waterway/pipeline geometry before any active import.",
+    "Do not merge candidates into active unless all required active fields and source checks pass."
+  ]
+}
