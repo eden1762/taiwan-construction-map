@@ -1,0 +1,73 @@
+{
+  "batch_id": "2026-07-01-run-33-road-candidate-rotation",
+  "batch_date": "2026-07-01",
+  "source_type": "candidate-import-source-rotation",
+  "source_names": [
+    "臺南都會區北外環道路公開進度資料",
+    "西部濱海快速公路平交路口改善公開進度資料",
+    "東勢－豐原生活圈快速道路公開進度資料"
+  ],
+  "candidate_records": 3,
+  "passed_records": 0,
+  "excluded_records": 0,
+  "active_records_added": 0,
+  "active_records_removed": 0,
+  "active_total_public": 14,
+  "candidate_policy": "These records are stored as candidates only. They are not promoted to the active public map until official detail URLs, contractor identity, schedule fields, source traceability, and route geometry are sufficiently verified.",
+  "candidates": [
+    {
+      "candidate_id": "tcmap-cand-20260701-033-001",
+      "name": "臺南都會區北外環道路第二期與國道一號交流道工程",
+      "category": "道路/管線",
+      "initial_status": "施工中",
+      "owner": "臺南市政府、交通部高速公路局相關工程單位",
+      "contractor": null,
+      "budget_ntd": null,
+      "start_date": "2023-09-16",
+      "planned_end_date": "2027-06-30",
+      "address": "臺南市安南區台江大道至台19線溪頂寮大橋、國道一號北外環交流道周邊",
+      "geometry_type_needed": "LineString",
+      "source_name": "公共工程公開進度資料待官方細頁複核",
+      "source_url": "https://pcic.pcc.gov.tw/",
+      "fetched_at": "2026-07-01",
+      "dedupe_key": "臺南都會區北外環道路|第二期|國道一號交流道|臺南市",
+      "verification_note": "Public progress snippets show active construction and expected completion windows, but promotion requires official project detail pages, contractor mapping, normalized budget, and route geometry."
+    },
+    {
+      "candidate_id": "tcmap-cand-20260701-033-002",
+      "name": "台61線西部濱海快速公路平交路口改善工程群",
+      "category": "道路/管線",
+      "initial_status": "施工中",
+      "owner": "交通部公路局西部濱海公路相關工程處",
+      "contractor": null,
+      "budget_ntd": null,
+      "start_date": null,
+      "planned_end_date": "2030-03-01",
+      "address": "新北段15K+505至16K+800、新竹段77K+040至85K+865、苗栗段98K+780至101K+940等路段",
+      "geometry_type_needed": "MultiLineString",
+      "source_name": "公共工程公開進度資料待官方細頁複核",
+      "source_url": "https://pcic.pcc.gov.tw/",
+      "fetched_at": "2026-07-01",
+      "dedupe_key": "台61線|西部濱海快速公路|平交路口改善|新北新竹苗栗",
+      "verification_note": "Public progress snippets list multiple active or newly started improvement sections, but active promotion requires official section URLs, contractor fields, start dates, and normalized route geometry."
+    },
+    {
+      "candidate_id": "tcmap-cand-20260701-033-003",
+      "name": "東勢－豐原生活圈快速道路工程",
+      "category": "道路/管線",
+      "initial_status": "施工中",
+      "owner": "臺中市政府建設局",
+      "contractor": null,
+      "budget_ntd": null,
+      "start_date": "2022-10-30",
+      "planned_end_date": "2030-12-31",
+      "address": "臺中市豐原區、石岡區、東勢區，國道4號豐勢交流道至台8線周邊",
+      "geometry_type_needed": "LineString",
+      "source_name": "公共工程公開進度資料待官方細頁複核",
+      "source_url": "https://pcic.pcc.gov.tw/",
+      "fetched_at": "2026-07-01",
+      "dedupe_key": "東勢豐原生活圈快速道路|臺中市政府建設局|豐原石岡東勢",
+      "verification_note": "Public progress snippets show multiple construction sections and completion windows, but promotion requires official detail URLs, contractor identity, section-level schedule normalization, and route geometry."
+    }
+  ]
+}
