@@ -1,11 +1,11 @@
 {
   "updated_at": "2026-07-01",
-  "latest_batch_id": "2026-07-01-run-39-metro-transport-candidates",
-  "latest_batch_log": "data/import_batches/2026-07-01-run-39-metro-transport-candidates.json",
+  "latest_batch_id": "2026-07-01-run-40-homepage-preload-cache-alignment",
+  "latest_batch_log": "data/import_batches/2026-07-01-run-40-homepage-preload-cache-alignment.json",
   "active_count": 14,
   "active_records_added_this_batch": 0,
   "active_records_removed_from_source_baseline_this_batch": 0,
-  "candidate_records_added_this_batch": 3,
-  "quality_finding": "Added metro/transport candidate records for official-source completion without changing active public counts.",
-  "note": "Run 39 kept active data unchanged and preserved metro/transport candidates for source, contractor, schedule, and geometry completion."
+  "candidate_records_added_this_batch": 0,
+  "quality_finding": "Homepage active GeoJSON preload cache key now matches the map data request key, reducing stale-cache risk and duplicate early fetches.",
+  "note": "Run 40 changed only homepage loading consistency and kept active data unchanged."
 }
