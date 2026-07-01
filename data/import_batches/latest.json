@@ -1,11 +1,11 @@
 {
   "updated_at": "2026-07-01",
-  "latest_batch_id": "2026-07-01-run-35-homepage-legend-fix",
-  "latest_batch_log": "data/import_batches/2026-07-01-run-35-homepage-legend-fix.json",
+  "latest_batch_id": "2026-07-01-run-36-category-status-filter",
+  "latest_batch_log": "data/import_batches/2026-07-01-run-36-category-status-filter.json",
   "active_count": 14,
   "active_records_added_this_batch": 0,
   "active_records_removed_from_source_baseline_this_batch": 0,
   "candidate_records_added_this_batch": 0,
-  "quality_finding": "Homepage static legend now includes the delayed / Delayed status pill and matches the status filter.",
-  "note": "Run 35 fixed a visible homepage legend consistency issue without changing active data or exposing internal targets."
+  "quality_finding": "Category pages now expose the same city and status filtering pattern as the national overview.",
+  "note": "Run 36 improved category-page filtering, refreshed cache keys, and kept active data unchanged without exposing internal targets."
 }
