@@ -1,11 +1,10 @@
 {
   "updated_at": "2026-07-01",
-  "latest_batch_id": "2026-07-01-run-28-public-goal-cleanup",
-  "latest_batch_log": "data/import_batches/2026-07-01-run-28-public-goal-cleanup.json",
-  "active_count": 15,
+  "latest_batch_id": "2026-07-01-run-29-active-data-cleanup",
+  "latest_batch_log": "data/import_batches/2026-07-01-run-29-active-data-cleanup.json",
+  "active_count": 14,
   "active_records_added_this_batch": 0,
-  "active_records_removed_from_source_baseline_this_batch": 0,
-  "public_note": "Public pages show current verified records, source groups, city coverage, and map layers only. Internal accumulation targets are not shown on the website.",
-  "quality_finding": "Homepage and source navigation no longer expose internal active-count targets.",
-  "note": "Run 28 restored the sources page and removed public target ratios from homepage metrics without adding unverified records to active data."
+  "active_records_removed_from_source_baseline_this_batch": 1,
+  "quality_finding": "Active map data now excludes one under-verified record and publishes only current verified counts, source notes, and data rules.",
+  "note": "Run 29 cleaned the active map dataset and kept only records that meet the current active-data requirements."
 }
