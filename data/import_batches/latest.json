@@ -1,11 +1,11 @@
 {
   "updated_at": "2026-07-02",
-  "latest_batch_id": "2026-07-02-run-41-port-airport-road-candidates",
-  "latest_batch_log": "data/import_batches/2026-07-02-run-41-port-airport-road-candidates.json",
+  "latest_batch_id": "2026-07-02-run-42-rail-planning-candidates",
+  "latest_batch_log": "data/import_batches/2026-07-02-run-42-rail-planning-candidates.json",
   "active_count": 14,
   "active_records_added_this_batch": 0,
   "active_records_removed_from_source_baseline_this_batch": 0,
-  "candidate_records_added_this_batch": 3,
-  "quality_finding": "Added traceable candidate records from road, airport, and energy/port source groups while keeping unverified records out of active data.",
-  "note": "Run 41 expands candidate coverage without exposing internal targets or changing the public active count."
+  "candidate_records_added_this_batch": 4,
+  "quality_finding": "Added traceable rail planning and environmental-review candidate records while keeping unverified early-stage records out of active data.",
+  "note": "Run 42 expands candidate coverage for rail and planning sources without exposing internal targets or changing the public active count."
 }
