@@ -1,0 +1,28 @@
+{
+  "batch_id": "2026-07-03-run-16-road-highway-candidates",
+  "created_at": "2026-07-03",
+  "checked_files": [
+    "index.html",
+    "category.html",
+    "sources.html",
+    "fast-map.js",
+    "data/active_construction_projects.geojson"
+  ],
+  "public_site_checks": {
+    "forbidden_public_copy_found": false,
+    "private_target_numbers_found": false,
+    "placeholder_abc_found": false,
+    "active_geojson_loaded": true,
+    "active_count_before": 14,
+    "active_count_after": 14
+  },
+  "candidate_file": "data/candidates/2026-07-03-run-16-road-highway-candidates.json",
+  "candidate_count": 3,
+  "passed_to_active_count": 0,
+  "excluded_count": 0,
+  "reason_not_active": "三筆皆仍需補齊可回查精確標案頁、承攬廠商、預算或精確路廊 geometry，因此依資料規則保存為候選，不混入首頁 active。",
+  "notes": [
+    "本批補強道路／高速公路來源輪替，避免資料來源過度集中於捷運與鐵道。",
+    "公開資料只記錄實際候選數、active 實際總數與查核原因，不寫入任何私下資料量目標。"
+  ]
+}
