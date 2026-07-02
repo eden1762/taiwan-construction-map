@@ -1,0 +1,82 @@
+{
+  "batch_id": "2026-07-02-run16-public-works-candidates",
+  "captured_at": "2026-07-02",
+  "purpose": "保存本輪查得但尚未補齊 active 必備欄位或路廊 geometry 的候選工程；不混入首頁 active。",
+  "active_total_after_batch": 14,
+  "summary": {
+    "candidate_count": 4,
+    "passed_to_active_count": 0,
+    "excluded_count": 0,
+    "reason_not_active": "尚待逐案補齊承攬廠商、預算、官方細部頁面、狀態日期與 LineString/Polygon geometry。"
+  },
+  "candidates": [
+    {
+      "candidate_id": "cand-20260702-1601",
+      "name": "國道七號高雄路段計畫",
+      "category": "道路/管線",
+      "initial_status": "規劃/環評中",
+      "owner": "交通部高速公路局",
+      "contractor": "待補資料 / To be verified",
+      "budget_ntd": null,
+      "start_date": null,
+      "planned_end_date": null,
+      "address": "高雄市小港、林園、仁武、鳥松周邊路廊",
+      "source_name": "交通部高速公路局",
+      "source_url": "https://www.freeway.gov.tw/",
+      "dedupe_key": "國道七號高雄路段計畫|交通部高速公路局|高雄",
+      "geometry_status": "需補路廊 LineString；暫不得放入 active。",
+      "verification_note": "屬重大道路計畫候選；需回查最新環評、綜合規劃、核定經費、標案與路廊座標後再判斷是否轉入 active。"
+    },
+    {
+      "candidate_id": "cand-20260702-1602",
+      "name": "南港隧道（忠孝東路七段至研究院路一段）",
+      "category": "道路/管線",
+      "initial_status": "施工中",
+      "owner": "臺北市政府工務局新建工程處",
+      "contractor": "待補資料 / To be verified",
+      "budget_ntd": null,
+      "start_date": null,
+      "planned_end_date": null,
+      "address": "臺北市南港區忠孝東路七段、興中路、研究院路一段周邊",
+      "source_name": "臺北市政府工務局新建工程處",
+      "source_url": "https://nco.gov.taipei/",
+      "dedupe_key": "南港隧道|臺北市政府工務局新建工程處|南港",
+      "geometry_status": "需補隧道路廊 LineString；暫不得放入 active。",
+      "verification_note": "需回查最新施工進度、預定通車日、決標廠商與經費，避免採用過期媒體或百科資料。"
+    },
+    {
+      "candidate_id": "cand-20260702-1603",
+      "name": "馬太鞍溪橋災後復建工程",
+      "category": "公共工程",
+      "initial_status": "施工中/復建中",
+      "owner": "交通部公路局",
+      "contractor": "待補資料 / To be verified",
+      "budget_ntd": null,
+      "start_date": null,
+      "planned_end_date": null,
+      "address": "花蓮縣光復鄉、馬太鞍溪橋周邊",
+      "source_name": "交通部公路局",
+      "source_url": "https://www.thb.gov.tw/",
+      "dedupe_key": "馬太鞍溪橋災後復建|交通部公路局|花蓮光復",
+      "geometry_status": "需補橋梁位置與施工範圍 geometry；暫不得放入 active。",
+      "verification_note": "屬災後復建候選；需查核交通部公路局公告、便橋/永久橋期程、預算與承攬廠商後再決定是否轉入 active。"
+    },
+    {
+      "candidate_id": "cand-20260702-1604",
+      "name": "洲際液化天然氣接收站及港區配套工程",
+      "category": "建築/園區",
+      "initial_status": "規劃/前期作業中",
+      "owner": "台灣中油股份有限公司",
+      "contractor": "待補資料 / To be verified",
+      "budget_ntd": null,
+      "start_date": null,
+      "planned_end_date": null,
+      "address": "高雄市小港區高雄港洲際貨櫃中心第二期周邊",
+      "source_name": "台灣中油股份有限公司",
+      "source_url": "https://www.cpc.com.tw/",
+      "dedupe_key": "洲際液化天然氣接收站|台灣中油|高雄小港",
+      "geometry_status": "需補港區範圍 Polygon 或點位；暫不得放入 active。",
+      "verification_note": "需回查中油、港務、環評與都市計畫資料，確認是否屬 active 允許狀態與是否具備公開可回查來源。"
+    }
+  ]
+}
