@@ -1,0 +1,68 @@
+{
+  "batch_id": "20260703-xidong-metro-official-candidates",
+  "extracted_at": "2026-07-03",
+  "source_rotation": "捷運與道路主管機關",
+  "source_name": "新北市政府捷運工程局｜汐東捷運（原汐止民生線）",
+  "source_url": "https://www.dorts.ntpc.gov.tw/about/route/8l19Zo7NZveD",
+  "active_total_after_batch": 14,
+  "candidate_count": 2,
+  "passed_to_active_count": 0,
+  "excluded_count": 0,
+  "public_note": "本批資料先保存為候選，原因是承攬廠商、預算拆分與可直接使用的路廊 geometry 尚待逐欄查核；不得混入首頁 active。",
+  "candidates": [
+    {
+      "id": "cand-20260703-xidong-main",
+      "name": "汐東捷運（原汐止民生線）主體工程",
+      "name_en": "Xidong Metro Main Works, formerly Xizhi-Minsheng Line",
+      "category": "捷運/交通",
+      "initial_status": "施工中",
+      "owner": "新北市政府捷運工程局",
+      "contractor": "待補資料 / To be verified",
+      "budget_ntd": 37693000000,
+      "start_date": "2025-03-20",
+      "planned_end_date": "2032-12-31",
+      "address": "臺北市內湖區至新北市汐止區，東湖、社后、汐科、汐止區公所周邊路廊",
+      "source_name": "新北市政府捷運工程局｜汐東捷運（原汐止民生線）",
+      "source_url": "https://www.dorts.ntpc.gov.tw/about/route/8l19Zo7NZveD",
+      "updated_at": "2026-07-03",
+      "dedupe_key": "汐東捷運|新北市政府捷運工程局|施工中|捷運交通",
+      "geometry_status": "候選路廊，需依官方路線圖或可公開引用圖資補成 LineString；暫不進 active。",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [121.589, 25.067],
+          [121.617, 25.069],
+          [121.642, 25.064],
+          [121.662, 25.064]
+        ]
+      },
+      "verification_note": "官方頁面載明路線長度 5.56 公里、經費 376.93 億元、6 座車站、施工階段，以及主體統包工程於 114 年 3 月 20 日開工；承攬廠商名稱與精確路廊仍需以採購或工程標資料補齊。"
+    },
+    {
+      "id": "cand-20260703-xidong-road-widening",
+      "name": "汐東捷運要徑工程：吉林街／福德三路道路拓寬",
+      "name_en": "Xidong Metro Critical Works: Jilin Street and Fude 3rd Road Widening",
+      "category": "道路/管線",
+      "initial_status": "施工中",
+      "owner": "新北市政府捷運工程局",
+      "contractor": "待補資料 / To be verified",
+      "budget_ntd": 0,
+      "start_date": "2023-12-28",
+      "planned_end_date": "待補資料 / To be verified",
+      "address": "新北市汐止區吉林街、福德三路周邊",
+      "source_name": "新北市政府捷運工程局｜汐東捷運（原汐止民生線）",
+      "source_url": "https://www.dorts.ntpc.gov.tw/about/route/8l19Zo7NZveD",
+      "updated_at": "2026-07-03",
+      "dedupe_key": "吉林街福德三路道路拓寬|汐東捷運|新北市政府捷運工程局",
+      "geometry_status": "官方頁面描述長度約 1.4 公里；需補正式道路範圍或工程標圖資後才能進 active。",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [121.635, 25.068],
+          [121.647, 25.066]
+        ]
+      },
+      "verification_note": "官方頁面載明吉林街／福德三路道路拓寬工程於 112 年 11 月 15 日決標、112 年 12 月 28 日開工，長度約 1.4 公里，為捷運汐東線墩柱與地區交通需求的要徑工程；預算、廠商與可引用路廊仍需補查。"
+    }
+  ]
+}
