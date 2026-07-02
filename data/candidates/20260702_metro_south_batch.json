@@ -1,0 +1,105 @@
+{
+  "batch_id": "20260702-metro-south-batch",
+  "created_at": "2026-07-02",
+  "source_rotation": "捷運與鐵道主管機關、地方捷運主管機關、公開工程進度彙整",
+  "public_visibility_note": "本檔為候選資料保存區，僅供後續查核、去重與欄位補齊；未達 active 條件前不得混入首頁現況資料。",
+  "summary": {
+    "candidate_count": 3,
+    "passed_to_active_count": 0,
+    "excluded_count": 0,
+    "active_total_after_batch": 14
+  },
+  "candidates": [
+    {
+      "raw_candidate_name": "高雄捷運黃線",
+      "normalized_name": "高雄捷運黃線",
+      "category": "捷運/交通",
+      "initial_status": "施工中",
+      "owner": "高雄市政府捷運工程局",
+      "contractor": "待補資料 / To be verified",
+      "budget_ntd": null,
+      "start_date": "2023-01-01",
+      "planned_end_date": "2034-12-31",
+      "address": "高雄市前鎮、苓雅、三民、鳥松與鳳山等路廊",
+      "source_name": "高雄市政府捷運工程局與公開工程進度資料",
+      "source_url": "https://mtbu.kcg.gov.tw/",
+      "capture_date": "2026-07-02",
+      "dedupe_key": "kaohsiung-metro-yellow-line",
+      "geometry_status": "candidate_linestring_needs_official_alignment_check",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [120.307, 22.592],
+          [120.312, 22.615],
+          [120.324, 22.638],
+          [120.352, 22.658],
+          [120.371, 22.668]
+        ]
+      },
+      "verification_note": "公開資訊顯示路線興建中，但仍需補齊可直接回查的分標進度頁、得標廠商與核定金額後，才可轉入 active。"
+    },
+    {
+      "raw_candidate_name": "高雄捷運小港林園線",
+      "normalized_name": "高雄捷運小港林園線",
+      "category": "捷運/交通",
+      "initial_status": "施工中",
+      "owner": "高雄市政府捷運工程局",
+      "contractor": "待補資料 / To be verified",
+      "budget_ntd": null,
+      "start_date": "2023-11-14",
+      "planned_end_date": "2034-12-31",
+      "address": "高雄市小港區至林園區，沿台十七線與林園工業區周邊",
+      "source_name": "高雄市政府捷運工程局與公開工程進度資料",
+      "source_url": "https://mtbu.kcg.gov.tw/",
+      "capture_date": "2026-07-02",
+      "dedupe_key": "kaohsiung-metro-xiaogang-linyuan-line",
+      "geometry_status": "candidate_linestring_needs_official_alignment_check",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [120.353, 22.565],
+          [120.362, 22.545],
+          [120.376, 22.526],
+          [120.393, 22.506],
+          [120.411, 22.497]
+        ]
+      },
+      "verification_note": "公開資訊顯示路線興建中，但仍需補齊官方工程進度頁、分標廠商、核定金額與路線座標後，才可轉入 active。"
+    },
+    {
+      "raw_candidate_name": "臺北捷運萬大中和樹林線",
+      "normalized_name": "臺北捷運萬大中和樹林線",
+      "category": "捷運/交通",
+      "initial_status": "施工中",
+      "owner": "臺北市政府捷運工程局、新北市政府捷運工程局",
+      "contractor": "待補資料 / To be verified",
+      "budget_ntd": null,
+      "start_date": "2014-01-01",
+      "planned_end_date": "2031-06-30",
+      "address": "臺北市中正、萬華與新北市中和、土城、樹林、新莊等路廊",
+      "source_name": "臺北市政府捷運工程局與新北市政府捷運工程局公開工程資料",
+      "source_url": "https://www.dorts.gov.taipei/",
+      "capture_date": "2026-07-02",
+      "dedupe_key": "taipei-metro-wanda-zhonghe-shulin-line",
+      "geometry_status": "candidate_linestring_needs_official_alignment_check",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [121.519, 25.032],
+          [121.499, 25.025],
+          [121.485, 25.008],
+          [121.457, 24.989],
+          [121.431, 24.984]
+        ]
+      },
+      "verification_note": "公開資訊顯示路線施工中，但仍需補齊分期分標工程來源、得標廠商、金額與官方路線幾何後，才可轉入 active。"
+    }
+  ],
+  "quality_checks": {
+    "not_added_to_active": true,
+    "dedupe_checked_against_known_active_names": true,
+    "needs_direct_source_url_before_active": true,
+    "needs_contractor_before_active": true,
+    "needs_official_geometry_before_active": true
+  }
+}
