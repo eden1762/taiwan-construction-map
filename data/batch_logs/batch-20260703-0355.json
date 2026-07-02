@@ -1,0 +1,47 @@
+{
+  "batch_id": "batch-20260703-0355",
+  "created_at": "2026-07-03",
+  "candidate_file": "data/candidates/candidates-20260703-0355.json",
+  "source_rotation": [
+    "臺中市政府捷運工程局",
+    "新北市政府捷運工程局",
+    "交通部鐵道局"
+  ],
+  "candidate_count": 4,
+  "passed_to_active_count": 0,
+  "excluded_count": 0,
+  "active_actual_total": 14,
+  "checks": {
+    "public_forbidden_terms_checked": true,
+    "public_internal_target_leak_checked": true,
+    "active_geojson_not_modified": true,
+    "single_source_kept": true,
+    "candidate_not_mixed_into_active": true
+  },
+  "records": [
+    {
+      "id": "cand-20260703-001",
+      "name": "臺中捷運藍線",
+      "result": "candidate",
+      "reason": "需補標案級承攬廠商、區段預算與路廊 geometry。"
+    },
+    {
+      "id": "cand-20260703-002",
+      "name": "五股泰山輕軌",
+      "result": "candidate",
+      "reason": "需補綜合規劃核定狀態、經費、承攬廠商與路廊 geometry。"
+    },
+    {
+      "id": "cand-20260703-003",
+      "name": "桃園機場捷運延伸線 A22-A23 工程",
+      "result": "candidate",
+      "reason": "需補標案、承攬廠商、經費與精確路廊 geometry。"
+    },
+    {
+      "id": "cand-20260703-004",
+      "name": "高鐵延伸屏東規劃作業",
+      "result": "candidate",
+      "reason": "仍屬規劃階段，缺核定路廊、預算、標案與廠商。"
+    }
+  ]
+}
