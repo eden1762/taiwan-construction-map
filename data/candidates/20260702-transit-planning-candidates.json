@@ -1,0 +1,101 @@
+{
+  "batch_id": "20260702-transit-planning-candidates",
+  "created_at": "2026-07-02",
+  "source_rotation": "捷運與鐵道主管機關候選資料補充",
+  "active_total_before": 14,
+  "candidate_count": 3,
+  "passed_to_active_count": 0,
+  "public_publish_note": "本批次僅作候選資料保存，未寫入首頁 active GeoJSON；待官方來源逐筆補齊與欄位複核後，才可轉入 active。",
+  "private_goal_note": "not_public_target_free",
+  "candidates": [
+    {
+      "id": "candidate-20260702-transit-001",
+      "name": "臺中捷運藍線主線",
+      "name_en": "Taichung MRT Blue Line Main Route",
+      "category": "捷運/交通",
+      "initial_status": "施工中",
+      "owner": "臺中市政府捷運工程局",
+      "contractor": "待補官方標案分標資料",
+      "budget_ntd": 161510000000,
+      "start_date": "2025-06-26",
+      "planned_end_date": "2034-12-31",
+      "address": "臺中港至臺中車站、新建國市場沿線，主要行經臺灣大道路廊",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [120.524, 24.287],
+          [120.582, 24.203],
+          [120.642, 24.162],
+          [120.686, 24.136]
+        ]
+      },
+      "source_name": "臺中捷運藍線公開資料候選",
+      "source_url": "https://en.wikipedia.org/wiki/Blue_line_(Taichung_MRT)",
+      "official_source_to_verify": "https://tcrt.taichung.gov.tw/",
+      "captured_at": "2026-07-02",
+      "dedupe_key": "taichung-mrt-blue-line-main-route",
+      "check_note": "二級公開資料顯示 2025-06-26 動工、經費約新臺幣 1615.1 億、預定 2034 年開通；仍需回臺中市政府捷運工程局或標案資料補齊分標、承攬廠商與官方進度後才能進 active。"
+    },
+    {
+      "id": "candidate-20260702-transit-002",
+      "name": "臺南捷運藍線第一期主線",
+      "name_en": "Tainan MRT Blue Line Phase 1 Main Line",
+      "category": "捷運/交通",
+      "initial_status": "計畫中",
+      "owner": "臺南市政府交通局",
+      "contractor": "尚未進入可公開確認之主要施工標",
+      "budget_ntd": null,
+      "start_date": "2026-12-01",
+      "planned_end_date": "2032-12-31",
+      "address": "臺南市大橋、大同、仁德轉運站與文化中心周邊路廊",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [120.226, 23.019],
+          [120.222, 22.992],
+          [120.224, 22.977],
+          [120.251, 22.970]
+        ]
+      },
+      "source_name": "臺南捷運藍線公開資料候選",
+      "source_url": "https://zh.wikipedia.org/wiki/%E8%87%BA%E5%8D%97%E6%8D%B7%E9%81%8B%E8%97%8D%E7%B7%9A",
+      "official_source_to_verify": "https://traffic.tainan.gov.tw/",
+      "captured_at": "2026-07-02",
+      "dedupe_key": "tainan-mrt-blue-line-phase-1-main-line",
+      "check_note": "二級公開資料顯示綜合規劃已核定、最快 2026 年底動工、2032 年底完工；仍需回臺南市政府交通局、綜合規劃或環評公開資料補齊核定金額、官方期程與承攬資料。"
+    },
+    {
+      "id": "candidate-20260702-transit-003",
+      "name": "臺北捷運環狀線東環段",
+      "name_en": "Taipei Metro Circular Line Eastern Section",
+      "category": "捷運/交通",
+      "initial_status": "施工中",
+      "owner": "臺北市政府捷運工程局",
+      "contractor": "待補官方分標承攬資料",
+      "budget_ntd": null,
+      "start_date": "2024-12-24",
+      "planned_end_date": "2032-12-31",
+      "address": "臺北市文山區、新店區至內湖區相關路廊",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [121.579, 24.998],
+          [121.569, 25.033],
+          [121.567, 25.070],
+          [121.566, 25.082]
+        ]
+      },
+      "source_name": "臺北捷運工程進度公開資料候選",
+      "source_url": "https://zh.wikipedia.org/wiki/%E8%87%BA%E5%8C%97%E6%8D%B7%E9%81%8B",
+      "official_source_to_verify": "https://www.dorts.gov.taipei/",
+      "captured_at": "2026-07-02",
+      "dedupe_key": "taipei-metro-circular-line-eastern-section",
+      "check_note": "公開資料顯示東環段 2024-12-24 開工、預計 2032 年完工；仍需回臺北市捷運工程局工程進度頁與標案資料補齊分標、承攬廠商與官方進度。"
+    }
+  ],
+  "excluded_from_active_reasons": [
+    "尚未逐筆取得可直接回查的官方分標頁或工程進度頁",
+    "部分承攬廠商、官方核定金額或路廊 geometry 仍待複核",
+    "避免將二級彙整資料直接混入首頁 active"
+  ]
+}
