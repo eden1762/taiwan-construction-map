@@ -1,0 +1,96 @@
+{
+  "batch_id": "2026-07-03-run-16-road-highway-candidates",
+  "extracted_at": "2026-07-03",
+  "source_rotation": [
+    "交通部高速公路局",
+    "交通部公路局",
+    "公共工程雲端服務網",
+    "地方交通與工務主管機關"
+  ],
+  "active_import_decision": "candidate_only",
+  "reason": "本批為道路與高速公路工程候選資料，已有工程名稱、路廊、主辦機關與公開來源線索；但仍需逐案補齊精確標案來源頁、承攬廠商、最新進度、預算細節與可用於首頁的 LineString/MultiLineString geometry，因此不得混入 active GeoJSON。",
+  "internal_target_publication_check": "No private target numbers or progress-to-target wording are included in this public data file.",
+  "candidates": [
+    {
+      "candidate_id": "cand-20260703-r16-001",
+      "name": "淡水河北側沿河平面道路工程",
+      "name_en": "Tamsui River North-Side Riverside Road Project",
+      "category": "道路/管線",
+      "initial_status": "施工中",
+      "owner": "新北市政府工務局、臺北市政府交通局相關單位",
+      "contractor": null,
+      "budget_ntd": null,
+      "start_date": "2024-01-01",
+      "planned_end_date": "2029-06-30",
+      "address": "新北市淡水區竿蓁林至臺北市北投區大度路周邊",
+      "source_name": "新北市政府工務局／臺北市政府交通局／公共工程公開進度線索",
+      "source_url": "https://www.traffic.gov.taipei/",
+      "captured_at": "2026-07-03",
+      "dedupe_key": "淡水河北側沿河平面道路工程|新北市淡水區|臺北市北投區|道路",
+      "geometry_status": "needs_linestring_check",
+      "geometry_hint": {
+        "type": "LineString",
+        "coordinates_hint": [
+          [121.459, 25.164],
+          [121.481, 25.142],
+          [121.498, 25.126]
+        ]
+      },
+      "verification_note": "候選資料先保存。需回查工程專頁、公共工程雲端服務或標案資料，確認承攬廠商、預算、最新進度與精確路廊後才可轉入 active。"
+    },
+    {
+      "candidate_id": "cand-20260703-r16-002",
+      "name": "國道1號楊梅至頭份高架道路計畫",
+      "name_en": "National Freeway No. 1 Yangmei–Toufen Elevated Road Project",
+      "category": "道路/管線",
+      "initial_status": "計畫中",
+      "owner": "交通部高速公路局",
+      "contractor": null,
+      "budget_ntd": 75000000000,
+      "start_date": null,
+      "planned_end_date": "2030-12-31",
+      "address": "桃園市楊梅區至苗栗縣頭份市，國道1號約71K至108K路廊",
+      "source_name": "交通部高速公路局公開工程資訊線索",
+      "source_url": "https://www.freeway.gov.tw/",
+      "captured_at": "2026-07-03",
+      "dedupe_key": "國道1號楊梅至頭份高架道路|楊梅|頭份|國道",
+      "geometry_status": "needs_multilinestring_check",
+      "geometry_hint": {
+        "type": "LineString",
+        "coordinates_hint": [
+          [121.144, 24.908],
+          [120.995, 24.86],
+          [120.905, 24.687]
+        ]
+      },
+      "verification_note": "候選資料先保存。需查核核定計畫、設計／發包狀態、實際動工狀態、分標資訊與承攬廠商；若仍屬尚未動工或資料未完整，維持候選。"
+    },
+    {
+      "candidate_id": "cand-20260703-r16-003",
+      "name": "台61線新北、新竹、苗栗段平交路口改善工程群",
+      "name_en": "Provincial Highway 61 At-Grade Intersection Improvement Works in New Taipei, Hsinchu, and Miaoli",
+      "category": "道路/管線",
+      "initial_status": "施工中",
+      "owner": "交通部公路局西部濱海公路相關工程單位",
+      "contractor": null,
+      "budget_ntd": null,
+      "start_date": null,
+      "planned_end_date": null,
+      "address": "台61線新北段、新竹段與苗栗段部分平交路口路廊",
+      "source_name": "公共工程雲端服務網／交通部公路局公開資料線索",
+      "source_url": "https://pcic.pcc.gov.tw/",
+      "captured_at": "2026-07-03",
+      "dedupe_key": "台61線|平交路口改善|新北新竹苗栗|道路",
+      "geometry_status": "needs_section_split",
+      "geometry_hint": {
+        "type": "MultiLineString",
+        "coordinates_hint": [
+          [[121.38, 25.15], [121.35, 25.12]],
+          [[120.90, 24.78], [120.83, 24.72]],
+          [[120.70, 24.62], [120.66, 24.58]]
+        ]
+      },
+      "verification_note": "此筆是工程群候選，後續應拆成分標或分路段資料；需補齊各段工程名稱、標案編號、承攬廠商、預算、期程與路廊後才能轉入 active。"
+    }
+  ]
+}
