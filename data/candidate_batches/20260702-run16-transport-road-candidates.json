@@ -1,0 +1,97 @@
+{
+  "batch_id": "20260702-run16-transport-road-candidates",
+  "captured_at": "2026-07-02",
+  "source_rotation": [
+    "交通部鐵道局與鐵路立體化公開資料",
+    "交通部公路局與西濱快速公路公開資料",
+    "捷運主管機關與地方交通局公開資料"
+  ],
+  "active_total_before": 14,
+  "candidate_count": 4,
+  "passed_to_active_count": 0,
+  "reason_not_active": "本批先保存候選資料；尚需逐筆補齊可回查官方細部頁、精確工程路廊 geometry、最新標案甲乙方與期程後，才可轉入 active GeoJSON。",
+  "records": [
+    {
+      "candidate_id": "cand-20260702-016-001",
+      "name": "臺南市區鐵路地下化計畫",
+      "category": "捷運/交通",
+      "initial_status": "施工中",
+      "owner": "交通部鐵道局",
+      "contractor": "待由官方標案頁逐標補齊",
+      "budget_ntd": 29360000000,
+      "start_date": "2017-03-20",
+      "planned_end_date": "2026-11-04",
+      "address": "臺南市大橋車站以南至保安車站以北鐵路沿線",
+      "geometry_candidate": {
+        "type": "LineString",
+        "coordinates": [[120.224, 23.017], [120.213, 22.990], [120.220, 22.967]]
+      },
+      "source_name": "交通部鐵道局公開資料、臺南市區鐵路地下化公開說明",
+      "source_url": "https://zh.wikipedia.org/wiki/%E8%87%BA%E5%8D%97%E5%B8%82%E5%8D%80%E9%90%B5%E8%B7%AF%E5%9C%B0%E4%B8%8B%E5%8C%96%E8%A8%88%E7%95%AB",
+      "dedupe_key": "railway-bureau|tainan-underground-railway|tainan",
+      "check_note": "公開資料顯示仍屬興建中，且有多個工程標仍在辦理；轉 active 前需以鐵道局或公共工程雲端服務逐標確認最新進度、標案名稱、甲乙方與官方 URL。"
+    },
+    {
+      "candidate_id": "cand-20260702-016-002",
+      "name": "桃園都會區鐵路地下化計畫桃園車站與中路段",
+      "category": "捷運/交通",
+      "initial_status": "施工中",
+      "owner": "交通部鐵道局、桃園市政府",
+      "contractor": "待由官方標案頁逐標補齊",
+      "budget_ntd": 96409000000,
+      "start_date": "2024-07-10",
+      "planned_end_date": "2031-11-16",
+      "address": "桃園市桃園區、中壢區、平鎮區鐵路沿線",
+      "geometry_candidate": {
+        "type": "LineString",
+        "coordinates": [[121.363, 24.953], [121.313, 24.989], [121.226, 24.953]]
+      },
+      "source_name": "交通部鐵道局與桃園都會區鐵路地下化公開資料",
+      "source_url": "https://zh.wikipedia.org/wiki/%E6%A1%83%E5%9C%92%E9%83%BD%E6%9C%83%E5%8D%80%E9%90%B5%E8%B7%AF%E5%9C%B0%E4%B8%8B%E5%8C%96%E8%A8%88%E7%95%AB",
+      "dedupe_key": "railway-bureau|taoyuan-underground-railway|taoyuan",
+      "check_note": "公開資料列出多個地下化標案仍在施工；轉 active 前需確認官方進度頁與每標 contractor。"
+    },
+    {
+      "candidate_id": "cand-20260702-016-003",
+      "name": "台61線後龍觀海大橋及西湖溪橋改建工程",
+      "category": "道路/管線",
+      "initial_status": "施工中",
+      "owner": "交通部公路局",
+      "contractor": "待由官方標案頁補齊",
+      "budget_ntd": null,
+      "start_date": "待補資料 / To be verified",
+      "planned_end_date": "2026-07-23",
+      "address": "苗栗縣後龍鎮、西湖溪與觀海大橋周邊台61線路廊",
+      "geometry_candidate": {
+        "type": "LineString",
+        "coordinates": [[120.762, 24.650], [120.770, 24.626]]
+      },
+      "source_name": "交通部公路局西部濱海快速公路公開資料",
+      "source_url": "https://zh.wikipedia.org/wiki/%E8%A5%BF%E9%83%A8%E6%BF%B1%E6%B5%B7%E5%BF%AB%E9%80%9F%E5%85%AC%E8%B7%AF",
+      "dedupe_key": "highway-bureau|route-61|houlong-guanhai-xihu-bridge",
+      "check_note": "公開工程現況顯示預計 2026/07/23 完工且仍屬近期現況；缺預算、精確工區、乙方與官方細節頁，暫不進 active。"
+    },
+    {
+      "candidate_id": "cand-20260702-016-004",
+      "name": "西濱快速公路曾文溪橋新建工程",
+      "category": "道路/管線",
+      "initial_status": "施工中",
+      "owner": "交通部公路局",
+      "contractor": "待由官方標案頁補齊",
+      "budget_ntd": 9627000000,
+      "start_date": "2022-12-04",
+      "planned_end_date": "2028-10-14",
+      "address": "臺南市七股區至安南區曾文溪口台61線路廊",
+      "geometry_candidate": {
+        "type": "LineString",
+        "coordinates": [[120.101, 23.086], [120.132, 23.040]]
+      },
+      "source_name": "交通部公路局西濱快速公路曾文溪橋公開資料",
+      "source_url": "https://zh.wikipedia.org/wiki/%E6%9B%BE%E6%96%87%E6%BA%AA%E6%99%AF%E8%A7%80%E5%A4%A7%E6%A9%8B",
+      "dedupe_key": "highway-bureau|route-61|zengwen-river-bridge",
+      "check_note": "公開資料顯示仍在施工且工程主題明確；轉 active 前需補官方細節頁、最新進度、乙方與精確路廊。"
+    }
+  ],
+  "excluded_records": [],
+  "public_safety_note": "本批僅保存研究候選與查核備註，未寫入首頁、統計、公開圖例或 active GeoJSON。"
+}
