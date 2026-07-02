@@ -1,0 +1,73 @@
+{
+  "batch_id": "20260702-1602-rail-planning-candidates",
+  "captured_at": "2026-07-02T16:02:17+08:00",
+  "source_rotation": [
+    "交通部鐵道局最新消息",
+    "交通部鐵道局公聽會公告"
+  ],
+  "active_total_before_batch": 14,
+  "active_total_after_batch": 14,
+  "candidate_count": 3,
+  "passed_to_active_count": 0,
+  "excluded_count": 0,
+  "notes": "本批先保存具官方頁面佐證的鐵道規劃與用地程序候選資料。因仍缺完整 geometry、金額、期程或可直接回查的工程標案欄位，暫不混入 active GeoJSON。",
+  "candidates": [
+    {
+      "id": "cand-20260702-1602-001",
+      "name": "高鐵延伸宜蘭計畫",
+      "category": "規劃/環評",
+      "preliminary_status": "評估中",
+      "owner": "交通部鐵道局",
+      "contractor": "待補資料 / To be verified",
+      "budget_ntd": null,
+      "start_date": null,
+      "planned_end_date": null,
+      "address": "宜蘭縣及北宜交通廊帶",
+      "source_name": "交通部鐵道局新聞稿",
+      "source_url": "https://www.rb.gov.tw/zh-TW/main/main_188/news/main_347/20260519_134435/",
+      "source_captured_at": "2026-07-02",
+      "dedupe_key": "高鐵延伸宜蘭計畫|交通部鐵道局|宜蘭|規劃環評",
+      "raw_candidate_note": "官方新聞稿提及高鐵延伸宜蘭仍依既定程序，並提到第二階段環評與多元溝通。",
+      "verification_note": "適合作為規劃/環評候選；需補正式計畫範圍、路廊 geometry、預算、期程與工程主辦欄位後才能轉 active。",
+      "geometry_status": "missing_corridor_geometry"
+    },
+    {
+      "id": "cand-20260702-1602-002",
+      "name": "嘉義市區鐵路高架化計畫臨時軌用地延長使用",
+      "category": "捷運/交通",
+      "preliminary_status": "施工中",
+      "owner": "交通部鐵道局",
+      "contractor": "待補資料 / To be verified",
+      "budget_ntd": null,
+      "start_date": null,
+      "planned_end_date": null,
+      "address": "嘉義市區鐵路高架化臨時軌用地範圍",
+      "source_name": "交通部鐵道局公聽會公告",
+      "source_url": "https://www.rb.gov.tw/zh-TW/main/main_188/news/main_345/20260429_160651/",
+      "source_captured_at": "2026-07-02",
+      "dedupe_key": "嘉義市區鐵路高架化計畫|臨時軌用地|交通部鐵道局",
+      "raw_candidate_note": "官方公告檢送115年4月1日嘉義市區鐵路高架化計畫臨時軌用地延長使用第2場公聽會紀錄。",
+      "verification_note": "active 已有嘉義車站段資料，本筆需比對是否為既有 active 的程序更新或可拆成施工子項；避免重複前先保留候選。",
+      "geometry_status": "needs_dedup_and_section_geometry"
+    },
+    {
+      "id": "cand-20260702-1602-003",
+      "name": "嘉義縣市鐵路高架化延伸計畫民雄鄉路段永久軌工程",
+      "category": "捷運/交通",
+      "preliminary_status": "設計中",
+      "owner": "交通部鐵道局",
+      "contractor": "待補資料 / To be verified",
+      "budget_ntd": null,
+      "start_date": null,
+      "planned_end_date": null,
+      "address": "嘉義縣民雄鄉鐵路沿線",
+      "source_name": "交通部鐵道局公聽會公告",
+      "source_url": "https://www.rb.gov.tw/zh-TW/main/main_188/news/main_345/20260429_140645/",
+      "source_captured_at": "2026-07-02",
+      "dedupe_key": "嘉義縣市鐵路高架化延伸計畫|民雄鄉|永久軌工程|交通部鐵道局",
+      "raw_candidate_note": "官方公告為嘉義縣市鐵路高架化延伸計畫民雄鄉路段永久軌工程用地取得作業第1場公聽會。",
+      "verification_note": "可作為嘉義縣市延伸段候選；需補路線 LineString、工程經費、設計/施工標案與期程後再轉 active。",
+      "geometry_status": "missing_corridor_geometry"
+    }
+  ]
+}
