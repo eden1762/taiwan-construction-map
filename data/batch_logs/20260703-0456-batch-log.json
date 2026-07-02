@@ -1,0 +1,58 @@
+{
+  "batch_id": "20260703-0456-official-candidates",
+  "created_at": "2026-07-03T04:56:17+08:00",
+  "created_by": "automation-research-pass",
+  "scope": "新增候選資料，不改 active GeoJSON",
+  "precheck": {
+    "checked_files": [
+      "index.html",
+      "category.html",
+      "sources.html",
+      "fast-map.js",
+      "data/active_construction_projects.geojson"
+    ],
+    "public_forbidden_terms_found": false,
+    "internal_target_leak_found": false,
+    "placeholder_found": false,
+    "active_count_before": 14,
+    "active_count_after": 14
+  },
+  "candidate_count": 3,
+  "passed_to_active_count": 0,
+  "excluded_count": 0,
+  "saved_candidate_file": "data/candidates/20260703-0456-official-candidates.json",
+  "source_types": [
+    "捷運主管機關",
+    "道路工程主管機關",
+    "科學園區主管機關",
+    "公共工程雲端服務網",
+    "環評公開資料"
+  ],
+  "records": [
+    {
+      "candidate_id": "cand-20260703-001",
+      "name": "高雄捷運岡山路竹延伸線第二階段",
+      "dedupe_key": "kaohsiung-metro-gangshan-lujhu-extension-phase-2",
+      "initial_status": "施工中／設計中",
+      "action": "saved_as_candidate",
+      "reason": "須補齊逐標承攬廠商、正式履約期程與路廊 geometry。"
+    },
+    {
+      "candidate_id": "cand-20260703-002",
+      "name": "高雄楠海路南段道路工程",
+      "dedupe_key": "kaohsiung-nanhai-road-southern-section",
+      "initial_status": "施工中／設計中",
+      "action": "saved_as_candidate",
+      "reason": "須補齊各期標案、預算、承攬廠商與道路線形。"
+    },
+    {
+      "candidate_id": "cand-20260703-003",
+      "name": "南部科學園區橋頭園區開發工程",
+      "dedupe_key": "stsp-qiaotou-park-development",
+      "initial_status": "施工中／開發中",
+      "action": "saved_as_candidate",
+      "reason": "須補齊園區邊界 polygon、分期公共工程標案與最新履約狀態。"
+    }
+  ],
+  "next_safe_step": "下輪優先使用主管機關與公共工程雲端服務網逐筆補齊 contractor、budget_ntd、planned_end_date 與 geometry；補齊後再評估是否可轉入 active。"
+}
