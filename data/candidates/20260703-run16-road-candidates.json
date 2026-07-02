@@ -1,0 +1,53 @@
+{
+  "batch_id": "20260703-run16-road-candidates",
+  "captured_at": "2026-07-03",
+  "source_rotation": "公路與道路工程機關、公共工程公開進度彙整",
+  "active_merge_policy": "本批僅保存為候選資料；需補齊官方細部頁、契約金額、承攬廠商、路廊 geometry 與最新進度後，才可轉入 active GeoJSON。",
+  "candidate_count": 2,
+  "passed_to_active_count": 0,
+  "excluded_count": 0,
+  "active_total_after_batch": 14,
+  "private_goal_note": "No private target or KPI is written into public pages or active data.",
+  "candidates": [
+    {
+      "candidate_id": "cand-20260703-1601",
+      "name": "台66線6K+500-9K+100段平交路口高架化改善工程",
+      "category": "道路/管線",
+      "initial_status": "施工中",
+      "owner": "交通部公路局及所屬新建工程分局",
+      "contractor": "待補資料 / To be verified",
+      "budget_ntd": null,
+      "start_date": "待補資料 / To be verified",
+      "planned_end_date": "2027-03-09",
+      "address": "桃園市台66線6K+500至9K+100路段",
+      "source_name": "交通部公路局、公共工程公開進度彙整",
+      "source_url": "https://www.thb.gov.tw/",
+      "secondary_reference_url": "https://zh.wikipedia.org/wiki/%E5%8F%B066%E7%B7%9A",
+      "captured_at": "2026-07-03",
+      "dedupe_key": "台66線6K+500-9K+100段平交路口高架化改善工程|交通部公路局|桃園市",
+      "geometry_status": "candidate_point_only_need_official_corridor",
+      "geometry": { "type": "Point", "coordinates": [121.124, 24.975] },
+      "verification_note": "公開進度彙整顯示為施工中且預定 2027-03-09 完工；尚需回交通部公路局或公共工程標案頁確認承攬廠商、契約金額與精確路廊，暫不轉入 active。"
+    },
+    {
+      "candidate_id": "cand-20260703-1602",
+      "name": "台66線0K+000-3K+200段平交路口高架化改善工程",
+      "category": "道路/管線",
+      "initial_status": "施工中",
+      "owner": "交通部公路局及所屬新建工程分局",
+      "contractor": "待補資料 / To be verified",
+      "budget_ntd": null,
+      "start_date": "待補資料 / To be verified",
+      "planned_end_date": "2029-10-23",
+      "address": "桃園市台66線0K+000至3K+200路段",
+      "source_name": "交通部公路局、公共工程公開進度彙整",
+      "source_url": "https://www.thb.gov.tw/",
+      "secondary_reference_url": "https://zh.wikipedia.org/wiki/%E5%8F%B066%E7%B7%9A",
+      "captured_at": "2026-07-03",
+      "dedupe_key": "台66線0K+000-3K+200段平交路口高架化改善工程|交通部公路局|桃園市",
+      "geometry_status": "candidate_point_only_need_official_corridor",
+      "geometry": { "type": "Point", "coordinates": [121.066, 25.024] },
+      "verification_note": "公開進度彙整顯示為施工中且預定 2029-10-23 完工；尚需回交通部公路局或公共工程標案頁確認承攬廠商、契約金額與精確路廊，暫不轉入 active。"
+    }
+  ]
+}
