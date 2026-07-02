@@ -1,0 +1,75 @@
+{
+  "type": "FeatureCollection",
+  "name": "railway_land_and_station_candidates_2026_07_03",
+  "created_at": "2026-07-03",
+  "status": "candidate_only_not_active",
+  "source_policy": "Candidate records preserve official source URLs, capture date, preliminary status, dedupe key, and verification notes. They are not loaded by the public homepage until all active fields, contractor, budget, schedule, and geometry are verified.",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "candidate_id": "cand-20260703-rail-001",
+        "name": "嘉義市區鐵路高架化計畫臨時軌用地延長",
+        "name_en": "Chiayi Urban Railway Elevation Temporary Track Land-Use Extension",
+        "category": "捷運/交通",
+        "preliminary_status": "施工中 / 用地程序",
+        "owner": "交通部鐵道局",
+        "contractor": "待補資料",
+        "budget_ntd": null,
+        "start_date": null,
+        "planned_end_date": null,
+        "address": "嘉義市東區吳鳳北路184號周邊及嘉義市區鐵路高架化計畫路廊",
+        "source_name": "交通部鐵道局公告專區",
+        "source_url": "https://www.rb.gov.tw/zh-TW/main/main_188/news/main_345/20260429_160651/",
+        "captured_at": "2026-07-03",
+        "dedupe_key": "交通部鐵道局|嘉義市區鐵路高架化計畫|臨時軌用地延長|20260430",
+        "verification_note": "官方公告保存115年4月1日公聽會會議紀錄與會議地點；仍需補齊標案、預算、承攬廠商、詳細路廊 geometry 後才能進 active。"
+      },
+      "geometry": { "type": "Point", "coordinates": [120.4559, 23.4806] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "candidate_id": "cand-20260703-rail-002",
+        "name": "嘉義縣市鐵路高架化延伸民雄段永久軌工程用地取得",
+        "name_en": "Chiayi County-City Railway Elevation Extension to Minxiong Permanent Track Land Acquisition",
+        "category": "捷運/交通",
+        "preliminary_status": "計畫中 / 用地程序",
+        "owner": "交通部鐵道局",
+        "contractor": "待補資料",
+        "budget_ntd": null,
+        "start_date": null,
+        "planned_end_date": null,
+        "address": "嘉義縣民雄鄉文化路7號周邊及民雄鄉路段",
+        "source_name": "交通部鐵道局公告專區",
+        "source_url": "https://www.rb.gov.tw/zh-TW/main/main_188/news/main_345/20260429_140645/",
+        "captured_at": "2026-07-03",
+        "dedupe_key": "交通部鐵道局|嘉義縣市鐵路高架化延伸計畫|民雄鄉永久軌|20260430",
+        "verification_note": "官方公告指出本案辦理永久軌工程都市土地用地取得公聽會，且計畫奉行政院核定；仍需補齊標案、預算、承攬廠商、期程與路廊 geometry。"
+      },
+      "geometry": { "type": "Point", "coordinates": [120.4308, 23.5514] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "candidate_id": "cand-20260703-rail-003",
+        "name": "桃園鐵路地下化平鎮臨時站周邊工程",
+        "name_en": "Taoyuan Railway Underground Project Pingzhen Temporary Station Area Works",
+        "category": "捷運/交通",
+        "preliminary_status": "施工中",
+        "owner": "交通部鐵道局",
+        "contractor": "待補資料",
+        "budget_ntd": null,
+        "start_date": null,
+        "planned_end_date": null,
+        "address": "桃園市平鎮區環南路、新富一街周邊",
+        "source_name": "交通部鐵道局最新消息",
+        "source_url": "https://www.rb.gov.tw/zh-TW/main/",
+        "captured_at": "2026-07-03",
+        "dedupe_key": "交通部鐵道局|桃園鐵路地下化|平鎮臨時站|20260511",
+        "verification_note": "鐵道局首頁最新消息列示桃地計畫廉政平臺第8會與平鎮臨時站資訊；仍需補齊原公告頁、標案、預算、承攬廠商、期程與精準 geometry。"
+      },
+      "geometry": { "type": "Point", "coordinates": [121.2149, 24.9448] }
+    }
+  ]
+}
