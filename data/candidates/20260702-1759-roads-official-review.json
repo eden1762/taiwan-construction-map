@@ -1,0 +1,63 @@
+{
+  "batch_id": "20260702-1759-roads-official-review",
+  "extracted_at": "2026-07-02",
+  "source_rotation": "roads-utilities / transit corridor review",
+  "active_total_before": 14,
+  "candidate_count": 3,
+  "active_imported_count": 0,
+  "active_import_note": "Not imported into active because the records still need primary agency URL verification, contractor confirmation, and geometry refinement.",
+  "internal_target": null,
+  "candidates": [
+    {
+      "id": "cand-20260702-road-001",
+      "name": "臺南都會區北外環道路第2期新建工程（西工區）",
+      "category": "道路/管線",
+      "initial_status": "施工中",
+      "owner": "內政部國土管理署南區都市基礎工程分署",
+      "contractor": "待補資料 / To be verified",
+      "budget_ntd": null,
+      "start_date": "待補資料 / To be verified",
+      "planned_end_date": "2027-06-20",
+      "address": "臺南市安南區、永康區、新市區周邊北外環道路路廊",
+      "geometry_hint": "LineString preferred; current record only has corridor-level location.",
+      "source_name": "公共工程進度公開彙整，待回查公共工程委員會或主管機關原始頁",
+      "source_url": "https://zh.wikipedia.org/wiki/%E8%87%BA%E5%8D%97%E9%83%BD%E6%9C%83%E5%8D%80%E5%8C%97%E5%A4%96%E7%92%B0%E9%81%93%E8%B7%AF",
+      "dedupe_key": "臺南都會區北外環道路第2期|西工區|臺南|內政部國土管理署",
+      "review_note": "Publicly summarized progress shows ongoing construction and planned completion in 2027; keep as candidate until primary public works URL and contractor fields are verified."
+    },
+    {
+      "id": "cand-20260702-road-002",
+      "name": "臺南都會區北外環道路第2期新建工程及鹽水溪永安橋至太平橋堤段整體改善工程",
+      "category": "道路/管線",
+      "initial_status": "施工中",
+      "owner": "內政部國土管理署南區都市基礎工程分署",
+      "contractor": "待補資料 / To be verified",
+      "budget_ntd": null,
+      "start_date": "待補資料 / To be verified",
+      "planned_end_date": "2026-12-08",
+      "address": "臺南市鹽水溪永安橋至太平橋堤段與北外環道路周邊",
+      "geometry_hint": "LineString or MultiLineString preferred; candidate needs route geometry confirmation.",
+      "source_name": "公共工程進度公開彙整，待回查公共工程委員會或主管機關原始頁",
+      "source_url": "https://zh.wikipedia.org/wiki/%E8%87%BA%E5%8D%97%E9%83%BD%E6%9C%83%E5%8D%80%E5%8C%97%E5%A4%96%E7%92%B0%E9%81%93%E8%B7%AF",
+      "dedupe_key": "臺南都會區北外環道路第2期|鹽水溪永安橋太平橋|臺南|內政部國土管理署",
+      "review_note": "Candidate only. It appears to be active, but active import requires primary URL, contractor, budget, and geometry verification."
+    },
+    {
+      "id": "cand-20260702-road-003",
+      "name": "國道1號中豐交流道新建工程暨主線配合改善工程（第I102R標）",
+      "category": "道路/管線",
+      "initial_status": "施工中",
+      "owner": "交通部高速公路局",
+      "contractor": "待補資料 / To be verified",
+      "budget_ntd": null,
+      "start_date": "2023-02-01",
+      "planned_end_date": "2026-06-03",
+      "address": "桃園市中壢區國道1號五股楊梅高架道路中豐交流道周邊",
+      "geometry_hint": "Point acceptable at interchange level; LineString preferred if ramp geometry is found.",
+      "source_name": "公共工程進度公開彙整，待回查高速公路局或公共工程委員會原始頁",
+      "source_url": "https://zh.wikipedia.org/wiki/%E4%B8%AD%E8%B1%90%E4%BA%A4%E6%B5%81%E9%81%93",
+      "dedupe_key": "國道1號中豐交流道新建工程|I102R|桃園|高速公路局",
+      "review_note": "Candidate only. The project appears near completion but needs current primary source confirmation before active import."
+    }
+  ]
+}
