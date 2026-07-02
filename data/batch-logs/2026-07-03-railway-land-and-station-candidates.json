@@ -1,0 +1,26 @@
+{
+  "batch_id": "2026-07-03-railway-land-and-station-candidates",
+  "created_at": "2026-07-03",
+  "source_rotation": [
+    "交通部鐵道局公告專區",
+    "交通部鐵道局最新消息"
+  ],
+  "candidate_file": "data/candidates/2026-07-03-railway-land-and-station-candidates.geojson",
+  "candidate_count": 3,
+  "accepted_to_active_count": 0,
+  "excluded_count": 0,
+  "active_total_after_batch": 14,
+  "public_site_change": false,
+  "checks": {
+    "public_forbidden_terms_checked": true,
+    "internal_goal_leak_checked": true,
+    "active_geojson_schema_spot_checked": true,
+    "single_source_rule_kept": true,
+    "candidate_not_loaded_by_homepage": true
+  },
+  "notes": [
+    "本輪未將候選資料混入 active，因預算、承攬廠商、完整期程與路廊 geometry 尚未逐欄補齊。",
+    "候選資料均保存來源 URL、擷取日期、初步狀態、去重鍵與查核備註。",
+    "公開網站未新增內部營運目標、目標進度或缺口說明。"
+  ]
+}
