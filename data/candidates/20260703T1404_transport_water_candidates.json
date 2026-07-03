@@ -1,0 +1,103 @@
+{
+  "type": "FeatureCollection",
+  "name": "tcmap_candidates_20260703T1404_transport_water",
+  "captured_at": "2026-07-03T14:04:00+08:00",
+  "source_rotation": [
+    "捷運與鐵道主管機關",
+    "水利與防災機關",
+    "地方道路工程機關"
+  ],
+  "active_merge_policy": "本檔為候選資料，不併入首頁 active。須補齊可回查官方細頁、承攬廠商、期程、預算與 GeoJSON 幾何後，才可逐筆升級。",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "cand-20260703-1404-001",
+        "name": "臺北捷運環狀線南北環段",
+        "name_en": "Taipei Metro Circular Line South and North Sections",
+        "category": "捷運/交通",
+        "initial_status": "施工中",
+        "owner": "臺北市政府捷運工程局、新北市政府捷運工程局",
+        "contractor": "待補資料 / To be verified",
+        "budget_ntd": null,
+        "start_date": "2022-03-03",
+        "planned_end_date": "2031-06-30",
+        "address": "臺北市文山區至新北市新店區、五股區與臺北市內湖區間路廊",
+        "source_name": "臺北市政府捷運工程局／新北市政府捷運工程局",
+        "source_url": "https://www.dorts.gov.taipei/",
+        "secondary_source_url": "https://www.dorts.ntpc.gov.tw/",
+        "captured_at": "2026-07-03",
+        "dedupe_key": "taipei-metro-circular-line-south-north-sections",
+        "verification_note": "公開資料顯示環狀線南北環段屬興建中路線；仍需回官方工程進度頁逐標補齊契約、廠商、預算與最新進度後才可升級 active。"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [121.581, 24.998],
+          [121.536, 24.982],
+          [121.451, 25.061],
+          [121.566, 25.083]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "cand-20260703-1404-002",
+        "name": "臺北捷運環狀線東環段",
+        "name_en": "Taipei Metro Circular Line East Section",
+        "category": "捷運/交通",
+        "initial_status": "施工中",
+        "owner": "臺北市政府捷運工程局",
+        "contractor": "待補資料 / To be verified",
+        "budget_ntd": null,
+        "start_date": "2024-12-24",
+        "planned_end_date": "2032-12-31",
+        "address": "臺北市文山區、信義區、松山區、內湖區間路廊",
+        "source_name": "臺北市政府捷運工程局",
+        "source_url": "https://www.dorts.gov.taipei/",
+        "captured_at": "2026-07-03",
+        "dedupe_key": "taipei-metro-circular-line-east-section",
+        "verification_note": "公開資料顯示東環段屬興建中或已開工路線；仍需回官方工程進度頁逐標補齊契約、廠商、預算與最新進度後才可升級 active。"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [121.581, 24.998],
+          [121.571, 25.033],
+          [121.579, 25.05],
+          [121.566, 25.083]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "cand-20260703-1404-003",
+        "name": "馬太鞍溪災後河道疏濬與堤防復建相關工程",
+        "name_en": "Mataian Creek Post-Disaster Dredging and Levee Recovery Works",
+        "category": "公共工程",
+        "initial_status": "施工中",
+        "owner": "經濟部水利署第九河川分署及相關防災主管機關",
+        "contractor": "待補資料 / To be verified",
+        "budget_ntd": null,
+        "start_date": "2025-09-27",
+        "planned_end_date": "2026-12-31",
+        "address": "花蓮縣光復鄉、萬榮鄉馬太鞍溪流域",
+        "source_name": "經濟部水利署",
+        "source_url": "https://www.wra.gov.tw/",
+        "captured_at": "2026-07-03",
+        "dedupe_key": "hualien-mataian-creek-post-disaster-dredging-levee-recovery",
+        "verification_note": "已保存為防災水利候選；需補官方工程標案、契約廠商、復建範圍與最新辦理狀態後才可升級 active。"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [121.335, 23.667],
+          [121.39, 23.66],
+          [121.45, 23.652]
+        ]
+      }
+    }
+  ]
+}
