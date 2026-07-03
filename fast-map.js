@@ -1,8 +1,8 @@
 const $ = (s, r = document) => r.querySelector(s);
 const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
-const DATA = "/data/active_construction_projects.geojson?v=20260702-en-fields";
-const CK = "tcmap.active.layers.v12";
+const DATA = "/data/active_construction_projects.geojson?v=20260703-active-status";
+const CK = "tcmap.active.layers.v13";
 const LK = "tcmap.lang";
 const TS = 256;
 const HOME = [120.96, 23.72];
@@ -20,7 +20,7 @@ const CAT = [
 ];
 const CB = Object.fromEntries(CAT.map(x => [x[0], x]));
 const ST = ["計畫中", "計劃中", "評估中", "設計中", "施工中", "完工", "延宕"];
-const STE = { 計畫中: "Planned", 計劃中: "Planned", 評估中: "Under Evaluation", 設計中: "In Design", 施工中: "Under Construction", 完工: "Completed within 1 month", 延宕: "Delayed" };
+const STE = { 計畫中: "Planned", 計劃中: "Planned", 評估中: "Under Evaluation", 設計中: "In Design", 施工中: "Under Construction", 完工: "Completed within 1 month", "完工/啟用一個月內": "Completed within 1 month", 延宕: "Delayed" };
 const MENU = [["home", "全國工程概況", "National Overview", "./index.html"], ...CAT.map(c => ["sector", c[1], c[2], `./category.html?sector=${encodeURIComponent(c[0])}`]), ["sources", "資料入口", "Data Sources", "./sources.html"]];
 
 const T = {
@@ -39,6 +39,7 @@ const esc = v => String(v ?? "").replace(/[&<>\"']/g, m => ({ "&": "&amp;", "<":
 const cl = k => lang === "en" ? (CB[k]?.[2] || k) : (CB[k]?.[1] || k);
 const cc = c => lang === "en" ? (CITY[c]?.[1] || c) : c;
 const sl = s => lang === "en" ? (STE[s] || s) : s;
+const statusKey = s => s === "完工/啟用一個月內" ? "完工" : s;
 
 function nav(){ const n = $("#mainNav"); if(!n) return; n.innerHTML = MENU.map(m => `<a href="${m[3]}" ${((mode === "overview" && m[0] === "home") || (mode === "category" && m[0] === "sector" && m[3].includes(encodeURIComponent(sector))) || (mode === "sources" && m[0] === "sources")) ? 'aria-current="page"' : ""}>${esc(lang === "en" ? m[2] : m[1])}</a>`).join(""); }
 function tr(){ document.documentElement.lang = lang === "en" ? "en" : "zh-Hant"; $$('[data-t]').forEach(e => e.textContent = tt(e.dataset.t)); const b = $("#lang"); if(b) b.textContent = lang === "en" ? "中" : "EN"; const q = $("#q"); if(q) q.placeholder = lang === "en" ? "Try Taipei, roads, metro, science park" : "例：臺北、道路、捷運、科學園區"; nav(); hero(); renderLayers(); if(timeout) health(tt("slow"), true); apply(false); }
@@ -48,12 +49,12 @@ function cityOf(p){ const t = [p.city,p.address,p.name].join(" "); return Object
 function cat(p){ const x = [p.category, p.name].join(" "); if(/道路|橋|公路|路面|挖掘|沿河|管線|污水|排水/.test(x)) return "roads-utilities"; if(/捷運|鐵路|高鐵|台鐵|車站|交通/.test(x)) return "transit"; if(/園區|航空城|科學城|建築|社宅|航廈|場館|住宅/.test(x)) return "buildings-parks"; if(/環評|規劃|計畫|可行性|評估|設計/.test(x)) return "planning-eia"; return "public-works"; }
 function coord(f,p){ const g = f.geometry || {}; if(g.type === "Point") return g.coordinates; if(g.coordinates){ let x = g.coordinates; while(Array.isArray(x?.[0]?.[0])) x = x[0]; return Array.isArray(x?.[0]) ? x[0] : x; } return CITY[cityOf(p)]?.[0] || HOME; }
 function dval(v){ if(!v) return null; const d = new Date(`${String(v).slice(0,10)}T00:00:00+08:00`); return Number.isNaN(d.getTime()) ? null : d; }
-function activeOK(p){ if(["計畫中", "計劃中", "評估中", "設計中", "施工中"].includes(p.status)) return true; if(p.status !== "完工") return false; const d = dval(p.completed_at || p.opened_at || p.planned_end_date || p.end_date); return !!d && Date.now() - d.getTime() <= 31 * 864e5; }
+function activeOK(p){ const s = statusKey(p.status); if(["計畫中", "計劃中", "評估中", "設計中", "施工中"].includes(s)) return true; if(s !== "完工") return false; const d = dval(p.completed_at || p.opened_at || p.planned_end_date || p.end_date); return !!d && Date.now() - d.getTime() <= 31 * 864e5; }
 function norm(f,i){ const p = f.properties || {}, k = cat(p); return { ...p, id: p.id || `p-${i}`, status: p.status || "待確認", city: cityOf(p), key: k, color: CB[k]?.[3] || CB["public-works"][3], coord: coord(f,p), geometry_type: f.geometry?.type || p.geometry_type || "Point" }; }
 function layerOK(p){ return mode === "category" || S.layers.has(p.key); }
 function use(data){ const seen = new Set(); let dropped = 0; S.all = (data.features || []).map(norm).filter(p => { const k = [p.name, p.owner, p.address, p.source_url].join("|").toLowerCase(); if(seen.has(k)){ dropped++; return false; } seen.add(k); const ok = activeOK(p); if(!ok) dropped++; return ok; }); window.__tcmapDroppedInactive = dropped; dataSettled = true; apply(); }
 async function load(){ let had = false; try{ const c = JSON.parse(localStorage.getItem(CK) || "null"); if(c?.features){ had = true; use(c); } }catch{} const soft = setTimeout(() => { if(!dataSettled && !had){ health(tt("dataSlow")); use({features:[]}); } }, 1500); try{ const ctl = new AbortController(), to = setTimeout(() => ctl.abort(), 4200); const r = await fetch(DATA, { signal: ctl.signal, cache: "no-cache" }); clearTimeout(to); if(!r.ok) throw new Error("data"); const j = await r.json(); clearTimeout(soft); localStorage.setItem(CK, JSON.stringify(j)); use(j); }catch{ clearTimeout(soft); if(!had && !dataSettled){ health(tt("dataSlow")); use({features:[]}); } } }
-function filt(p){ const q = S.q.trim().toLowerCase(); return layerOK(p) && (mode !== "category" || p.key === sector) && (!S.city || p.city === S.city) && (!S.status || p.status === S.status) && (!q || [p.name,p.name_en,p.address,p.address_en,p.owner,p.owner_en,p.contractor,p.contractor_en,p.source_name,p.city,cc(p.city),cl(p.key),p.status,sl(p.status)].join(" ").toLowerCase().includes(q)); }
+function filt(p){ const q = S.q.trim().toLowerCase(); return layerOK(p) && (mode !== "category" || p.key === sector) && (!S.city || p.city === S.city) && (!S.status || statusKey(p.status) === S.status) && (!q || [p.name,p.name_en,p.address,p.address_en,p.owner,p.owner_en,p.contractor,p.contractor_en,p.source_name,p.city,cc(p.city),cl(p.key),p.status,sl(p.status)].join(" ").toLowerCase().includes(q)); }
 function apply(redraw=true){ S.list = S.all.filter(filt); metrics(); filters(); cats(); cities(); cards(); if(redraw) map(); renderLayers(); }
 function metrics(){ const a = mode === "category" ? S.all.filter(p => p.key === sector) : S.all.filter(layerOK), c = new Set(a.map(p => p.city).filter(x => x && x !== "其他")), src = new Set(a.map(p => p.source_name).filter(Boolean)); const set = (id, v) => { const el = $(id); if(el) el.textContent = v; }; set("#m1", a.length.toLocaleString()); set("#m2", c.size.toLocaleString()); set("#m3", mode === "category" ? "1" : CAT.length); set("#m4", src.size.toLocaleString()); }
 function filters(){ const cs = $("#cityFilter"); if(cs){ const a = mode === "category" ? S.all.filter(p => p.key === sector) : S.all.filter(layerOK), arr = Object.keys(CITY).filter(c => a.some(p => p.city === c)); cs.innerHTML = `<option value="">${esc(tt("allCity"))}</option>` + arr.map(c => `<option value="${esc(c)}" ${S.city === c ? "selected" : ""}>${esc(cc(c))}</option>`).join(""); } const st = $("#status"); if(st) st.innerHTML = `<option value="">${esc(tt("allStatus"))}</option>` + ST.map(s => `<option value="${esc(s)}" ${S.status === s ? "selected" : ""}>${esc(sl(s))}</option>`).join(""); }
