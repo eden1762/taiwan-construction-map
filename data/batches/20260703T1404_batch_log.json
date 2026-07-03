@@ -1,0 +1,33 @@
+{
+  "batch_id": "20260703T1404",
+  "captured_at": "2026-07-03T14:04:00+08:00",
+  "purpose": "補強捷運/交通與水利防災候選資料，先保存可查核線索，不混入 active。",
+  "public_safety_check": {
+    "checked_files": [
+      "index.html",
+      "category.html",
+      "sources.html",
+      "fast-map.js",
+      "data/active_construction_projects.geojson"
+    ],
+    "public_forbidden_terms_found": false,
+    "internal_target_leak_found": false,
+    "placeholder_abc_found": false,
+    "active_file_changed": false
+  },
+  "source_rotation": [
+    "捷運與鐵道主管機關",
+    "水利與防災機關",
+    "地方道路工程機關"
+  ],
+  "candidate_file": "data/candidates/20260703T1404_transport_water_candidates.json",
+  "candidate_count": 3,
+  "passed_to_active_count": 0,
+  "excluded_count": 0,
+  "active_total_after_batch": 14,
+  "notes": [
+    "候選資料均保留來源入口、擷取日期、初步狀態、去重鍵與查核備註。",
+    "因尚未逐筆補齊官方細頁、承攬廠商、預算或最新工程進度，未併入首頁 active。",
+    "本批未修改公開首頁、分類頁或 active GeoJSON。"
+  ]
+}
