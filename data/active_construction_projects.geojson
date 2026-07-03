@@ -1,7 +1,7 @@
 {
   "type": "FeatureCollection",
   "name": "taiwan_construction_projects_active",
-  "updated_at": "2026-07-02",
+  "updated_at": "2026-07-04",
   "data_policy": {
     "rule_zh": "首頁 active 地圖只保留不重複、來源可回查，且狀態為計畫中/計劃中、評估中、設計中、施工中，或完工/啟用未超過一個月的資料；招標中、延宕、規劃中、待確認、已完工超過一個月、取消、停辦或來源失效者需移出 active 資料。",
     "rule_en": "Active map data keeps only deduplicated, traceable projects that are planned, under evaluation, in design, under construction, or completed/opened within one month. Tendering, delayed, generic planning, unverified, outdated completed, canceled, suspended, or inactive records are moved out of active data."
@@ -158,8 +158,8 @@
       "type": "Feature",
       "properties": {
         "id": "tcmap-009",
-        "name": "嘉義市區鐵路高架化車站段",
-        "name_en": "Chiayi Urban Railway Elevation Station Section",
+        "name": "嘉義市區鐵路高架化計畫",
+        "name_en": "Chiayi Urban Railway Elevation Project",
         "category": "捷運/交通",
         "status": "施工中",
         "owner": "交通部鐵道局",
@@ -169,13 +169,23 @@
         "budget_ntd": 23840000000,
         "start_date": "2019-09-01",
         "planned_end_date": "2026-12-31",
-        "address": "嘉義市西區嘉義車站周邊",
-        "address_en": "Around Chiayi Station, West District, Chiayi City",
+        "address": "嘉義市區臺鐵路廊，嘉北站至水上站北側周邊",
+        "address_en": "Taiwan Railway corridor through Chiayi City, from around Jiabei Station toward north of Shuishang Station",
         "source_name": "交通部鐵道局",
-        "source_url": "https://www.rb.gov.tw/",
-        "updated_at": "2026-07-02"
+        "source_url": "https://www.rb.gov.tw/showpage.php?lmenuid=5&smenuid=14&tmenuid=447#Chiayi",
+        "updated_at": "2026-07-04"
       },
-      "geometry": { "type": "Point", "coordinates": [120.441, 23.486] }
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [120.4504, 23.5008],
+          [120.4461, 23.4935],
+          [120.4410, 23.4860],
+          [120.4343, 23.4745],
+          [120.4261, 23.4591],
+          [120.4152, 23.4416]
+        ]
+      }
     },
     {
       "type": "Feature",
