@@ -1,0 +1,28 @@
+{
+  "batch_id": "2026-07-03-run-17-source-portal-expansion",
+  "created_at": "2026-07-03",
+  "checked_files": [
+    "index.html",
+    "category.html",
+    "sources.html",
+    "fast-map.js",
+    "data/active_construction_projects.geojson"
+  ],
+  "public_site_checks": {
+    "forbidden_public_copy_found": false,
+    "private_target_numbers_found": false,
+    "placeholder_abc_found": false,
+    "active_geojson_loaded": true,
+    "active_count_before": 14,
+    "active_count_after": 14
+  },
+  "change_type": "public_source_portal_expansion",
+  "changed_file": "sources.html",
+  "official_portal_count_after": 10,
+  "active_data_changed": false,
+  "notes": [
+    "資料入口補齊水利、防災、環評、社宅與園區來源入口，便於後續候選資料查核。",
+    "公開頁面只顯示可回查來源與資料規則，不寫入任何私下資料量目標。",
+    "本輪為來源入口改善，未新增或轉入 active 工程資料。"
+  ]
+}
