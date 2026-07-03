@@ -1,0 +1,44 @@
+{
+  "batch_id": "20260703-rail-candidates-02",
+  "created_at": "2026-07-03",
+  "purpose": "Add traceable railway and metro candidates without changing active homepage data.",
+  "candidate_count": 3,
+  "passed_active_count": 0,
+  "excluded_count": 0,
+  "active_total_after": 14,
+  "source_types": [
+    "railway authority",
+    "metro authority",
+    "environmental review lead",
+    "public project progress lead"
+  ],
+  "records": [
+    {
+      "candidate_id": "cand-20260703-rail-001",
+      "name": "臺南市區鐵路地下化計畫",
+      "preliminary_status": "施工中",
+      "decision": "candidate_only",
+      "reason": "Contractor, latest official schedule, and verifiable corridor geometry need line-by-line confirmation."
+    },
+    {
+      "candidate_id": "cand-20260703-rail-002",
+      "name": "宜蘭至羅東鐵路高架化計畫",
+      "preliminary_status": "評估中",
+      "decision": "candidate_only",
+      "reason": "Planning and environmental-review leads exist, but active-level tender, contractor, schedule, and geometry fields are not complete."
+    },
+    {
+      "candidate_id": "cand-20260703-rail-003",
+      "name": "機場捷運增設 A14 站計畫",
+      "preliminary_status": "施工中",
+      "decision": "candidate_only",
+      "reason": "Progress lead exists, but budget, contractor, start date, and official station geometry still need verification."
+    }
+  ],
+  "public_safety_check": {
+    "active_geojson_changed": false,
+    "homepage_copy_changed": false,
+    "internal_target_numbers_written_to_public_site": false,
+    "forbidden_public_terms_added": false
+  }
+}
