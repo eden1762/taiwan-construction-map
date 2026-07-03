@@ -1,0 +1,98 @@
+{
+  "batch_id": "20260703-road-publicworks-01",
+  "created_at": "2026-07-03",
+  "source_rotation": [
+    "公共工程雲端服務網",
+    "政府電子採購網",
+    "交通部高速公路局",
+    "臺中市政府建設局"
+  ],
+  "public_visibility": "candidate-only; not loaded by homepage active map",
+  "active_total_after_batch": 14,
+  "candidates": [
+    {
+      "candidate_id": "cand-20260703-road-001",
+      "raw_candidate_name": "東勢－豐原生活圈快速道路（第三標－石岡新興段工程）",
+      "normalized_name": "東勢－豐原生活圈快速道路第三標石岡新興段",
+      "name_en": "Dongshi-Fengyuan Life Circle Expressway, Section 3 Shigang-Xinxing Segment",
+      "category": "道路/管線",
+      "preliminary_status": "施工中",
+      "owner": "臺中市政府建設局",
+      "contractor": "待由政府電子採購網或決標公告補齊",
+      "budget_ntd": null,
+      "start_date": null,
+      "planned_end_date": "2027-03-31",
+      "address": "臺中市石岡區新興段周邊，東勢－豐原生活圈快速道路路廊",
+      "geometry_status": "candidate-linestring-approximate",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [120.7605, 24.2702],
+          [120.7802, 24.2758],
+          [120.7996, 24.2822]
+        ]
+      },
+      "source_name": "公共工程雲端服務網／臺中市政府建設局",
+      "source_url": "https://pcic.pcc.gov.tw/",
+      "secondary_source_url": "https://www.construction.taichung.gov.tw/",
+      "fetched_at": "2026-07-03",
+      "dedupe_key": "臺中市政府建設局|東勢豐原生活圈快速道路|第三標|石岡新興段",
+      "verification_note": "公共工程進度線索顯示仍在施工；尚需回查決標資料、契約金額、承攬廠商與精確路廊後才能升級 active。"
+    },
+    {
+      "candidate_id": "cand-20260703-road-002",
+      "raw_candidate_name": "東勢－豐原生活圈快速道路（第一標－公老坪山隧道段工程）",
+      "normalized_name": "東勢－豐原生活圈快速道路第一標公老坪山隧道段",
+      "name_en": "Dongshi-Fengyuan Life Circle Expressway, Section 1 Gonglaoping Mountain Tunnel Segment",
+      "category": "道路/管線",
+      "preliminary_status": "施工中",
+      "owner": "臺中市政府建設局",
+      "contractor": "待由政府電子採購網或決標公告補齊",
+      "budget_ntd": null,
+      "start_date": null,
+      "planned_end_date": "2030-12-31",
+      "address": "臺中市豐原區、石岡區公老坪山隧道路廊",
+      "geometry_status": "candidate-linestring-approximate",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [120.7302, 24.2664],
+          [120.7461, 24.2696],
+          [120.7605, 24.2702]
+        ]
+      },
+      "source_name": "公共工程雲端服務網／臺中市政府建設局",
+      "source_url": "https://pcic.pcc.gov.tw/",
+      "secondary_source_url": "https://www.construction.taichung.gov.tw/",
+      "fetched_at": "2026-07-03",
+      "dedupe_key": "臺中市政府建設局|東勢豐原生活圈快速道路|第一標|公老坪山隧道段",
+      "verification_note": "屬同一生活圈道路計畫的獨立施工標；需確認契約、得標廠商、預算與可公開引用路廊後再判斷是否拆為 active 獨立工程。"
+    },
+    {
+      "candidate_id": "cand-20260703-road-003",
+      "raw_candidate_name": "國道1號中豐交流道新建工程暨主線配合改善工程（第I102R標）",
+      "normalized_name": "國道1號中豐交流道新建工程暨主線配合改善工程",
+      "name_en": "National Freeway No. 1 Zhongfeng Interchange New Construction and Mainline Improvement Works",
+      "category": "捷運/交通",
+      "preliminary_status": "完工/啟用一個月內待確認",
+      "owner": "交通部高速公路局",
+      "contractor": "待由政府電子採購網或決標公告補齊",
+      "budget_ntd": null,
+      "start_date": "2023-02-01",
+      "planned_end_date": "2026-06-03",
+      "address": "桃園市中壢區國道1號約59K中豐交流道周邊",
+      "geometry_status": "candidate-point-plus-ramp-range-needed",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [121.2268, 24.9725]
+      },
+      "source_name": "交通部高速公路局／公共工程雲端服務網",
+      "source_url": "https://www.freeway.gov.tw/",
+      "secondary_source_url": "https://pcic.pcc.gov.tw/",
+      "fetched_at": "2026-07-03",
+      "dedupe_key": "交通部高速公路局|國道1號|中豐交流道|I102R",
+      "verification_note": "此案可能已接近完工或啟用邊界；需以主管機關公告確認啟用日是否仍符合 active 一個月內規則，並補齊得標廠商與決標金額。"
+    }
+  ],
+  "excluded_from_active_reason": "三筆均仍缺承攬廠商、決標金額或精確 geometry；不得混入 active。"
+}
