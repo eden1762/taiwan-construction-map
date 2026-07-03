@@ -1,0 +1,35 @@
+{
+  "batch_id": "20260703-chiayi-rail-linestring",
+  "created_at": "2026-07-03",
+  "type": "active_geometry_patch_candidate",
+  "public_visibility": "internal_data_file_only_not_rendered_on_homepage",
+  "summary": "Record a safe geometry improvement for the Chiayi urban railway elevation active feature. The active file update was not applied in this commit because the large direct replacement write was blocked by the GitHub safety layer.",
+  "active_feature_id": "tcmap-009",
+  "active_feature_name": "嘉義市區鐵路高架化車站段",
+  "source_name": "交通部鐵道局",
+  "source_url": "https://www.rb.gov.tw/zh-TW/main/",
+  "source_checked_at": "2026-07-03",
+  "source_notes": [
+    "交通部鐵道局公開網站將嘉義市區鐵路高架化計畫列於鐵路立體化建設施工中項目。",
+    "目前 active geometry 仍為 Point，可改為沿嘉義車站周邊鐵道路廊的 LineString，以符合能確認路廊時優先使用線狀 geometry 的規則。"
+  ],
+  "dedupe_key": "railway-bureau|chiayi-urban-railway-elevation|tcmap-009",
+  "proposed_geometry": {
+    "type": "LineString",
+    "coordinates": [
+      [120.4525, 23.5046],
+      [120.4472, 23.4945],
+      [120.441, 23.486],
+      [120.4362, 23.4746]
+    ]
+  },
+  "recommended_active_updates": {
+    "properties.updated_at": "2026-07-03",
+    "geometry": "replace Point with proposed LineString"
+  },
+  "public_safety_check": {
+    "no_internal_target_numbers": true,
+    "no_public_copy_changes": true,
+    "no_forbidden_public_terms": true
+  }
+}
