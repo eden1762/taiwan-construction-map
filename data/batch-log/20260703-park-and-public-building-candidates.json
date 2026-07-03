@@ -1,0 +1,43 @@
+{
+  "batch_id": "2026-07-03-run-44-park-and-public-building-candidates",
+  "created_at": "2026-07-03",
+  "purpose": "Add traceable science-park and public-building candidates without changing active homepage data.",
+  "candidate_count": 3,
+  "passed_active_count": 0,
+  "excluded_count": 0,
+  "active_total_after": 14,
+  "source_types": [
+    "science park authority",
+    "public school / public building lead",
+    "planning and environmental-review lead"
+  ],
+  "records": [
+    {
+      "candidate_id": "cand-20260703-park-001",
+      "name": "南部科學園區臺南園區三期擴建基地開發工程",
+      "preliminary_status": "施工中",
+      "decision": "candidate_only",
+      "reason": "Contractor, latest schedule, budget, and official polygon geometry still need verification."
+    },
+    {
+      "candidate_id": "cand-20260703-park-002",
+      "name": "南部科學園區沙崙生態科學園區籌設計畫",
+      "preliminary_status": "評估中",
+      "decision": "candidate_only",
+      "reason": "Planning leads exist, but official scope, development schedule, contractor fields, and geometry are not complete."
+    },
+    {
+      "candidate_id": "cand-20260703-building-001",
+      "name": "國立屏科實驗高級中等學校第一期校舍工程",
+      "preliminary_status": "施工中",
+      "decision": "candidate_only",
+      "reason": "Campus completion lead exists, but contractor, budget, start date, and official site geometry need verification."
+    }
+  ],
+  "public_safety_check": {
+    "active_geojson_changed": false,
+    "homepage_copy_changed": false,
+    "internal_target_numbers_written_to_public_site": false,
+    "forbidden_public_terms_added": false
+  }
+}
