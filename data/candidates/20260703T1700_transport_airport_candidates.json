@@ -1,0 +1,100 @@
+{
+  "type": "FeatureCollection",
+  "name": "tcmap_candidates_20260703T1700_transport_airport",
+  "captured_at": "2026-07-03T17:00:00+08:00",
+  "source_rotation": [
+    "捷運與鐵道主管機關",
+    "港灣與機場主管機關",
+    "地方交通建設機關"
+  ],
+  "active_merge_policy": "本檔為候選資料，不併入首頁 active。須補齊逐案官方細頁、承攬廠商、期程、預算與 GeoJSON 幾何後，才可逐筆升級。",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "cand-20260703-1700-001",
+        "name": "臺中捷運藍線主線工程",
+        "name_en": "Taichung Metro Blue Line Main Works",
+        "category": "捷運/交通",
+        "initial_status": "施工中",
+        "owner": "臺中市政府捷運工程局",
+        "contractor": "待補資料 / To be verified",
+        "budget_ntd": 161500000000,
+        "start_date": "2025-06-26",
+        "planned_end_date": "2034-12-31",
+        "address": "臺中港至臺中車站、干城與建國市場周邊路廊",
+        "source_name": "臺中市政府捷運工程局、交通部審議與公開資料待逐案回查",
+        "source_url": "https://mtbu.taichung.gov.tw/",
+        "secondary_source_url": "https://www.motc.gov.tw/",
+        "captured_at": "2026-07-03",
+        "dedupe_key": "taichung-metro-blue-line-main-corridor",
+        "verification_note": "公開資料顯示藍線已進入工程推動階段；仍需補官方工程進度頁、分標契約、承攬廠商、正式里程範圍與最新進度後才可升級 active。"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [120.509, 24.276],
+          [120.585, 24.183],
+          [120.642, 24.164],
+          [120.686, 24.136]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "cand-20260703-1700-002",
+        "name": "高雄國際機場航廈與場站整建相關工程",
+        "name_en": "Kaohsiung International Airport Terminal and Landside Redevelopment Works",
+        "category": "建築/園區",
+        "initial_status": "規劃/評估中",
+        "owner": "交通部民用航空局高雄國際航空站",
+        "contractor": "待補資料 / To be verified",
+        "budget_ntd": null,
+        "start_date": "待補資料 / To be verified",
+        "planned_end_date": "待補資料 / To be verified",
+        "address": "高雄市小港區高雄國際機場航廈與周邊場站",
+        "source_name": "交通部民用航空局、高雄國際航空站與機場整體規劃公開資料待逐案回查",
+        "source_url": "https://www.caa.gov.tw/",
+        "secondary_source_url": "https://www.kia.gov.tw/",
+        "captured_at": "2026-07-03",
+        "dedupe_key": "kaohsiung-international-airport-terminal-landsideredevelopment",
+        "verification_note": "已保存為機場建築與場站工程候選；需補正式工程名稱、採購案號、承攬廠商、核定預算、辦理狀態與基地範圍後才可升級 active。"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [120.3503, 22.5771]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "cand-20260703-1700-003",
+        "name": "基隆南港間通勤軌道建設計畫",
+        "name_en": "Keelung-Nangang Commuter Rail Construction Plan",
+        "category": "規劃/環評",
+        "initial_status": "評估中",
+        "owner": "交通部鐵道局及相關地方政府",
+        "contractor": "待補資料 / To be verified",
+        "budget_ntd": null,
+        "start_date": "待補資料 / To be verified",
+        "planned_end_date": "待補資料 / To be verified",
+        "address": "基隆市至臺北市南港區間通勤軌道路廊",
+        "source_name": "交通部鐵道局各計畫進度及公開資料待逐案回查",
+        "source_url": "https://www.rb.gov.tw/",
+        "captured_at": "2026-07-03",
+        "dedupe_key": "keelung-nangang-commuter-rail-planning",
+        "verification_note": "公開進度資料顯示仍屬綜合規劃或評估階段；需補核定計畫、環評或設計進度、路廊範圍與後續採購資料後才可升級 active。"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [121.739, 25.128],
+          [121.692, 25.077],
+          [121.623, 25.05],
+          [121.607, 25.052]
+        ]
+      }
+    }
+  ]
+}
