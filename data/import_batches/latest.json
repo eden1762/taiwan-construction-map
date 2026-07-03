@@ -1,11 +1,11 @@
 {
   "updated_at": "2026-07-03",
-  "latest_batch_id": "2026-07-03-run-44-park-and-public-building-candidates",
-  "latest_batch_log": "data/import_batches/2026-07-03-run-44-park-and-public-building-candidates.json",
+  "latest_batch_id": "2026-07-03-run-47-transport-airport-candidates",
+  "latest_batch_log": "data/import_batches/2026-07-03-run-47-transport-airport-candidates.json",
   "active_count": 14,
   "active_records_added_this_batch": 0,
   "active_records_removed_from_source_baseline_this_batch": 0,
   "candidate_records_added_this_batch": 3,
-  "quality_finding": "Added traceable science-park and public-building candidates while keeping unverified records out of active data.",
-  "note": "Run 44 expands candidate coverage without exposing internal targets or changing the public active count."
+  "quality_finding": "Added traceable transport and airport candidates while keeping unverified records out of active data.",
+  "note": "Run 47 expands candidate coverage and corrects the latest-batch index without exposing internal targets or changing the public active count."
 }
