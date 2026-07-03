@@ -1,0 +1,96 @@
+{
+  "batch_id": "2026-07-04-railway-bureau-candidates",
+  "created_at": "2026-07-04",
+  "source_group": "交通部鐵道局 Railway Bureau",
+  "public_visibility_note": "Candidate records are not loaded by the public homepage until required active fields, geometry, deduplication, and source checks are complete.",
+  "active_total_after_batch": 14,
+  "candidate_count": 3,
+  "passed_to_active_count": 0,
+  "excluded_count": 0,
+  "records": [
+    {
+      "candidate_id": "cand-rb-20260704-001",
+      "name": "機場捷運延伸中壢火車站計畫",
+      "name_en": "Airport MRT Extension to Zhongli Railway Station",
+      "category": "捷運/交通",
+      "initial_status": "施工中",
+      "owner": "交通部鐵道局",
+      "contractor": "待逐標查核",
+      "budget_ntd": 17302000000,
+      "start_date": "2010-04",
+      "planned_end_date": "2029-07",
+      "address": "桃園市中壢區，A21環北站至A23中壢站",
+      "source_name": "交通部鐵道局｜機場捷運延伸中壢火車站計畫",
+      "source_url": "https://www.rb.gov.tw/zh-TW/main/main_28/20250505_152320/20251104_133945/20250505_152539/",
+      "source_retrieved_at": "2026-07-04",
+      "dedupe_key": "交通部鐵道局|機場捷運延伸中壢火車站計畫|A21-A23|桃園市中壢區",
+      "geometry_status": "candidate_linestring_needed",
+      "rough_geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [121.224, 24.964],
+          [121.221, 24.960],
+          [121.218, 24.956],
+          [121.225, 24.953]
+        ]
+      },
+      "verification_note": "Official page says progress was 87.69% as of 115/05/31 and the route runs about 2.06 km from A21 Huanbei to A23 Zhongli. Keep as candidate until contract-level contractor fields and geometry are reviewed."
+    },
+    {
+      "candidate_id": "cand-rb-20260704-002",
+      "name": "桃園都會區鐵路地下化計畫",
+      "name_en": "Taoyuan Metropolitan Railway Undergrounding Project",
+      "category": "捷運/交通",
+      "initial_status": "施工中",
+      "owner": "交通部鐵道局",
+      "contractor": "待逐標查核",
+      "budget_ntd": 104793000000,
+      "start_date": "2020-09",
+      "planned_end_date": "2030-12",
+      "address": "新北市鶯歌區鳳鳴陸橋北側至桃園市平鎮區台66線附近",
+      "source_name": "交通部鐵道局｜桃園都會區鐵路地下化計畫",
+      "source_url": "https://www.rb.gov.tw/zh-TW/main/main_28/20250505_152338/20251104_135332/20250505_153050/",
+      "source_retrieved_at": "2026-07-04",
+      "dedupe_key": "交通部鐵道局|桃園都會區鐵路地下化計畫|鳳鳴-平鎮|新北桃園",
+      "geometry_status": "candidate_linestring_needed",
+      "rough_geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [121.336, 24.971],
+          [121.314, 24.989],
+          [121.276, 24.989],
+          [121.226, 24.953],
+          [121.211, 24.944]
+        ]
+      },
+      "verification_note": "Official page says progress was 36.60% as of 115/05/31, with multiple construction and tendering sections. Keep as candidate until section contractors and final line geometry are normalized."
+    },
+    {
+      "candidate_id": "cand-rb-20260704-003",
+      "name": "嘉義縣市鐵路高架化延伸計畫",
+      "name_en": "Chiayi County-City Railway Elevation Extension Project",
+      "category": "捷運/交通",
+      "initial_status": "施工中",
+      "owner": "交通部鐵道局",
+      "contractor": "待逐標查核",
+      "budget_ntd": null,
+      "start_date": null,
+      "planned_end_date": null,
+      "address": "嘉義縣民雄鄉至嘉義市鐵路高架化延伸路段",
+      "source_name": "交通部鐵道局｜嘉義延伸民雄高架計畫",
+      "source_url": "https://www.rb.gov.tw/zh-TW/main/main_28/20250505_152338/20251104_135332/20250505_153111/",
+      "source_retrieved_at": "2026-07-04",
+      "dedupe_key": "交通部鐵道局|嘉義縣市鐵路高架化延伸計畫|民雄段",
+      "geometry_status": "candidate_linestring_needed",
+      "rough_geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [120.431, 23.554],
+          [120.435, 23.525],
+          [120.441, 23.486]
+        ]
+      },
+      "verification_note": "Official Railway Bureau public hearing and project links show the extension is being advanced; keep as candidate until budget, section contracts, dates, and geometry are completed."
+    }
+  ]
+}
