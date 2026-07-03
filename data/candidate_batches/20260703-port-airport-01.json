@@ -1,0 +1,95 @@
+{
+  "batch_id": "20260703-port-airport-01",
+  "created_at": "2026-07-03",
+  "source_rotation": [
+    "交通部民用航空局",
+    "桃園國際機場股份有限公司",
+    "臺灣港務公司",
+    "公共工程雲端服務網",
+    "政府電子採購網"
+  ],
+  "public_visibility": "candidate-only; not loaded by homepage active map",
+  "active_total_after_batch": 14,
+  "candidates": [
+    {
+      "candidate_id": "cand-20260703-portairport-001",
+      "raw_candidate_name": "桃園國際機場第三跑道及基礎設施計畫第一階段工程",
+      "normalized_name": "桃園國際機場第三跑道及基礎設施第一階段工程",
+      "name_en": "Taoyuan International Airport Third Runway and Infrastructure Phase 1 Works",
+      "category": "捷運/交通",
+      "preliminary_status": "施工中",
+      "owner": "桃園國際機場股份有限公司",
+      "contractor": "待由政府電子採購網或決標公告補齊",
+      "budget_ntd": null,
+      "start_date": "2023-09-16",
+      "planned_end_date": "2026-07-01",
+      "address": "桃園市大園區桃園國際機場北側第三跑道路廊",
+      "geometry_status": "candidate-linestring-approximate",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [121.2184, 25.0848],
+          [121.2392, 25.0896],
+          [121.2601, 25.0945]
+        ]
+      },
+      "source_name": "桃園國際機場股份有限公司／公共工程雲端服務網",
+      "source_url": "https://www.taoyuan-airport.com/",
+      "secondary_source_url": "https://pcic.pcc.gov.tw/",
+      "fetched_at": "2026-07-03",
+      "dedupe_key": "桃園國際機場股份有限公司|第三跑道|第一階段|X002X",
+      "verification_note": "已有機場與公共工程進度線索；尚需補齊正式決標廠商、契約金額、最新展延期程與可公開引用的跑道路廊後才能升級 active。"
+    },
+    {
+      "candidate_id": "cand-20260703-portairport-002",
+      "raw_candidate_name": "大林石化油品儲運中心13座球形槽新建統包工程",
+      "normalized_name": "大林石化油品儲運中心13座球形槽新建統包工程",
+      "name_en": "Dalin Petrochemical Storage Center 13 Spherical Tanks EPC Works",
+      "category": "建築/園區",
+      "preliminary_status": "施工中",
+      "owner": "台灣中油股份有限公司",
+      "contractor": "待由政府電子採購網或決標公告補齊",
+      "budget_ntd": null,
+      "start_date": null,
+      "planned_end_date": "2026-12-25",
+      "address": "高雄市小港區高雄港大林港區周邊",
+      "geometry_status": "candidate-point-plus-site-boundary-needed",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [120.3374, 22.5345]
+      },
+      "source_name": "公共工程雲端服務網／臺灣港務公司",
+      "source_url": "https://pcic.pcc.gov.tw/",
+      "secondary_source_url": "https://www.twport.com.tw/",
+      "fetched_at": "2026-07-03",
+      "dedupe_key": "台灣中油|大林石化油品儲運中心|13座球形槽|統包工程",
+      "verification_note": "工程位於港區與能源儲運設施脈絡，需確認是否作為公共工程圖層或園區工程呈現，並補齊決標金額、承攬廠商與基地範圍。"
+    },
+    {
+      "candidate_id": "cand-20260703-portairport-003",
+      "raw_candidate_name": "大林石化油品儲運中心三區26座石化品儲槽統包工程",
+      "normalized_name": "大林石化油品儲運中心三區26座石化品儲槽統包工程",
+      "name_en": "Dalin Petrochemical Storage Center Zone 3 26 Petrochemical Tanks EPC Works",
+      "category": "建築/園區",
+      "preliminary_status": "施工中",
+      "owner": "台灣中油股份有限公司",
+      "contractor": "待由政府電子採購網或決標公告補齊",
+      "budget_ntd": null,
+      "start_date": null,
+      "planned_end_date": "2026-09-15",
+      "address": "高雄市小港區高雄港大林港區周邊",
+      "geometry_status": "candidate-point-plus-site-boundary-needed",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [120.3416, 22.5318]
+      },
+      "source_name": "公共工程雲端服務網／臺灣港務公司",
+      "source_url": "https://pcic.pcc.gov.tw/",
+      "secondary_source_url": "https://www.twport.com.tw/",
+      "fetched_at": "2026-07-03",
+      "dedupe_key": "台灣中油|大林石化油品儲運中心|三區26座石化品儲槽|統包工程",
+      "verification_note": "與同一儲運中心其他標案可能高度相近；需確認契約邊界、工程範圍、承攬廠商與是否應合併顯示後才能進 active。"
+    }
+  ],
+  "excluded_from_active_reason": "三筆均仍缺承攬廠商、決標金額、最新可回查細頁或精確 geometry；不得混入 active。"
+}
