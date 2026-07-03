@@ -1,0 +1,83 @@
+{
+  "batch_id": "2026-07-03-1800-rail-project-candidates",
+  "created_at": "2026-07-03T18:00:39+08:00",
+  "source_rotation": [
+    "交通部鐵道局",
+    "公共工程雲端服務網",
+    "環境部環評查詢"
+  ],
+  "purpose": "保存可查核但尚未達 active 欄位完整度的軌道工程候選資料；未混入首頁 active GeoJSON。",
+  "public_safety_check": {
+    "active_geojson_changed": false,
+    "homepage_changed": false,
+    "internal_targets_exposed": false,
+    "public_forbidden_terms_added": false
+  },
+  "active_total_after_batch": 14,
+  "candidate_count": 3,
+  "passed_to_active_count": 0,
+  "excluded_count": 0,
+  "promotion_rule": "補齊可回查細頁、承攬廠商、金額、起訖期程與 GeoJSON geometry 後，才可升級為 active。",
+  "candidates": [
+    {
+      "candidate_id": "cand-20260703-rail-001",
+      "name": "桃園機場捷運延伸線計畫",
+      "name_en": "Taoyuan Airport MRT Extension Project",
+      "category": "捷運/交通",
+      "initial_status": "施工中",
+      "owner": "交通部鐵道局",
+      "contractor": "待補資料 / To be verified",
+      "budget_ntd": null,
+      "start_date": "待補資料 / To be verified",
+      "planned_end_date": "2028-07",
+      "address": "桃園市中壢區，老街溪站至中壢車站周邊",
+      "geometry_status": "候選階段先記錄概略路廊；需補 LineString 或分標範圍後才能進 active。",
+      "geometry": null,
+      "source_name": "交通部鐵道局各計畫進度及公共工程雲端服務網線索",
+      "source_url": "https://www.rb.gov.tw/",
+      "retrieved_at": "2026-07-03",
+      "dedupe_key": "桃園機場捷運延伸線計畫|交通部鐵道局|老街溪站-中壢車站",
+      "verification_note": "公開線索顯示仍屬施工中；尚需補齊細部標案、承攬廠商、完整工程金額與路廊 geometry。"
+    },
+    {
+      "candidate_id": "cand-20260703-rail-002",
+      "name": "桃園都會區鐵路地下化計畫",
+      "name_en": "Taoyuan Metropolitan Railway Underground Project",
+      "category": "捷運/交通",
+      "initial_status": "施工中",
+      "owner": "交通部鐵道局",
+      "contractor": "待補資料 / To be verified",
+      "budget_ntd": null,
+      "start_date": "2022",
+      "planned_end_date": "2033",
+      "address": "新北市鶯歌區至桃園市中壢區鐵路沿線",
+      "geometry_status": "候選階段需整理鶯歌至中壢路廊 LineString，並避免與平鎮臨時站或分標資料重複。",
+      "geometry": null,
+      "source_name": "交通部鐵道局各計畫進度及公共工程雲端服務網線索",
+      "source_url": "https://www.rb.gov.tw/",
+      "retrieved_at": "2026-07-03",
+      "dedupe_key": "桃園都會區鐵路地下化計畫|交通部鐵道局|鶯歌-中壢",
+      "verification_note": "公開線索顯示仍屬施工中；因工程分標多，需補分標、承攬廠商與去重規則後再判斷是否整案或分標進 active。"
+    },
+    {
+      "candidate_id": "cand-20260703-rail-003",
+      "name": "宜蘭至羅東鐵路高架化計畫",
+      "name_en": "Yilan to Luodong Railway Elevation Project",
+      "category": "規劃/環評",
+      "initial_status": "評估中",
+      "owner": "交通部鐵道局、宜蘭縣政府相關單位",
+      "contractor": "待補資料 / To be verified",
+      "budget_ntd": null,
+      "start_date": "待補資料 / To be verified",
+      "planned_end_date": "2034",
+      "address": "宜蘭縣宜蘭市至羅東鎮鐵路沿線",
+      "geometry_status": "候選階段需補四城以南至冬山以北路廊 LineString，並確認最新環評與經費來源。",
+      "geometry": null,
+      "source_name": "環境部環評查詢、交通部鐵道局線索",
+      "source_url": "https://eiadoc.moenv.gov.tw/",
+      "retrieved_at": "2026-07-03",
+      "dedupe_key": "宜蘭至羅東鐵路高架化計畫|環評|宜蘭-羅東",
+      "verification_note": "已找到環評與軌道主管機關線索；尚需確認最新辦理狀態、地方配合款、正式工程期程與承攬廠商，因此先留候選。"
+    }
+  ]
+}
