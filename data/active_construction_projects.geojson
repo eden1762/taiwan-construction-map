@@ -6,7 +6,7 @@
     "rule_zh": "首頁 active 地圖只保留不重複、來源可回查，且狀態為計畫中/計劃中、評估中、設計中、施工中，或完工/啟用未超過一個月的資料；招標中、延宕、規劃中、待確認、已完工超過一個月、取消、停辦或來源失效者需移出 active 資料。",
     "rule_en": "Active map data keeps only deduplicated, traceable projects that are planned, under evaluation, in design, under construction, or completed/opened within one month. Tendering, delayed, generic planning, unverified, outdated completed, canceled, suspended, or inactive records are moved out of active data."
   },
-  "active_count": 14,
+  "active_count": 15,
   "allowed_statuses": [
     "計畫中",
     "計劃中",
@@ -347,6 +347,40 @@
         "updated_at": "2026-07-02"
       },
       "geometry": { "type": "Point", "coordinates": [120.414, 24.07] }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "id": "tcmap-019",
+        "name": "淡水河北側沿河平面道路工程",
+        "name_en": "Tamsui River North-Side Riverside Road Project",
+        "category": "道路/管線",
+        "status": "施工中",
+        "owner": "新北市政府工務局",
+        "owner_en": "Public Works Department, New Taipei City Government",
+        "contractor": "榮工工程及協力廠商",
+        "contractor_en": "RSEA Engineering and partner contractors",
+        "budget_ntd": 6600000000,
+        "start_date": "2024-02-02",
+        "planned_end_date": "2029-06-30",
+        "address": "新北市淡水區竿蓁林、紅樹林至臺北市北投區大度路周邊",
+        "address_en": "From Ganzhenlin and Hongshulin in Tamsui District, New Taipei City, toward Dadu Road in Beitou District, Taipei City",
+        "source_name": "淡水河北側沿河平面道路專案",
+        "source_url": "https://www.danbeird.ntpc.gov.tw/",
+        "updated_at": "2026-07-04"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [121.4590, 25.1758],
+          [121.4599, 25.1650],
+          [121.4598, 25.1543],
+          [121.4594, 25.1432],
+          [121.4625, 25.1320],
+          [121.4768, 25.1241],
+          [121.4886, 25.1220]
+        ]
+      }
     }
   ]
 }
