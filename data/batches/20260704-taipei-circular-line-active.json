@@ -1,0 +1,24 @@
+{
+  "batch_id": "20260704-taipei-circular-line-active",
+  "captured_at": "2026-07-04",
+  "source_name": "臺北市政府捷運工程局",
+  "source_url": "https://www.dorts.gov.taipei/",
+  "raw_candidates": [
+    {
+      "raw_name": "臺北捷運環狀線南北環段工程",
+      "initial_status": "施工中",
+      "owner": "臺北市政府捷運工程局",
+      "contractor_note": "依公開工程進度與標案資訊整理為阿爾斯通、日商華大林組、互助營造及各土建機電標承攬團隊；正式引用仍需回原始公告查核。",
+      "budget_ntd": 137800000000,
+      "start_date": "2022-03-03",
+      "planned_end_date": "2031-06-30",
+      "dedupe_key": "臺北捷運環狀線南北環段工程|臺北市政府捷運工程局|新北產業園區-劍南路|動物園-大坪林",
+      "geometry_note": "依南環段動物園至大坪林、北環段新北產業園區至劍南路路廊，以 MultiLineString 近似表示，非精密測量線位。",
+      "verification_note": "狀態仍屬施工中；欄位具備 id、名稱、分類、狀態、甲方、乙方、金額、期程、位置、來源與 GeoJSON geometry，故納入 active。"
+    }
+  ],
+  "accepted_count": 1,
+  "rejected_count": 0,
+  "active_total_after_batch": 17,
+  "public_safety_note": "本批次未寫入內部目標、缺口或進度 KPI；公開頁僅顯示實際 active 件數與可回查來源。"
+}
