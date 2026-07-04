@@ -1,0 +1,23 @@
+{
+  "patch_id": "20260704-sanying-line-geometry",
+  "created_at": "2026-07-04",
+  "record_id": "tcmap-005",
+  "target_file": "data/active_construction_projects.geojson",
+  "change_type": "active_geometry_improvement",
+  "summary_zh": "建議將新北捷運三鶯線工程從 Point 改為 LineString 路廊，提升地圖可讀性；主檔直接改寫被安全檢查阻擋，因此先保存可套用 patch。",
+  "summary_en": "Suggested changing the New Taipei Metro Sanying Line from a Point to a LineString corridor for better map readability. Direct active-file replacement was blocked by safety checks, so this patch is saved for safe follow-up application.",
+  "source_name": "新北市政府捷運工程局",
+  "source_url": "https://www.dorts.ntpc.gov.tw/",
+  "proposed_properties": {
+    "name": "新北捷運三鶯線工程",
+    "name_en": "New Taipei Metro Sanying Line Project",
+    "address": "新北市土城區頂埔、三峽區至鶯歌區鶯桃福德沿線",
+    "address_en": "Sanying corridor from Dingpu in Tucheng through Sanxia to Yingtao Fude in Yingge, New Taipei City",
+    "updated_at": "2026-07-04"
+  },
+  "proposed_geometry": {
+    "type": "LineString",
+    "coordinates": [[121.4190,24.9590],[121.4010,24.9510],[121.3810,24.9350],[121.3650,24.9300],[121.3500,24.9390],[121.3400,24.9490],[121.3290,24.9560],[121.3230,24.9630]]
+  },
+  "public_safety_note": "本檔為資料修正 patch，不是公開首頁文案；不含內部目標或公開 KPI。"
+}
