@@ -1,87 +1,71 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#071827" />
-  <meta name="description" content="台灣工程地圖資料入口：公開來源、現況工程收錄規則、五大工程圖層與引用提醒。" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#071827">
+  <meta name="description" content="台灣工程地圖資料入口：公開來源、現況工程收錄規則、五大工程圖層與正式引用提醒。">
   <title>資料入口｜台灣工程地圖 Taiwan Construction Map</title>
-  <link rel="stylesheet" href="./fast-map.css?v=20260629-mobile-first-4" />
-  <style>
-    .sourceGrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.sourceCard{border:1px solid var(--line);border-radius:22px;background:#fff;padding:18px;box-shadow:0 10px 26px rgba(0,0,0,.06)}.sourceCard h3{margin:0 0 8px;font-size:22px}.sourceCard p,.sourceCard li{color:#526b82;line-height:1.65;font-weight:760}.sourceCard ul{margin:10px 0 0;padding-left:20px}.sourceCard a,.sourceLinks a{display:inline-flex;margin-top:10px;border-radius:999px;background:linear-gradient(135deg,var(--cyan),#ffe0aa);padding:10px 14px;font-weight:1000;color:#061522}.sourceLinks{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.sourceLinks article{border:1px solid rgba(12,35,55,.13);border-radius:20px;background:linear-gradient(145deg,#fff,#f7fbff);padding:16px;box-shadow:0 10px 24px rgba(0,0,0,.05)}.sourceLinks h3{margin:0 0 6px;font-size:18px}.sourceLinks p{margin:0;color:#526b82;line-height:1.6;font-weight:760}.en-only{display:none!important}html[lang=en] .zh-only{display:none!important}html[lang=en] .en-only{display:initial!important}html[lang=en] li.en-only,html[lang=en] p.en-only,html[lang=en] article.en-only{display:block!important}html[lang=en] .inline-en{display:inline!important}@media(max-width:900px){.sourceLinks{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:760px){.sourceGrid,.sourceLinks{grid-template-columns:1fr}}
-  </style>
+  <link rel="preload" href="./Content/Taiwan_Construction.PNG" as="image" fetchpriority="high">
+  <link rel="stylesheet" href="./fast-map.css?v=20260711-single-source">
 </head>
 <body data-page="sources">
   <a class="skip" href="#sourcesMain"><span class="zh-only">跳到資料入口</span><span class="en-only inline-en">Skip to data sources</span></a>
-  <header class="top" aria-label="網站導覽">
-    <a class="brand" href="./index.html" aria-label="台灣工程地圖首頁"><span class="mark">工</span><span><b data-t="brand">台灣工程地圖</b><small data-t="line">全國工程概況 × 五大圖層 × 資料入口</small></span></a>
-    <nav id="mainNav" class="nav" aria-label="主要目錄"></nav>
-  </header>
+  <div data-site-header></div>
+
   <main id="sourcesMain">
     <section class="hero">
       <div>
         <p class="pill"><span class="zh-only">公開來源 × 現況工程 × 可回查</span><span class="en-only inline-en">Public sources × active projects × traceable records</span></p>
-        <h1><span class="zh-only">資料入口，先看來源與收錄規則。</span><span class="en-only inline-en">Data sources, collection rules, and public traceability.</span></h1>
-        <p><span class="zh-only">這裡整理台灣工程地圖採用的公開來源類型、首頁現況資料規則與正式引用提醒。工程金額、期程、甲方與乙方可能隨公告更新，正式使用前請回原始主管機關或發包單位確認。</span><span class="en-only inline-en">This page explains the public source types, active-record rules, and citation notes behind Taiwan Construction Map. Budgets, schedules, owners, and contractors may change, so formal use should always be checked against the original agency or project owner.</span></p>
+        <h1><span class="zh-only">資料入口，查案先看證據鏈。</span><span class="en-only inline-en">Data sources built for traceable project checks.</span></h1>
+        <p><span class="zh-only">這裡整理工程公告、採購、施工進度、交通、水利、港灣、建築、園區、環評與地理圖資入口。金額、期程、甲方與乙方可能隨公告更新，正式使用前請回原始主管機關或發包單位確認。</span><span class="en-only inline-en">This page brings together public portals for project notices, procurement, progress, transport, water, ports, buildings, industrial parks, environmental review, and geospatial data. Budgets, schedules, owners, and contractors may change, so verify the original agency or project owner before formal use.</span></p>
         <div class="actions"><a class="btn" href="./index.html"><span class="zh-only">回全國工程概況</span><span class="en-only inline-en">Back to national overview</span></a></div>
       </div>
       <div class="metrics" aria-label="資料入口重點">
         <article><b>5</b><span><span class="zh-only">主要工程圖層</span><span class="en-only inline-en">Main layers</span></span></article>
-        <article><b>9</b><span><span class="zh-only">資料欄位面向</span><span class="en-only inline-en">Data aspects</span></span></article>
+        <article><b>9</b><span><span class="zh-only">資料面向</span><span class="en-only inline-en">Data aspects</span></span></article>
         <article><b>13</b><span><span class="zh-only">官方入口</span><span class="en-only inline-en">Official portals</span></span></article>
       </div>
     </section>
 
-    <section class="block">
+    <section class="block lazySection">
       <div class="title">
         <p class="eyebrow"><span class="zh-only">現況收錄規則</span><span class="en-only inline-en">Active collection rules</span></p>
-        <h2><span class="zh-only">首頁只放現在仍有參考價值的工程。</span><span class="en-only inline-en">The homepage keeps projects that are still current and useful.</span></h2>
-        <p><span class="zh-only">可納入首頁的狀態包含計畫中、評估中、設計中、施工中，以及完工或啟用一個月內。已取消、停辦、來源失效、無法查證、重複或明顯過期的資料不進首頁現況統計。</span><span class="en-only inline-en">Homepage records include planned, under-evaluation, in-design, under-construction, and recently completed or opened projects. Canceled, suspended, inactive, unverified, duplicate, or clearly outdated records are kept out of the active homepage view.</span></p>
+        <h2><span class="zh-only">首頁只放現在仍值得追的工程。</span><span class="en-only inline-en">The homepage keeps projects that are current and useful.</span></h2>
+        <p><span class="zh-only">納入計畫中、評估中、設計中、施工中，以及完工或啟用一個月內的工程。取消、停辦、來源失效、無法查證、重複或明顯過期的資料，不混進現況統計。</span><span class="en-only inline-en">The active view includes planned, under-evaluation, in-design, under-construction, and recently completed or opened projects. Canceled, suspended, inactive, unverified, duplicate, or clearly outdated records stay out of the current overview.</span></p>
       </div>
       <div class="sourceGrid">
-        <article class="sourceCard"><h3><span class="zh-only">五大工程圖層</span><span class="en-only inline-en">Five map layers</span></h3><ul><li class="zh-only">公共工程、道路/管線、捷運/交通、建築/園區、規劃/環評。</li><li class="zh-only">點位顏色依圖層區分，搜尋可查工程名、地點、甲方與乙方。</li><li class="en-only">Public works, roads/utilities, metro/transport, buildings/parks, and planning/environmental review.</li><li class="en-only">Pin colors follow layers; search supports project name, place, owner, and contractor.</li></ul></article>
-        <article class="sourceCard"><h3><span class="zh-only">九大資料面向</span><span class="en-only inline-en">Nine data aspects</span></h3><ul><li class="zh-only">基本資料、位置範圍、工程內容、發包與廠商、金額成本、時間期程、施工進度、審查法規、民眾資訊。</li><li class="zh-only">查不到的欄位標示「待補資料 / To be verified」，不臆測。</li><li class="en-only">Basics, location range, scope, owner and contractor, budget, schedule, progress, review rules, and public information.</li><li class="en-only">Unknown fields are marked “To be verified” rather than guessed.</li></ul></article>
+        <article class="sourceCard"><h3><span class="zh-only">五大工程圖層</span><span class="en-only inline-en">Five project layers</span></h3><ul><li class="zh-only">公共工程、道路/管線、捷運/交通、建築/園區、規劃/環評。</li><li class="zh-only">可依工程名、地點、甲方、乙方、縣市與狀態查詢。</li><li class="en-only">Public works, roads/utilities, metro/transport, buildings/parks, and planning/environmental review.</li><li class="en-only">Search by project, place, owner, contractor, city, and status.</li></ul></article>
+        <article class="sourceCard"><h3><span class="zh-only">九大資料面向</span><span class="en-only inline-en">Nine data aspects</span></h3><ul><li class="zh-only">基本資料、位置範圍、工程內容、發包與廠商、金額、期程、進度、審查法規、民眾資訊。</li><li class="zh-only">查不到就標示「待補資料」，不拿猜測充數。</li><li class="en-only">Basics, location, scope, owner and contractor, budget, schedule, progress, review rules, and public information.</li><li class="en-only">Unknown fields are marked “To be verified,” never guessed.</li></ul></article>
       </div>
     </section>
 
-    <section class="block">
+    <section class="block lazySection">
       <div class="title">
         <p class="eyebrow"><span class="zh-only">官方入口</span><span class="en-only inline-en">Official portals</span></p>
-        <h2><span class="zh-only">查核時優先回到可公開追溯的來源。</span><span class="en-only inline-en">Verification starts from traceable public portals.</span></h2>
-        <p><span class="zh-only">下列入口提供工程公告、採購、施工進度、交通建設、水利防災、港灣機場、社宅園區、環境審查、建照使照、道路挖掘與地理圖資線索；每筆工程正式收錄前仍需逐案比對名稱、位置、狀態、期程、甲方、乙方與來源日期。</span><span class="en-only inline-en">These portals provide leads for project notices, procurement, progress, transport works, water and resilience works, port and airport works, housing and park projects, environmental review, building and occupancy permits, road excavation, and geospatial data. Each record still needs project-by-project checks before it enters the active map.</span></p>
+        <h2><span class="zh-only">查核不繞路，直接回公開來源。</span><span class="en-only inline-en">Verification starts from traceable public portals.</span></h2>
+        <p><span class="zh-only">每筆工程正式收錄前，仍需逐案比對名稱、位置、狀態、期程、甲方、乙方與來源日期。</span><span class="en-only inline-en">Before a project enters the active map, its name, location, status, schedule, owner, contractor, and source date still need project-by-project checks.</span></p>
       </div>
       <div class="sourceLinks">
-        <article><h3><span class="zh-only">公共工程委員會</span><span class="en-only inline-en">Public Construction Commission</span></h3><p><span class="zh-only">公共工程政策、工程管理與採購相關入口。</span><span class="en-only inline-en">Public works policy, project management, and procurement entry point.</span></p><a href="https://www.pcc.gov.tw/" target="_blank" rel="noopener noreferrer"><span class="zh-only">開啟來源</span><span class="en-only inline-en">Open source</span></a></article>
+        <article><h3><span class="zh-only">公共工程委員會</span><span class="en-only inline-en">Public Construction Commission</span></h3><p><span class="zh-only">公共工程政策、工程管理與採購相關入口。</span><span class="en-only inline-en">Public works policy, project management, and procurement.</span></p><a href="https://www.pcc.gov.tw/" target="_blank" rel="noopener noreferrer"><span class="zh-only">開啟來源</span><span class="en-only inline-en">Open source</span></a></article>
         <article><h3><span class="zh-only">政府電子採購網</span><span class="en-only inline-en">Government e-Procurement</span></h3><p><span class="zh-only">查詢招標、決標、得標廠商與採購公告。</span><span class="en-only inline-en">Tender notices, awards, contractors, and procurement records.</span></p><a href="https://web.pcc.gov.tw/" target="_blank" rel="noopener noreferrer"><span class="zh-only">開啟來源</span><span class="en-only inline-en">Open source</span></a></article>
-        <article><h3><span class="zh-only">公共工程雲端服務網</span><span class="en-only inline-en">Public Works Cloud</span></h3><p><span class="zh-only">追蹤公共工程施工、進度與相關公開資訊。</span><span class="en-only inline-en">Progress and public records for public construction projects.</span></p><a href="https://pcic.pcc.gov.tw/" target="_blank" rel="noopener noreferrer"><span class="zh-only">開啟來源</span><span class="en-only inline-en">Open source</span></a></article>
-        <article><h3><span class="zh-only">交通部鐵道局</span><span class="en-only inline-en">Railway Bureau</span></h3><p><span class="zh-only">鐵路高架化、地下化、雙軌化與重大軌道工程資料。</span><span class="en-only inline-en">Rail elevation, undergrounding, double-tracking, and major rail projects.</span></p><a href="https://www.rb.gov.tw/" target="_blank" rel="noopener noreferrer"><span class="zh-only">開啟來源</span><span class="en-only inline-en">Open source</span></a></article>
-        <article><h3><span class="zh-only">交通部公路局</span><span class="en-only inline-en">Highway Bureau</span></h3><p><span class="zh-only">公路、橋梁、快速道路與道路改善工程資訊。</span><span class="en-only inline-en">Highway, bridge, expressway, and road improvement information.</span></p><a href="https://www.thb.gov.tw/" target="_blank" rel="noopener noreferrer"><span class="zh-only">開啟來源</span><span class="en-only inline-en">Open source</span></a></article>
-        <article><h3><span class="zh-only">交通部民用航空局</span><span class="en-only inline-en">Civil Aviation Administration</span></h3><p><span class="zh-only">機場、跑滑道、航站設施與航空公共建設線索。</span><span class="en-only inline-en">Airport, runway, taxiway, terminal facility, and aviation infrastructure leads.</span></p><a href="https://www.caa.gov.tw/" target="_blank" rel="noopener noreferrer"><span class="zh-only">開啟來源</span><span class="en-only inline-en">Open source</span></a></article>
-        <article><h3><span class="zh-only">臺灣港務公司</span><span class="en-only inline-en">Taiwan International Ports</span></h3><p><span class="zh-only">商港、碼頭、港埠物流與港區公共設施工程資訊。</span><span class="en-only inline-en">Commercial port, terminal, port logistics, and harbor public-facility project information.</span></p><a href="https://www.twport.com.tw/" target="_blank" rel="noopener noreferrer"><span class="zh-only">開啟來源</span><span class="en-only inline-en">Open source</span></a></article>
-        <article><h3><span class="zh-only">經濟部水利署</span><span class="en-only inline-en">Water Resources Agency</span></h3><p><span class="zh-only">水利、防洪、河川治理、供水與防災工程公開資訊。</span><span class="en-only inline-en">Water resources, flood control, river works, supply resilience, and disaster-prevention projects.</span></p><a href="https://www.wra.gov.tw/" target="_blank" rel="noopener noreferrer"><span class="zh-only">開啟來源</span><span class="en-only inline-en">Open source</span></a></article>
-        <article><h3><span class="zh-only">環境部環評查詢</span><span class="en-only inline-en">Environmental Review</span></h3><p><span class="zh-only">查詢環境影響評估書件、審查進度與開發計畫線索。</span><span class="en-only inline-en">Environmental assessment documents, review status, and development-plan leads.</span></p><a href="https://eiadoc.moenv.gov.tw/" target="_blank" rel="noopener noreferrer"><span class="zh-only">開啟來源</span><span class="en-only inline-en">Open source</span></a></article>
-        <article><h3><span class="zh-only">國土管理署</span><span class="en-only inline-en">National Land Management Agency</span></h3><p><span class="zh-only">補強都市計畫、建照、使照、區域建設與國土空間資料查核。</span><span class="en-only inline-en">Urban planning, building permits, occupancy permits, regional projects, and national spatial-data checks.</span></p><a href="https://www.nlma.gov.tw/" target="_blank" rel="noopener noreferrer"><span class="zh-only">開啟來源</span><span class="en-only inline-en">Open source</span></a></article>
-        <article><h3><span class="zh-only">國家住都中心</span><span class="en-only inline-en">National Housing Center</span></h3><p><span class="zh-only">社會住宅、都市更新與公有建築相關公開資訊。</span><span class="en-only inline-en">Social housing, urban renewal, and public-building project information.</span></p><a href="https://www.hurc.org.tw/" target="_blank" rel="noopener noreferrer"><span class="zh-only">開啟來源</span><span class="en-only inline-en">Open source</span></a></article>
-        <article><h3><span class="zh-only">國科會園區管理局</span><span class="en-only inline-en">Science Park Bureaus</span></h3><p><span class="zh-only">科學園區、產業基地、公共設施與開發工程線索。</span><span class="en-only inline-en">Science park, industrial base, public facility, and development project leads.</span></p><a href="https://www.nstc.gov.tw/" target="_blank" rel="noopener noreferrer"><span class="zh-only">開啟來源</span><span class="en-only inline-en">Open source</span></a></article>
-        <article><h3><span class="zh-only">政府資料開放平台</span><span class="en-only inline-en">Open Data Portal</span></h3><p><span class="zh-only">補充地理圖資、道路、管線、建照、環境與地方公開資料。</span><span class="en-only inline-en">Geospatial, road, utility, permit, environmental, and local public datasets.</span></p><a href="https://data.gov.tw/" target="_blank" rel="noopener noreferrer"><span class="zh-only">開啟來源</span><span class="en-only inline-en">Open source</span></a></article>
-      </div>
-    </section>
-
-    <section class="block">
-      <div class="title">
-        <p class="eyebrow"><span class="zh-only">優先來源</span><span class="en-only inline-en">Priority source groups</span></p>
-        <h2><span class="zh-only">來源輪替，不只看單一平台。</span><span class="en-only inline-en">Rotated sources, not one single portal.</span></h2>
-      </div>
-      <div class="sourceGrid">
-        <article class="sourceCard"><h3><span class="zh-only">公共工程與採購</span><span class="en-only inline-en">Public works and procurement</span></h3><p><span class="zh-only">公共工程委員會、政府電子採購、公共工程雲端服務、各縣市工程與建設局處。</span><span class="en-only inline-en">Public construction portals, government procurement records, cloud project services, and local engineering bureaus.</span></p></article>
-        <article class="sourceCard"><h3><span class="zh-only">交通、水利、園區</span><span class="en-only inline-en">Transport, water, and parks</span></h3><p><span class="zh-only">捷運、鐵道、公路、水利、防災、港灣、機場、產業園區、科學園區與航空城相關公開資料。</span><span class="en-only inline-en">Metro, rail, highway, water, disaster prevention, port, airport, industrial park, science park, and aerotropolis public records.</span></p></article>
-        <article class="sourceCard"><h3><span class="zh-only">規劃與審查</span><span class="en-only inline-en">Planning and review</span></h3><p><span class="zh-only">環評書件、都市計畫、建照與使照公開資料、主管機關公告與地方圖台。</span><span class="en-only inline-en">Environmental review documents, urban planning, building and occupancy permit records, agency notices, and local public map portals.</span></p></article>
-        <article class="sourceCard"><h3><span class="zh-only">道路與管線</span><span class="en-only inline-en">Roads and utilities</span></h3><p><span class="zh-only">道路挖掘、道路養護、排水、污水、橋梁與地下管線施工公開圖資。</span><span class="en-only inline-en">Road excavation, maintenance, drainage, sewage, bridge, and underground utility construction map data.</span></p></article>
+        <article><h3><span class="zh-only">公共工程雲端服務網</span><span class="en-only inline-en">Public Works Cloud</span></h3><p><span class="zh-only">追蹤公共工程施工、進度與公開資訊。</span><span class="en-only inline-en">Progress and public records for public construction projects.</span></p><a href="https://pcic.pcc.gov.tw/" target="_blank" rel="noopener noreferrer"><span class="zh-only">開啟來源</span><span class="en-only inline-en">Open source</span></a></article>
+        <article><h3><span class="zh-only">交通部鐵道局</span><span class="en-only inline-en">Railway Bureau</span></h3><p><span class="zh-only">鐵路高架化、地下化、雙軌化與重大軌道工程。</span><span class="en-only inline-en">Rail elevation, undergrounding, double-tracking, and major rail projects.</span></p><a href="https://www.rb.gov.tw/" target="_blank" rel="noopener noreferrer"><span class="zh-only">開啟來源</span><span class="en-only inline-en">Open source</span></a></article>
+        <article><h3><span class="zh-only">交通部公路局</span><span class="en-only inline-en">Highway Bureau</span></h3><p><span class="zh-only">公路、橋梁、快速道路與道路改善工程。</span><span class="en-only inline-en">Highways, bridges, expressways, and road improvements.</span></p><a href="https://www.thb.gov.tw/" target="_blank" rel="noopener noreferrer"><span class="zh-only">開啟來源</span><span class="en-only inline-en">Open source</span></a></article>
+        <article><h3><span class="zh-only">交通部民用航空局</span><span class="en-only inline-en">Civil Aviation Administration</span></h3><p><span class="zh-only">機場、跑滑道、航站設施與航空公共建設。</span><span class="en-only inline-en">Airports, runways, taxiways, terminals, and aviation infrastructure.</span></p><a href="https://www.caa.gov.tw/" target="_blank" rel="noopener noreferrer"><span class="zh-only">開啟來源</span><span class="en-only inline-en">Open source</span></a></article>
+        <article><h3><span class="zh-only">臺灣港務公司</span><span class="en-only inline-en">Taiwan International Ports</span></h3><p><span class="zh-only">商港、碼頭、港埠物流與港區公共設施。</span><span class="en-only inline-en">Commercial ports, terminals, port logistics, and harbor facilities.</span></p><a href="https://www.twport.com.tw/" target="_blank" rel="noopener noreferrer"><span class="zh-only">開啟來源</span><span class="en-only inline-en">Open source</span></a></article>
+        <article><h3><span class="zh-only">經濟部水利署</span><span class="en-only inline-en">Water Resources Agency</span></h3><p><span class="zh-only">水利、防洪、河川治理、供水與防災工程。</span><span class="en-only inline-en">Water resources, flood control, river works, supply, and resilience.</span></p><a href="https://www.wra.gov.tw/" target="_blank" rel="noopener noreferrer"><span class="zh-only">開啟來源</span><span class="en-only inline-en">Open source</span></a></article>
+        <article><h3><span class="zh-only">環境部環評查詢</span><span class="en-only inline-en">Environmental Review</span></h3><p><span class="zh-only">查詢環境影響評估案件、審查文件與進度。</span><span class="en-only inline-en">Environmental assessment cases, documents, and review progress.</span></p><a href="https://eiadoc.moenv.gov.tw/eiaweb/" target="_blank" rel="noopener noreferrer"><span class="zh-only">開啟來源</span><span class="en-only inline-en">Open source</span></a></article>
+        <article><h3><span class="zh-only">國土管理署</span><span class="en-only inline-en">National Land Management Agency</span></h3><p><span class="zh-only">國土、都市計畫、建築管理與公共建設資訊。</span><span class="en-only inline-en">Land use, urban planning, building management, and public infrastructure.</span></p><a href="https://www.nlma.gov.tw/" target="_blank" rel="noopener noreferrer"><span class="zh-only">開啟來源</span><span class="en-only inline-en">Open source</span></a></article>
+        <article><h3><span class="zh-only">國家科學及技術委員會</span><span class="en-only inline-en">National Science and Technology Council</span></h3><p><span class="zh-only">科學園區、研發建設與園區發展資訊。</span><span class="en-only inline-en">Science parks, research infrastructure, and park development.</span></p><a href="https://www.nstc.gov.tw/" target="_blank" rel="noopener noreferrer"><span class="zh-only">開啟來源</span><span class="en-only inline-en">Open source</span></a></article>
+        <article><h3><span class="zh-only">政府資料開放平臺</span><span class="en-only inline-en">data.gov.tw</span></h3><p><span class="zh-only">查找工程、交通、地理、環境與地方政府開放資料。</span><span class="en-only inline-en">Open datasets for construction, transport, geography, environment, and local government.</span></p><a href="https://data.gov.tw/" target="_blank" rel="noopener noreferrer"><span class="zh-only">開啟來源</span><span class="en-only inline-en">Open source</span></a></article>
+        <article><h3><span class="zh-only">國土測繪圖資服務雲</span><span class="en-only inline-en">Taiwan Map Service</span></h3><p><span class="zh-only">地名、底圖、行政區與國土測繪圖資。</span><span class="en-only inline-en">Place names, basemaps, administrative areas, and national mapping data.</span></p><a href="https://maps.nlsc.gov.tw/" target="_blank" rel="noopener noreferrer"><span class="zh-only">開啟來源</span><span class="en-only inline-en">Open source</span></a></article>
       </div>
     </section>
   </main>
-  <footer class="foot"><span data-t="footer">資料以公開入口可回查內容整理；正式引用請回主管機關、發包單位與公告來源確認最新版本。地圖底圖 © OpenStreetMap contributors。</span></footer>
-  <div class="dock" aria-label="快速操作"><a href="https://www.instagram.com/taiwan.construction/" target="_blank" rel="noopener noreferrer">IG</a><button id="lang" type="button">EN</button></div>
-  <script type="module" src="./fast-map.js?v=20260704-city-filter"></script>
+
+  <div data-site-footer></div>
+  <script src="./site-shell.js?v=20260711-single-source"></script>
+  <script type="module" src="./fast-map.js?v=20260711-single-source"></script>
 </body>
 </html>
