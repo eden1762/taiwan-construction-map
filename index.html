@@ -1,29 +1,21 @@
 <!doctype html>
 <html lang="zh-Hant">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#071827" />
-  <meta name="description" content="台灣工程地圖：全國工程概況、公共工程、道路/管線、捷運/交通、建築/園區、規劃/環評五大圖層的縣市統計與互動地圖。" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#071827">
+  <meta name="description" content="台灣工程地圖：快速查看全台現況工程、甲方、乙方、金額、期程、位置與公開來源。">
   <title>全國工程概況｜台灣工程地圖 Taiwan Construction Map</title>
-  <link rel="preconnect" href="https://tile.openstreetmap.org" crossorigin />
-  <link rel="dns-prefetch" href="//tile.openstreetmap.org" />
-  <link rel="preload" href="/data/active_construction_projects.geojson?v=20260704-city-filter" as="fetch" type="application/geo+json" crossorigin />
-  <link rel="stylesheet" href="./fast-map.css?v=20260629-mobile-first-4" />
-  <style>
-    .quickPanel{margin-top:12px;border:1px solid rgba(12,35,55,.13);border-radius:18px;background:linear-gradient(145deg,#fff,#f7fbff);padding:12px}.quickPanel summary{cursor:pointer;font-weight:1000;color:#102131;list-style:none}.quickPanel summary::-webkit-details-marker{display:none}.quickPanel summary::after{content:"＋";float:right}.quickPanel[open] summary::after{content:"－"}.quickPanel p,.quickPanel li{color:#526b82;font-size:12px;line-height:1.55;font-weight:850}.quickPanel ul{margin:10px 0 0;padding-left:18px}.legendDots,.statusDots,.speedPills{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.legendDots span,.statusDots span,.speedPills span{display:inline-flex;align-items:center;gap:6px;border:1px solid rgba(12,35,55,.12);border-radius:999px;background:#fff;padding:6px 8px;font-size:12px;font-weight:950}.legendDots i{display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--c)}.statusDots i{display:inline-block;width:9px;height:9px;border-radius:3px;background:#0b88aa}.speedPills i{display:inline-block;width:8px;height:8px;border-radius:50%;background:#0b88aa}.mapNote{margin:8px 0 0!important;font-size:12px!important;line-height:1.5;color:#526b82!important;font-weight:850!important}.firstUse{border-color:rgba(11,136,170,.22);background:linear-gradient(145deg,#eefbff,#fff)}.en-only{display:none!important}html[lang=en] .zh-only{display:none!important}html[lang=en] .en-only{display:initial!important}html[lang=en] li.en-only,html[lang=en] p.en-only,html[lang=en] article.en-only{display:block!important}html[lang=en] .inline-en{display:inline!important}
-    @media(max-width:760px){.quickPanel{margin-top:10px;padding:10px}.side .quickPanel:not(.firstUse){margin-top:8px}.legendDots span,.statusDots span,.speedPills span{font-size:11px;padding:5px 7px}.mapNote{font-size:11px!important}.hero{padding-bottom:14px}.block{padding-top:18px}.layout{gap:12px}.side{order:1}.mapcard{order:2}.metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
-  </style>
+  <link rel="preconnect" href="https://tile.openstreetmap.org" crossorigin>
+  <link rel="dns-prefetch" href="//tile.openstreetmap.org">
+  <link rel="preload" href="./Content/Taiwan_Construction.PNG" as="image" fetchpriority="high">
+  <link rel="preload" href="./data/active_construction_projects.geojson?v=20260704-city-filter" as="fetch" type="application/geo+json" crossorigin>
+  <link rel="stylesheet" href="./fast-map.css?v=20260711-single-source">
 </head>
 <body data-page="overview">
-  <a class="skip" href="#mapSec"><span class="zh-only">跳到全國工程概況</span><span class="en-only inline-en">Skip to national overview</span></a>
-  <header class="top" aria-label="網站導覽">
-    <a class="brand" href="./index.html" aria-label="台灣工程地圖首頁">
-      <span class="mark">工</span>
-      <span><b data-t="brand">台灣工程地圖</b><small data-t="line">全國工程概況 × 五大圖層 × 資料入口</small></span>
-    </a>
-    <nav id="mainNav" class="nav" aria-label="主要目錄"></nav>
-  </header>
+  <a class="skip" href="#mapSec"><span class="zh-only">跳到全國工程地圖</span><span class="en-only inline-en">Skip to the national map</span></a>
+  <div data-site-header></div>
+
   <main>
     <section class="hero">
       <div>
@@ -43,13 +35,13 @@
       </div>
     </section>
 
-    <section id="cats" class="block">
+    <section id="cats" class="block lazySection">
       <div class="title">
         <p class="eyebrow" data-t="cats">工程圖層</p>
         <h2 data-t="catTitle">五大工程圖層，對齊首頁現況資料。</h2>
         <p data-t="catText">每個圖層都能用縣市查詢，也能看點位、甲方、乙方、金額、期程與來源。查案不用繞路，直接切到你要的工程線。</p>
       </div>
-      <div id="catCards" class="catgrid"></div>
+      <div id="catCards" class="catgrid" aria-live="polite"></div>
     </section>
 
     <section id="mapSec" class="layout">
@@ -57,124 +49,68 @@
         <p class="eyebrow" data-t="overview">全國工程概況</p>
         <h2 data-t="countyTitle">各縣市工程總數與分類盤點</h2>
         <p data-t="countyText">點地圖縣市標記或下方卡片，查看該縣市總數與各工程分類；分類數字可直接串到對應分類頁。</p>
-        <label class="search"><span data-t="search">搜尋</span><input id="q" type="search" placeholder="例：臺北、道路、捷運、科學園區"></label>
-        <div class="filters">
-          <label><span data-t="cityFilter">縣市</span><select id="cityFilter"></select></label>
-          <label><span data-t="status">辦理狀態</span><select id="status"></select></label>
-        </div>
-        <section id="layerToggles" class="layerbox" aria-label="圖層開關">
-          <p><b><span class="zh-only">圖層開關</span><span class="en-only inline-en">Layer switches</span></b><span><span class="zh-only">首屏先保留五大現況圖層；正式載入後可逐層開關。</span><span class="en-only inline-en">The first view keeps five active layers ready; after loading, layers can be switched one by one.</span></span></p>
-          <div>
-            <label><input type="checkbox" checked><span class="zh-only">公共工程</span><span class="en-only inline-en">Public Works</span></label>
-            <label><input type="checkbox" checked><span class="zh-only">道路/管線</span><span class="en-only inline-en">Roads & Utilities</span></label>
-            <label><input type="checkbox" checked><span class="zh-only">捷運/交通</span><span class="en-only inline-en">Metro & Transport</span></label>
-            <label><input type="checkbox" checked><span class="zh-only">建築/園區</span><span class="en-only inline-en">Buildings & Parks</span></label>
-            <label><input type="checkbox" checked><span class="zh-only">規劃/環評</span><span class="en-only inline-en">Planning & Environmental Review</span></label>
+
+        <div class="fieldTools">
+          <label class="search"><span data-t="search">搜尋</span><input id="q" type="search" inputmode="search" autocomplete="off" placeholder="例：臺北、道路、捷運、科學園區"></label>
+          <div class="filters">
+            <label><span data-t="cityFilter">縣市</span><select id="cityFilter"></select></label>
+            <label><span data-t="status">辦理狀態</span><select id="status"></select></label>
           </div>
+        </div>
+
+        <section id="layerToggles" class="layerbox" aria-label="工程圖層開關">
+          <p><b><span class="zh-only">工程圖層開關</span><span class="en-only inline-en">Project layer switches</span></b><span><span class="zh-only">五大現況圖層可自由開關，快速聚焦你正在追的工程類型。</span><span class="en-only inline-en">Switch the five active layers on or off to focus on the project types you track.</span></span></p>
+          <div></div>
         </section>
 
         <details class="quickPanel firstUse" open>
-          <summary><span class="zh-only">地圖操作提示</span><span class="en-only inline-en">Map tips</span></summary>
+          <summary><span class="zh-only">地圖怎麼看</span><span class="en-only inline-en">How to use the map</span></summary>
           <ul>
-            <li class="zh-only">手機可直接拖曳地圖、點縣市標記，或搜尋工程名、地點、甲方與乙方。</li>
-            <li class="zh-only">桌機可用右下角 + / − 調整視角，再點工程點位查看金額、期程與來源。</li>
-            <li class="zh-only">若底圖暫時較慢，工程清單、分類入口、縣市卡片與台灣簡圖會先保持可用。</li>
-            <li class="en-only">On mobile, drag the map, tap city markers, or search by project, place, owner, or contractor.</li>
-            <li class="en-only">On desktop, use + / − to adjust the view, then tap a project pin to check budget, schedule, and source.</li>
-            <li class="en-only">If the basemap is slow, the project list, sector entry points, city cards, and Taiwan fallback map stay ready first.</li>
-          </ul>
-        </details>
-
-        <details class="quickPanel">
-          <summary><span class="zh-only">圖例與狀態</span><span class="en-only inline-en">Legend & status</span></summary>
-          <p><span class="zh-only">顏色代表五大工程圖層，狀態代表目前辦理階段；放大、搜尋或選縣市後會顯示工程點位。</span><span class="en-only inline-en">Colors show the five project layers, while status shows the current delivery stage. Zoom, search, or choose a city to reveal project pins.</span></p>
-          <div class="legendDots">
-            <span><i style="--c:#35d4ff"></i><span class="zh-only">公共工程</span><span class="en-only inline-en">Public Works</span></span>
-            <span><i style="--c:#ffb84d"></i><span class="zh-only">道路/管線</span><span class="en-only inline-en">Roads & Utilities</span></span>
-            <span><i style="--c:#9b7cff"></i><span class="zh-only">捷運/交通</span><span class="en-only inline-en">Metro & Transport</span></span>
-            <span><i style="--c:#30d68a"></i><span class="zh-only">建築/園區</span><span class="en-only inline-en">Buildings & Parks</span></span>
-            <span><i style="--c:#ffcf66"></i><span class="zh-only">規劃/環評</span><span class="en-only inline-en">Planning & Environmental Review</span></span>
-          </div>
-          <div class="statusDots">
-            <span><i></i><span class="zh-only">計畫中</span><span class="en-only inline-en">Planned</span></span>
-            <span><i></i><span class="zh-only">評估中</span><span class="en-only inline-en">Under Evaluation</span></span>
-            <span><i></i><span class="zh-only">設計中</span><span class="en-only inline-en">In Design</span></span>
-            <span><i></i><span class="zh-only">施工中</span><span class="en-only inline-en">Under Construction</span></span>
-            <span><i></i><span class="zh-only">一個月內完工</span><span class="en-only inline-en">Completed within 1 month</span></span>
-            <span><i></i><span class="zh-only">延宕</span><span class="en-only inline-en">Delayed</span></span>
-          </div>
-        </details>
-
-        <details class="quickPanel">
-          <summary><span class="zh-only">現況資料守則</span><span class="en-only inline-en">Active data rules</span></summary>
-          <p class="zh-only"><strong>首頁現況統計</strong>只納入計畫中、評估中、設計中、施工中，或完工／啟用一個月內的工程；過期、取消、停辦或來源失效的資料會移出首頁，避免把歷史案誤看成現況工程。</p>
-          <p class="en-only"><strong>Active overview</strong> keeps planned, under-evaluation, in-design, under-construction, or completed/opened-within-one-month projects only. Outdated or inactive records are moved out of the homepage view.</p>
-        </details>
-
-        <details class="quickPanel">
-          <summary><span class="zh-only">資料量與速度</span><span class="en-only inline-en">Data speed</span></summary>
-          <p class="zh-only">首頁先給搜尋、篩選、統計、分類入口與地圖容器；工程資料增加時，畫面會優先顯示目前視野與已篩選的重點，不一次把大量卡片塞到手機畫面。</p>
-          <p class="en-only">The homepage stays field-ready first: search, filters, stats, layer entry points, and the map frame load before heavy project detail views.</p>
-          <div class="speedPills">
-            <span><i></i><span class="zh-only">首屏先可用</span><span class="en-only inline-en">First view first</span></span>
-            <span><i></i><span class="zh-only">五層分流</span><span class="en-only inline-en">Five-layer lanes</span></span>
-            <span><i></i><span class="zh-only">清單分頁</span><span class="en-only inline-en">Paged list</span></span>
-            <span><i></i><span class="zh-only">視野優先</span><span class="en-only inline-en">Viewport first</span></span>
-          </div>
-        </details>
-
-        <details class="quickPanel">
-          <summary><span class="zh-only">資料來源怎麼看</span><span class="en-only inline-en">How to read sources</span></summary>
-          <ul>
-            <li class="zh-only"><strong>來源連結</strong>優先放可回查的主管機關、發包單位、公告或公開圖資入口。</li>
-            <li class="zh-only">工程金額、期程、甲方與乙方可能隨招標、變更設計或公告更新；正式引用前請回來源確認最新版。</li>
-            <li class="zh-only">資料會逐步輪流補進不同主管機關、不同縣市與不同工程類型，避免只看單一來源。</li>
-            <li class="zh-only">沒有公開佐證的欄位會標示「待補資料 / To be verified」，不把猜測內容混進工程卡片。</li>
-            <li class="en-only"><strong>Source links</strong> point first to traceable owner agencies, project owners, public notices, or public map portals.</li>
-            <li class="en-only">Budgets, schedules, owners, and contractors may change with tendering or design updates; re-check the source before formal use.</li>
-            <li class="en-only">New records are rotated across agencies, cities, and project sectors so the map does not lean on only one source.</li>
-            <li class="en-only">Fields without public evidence are marked “To be verified,” and guesses are kept out of project cards.</li>
+            <li class="zh-only">手機可直接拖曳地圖、點工程標記，或搜尋工程名、地點、甲方與乙方。</li>
+            <li class="zh-only">地圖背景較慢時，工程清單、縣市卡片與台灣簡圖仍可先查，不會卡住。</li>
+            <li class="zh-only">工程金額、期程與承攬資訊可能更新，正式引用前請回公開來源確認。</li>
+            <li class="en-only">On mobile, drag the map, tap a project pin, or search by project, place, owner, or contractor.</li>
+            <li class="en-only">If map tiles are slow, the project list, city cards, and Taiwan fallback map remain usable.</li>
+            <li class="en-only">Budgets, schedules, and contractor details may change; verify the public source before formal use.</li>
           </ul>
         </details>
 
         <button id="reset" class="reset" data-t="reset">回到全台總覽</button>
-        <div id="cityCards" class="citycards"></div>
+        <div id="cityCards" class="citycards" aria-live="polite"></div>
       </aside>
+
       <section class="mapcard">
         <div class="mapbar">
           <div>
             <p class="eyebrow" data-t="osm">OpenStreetMap 電子地圖</p>
             <h2 data-t="countyTitle">各縣市工程總數與分類盤點</h2>
-            <p class="mapNote"><span class="zh-only">預設使用 OpenStreetMap 底圖；若底圖暫時較慢，搜尋、篩選、工程清單與台灣簡圖會先保持可用。</span><span class="en-only inline-en">Default basemap: OpenStreetMap. Search, filters, list, and fallback map stay usable even when map tiles are slow.</span></p>
+            <p class="mapNote"><span class="zh-only">先看全台分布，再用搜尋、縣市、狀態與圖層縮小範圍。</span><span class="en-only inline-en">Start with the national spread, then narrow it by search, city, status, and layer.</span></p>
           </div>
           <p id="health" data-t="boot">工程清單已可用，地圖背景載入中。</p>
         </div>
         <div id="map" class="map" aria-label="全國工程概況地圖"></div>
-        <div id="detail" class="detail"></div>
+        <div id="detail" class="detail" aria-live="polite"></div>
       </section>
     </section>
 
-    <section class="block">
+    <section class="block lazySection">
       <div class="title">
         <p class="eyebrow" data-t="list">工程清單</p>
         <h2 data-t="listTitle">點位、甲方、乙方、期程與來源。</h2>
       </div>
       <div id="list" class="cards" aria-live="polite">
-        <article class="proj zh-only" style="--c:#35d4ff"><i>公共工程</i><h3>公共工程入口</h3><p>資料讀取中也能先進入分類頁，查看公部門建設、水利、港灣、社宅與市政工程。</p><a href="./category.html?sector=public-works">打開公共工程</a></article>
-        <article class="proj zh-only" style="--c:#ffb84d"><i>道路/管線</i><h3>道路、橋梁、管線入口</h3><p>適合快速查找道路改善、橋梁、公路、排水、污水與地下管線相關工程。</p><a href="./category.html?sector=roads-utilities">打開道路/管線</a></article>
-        <article class="proj zh-only" style="--c:#9b7cff"><i>捷運/交通</i><h3>捷運、鐵路、交通入口</h3><p>先看軌道、車站、交通節點與路廊計畫；正式資料載入完成後會自動換成現況清單。</p><a href="./category.html?sector=transit">打開捷運/交通</a></article>
-        <article class="proj zh-only" style="--c:#30d68a"><i>建築/園區</i><h3>建築、園區入口</h3><p>查看航廈、社宅、公有建築、科學園區、產業園區與航空城公共設施。</p><a href="./category.html?sector=buildings-parks">打開建築/園區</a></article>
-        <article class="proj zh-only" style="--c:#ffcf66"><i>規劃/環評</i><h3>規劃、環評入口</h3><p>適合追蹤計畫中、評估中、設計中、環境審查與前期公告。</p><a href="./category.html?sector=planning-eia">打開規劃/環評</a></article>
-        <article class="proj en-only" style="--c:#35d4ff"><i>Public Works</i><h3>Public works gateway</h3><p>Even while data loads, jump into civic works, water, ports, public housing, and municipal infrastructure.</p><a href="./category.html?sector=public-works">Open public works</a></article>
-        <article class="proj en-only" style="--c:#ffb84d"><i>Roads & Utilities</i><h3>Roads, bridges, and utilities</h3><p>Quickly check road upgrades, bridges, highways, drainage, sewage, and underground utility projects.</p><a href="./category.html?sector=roads-utilities">Open roads & utilities</a></article>
-        <article class="proj en-only" style="--c:#9b7cff"><i>Metro & Transport</i><h3>Metro, rail, and transport gateway</h3><p>Start with rail corridors, stations, mobility nodes, and corridor plans; the active list replaces this view after loading.</p><a href="./category.html?sector=transit">Open transport projects</a></article>
-        <article class="proj en-only" style="--c:#30d68a"><i>Buildings & Parks</i><h3>Buildings and park infrastructure</h3><p>Explore terminals, public housing, public buildings, science parks, industrial parks, and aerotropolis works.</p><a href="./category.html?sector=buildings-parks">Open buildings & parks</a></article>
-        <article class="proj en-only" style="--c:#ffcf66"><i>Planning & Review</i><h3>Planning and review gateway</h3><p>Track planned, under-evaluation, in-design, environmental-review, and early-stage notices before projects move forward.</p><a href="./category.html?sector=planning-eia">Open planning & review</a></article>
+        <article class="proj zh-only" style="--c:#35d4ff"><i>公共工程</i><h3>公共工程入口</h3><p>查看公部門建設、水利、港灣、社宅與市政工程。</p><a href="./category.html?sector=public-works">打開公共工程</a></article>
+        <article class="proj zh-only" style="--c:#ffb84d"><i>道路/管線</i><h3>道路、橋梁與管線</h3><p>查看道路改善、橋梁、公路、排水、污水與地下管線工程。</p><a href="./category.html?sector=roads-utilities">打開道路/管線</a></article>
+        <article class="proj zh-only" style="--c:#9b7cff"><i>捷運/交通</i><h3>捷運、鐵路與交通</h3><p>查看軌道、車站、交通節點與重大路廊計畫。</p><a href="./category.html?sector=transit">打開捷運/交通</a></article>
+        <article class="proj en-only" style="--c:#35d4ff"><i>Public Works</i><h3>Public works gateway</h3><p>Explore civic works, water, ports, public housing, and municipal infrastructure.</p><a href="./category.html?sector=public-works">Open public works</a></article>
+        <article class="proj en-only" style="--c:#ffb84d"><i>Roads & Utilities</i><h3>Roads, bridges, and utilities</h3><p>Explore road upgrades, bridges, highways, drainage, sewage, and underground utilities.</p><a href="./category.html?sector=roads-utilities">Open roads & utilities</a></article>
+        <article class="proj en-only" style="--c:#9b7cff"><i>Metro & Transport</i><h3>Metro, rail, and transport</h3><p>Explore rail corridors, stations, mobility nodes, and major transport programs.</p><a href="./category.html?sector=transit">Open transport projects</a></article>
       </div>
     </section>
   </main>
-  <footer class="foot"><span data-t="footer">資料以公開入口可回查內容整理；正式引用請回主管機關、發包單位與公告來源確認最新版本。地圖底圖 © OpenStreetMap contributors。</span></footer>
-  <div class="dock" aria-label="快速操作"><a href="https://www.instagram.com/taiwan.construction/" target="_blank" rel="noopener noreferrer">IG</a><button id="lang" type="button">EN</button></div>
-  <script type="module" src="./fast-map.js?v=20260704-city-filter"></script>
+
+  <div data-site-footer></div>
+  <script src="./site-shell.js?v=20260711-single-source"></script>
+  <script type="module" src="./fast-map.js?v=20260711-single-source"></script>
 </body>
 </html>
